@@ -1,0 +1,215 @@
+/* Binder Global Styles */
+:root {
+  /* Primary Palette from color-lineage.md */
+  --accent: #0098B1;
+  --accent-light: #AEDEE6;
+  --gray-dark: #1B1B1B;
+  --gray-light: #DFDFDF;
+  --white: #FFFFFF;
+  --bg: #F5F5F5;
+  --fg: #1B1B1B;
+
+  /* Secondary Palette */
+  --orange: #FF9000;
+  --green: #00D44E;
+  --accent-teal: #8AD0DC;
+  --very-light-blue: #96EFFF;
+  --light-blue: #5FBDFF;
+  --medium-blue: #3987BE;
+  --bright-purple: #6D3CFF;
+  --navy: #30339C;
+  --pink: #F251FF;
+
+  /* Opacity variants */
+  --opacity-75: 0.75;
+  --opacity-50: 0.5;
+  --opacity-25: 0.25;
+
+  /* Typography */
+  --font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --fs-12: 0.75rem;
+  --fs-14: 0.875rem;
+  --fs-16: 1rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-32: 2rem;
+  --fs-40: 2.5rem;
+  --fs-48: 3rem;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+  --spacing-3xl: 6rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg: #1B1B1B;
+  --fg: #FFFFFF;
+  --gray-light: #333333;
+  --gray-dark: #DFDFDF;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--fs-16);
+  line-height: 1.6;
+  color: var(--fg);
+  background-color: var(--bg);
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-sm);
+}
+
+h1 {
+  font-size: var(--fs-48);
+}
+
+h2 {
+  font-size: var(--fs-40);
+}
+
+h3 {
+  font-size: var(--fs-32);
+}
+
+h4 {
+  font-size: var(--fs-24);
+}
+
+p {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.container-wide {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Grid */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-md);
+}
+
+/* Section Spacing */
+section {
+  padding: var(--spacing-3xl) 0;
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-light);
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Buttons - Base Reset */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* Focus Visible */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  :root {
+    --fs-48: 2.5rem;
+    --fs-40: 2rem;
+    --fs-32: 1.75rem;
+    --fs-24: 1.25rem;
+  }
+
+  section {
+    padding: var(--spacing-2xl) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --fs-48: 2rem;
+    --fs-40: 1.75rem;
+    --fs-32: 1.5rem;
+  }
+}
+

@@ -1,0 +1,26 @@
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: transparent;
+  border: 1px solid var(--gray-light);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--fg);
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--gray-light);
+  transform: scale(1.05);
+}
+
+.theme-toggle svg {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle {
+  border-color: var(--gray-light);
+}
+
