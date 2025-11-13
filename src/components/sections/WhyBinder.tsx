@@ -31,22 +31,33 @@ export const WhyBinder = () => {
 
   return (
     <section id="porquebinder" className="why-binder-section">
+      {/* Floating icons - positioned outside the grid system */}
+      <div className="floating-icons">
+        {/* Left side icons */}
+        <div className="icon-placeholder icon-1">📧</div>
+        <div className="icon-placeholder icon-3">📊</div>
+        <div className="icon-placeholder icon-6">📋</div>
+        <div className="icon-placeholder icon-7">📝</div>
+        <div className="icon-placeholder icon-9">📑</div>
+        <div className="icon-placeholder icon-11">📌</div>
+        <div className="icon-placeholder icon-13">📎</div>
+        
+        {/* Right side icons */}
+        <div className="icon-placeholder icon-2">📄</div>
+        <div className="icon-placeholder icon-4">💬</div>
+        <div className="icon-placeholder icon-5">📱</div>
+        <div className="icon-placeholder icon-8">📧</div>
+        <div className="icon-placeholder icon-10">📈</div>
+        <div className="icon-placeholder icon-12">📦</div>
+        <div className="icon-placeholder icon-14">🔖</div>
+      </div>
+
       <div className="container">
         <div 
           className="why-binder-container"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Floating icons - placeholders */}
-          <div className="floating-icons">
-            <div className="icon-placeholder icon-1">📧</div>
-            <div className="icon-placeholder icon-2">📄</div>
-            <div className="icon-placeholder icon-3">📊</div>
-            <div className="icon-placeholder icon-4">💬</div>
-            <div className="icon-placeholder icon-5">📱</div>
-            <div className="icon-placeholder icon-6">📋</div>
-          </div>
-
           <div className="carousel-content">
             <div className="slides-wrapper">
               {slides.map((slide, index) => (
@@ -77,18 +88,18 @@ export const WhyBinder = () => {
               ›
             </button>
           </div>
-
-          {/* Indicators */}
-          <div className="carousel-indicators">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                className={`indicator ${index === currentSlide ? 'active' : ''}`}
-                onClick={() => goToSlide(index)}
-                aria-label={`Ir a slide ${index + 1}`}
-              />
-            ))}
-          </div>
+        </div>
+        
+        {/* Indicators */}
+        <div className="carousel-indicators">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              className={`indicator ${index === currentSlide ? 'active' : ''}`}
+              onClick={() => goToSlide(index)}
+              aria-label={`Ir a slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>

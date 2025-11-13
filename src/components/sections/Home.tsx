@@ -6,8 +6,18 @@ export const Home = () => {
   return (
     <section id="home" className="home-section">
       <div className="home-background">
-        {/* Animated dots placeholder - to be implemented later */}
-        <div className="dots-animation"></div>
+        <img 
+          src="/Dots BG 2 - Top.svg" 
+          alt="" 
+          className="dots-bg-top"
+          aria-hidden="true"
+        />
+        <img 
+          src="/Dots BG 1 - Bottom.svg" 
+          alt="" 
+          className="dots-bg-bottom"
+          aria-hidden="true"
+        />
       </div>
       
       <div className="container">
@@ -19,18 +29,18 @@ export const Home = () => {
           <p className="home-subtitle">{homeContent.subtitle}</p>
           
           <div className="home-image-container">
-            {/* Placeholder for main dashboard image */}
-            <div className="home-image-placeholder">
-              <span>{homeContent.imagePlaceholder}</span>
+            <img 
+              src="/Plataforma.png" 
+              alt="Captura de interfaz del panel de Binder" 
+              className="home-image"
+            />
+            <div className="home-cta-floating">
+              <Button variant="primary" onClick={() => {
+                document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+              }}>
+                {homeContent.ctaText}
+              </Button>
             </div>
-          </div>
-          
-          <div className="home-cta">
-            <Button variant="primary" onClick={() => {
-              document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
-            }}>
-              {homeContent.ctaText}
-            </Button>
           </div>
         </div>
       </div>

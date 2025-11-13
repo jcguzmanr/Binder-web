@@ -10,7 +10,7 @@ export interface App {
 }
 
 export const appsContent = {
-  mainTitle: "Descubre cómo Binder se adapta a cada equipo legal.",
+  mainTitle: "Descubre cómo Binder se adapta a cada equipo legal",
   subtitle: "Seis soluciones diseñadas para diferentes desafíos: desde la gestión de contratos hasta el control total de procesos y expedientes.",
   apps: [
     {

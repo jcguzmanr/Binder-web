@@ -1,6 +1,19 @@
 import { appsContent } from '../../content/apps';
 import './Apps.css';
 
+// Map app IDs to their corresponding SVG icon files
+const getAppIcon = (appId: string): string => {
+  const iconMap: Record<string, string> = {
+    cases: '/CASES_Transp_BG.svg',
+    deals: '/DEALS_Transp_BG.svg',
+    archive: '/ARCHIVE_Transp_BG.svg',
+    comply: '/COMPLY_Transp_BG.svg',
+    tally: '/TALLY_SkyBlu_Transp_BG.svg',
+    quorum: '/QUORUM_Transp_BG.svg',
+  };
+  return iconMap[appId] || '';
+};
+
 export const Apps = () => {
   const { mainTitle, subtitle, apps } = appsContent;
 
@@ -21,7 +34,11 @@ export const Apps = () => {
             >
               <div className="app-card-header">
                 <div className="app-icon">
-                  <span>{app.imagePlaceholder}</span>
+                  <img 
+                    src={getAppIcon(app.id)} 
+                    alt={`${app.name} icon`}
+                    className="app-icon-img"
+                  />
                 </div>
                 <div className="app-name-group">
                   <h3 className="app-name">{app.name}</h3>

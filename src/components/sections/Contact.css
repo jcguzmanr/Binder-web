@@ -33,20 +33,22 @@
   font-size: var(--fs-40);
   font-weight: var(--font-weight-bold);
   color: var(--pink);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
   line-height: 1.2;
+  text-align: left;
 }
 
 .contact-description {
-  font-size: var(--fs-20);
-  font-weight: var(--font-weight-regular);
-  color: var(--gray-dark);
+  font-size: calc(var(--fs-40) / 1.618);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family);
+  color: #30339C;
   margin-bottom: var(--spacing-md);
   line-height: 1.5;
 }
 
 [data-theme="dark"] .contact-description {
-  color: var(--gray-light);
+  color: #30339C;
 }
 
 .contact-cta {
@@ -204,7 +206,7 @@
   }
 
   .contact-description {
-    font-size: var(--fs-16);
+    font-size: calc(var(--fs-32) / 1.618);
   }
 
   .contact-decoration {
@@ -218,7 +220,7 @@
   }
 
   .contact-description {
-    font-size: var(--fs-14);
+    font-size: calc(var(--fs-24) / 1.618);
   }
 
   .contact-form-container {

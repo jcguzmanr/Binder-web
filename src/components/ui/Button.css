@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.875rem 2rem;
+  font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: var(--fs-16);
   font-weight: var(--font-weight-medium);
   border-radius: var(--radius-lg);
@@ -21,8 +22,10 @@
 
 /* Primary Button: Blue background, Teal text */
 .btn--primary {
-  background-color: var(--medium-blue);
-  color: var(--accent);
+  background-color: #2F339B;
+  color: #96EFFF;
+  font-size: 18.3pt;
+  font-weight: 500;
   box-shadow: var(--shadow-md);
 }
 
@@ -72,6 +75,10 @@
   .btn {
     padding: 0.75rem 1.5rem;
     font-size: var(--fs-14);
+  }
+  
+  .btn--primary {
+    font-size: 16pt;
   }
 }
 
