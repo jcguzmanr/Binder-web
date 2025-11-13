@@ -47,6 +47,6 @@ export const footerContent = {
   socialLinks: {
     linkedin: "https://www.linkedin.com/company/binder-legal",
   },
-  legalNote: "© 2024 Binder. Todos los derechos reservados.",
+  legalNote: "© 2025 Binder. Todos los derechos reservados.",
 };
 

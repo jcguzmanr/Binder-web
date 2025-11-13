@@ -1,6 +1,11 @@
 .testimonials-section {
   padding: var(--spacing-3xl) 0;
-  background-color: var(--bg);
+  background: linear-gradient(180deg, #F5F5F5 0%, #E8F6F8 100%);
+  position: relative;
+}
+
+[data-theme="dark"] .testimonials-section {
+  background: linear-gradient(180deg, #1B1B1B 0%, #1A2F35 100%);
 }
 
 .testimonials-section .container-wide {
@@ -32,7 +37,7 @@
   box-shadow: var(--shadow-xl);
   position: relative;
   z-index: 1;
-  overflow: visible;
+  overflow: visible; /* Visible para permitir tabs, pero mantener padding para bordes */
 }
 
 [data-theme="dark"] .testimonials-container {
@@ -56,8 +61,8 @@
   display: flex;
   flex-direction: column;
   background-color: transparent;
-  border-radius: 0;
-  overflow: visible;
+  border-radius: var(--radius-lg);
+  overflow: visible; /* Visible para permitir que el tab se muestre */
   box-shadow: none;
   transition: all 0.3s ease;
   position: relative;
@@ -201,6 +206,11 @@
 
 /* Responsive - Mobile: Switch to carousel */
 @media (max-width: 640px) {
+  .testimonials-container {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg); /* Mantener bordes redondeados en mobile */
+  }
+
   .testimonials-grid {
     display: none;
   }
@@ -208,22 +218,25 @@
   .testimonials-carousel {
     display: block;
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* Cambiar a visible para no cortar contenido */
   }
 
   .carousel-track {
     display: flex;
     transition: transform 0.4s ease;
+    overflow: visible; /* No cortar contenido */
   }
 
   .carousel-item {
     min-width: 100%;
     padding: 0 var(--spacing-sm);
+    flex-shrink: 0;
   }
 
   .testimonial-card {
     margin: 0 auto;
     max-width: 100%;
+    overflow: visible; /* Asegurar que el contenido no se corte */
   }
 
   .testimonial-message {

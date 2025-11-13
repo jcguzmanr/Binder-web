@@ -229,5 +229,5 @@ Dark mode is fully implemented:
 
 ## 📄 License
 
-© 2024 Binder. All rights reserved.
+© 2025 Binder. All rights reserved.
 

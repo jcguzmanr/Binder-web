@@ -24,8 +24,8 @@
 .btn--primary {
   background-color: #2F339B;
   color: #96EFFF;
-  font-size: 18.3pt;
-  font-weight: 500;
+  font-size: var(--fs-16);
+  font-weight: var(--font-weight-medium);
   box-shadow: var(--shadow-md);
 }
 
@@ -44,6 +44,8 @@
 .btn--secondary {
   background-color: var(--accent-light);
   color: var(--accent);
+  font-size: var(--fs-16);
+  font-weight: var(--font-weight-medium);
   box-shadow: var(--shadow-sm);
 }
 
@@ -77,8 +79,9 @@
     font-size: var(--fs-14);
   }
   
-  .btn--primary {
-    font-size: 16pt;
+  .btn--primary,
+  .btn--secondary {
+    font-size: var(--fs-14);
   }
 }
 

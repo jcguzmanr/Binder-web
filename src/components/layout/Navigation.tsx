@@ -40,11 +40,8 @@ export const Navigation = () => {
         <div className="nav-content">
           {/* Logo */}
           <a href="#home" className="logo" onClick={(e) => handleNavClick(e, '#home')}>
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
-              <rect width="32" height="32" rx="6" fill="var(--accent)"/>
-              <path d="M8 12h16M8 16h16M8 20h12" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-            <span>Binder</span>
+            <img src="/lightmode_default.svg" alt="Binder" className="logo-full" />
+            <img src="/lightmode_default_isotipo.svg" alt="Binder" className="logo-isotipo" />
           </a>
 
           {/* Desktop Navigation */}
