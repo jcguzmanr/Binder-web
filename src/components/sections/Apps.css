@@ -13,7 +13,8 @@
 }
 
 .apps-title {
-  font-size: var(--fs-40);
+  /* Fluid typography */
+  font-size: clamp(1.75rem, 1.5rem + 2vw, 2.5rem);
   font-weight: var(--font-weight-bold);
   color: var(--pink);
   margin-bottom: var(--spacing-md);
@@ -21,7 +22,8 @@
 }
 
 .apps-subtitle {
-  font-size: var(--fs-20);
+  /* Fluid typography */
+  font-size: clamp(1rem, 0.875rem + 0.75vw, 1.25rem);
   font-weight: var(--font-weight-regular);
   color: var(--navy);
   max-width: 800px;
@@ -99,7 +101,8 @@
 }
 
 .app-name {
-  font-size: var(--fs-24);
+  /* Fluid typography */
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.5rem);
   font-weight: var(--font-weight-bold);
   color: var(--white);
   margin-bottom: 0.25rem;
@@ -170,19 +173,11 @@
   transform: translateX(4px);
 }
 
-/* Responsive */
+/* Responsive - Layout adjustments only, typography handled by clamp() */
 @media (max-width: 968px) {
   .apps-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-lg);
-  }
-
-  .apps-title {
-    font-size: var(--fs-32);
-  }
-
-  .apps-subtitle {
-    font-size: var(--fs-16);
   }
 }
 
@@ -195,18 +190,6 @@
   .app-card {
     min-height: 380px;
     padding: var(--spacing-md);
-  }
-
-  .apps-title {
-    font-size: var(--fs-24);
-  }
-
-  .apps-subtitle {
-    font-size: var(--fs-14);
-  }
-
-  .app-name {
-    font-size: var(--fs-20);
   }
 }
 

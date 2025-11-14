@@ -32,14 +32,17 @@
   --font-weight-medium: 500;
   --font-weight-bold: 700;
 
-  --fs-12: 0.75rem;
-  --fs-14: 0.875rem;
-  --fs-16: 1rem;
-  --fs-20: 1.25rem;
-  --fs-24: 1.5rem;
-  --fs-32: 2rem;
-  --fs-40: 2.5rem;
-  --fs-48: 3rem;
+  /* Fluid Typography System - Using clamp() for smooth viewport scaling */
+  /* Formula: clamp(min-size, preferred-size, max-size) */
+  /* Preferred uses vw (viewport width) for fluid scaling */
+  --fs-12: clamp(0.625rem, 0.5rem + 0.5vw, 0.75rem);
+  --fs-14: clamp(0.75rem, 0.625rem + 0.5vw, 0.875rem);
+  --fs-16: clamp(0.875rem, 0.75rem + 0.5vw, 1rem);
+  --fs-20: clamp(1rem, 0.875rem + 0.75vw, 1.25rem);
+  --fs-24: clamp(1.25rem, 1rem + 1vw, 1.5rem);
+  --fs-32: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
+  --fs-40: clamp(1.75rem, 1.5rem + 2vw, 2.5rem);
+  --fs-48: clamp(2rem, 1.75rem + 2.5vw, 3rem);
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -191,25 +194,11 @@ button {
   outline-offset: 2px;
 }
 
-/* Responsive Typography */
+/* Responsive Typography - Now handled by clamp() */
+/* Media queries only for layout adjustments, not font sizes */
 @media (max-width: 768px) {
-  :root {
-    --fs-48: 2.5rem;
-    --fs-40: 2rem;
-    --fs-32: 1.75rem;
-    --fs-24: 1.25rem;
-  }
-
   section {
     padding: var(--spacing-2xl) 0;
-  }
-}
-
-@media (max-width: 480px) {
-  :root {
-    --fs-48: 2rem;
-    --fs-40: 1.75rem;
-    --fs-32: 1.5rem;
   }
 }
 

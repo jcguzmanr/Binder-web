@@ -11,9 +11,10 @@
   grid-template-columns: repeat(12, 1fr);
   gap: var(--spacing-md);
   position: relative;
-  overflow: hidden; /* Prevent container from causing scroll */
+  overflow: visible; /* Permitir que la solapa se muestre */
   width: 100%;
   max-width: 100%;
+  padding-top: 30px; /* Espacio para la solapa */
 }
 
 .why-binder-container {
@@ -23,12 +24,13 @@
   background: #2F339B;
   border-radius: var(--radius-xl);
   padding: var(--spacing-3xl) var(--spacing-xl);
-  min-height: 400px;
+  height: 500px; /* Altura fija para todas las slides */
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-shadow: var(--shadow-xl);
   z-index: 1; /* Container content */
+  overflow: visible; /* Permitir que la solapa se muestre */
 }
 
 .why-binder-solapa {
@@ -98,7 +100,10 @@
 
 .slides-wrapper {
   position: relative;
-  min-height: auto;
+  min-height: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .slide {
@@ -117,10 +122,16 @@
   transform: translateX(0);
   pointer-events: auto;
   position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .slide-question {
-  font-size: calc(var(--fs-40) / 1.618);
+  /* Fluid typography - golden ratio with headline */
+  font-size: clamp(1rem, 0.875rem + 1.25vw, 1.55rem);
   font-weight: var(--font-weight-light);
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: var(--spacing-md);
@@ -128,7 +139,8 @@
 }
 
 .slide-headline {
-  font-size: var(--fs-40);
+  /* Fluid typography - scales smoothly with viewport */
+  font-size: clamp(1.75rem, 1.5rem + 2vw, 2.5rem);
   font-weight: var(--font-weight-bold);
   color: var(--pink);
   margin-bottom: var(--spacing-lg);
@@ -136,7 +148,8 @@
 }
 
 .slide-support {
-  font-size: calc(calc(var(--fs-40) / 1.618) / 1.618);
+  /* Fluid typography - maintains golden ratio hierarchy */
+  font-size: clamp(0.75rem, 0.625rem + 0.75vw, 0.95rem);
   font-weight: var(--font-weight-regular);
   color: rgba(255, 255, 255, 0.85);
   max-width: 800px;
@@ -232,34 +245,27 @@
   }
 }
 
-/* Responsive */
+/* Responsive - Layout adjustments only, typography handled by clamp() */
 @media (max-width: 768px) {
+  .why-binder-section .container {
+    padding-top: 40px; /* Espacio para la solapa en mobile */
+  }
+
   .why-binder-container {
     grid-column: 1 / -1; /* Full width on mobile */
     padding: var(--spacing-xl) var(--spacing-md);
-    min-height: 300px;
+    height: 400px; /* Altura fija para todas las slides en mobile */
   }
 
   .why-binder-solapa {
     right: 0;
     width: 120px;
     height: 40px;
+    top: -40px; /* Ajustar posición para mobile */
   }
 
   .carousel-content {
     padding: var(--spacing-md);
-  }
-
-  .slide-headline {
-    font-size: var(--fs-32);
-  }
-
-  .slide-question {
-    font-size: calc(var(--fs-32) / 1.618);
-  }
-
-  .slide-support {
-    font-size: calc(calc(var(--fs-32) / 1.618) / 1.618);
   }
 
   .carousel-arrow {
@@ -273,25 +279,16 @@
   }
 
   .slides-wrapper {
-    min-height: auto;
+    min-height: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 }
 
 @media (max-width: 480px) {
   .carousel-arrow {
     display: none;
-  }
-
-  .slide-headline {
-    font-size: var(--fs-24);
-  }
-
-  .slide-question {
-    font-size: calc(var(--fs-24) / 1.618);
-  }
-
-  .slide-support {
-    font-size: calc(calc(var(--fs-24) / 1.618) / 1.618);
   }
 
   .icon-placeholder {

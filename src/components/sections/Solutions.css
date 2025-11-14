@@ -23,7 +23,8 @@
 
 .solutions-main-title {
   text-align: center;
-  font-size: var(--fs-32);
+  /* Fluid typography */
+  font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
   color: var(--navy);
   margin-bottom: var(--spacing-xl);
@@ -178,7 +179,8 @@
 }
 
 .tab-title {
-  font-size: var(--fs-32);
+  /* Fluid typography */
+  font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
   color: var(--pink);
   margin-bottom: var(--spacing-sm);
@@ -186,7 +188,8 @@
 }
 
 .tab-subtitle {
-  font-size: var(--fs-20);
+  /* Fluid typography */
+  font-size: clamp(1rem, 0.875rem + 0.75vw, 1.25rem);
   font-weight: var(--font-weight-medium);
   color: var(--gray-dark);
   margin-bottom: var(--spacing-md);
@@ -240,8 +243,26 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  font-size: 3rem;
   opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clerk-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.05) translateY(-5px);
+  }
 }
 
 /* Responsive */
@@ -267,18 +288,6 @@
 
   .tab-image {
     order: -1;
-  }
-
-  .solutions-main-title {
-    font-size: var(--fs-32);
-  }
-
-  .tab-title {
-    font-size: var(--fs-24);
-  }
-
-  .tab-subtitle {
-    font-size: var(--fs-16);
   }
 }
 
@@ -407,15 +416,15 @@
   .binder-character {
     font-size: 2rem;
   }
+
+  .clerk-image {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 @media (max-width: 480px) {
-  .solutions-main-title {
-    font-size: var(--fs-24);
-  }
-
   .tab-button {
-    font-size: var(--fs-12);
     padding: 0.5rem 0.75rem;
   }
 }

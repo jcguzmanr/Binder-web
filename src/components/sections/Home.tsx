@@ -1,8 +1,21 @@
 import { homeContent } from '../../content/home';
 import { Button } from '../ui/Button';
+import { useTypewriter } from '../../hooks/useTypewriter';
 import './Home.css';
 
+const subtitles = [
+  "La única plataforma legal con IA que conecta contratos, expedientes y procesos con trazabilidad total.",
+  "Ordena tus procesos judiciales y administrativos de forma automática con apoyo de IA.",
+  "Tu operación legal, unificada en un solo espacio con IA que aprende de tus procesos."
+];
+
 export const Home = () => {
+  const { displayedText } = useTypewriter({
+    texts: subtitles,
+    displayDuration: 8000, // 8 seconds
+    typingSpeed: 30 // milliseconds between characters
+  });
+
   return (
     <section id="home" className="home-section">
       <div className="home-background">
@@ -26,7 +39,7 @@ export const Home = () => {
           
           <h1 className="home-title">{homeContent.title}</h1>
           
-          <p className="home-subtitle">{homeContent.subtitle}</p>
+          <p className="home-subtitle">{displayedText}</p>
           
           <div className="home-image-container">
             <img 

@@ -7,12 +7,21 @@
 
 .contact-decoration {
   position: absolute;
-  bottom: var(--spacing-xl);
-  right: var(--spacing-xl);
-  font-size: 5rem;
-  opacity: 0.3;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
   pointer-events: none;
-  z-index: 0;
+  z-index: 10; /* Por encima de otros componentes */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clerk-decoration-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  opacity: 0.8;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
 .contact-grid {
@@ -30,7 +39,8 @@
 }
 
 .contact-title {
-  font-size: var(--fs-40);
+  /* Fluid typography - scales smoothly with viewport */
+  font-size: clamp(1.75rem, 1.5rem + 2vw, 2.5rem);
   font-weight: var(--font-weight-bold);
   color: var(--pink);
   margin-bottom: var(--spacing-2xl);
@@ -39,7 +49,8 @@
 }
 
 .contact-description {
-  font-size: calc(var(--fs-40) / 1.618);
+  /* Fluid typography - maintains golden ratio with title */
+  font-size: clamp(1rem, 0.875rem + 1.25vw, 1.55rem);
   font-weight: var(--font-weight-medium);
   font-family: var(--font-family);
   color: #30339C;
@@ -68,6 +79,8 @@
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: visible; /* Permitir que la imagen se muestre fuera si es necesario */
 }
 
 [data-theme="dark"] .contact-form-container {
@@ -81,7 +94,8 @@
 }
 
 .form-title {
-  font-size: var(--fs-32);
+  /* Fluid typography */
+  font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
   color: var(--navy);
   margin-bottom: var(--spacing-sm);
@@ -189,7 +203,7 @@
   cursor: not-allowed;
 }
 
-/* Responsive */
+/* Responsive - Layout adjustments only, typography handled by clamp() */
 @media (max-width: 968px) {
   .contact-grid {
     grid-template-columns: 1fr;
@@ -201,40 +215,20 @@
     text-align: center;
   }
 
-  .contact-title {
-    font-size: var(--fs-32);
-  }
-
-  .contact-description {
-    font-size: calc(var(--fs-32) / 1.618);
-  }
-
-  .contact-decoration {
-    font-size: 3rem;
+  .clerk-decoration-image {
+    width: 120px;
+    height: 120px;
   }
 }
 
 @media (max-width: 640px) {
-  .contact-title {
-    font-size: var(--fs-24);
-  }
-
-  .contact-description {
-    font-size: calc(var(--fs-24) / 1.618);
-  }
-
   .contact-form-container {
     padding: var(--spacing-md);
-  }
-
-  .form-title {
-    font-size: var(--fs-24);
   }
 
   .form-group input,
   .form-group textarea {
     padding: 0.75rem;
-    font-size: var(--fs-14);
   }
 
   .contact-decoration {

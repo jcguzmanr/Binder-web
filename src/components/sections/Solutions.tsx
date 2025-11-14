@@ -80,7 +80,7 @@ export const Solutions = () => {
 
                     {/* Binder character placeholder */}
                     <div className="binder-character">
-                      <span>🤖</span>
+                      <img src="/Clerk.png" alt="Clerk" className="clerk-image" />
                     </div>
                   </div>
                 </div>
@@ -125,7 +125,7 @@ export const Solutions = () => {
 
                         {/* Binder character placeholder */}
                         <div className="binder-character">
-                          <span>🤖</span>
+                          <img src="/Clerk.png" alt="Clerk" className="clerk-image" />
                         </div>
                       </div>
                     </div>

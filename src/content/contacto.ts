@@ -39,7 +39,7 @@ export const contactoContent = {
       text: "Acepto que Binder contacte conmigo con información sobre sus productos y servicios.",
       required: true,
     },
-    submitText: "Solicita tu Demo",
+    submitText: "Agendar Demo",
   },
 };
 

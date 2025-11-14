@@ -96,10 +96,6 @@ export const Contact = () => {
 
   return (
     <section id="contacto" className="contact-section">
-      <div className="contact-decoration">
-        <span>🤖</span>
-      </div>
-      
       <div className="container-wide">
         <div className="contact-grid">
           <div className="contact-text">
@@ -109,6 +105,9 @@ export const Contact = () => {
           </div>
 
           <div className="contact-form-container">
+            <div className="contact-decoration">
+              <img src="/Clerk-2.png" alt="Clerk" className="clerk-decoration-image" />
+            </div>
             <form onSubmit={handleSubmit} className="contact-form">
               <h3 className="form-title">{contactoContent.form.title}</h3>
 

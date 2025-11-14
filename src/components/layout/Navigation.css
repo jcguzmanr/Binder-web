@@ -10,7 +10,7 @@
 }
 
 [data-theme="dark"] .navigation {
-  background-color: var(--gray-dark);
+  background-color: var(--bg);
 }
 
 .navigation.scrolled {
@@ -84,11 +84,12 @@
 }
 
 [data-theme="dark"] .nav-links a {
-  color: #30339C;
+  color: var(--fg);
+  opacity: 0.9;
 }
 
 [data-theme="dark"] .nav-links a:not(:last-child)::after {
-  color: #30339C;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .nav-links a:hover {
@@ -141,6 +142,10 @@
   text-decoration: none;
   transition: all 0.2s ease;
   border-radius: var(--radius-md);
+}
+
+[data-theme="dark"] .mobile-menu a {
+  color: var(--fg);
 }
 
 .mobile-menu a:hover {

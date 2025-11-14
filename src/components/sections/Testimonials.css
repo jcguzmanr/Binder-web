@@ -17,7 +17,8 @@
 
 .testimonials-title {
   text-align: center;
-  font-size: var(--fs-40);
+  /* Fluid typography */
+  font-size: clamp(1.75rem, 1.5rem + 2vw, 2.5rem);
   font-weight: var(--font-weight-bold);
   color: var(--navy);
   margin-bottom: var(--spacing-2xl);
@@ -132,7 +133,8 @@
 }
 
 .author-name {
-  font-size: var(--fs-20);
+  /* Fluid typography */
+  font-size: clamp(1rem, 0.875rem + 0.75vw, 1.25rem);
   font-weight: var(--font-weight-bold);
   color: var(--navy);
   margin-bottom: 0.25rem;
@@ -183,10 +185,6 @@
   .testimonials-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-lg);
-  }
-
-  .testimonials-title {
-    font-size: var(--fs-32);
   }
 
   .testimonial-message {
@@ -242,10 +240,6 @@
   .testimonial-message {
     min-height: 220px;
     padding: var(--spacing-md);
-  }
-
-  .testimonial-message p {
-    font-size: var(--fs-14);
   }
 
   .testimonial-author {
@@ -311,7 +305,6 @@
   }
 
   .testimonials-title {
-    font-size: var(--fs-24);
     margin-bottom: var(--spacing-lg);
   }
 }

@@ -60,8 +60,8 @@ export const Navigation = () => {
           {/* Actions */}
           <div className="nav-actions">
             <ThemeToggle />
-            <Button variant="primary">Demo</Button>
-            <Button variant="secondary">Inicio de Sesión</Button>
+            <Button variant="primary">Agendar Demo</Button>
+            <Button variant="secondary">Ingresar</Button>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -89,8 +89,8 @@ export const Navigation = () => {
               </a>
             ))}
             <div className="mobile-menu-actions">
-              <Button variant="primary">Demo</Button>
-              <Button variant="secondary">Inicio de Sesión</Button>
+              <Button variant="primary">Agendar Demo</Button>
+              <Button variant="secondary">Ingresar</Button>
             </div>
           </div>
         )}

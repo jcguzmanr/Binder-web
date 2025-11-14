@@ -111,7 +111,9 @@
 }
 
 .home-top-text {
-  font-size: 13.8pt; /* 22.3pt / 1.618 = 13.8pt */
+  /* Fluid typography using clamp() - scales smoothly with viewport */
+  /* Optimized for smooth scaling: mobile (0.575rem) → tablet → desktop (0.875rem) */
+  font-size: clamp(0.575rem, 0.4rem + 0.875vw, 0.875rem);
   font-weight: var(--font-weight-light);
   color: #30339C;
   margin-bottom: var(--spacing-md);
@@ -124,7 +126,9 @@
 
 .home-title {
   font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  font-size: 36pt; /* Reduced size to fit on one line - equivalent to 2.25rem/36px */
+  /* Fluid typography - scales smoothly from mobile to desktop */
+  /* Optimized for smooth scaling: mobile (1.5rem) → tablet → desktop (2.25rem) */
+  font-size: clamp(1.5rem, 0.875rem + 3.5vw, 2.25rem);
   font-weight: bold;
   color: var(--accent);
   margin-bottom: var(--spacing-md);
@@ -133,23 +137,30 @@
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  /* Base size for golden ratio hierarchy */
 }
 
 .home-subtitle {
   font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  font-size: 22.3pt; /* 36pt / 1.618 = 22.3pt */
+  /* Fluid typography - maintains golden ratio with title (title / 1.618) */
+  /* Optimized for smooth scaling: mobile (0.9rem) → tablet → desktop (1.4rem) */
+  font-size: clamp(0.9rem, 0.5rem + 2.25vw, 1.4rem);
   font-weight: 500;
   color: #30339C;
   margin-bottom: var(--spacing-xl);
   line-height: 1.5;
   max-width: 100%;
   width: 100%;
+  min-height: 3em; /* Prevent layout shift when text changes */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 [data-theme="dark"] .home-subtitle {
   color: #30339C;
 }
+
 
 .home-image-container {
   margin: var(--spacing-lg) 0;
@@ -205,7 +216,7 @@
   margin-top: var(--spacing-xl);
 }
 
-/* Responsive */
+/* Responsive - Layout adjustments only, typography handled by clamp() */
 @media (max-width: 768px) {
   .home-section {
     min-height: auto;
@@ -213,34 +224,8 @@
     padding-top: calc(70px + var(--spacing-2xl));
   }
 
-  .home-title {
-    font-size: 28pt; /* Reduced for tablet */
-  }
-
-  .home-subtitle {
-    font-size: 17.3pt; /* 28pt / 1.618 = 17.3pt */
-  }
-
-  .home-top-text {
-    font-size: 10.7pt; /* 17.3pt / 1.618 = 10.7pt */
-  }
-
   .home-image {
     max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .home-title {
-    font-size: 24pt; /* Reduced for mobile */
-  }
-
-  .home-subtitle {
-    font-size: 14.8pt; /* 24pt / 1.618 = 14.8pt */
-  }
-
-  .home-top-text {
-    font-size: 9.2pt; /* 14.8pt / 1.618 = 9.2pt */
   }
 }
 
