@@ -45,27 +45,27 @@ export const Test = () => {
       });
   }, []);
 
-  // Generate smooth wave animation based on X position
+  // Generate ultra-smooth wave animation based on X position
   const getAnimationProps = (pathData: PathData) => {
     const { x, y } = pathData;
     
     // Normalize X position (0 to 440 based on viewBox)
     const normalizedX = x / 440;
     
-    // Wave parameters
-    const waveAmplitude = 12; // Maximum vertical movement
-    const waveFrequency = 1.2; // How many waves across the width
-    const waveSpeed = 2; // Speed multiplier for wave propagation
+    // Wave parameters - optimized for maximum fluidity
+    const waveAmplitude = 10;
+    const waveFrequency = 1.0;
+    const waveSpeed = 0.6; // Slower for more fluid motion
     
     // Calculate phase offset based on X position (creates wave from left to right)
     const phaseOffset = normalizedX * Math.PI * 2 * waveFrequency;
     
     // Add slight variation based on Y position for more organic feel
-    const yVariation = 1 + (y / 174) * 0.15;
-    
-    // Create smooth continuous wave animation with more keyframes for fluidity
+    const yVariation = 1 + (y / 174) * 0.1;
     const amplitude = waveAmplitude * yVariation;
-    const steps = 16; // More steps for smoother animation
+    
+    // Create ultra-smooth continuous wave animation with many keyframes
+    const steps = 120; // Very high number of steps for ultra-smooth animation
     
     const keyframes = Array.from({ length: steps + 1 }, (_, i) => {
       const progress = i / steps;
@@ -79,11 +79,11 @@ export const Test = () => {
         y: keyframes,
       },
       transition: {
-        duration: 4 / waveSpeed,
+        duration: 8 / waveSpeed, // Longer duration for smoother motion
         repeat: Infinity,
-        ease: 'linear', // Linear for smooth continuous wave
+        ease: [0.43, 0.13, 0.23, 0.96], // Very smooth easing curve
         // Delay creates wave propagation from left to right
-        delay: normalizedX * 0.4,
+        delay: normalizedX * 0.6,
       },
     };
   };
@@ -111,4 +111,3 @@ export const Test = () => {
     </div>
   );
 };
-
