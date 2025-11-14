@@ -25,7 +25,6 @@ export const WhyBinder = () => {
     
     // Distribución balanceada: 7 izquierda, 7 derecha
     const leftIndices = [0, 2, 5, 6, 8, 10, 12]; // Índices que van a la izquierda
-    const rightIndices = [1, 3, 4, 7, 9, 11, 13]; // Índices que van a la derecha
     
     // Posiciones verticales base distribuidas uniformemente
     const verticalPositions = [
