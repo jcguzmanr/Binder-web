@@ -1,7 +1,7 @@
 export const homeContent = {
   topText: "El workspace legal todo en uno",
   title: "Gestiona, automatiza y analiza todo tu mundo legal",
-  subtitle: "La única plataforma legal con IA que conecta contratos, expedientes y procesos con trazabilidad total.",
+  subtitle: "La plataforma legal que conecta contratos, expedientes y procesos con trazabilidad total.",
   ctaText: "Agendar Demo",
   ctaLink: "#contacto",
   // Placeholder for main image

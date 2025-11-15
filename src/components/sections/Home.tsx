@@ -4,9 +4,9 @@ import { useTypewriter } from '../../hooks/useTypewriter';
 import './Home.css';
 
 const subtitles = [
-  "La única plataforma legal con IA que conecta contratos, expedientes y procesos con trazabilidad total.",
-  "Ordena tus procesos judiciales y administrativos de forma automática con apoyo de IA.",
-  "Tu operación legal, unificada en un solo espacio con IA que aprende de tus procesos."
+  "La plataforma legal que conecta contratos, expedientes y procesos con trazabilidad total.",
+  "Organiza tus procesos judiciales y administrativos de forma automática.",
+  "Unifica tu operación legal con IA que aprende de tus procesos."
 ];
 
 export const Home = () => {
