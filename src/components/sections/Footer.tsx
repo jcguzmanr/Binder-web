@@ -1,8 +1,17 @@
+import { Link } from 'react-router-dom';
 import { footerContent } from '../../content/footer';
 import './Footer.css';
 
 export const Footer = () => {
   const { columns, socialLinks, legalNote } = footerContent;
+
+  const isExternalLink = (href: string) => {
+    return href.startsWith('http') || href.startsWith('https');
+  };
+
+  const isHashLink = (href: string) => {
+    return href.startsWith('#');
+  };
 
   return (
     <footer className="footer">
@@ -12,11 +21,27 @@ export const Footer = () => {
             <div key={index} className="footer-column">
               <h4 className="column-title">{column.title}</h4>
               <ul className="column-links">
-                {column.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
-                    <a href={link.href}>{link.label}</a>
-                  </li>
-                ))}
+                {column.links.map((link, linkIndex) => {
+                  if (isExternalLink(link.href)) {
+                    return (
+                      <li key={linkIndex}>
+                        <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                      </li>
+                    );
+                  } else if (isHashLink(link.href)) {
+                    return (
+                      <li key={linkIndex}>
+                        <a href={link.href}>{link.label}</a>
+                      </li>
+                    );
+                  } else {
+                    return (
+                      <li key={linkIndex}>
+                        <Link to={link.href}>{link.label}</Link>
+                      </li>
+                    );
+                  }
+                })}
               </ul>
             </div>
           ))}

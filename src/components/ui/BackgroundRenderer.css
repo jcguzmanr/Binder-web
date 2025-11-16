@@ -1,0 +1,32 @@
+.background-renderer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Ensure animation containers are properly positioned */
+.background-renderer .gentle-waves-container,
+.background-renderer .canyon-flows-container,
+.background-renderer .flowing-pattern-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+/* Allow mouse interaction for flow pattern - but events go through to window */
+.background-renderer .flowing-pattern-container {
+  pointer-events: none;
+}
+
+.background-renderer .flowing-pattern-container canvas {
+  pointer-events: none;
+}
+

@@ -3,16 +3,17 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.875rem 2rem;
+  padding: 0.5rem 1rem; /* Smaller padding */
   font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  font-size: var(--fs-16);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-lg);
-  transition: all 0.2s ease;
+  font-size: 0.75rem; /* 12px - smaller button size */
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-md);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
   border: none;
   text-decoration: none;
   white-space: nowrap;
+  line-height: 1.5;
 }
 
 .btn:disabled {
@@ -24,14 +25,14 @@
 .btn--primary {
   background-color: #2F339B;
   color: #96EFFF;
-  font-size: var(--fs-16);
-  font-weight: var(--font-weight-medium);
-  box-shadow: var(--shadow-md);
+  font-size: 0.75rem; /* 12px */
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
 .btn--primary:hover:not(:disabled) {
   background-color: var(--navy);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: var(--shadow-lg);
 }
 
@@ -44,15 +45,15 @@
 .btn--secondary {
   background-color: var(--accent-light);
   color: var(--accent);
-  font-size: var(--fs-16);
-  font-weight: var(--font-weight-medium);
-  box-shadow: var(--shadow-sm);
+  font-size: 0.75rem; /* 12px */
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
 .btn--secondary:hover:not(:disabled) {
   background-color: var(--accent);
   color: var(--white);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: var(--shadow-md);
 }
 
@@ -75,13 +76,22 @@
 /* Responsive */
 @media (max-width: 768px) {
   .btn {
-    padding: 0.75rem 1.5rem;
-    font-size: var(--fs-14);
+    padding: 0.5rem 0.875rem;
+    font-size: 0.6875rem; /* 11px - smaller on mobile */
+    width: auto; /* Auto width for nav buttons */
   }
   
   .btn--primary,
   .btn--secondary {
-    font-size: var(--fs-14);
+    font-size: 0.6875rem; /* 11px */
   }
+}
+
+/* Mobile menu buttons - take full space */
+.mobile-menu-actions .btn {
+  flex: 1 1 0;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.6875rem; /* 11px for mobile menu */
+  min-width: 0;
 }
 

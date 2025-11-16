@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { solucionesContent } from '../../content/soluciones';
 import './Solutions.css';
 
@@ -6,6 +6,8 @@ export const Solutions = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [openAccordions, setOpenAccordions] = useState<Set<number>>(new Set());
+  const [mascotPosition, setMascotPosition] = useState('0');
+  const tabNavigationRef = useRef<HTMLDivElement>(null);
   const { mainTitle, tabs } = solucionesContent;
 
   useEffect(() => {
@@ -17,6 +19,65 @@ export const Solutions = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Get mascot position based on tab ID
+  const getMascotPosition = (tabId: string): string => {
+    switch (tabId) {
+      case 'centralizacion':
+        return '0'; // Bottom right (current)
+      case 'automatizacion':
+        return '1'; // Upper corner
+      case 'gestion':
+        return 'image-bottom-left'; // Bottom left of image
+      case 'analitica':
+        return '0'; // Bottom right (keep current)
+      case 'firma':
+        return '0'; // Bottom right (keep current)
+      default:
+        return '0';
+    }
+  };
+
+  // Initialize mascot position on mount
+  useEffect(() => {
+    const initialTabId = tabs[activeTab].id;
+    const initialPosition = getMascotPosition(initialTabId);
+    setMascotPosition(initialPosition);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Handle keyboard navigation and mascot position
+  useEffect(() => {
+    if (!tabNavigationRef.current || isMobile) return;
+
+    const tabButtons = Array.from(tabNavigationRef.current.querySelectorAll('.tab-button'));
+    const handlers: Array<() => void> = [];
+    
+    // Add focus event listeners to each tab button
+    tabButtons.forEach((button, index) => {
+      const handleFocus = () => {
+        if (index !== activeTab) {
+          setActiveTab(index);
+          const tabId = tabs[index].id;
+          const position = getMascotPosition(tabId);
+          setMascotPosition(position);
+        }
+      };
+      
+      button.addEventListener('focus', handleFocus);
+      handlers.push(() => button.removeEventListener('focus', handleFocus));
+    });
+
+    return () => {
+      handlers.forEach(cleanup => cleanup());
+    };
+  }, [activeTab, isMobile, tabs]);
+
+  // Update mascot position when activeTab changes via click
+  useEffect(() => {
+    const tabId = tabs[activeTab].id;
+    const position = getMascotPosition(tabId);
+    setMascotPosition(position);
+  }, [activeTab, tabs]);
 
   const toggleAccordion = (index: number) => {
     setOpenAccordions(prev => {
@@ -39,7 +100,7 @@ export const Solutions = () => {
 
         {/* Desktop: Tabs Navigation */}
         {!isMobile && (
-          <div className="tabs-navigation">
+          <div className="tabs-navigation" ref={tabNavigationRef}>
             {tabs.map((tab, index) => (
               <button
                 key={tab.id}
@@ -65,6 +126,12 @@ export const Solutions = () => {
                     <div className="image-placeholder">
                       <span>{tab.imagePlaceholder}</span>
                     </div>
+                    {/* Mascot for image position (Gestión) */}
+                    {tab.id === 'gestion' && (
+                      <div className={`binder-character-image position-${mascotPosition}`}>
+                        <img src="/Clerk.png" alt="Clerk" className="clerk-image" />
+                      </div>
+                    )}
                   </div>
 
                   <div className="tab-text">
@@ -78,10 +145,12 @@ export const Solutions = () => {
                       ))}
                     </ul>
 
-                    {/* Binder character placeholder */}
-                    <div className="binder-character">
-                      <img src="/Clerk.png" alt="Clerk" className="clerk-image" />
-                    </div>
+                    {/* Binder character placeholder - hidden for Gestión */}
+                    {tab.id !== 'gestion' && (
+                      <div className={`binder-character position-${mascotPosition}`}>
+                        <img src="/Clerk.png" alt="Clerk" className="clerk-image" />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

@@ -33,7 +33,15 @@ export const Testimonials = () => {
                   <p className="author-role">{testimonial.role}</p>
                   
                   <div className="company-logo">
-                    <span>{testimonial.logoPlaceholder}</span>
+                    {testimonial.logoPath ? (
+                      <img 
+                        src={testimonial.logoPath} 
+                        alt={testimonial.logoPlaceholder} 
+                        className="company-logo-image"
+                      />
+                    ) : (
+                      <span>{testimonial.logoPlaceholder}</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -55,7 +63,15 @@ export const Testimonials = () => {
                       <p className="author-role">{testimonial.role}</p>
                       
                       <div className="company-logo">
-                        <span>{testimonial.logoPlaceholder}</span>
+                        {testimonial.logoPath ? (
+                          <img 
+                            src={testimonial.logoPath} 
+                            alt={testimonial.logoPlaceholder} 
+                            className="company-logo-image"
+                          />
+                        ) : (
+                          <span>{testimonial.logoPlaceholder}</span>
+                        )}
                       </div>
                     </div>
                   </div>

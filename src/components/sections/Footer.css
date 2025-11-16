@@ -71,25 +71,33 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  color: var(--white);
+  color: #30339C;
   font-size: var(--fs-14);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 0;
   border-radius: 0;
   background-color: transparent;
   transition: all 0.2s ease;
+  opacity: 0.85;
 }
 
 .linkedin-link:hover {
   background-color: transparent;
-  transform: translateY(-2px);
+  color: #30339C;
+  opacity: 1;
+  transform: translateX(4px);
 }
 
 .linkedin-link svg {
   flex-shrink: 0;
-  color: var(--white);
-  fill: var(--white);
+  color: #30339C;
+  fill: #30339C;
+  transition: all 0.2s ease;
+}
+
+.linkedin-link:hover svg {
+  opacity: 1;
 }
 
 .legal-note {

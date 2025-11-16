@@ -1,11 +1,16 @@
 .testimonials-section {
   padding: var(--spacing-3xl) 0;
-  background: linear-gradient(180deg, #F5F5F5 0%, #E8F6F8 100%);
+  background-color: var(--bg);
   position: relative;
 }
 
 [data-theme="dark"] .testimonials-section {
-  background: linear-gradient(180deg, #1B1B1B 0%, #1A2F35 100%);
+  background-color: var(--gray-dark);
+}
+
+/* Make background transparent when animated background is active */
+body.has-animated-background .testimonials-section {
+  background-color: transparent;
 }
 
 .testimonials-section .container-wide {
@@ -18,7 +23,7 @@
 .testimonials-title {
   text-align: center;
   /* Fluid typography */
-  font-size: clamp(1.75rem, 1.5rem + 2vw, 2.5rem);
+  font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
   color: var(--navy);
   margin-bottom: var(--spacing-2xl);
@@ -32,17 +37,17 @@
 
 .testimonials-container {
   grid-column: 1 / -1;
-  background-color: var(--white);
+  background-color: transparent;
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
-  box-shadow: var(--shadow-xl);
+  box-shadow: none;
   position: relative;
   z-index: 1;
   overflow: visible; /* Visible para permitir tabs, pero mantener padding para bordes */
 }
 
 [data-theme="dark"] .testimonials-container {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: transparent;
 }
 
 /* Desktop Grid */
@@ -65,9 +70,10 @@
   border-radius: var(--radius-lg);
   overflow: visible; /* Visible para permitir que el tab se muestre */
   box-shadow: none;
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   z-index: 2;
+  gap: 0;
 }
 
 .testimonial-card:hover {
@@ -88,6 +94,7 @@
   align-items: center;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   position: relative;
+  margin-bottom: 0;
 }
 
 .testimonial-message p {
@@ -101,9 +108,10 @@
 
 /* Author Section */
 .testimonial-author {
-  background-color: #F3F2F2;
-  padding: var(--spacing-xl);
-  padding-top: calc(var(--spacing-xl) + 30px);
+  background-color: var(--gray-light);
+  padding: var(--spacing-md);
+  padding-top: calc(var(--spacing-md) + 30px);
+  padding-bottom: calc(var(--spacing-md) + 60px); /* Space for logo */
   text-align: left;
   border-radius: 0 0 var(--radius-xl) var(--radius-xl);
   position: relative;
@@ -111,6 +119,7 @@
   flex-direction: column;
   z-index: 0;
   min-height: 150px;
+  margin-top: 0;
 }
 
 .testimonial-author-tab {
@@ -119,17 +128,25 @@
   right: 0;
   height: 30px;
   width: 160px;
-  background: #F3F2F2;
+  background: var(--gray-light);
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  z-index: 2;
+  z-index: 3;
 }
 
 [data-theme="dark"] .testimonial-author-tab {
-  background-color: rgba(243, 242, 242, 0.1);
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none;
 }
 
 [data-theme="dark"] .testimonial-author {
-  background-color: rgba(243, 242, 242, 0.1);
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: none;
 }
 
 .author-name {
@@ -154,7 +171,7 @@
 }
 
 [data-theme="dark"] .author-role {
-  color: var(--gray-light);
+  color: var(--white);
 }
 
 .company-logo {
@@ -165,6 +182,14 @@
   align-items: center;
   justify-content: flex-end;
   min-height: 50px;
+  max-width: 200px;
+}
+
+.company-logo-image {
+  max-width: 100%;
+  height: 40px;
+  width: auto;
+  object-fit: contain;
 }
 
 .company-logo span {
@@ -198,7 +223,7 @@
   }
 
   .testimonial-author {
-    padding-top: calc(var(--spacing-xl) + 28px);
+    padding-top: calc(var(--spacing-md) + 28px);
   }
 }
 
@@ -206,7 +231,8 @@
 @media (max-width: 640px) {
   .testimonials-container {
     padding: var(--spacing-md);
-    border-radius: var(--radius-lg); /* Mantener bordes redondeados en mobile */
+    border-radius: var(--radius-lg);
+    overflow: visible;
   }
 
   .testimonials-grid {
@@ -216,35 +242,57 @@
   .testimonials-carousel {
     display: block;
     position: relative;
-    overflow: visible; /* Cambiar a visible para no cortar contenido */
+    overflow: visible;
+    width: 100%;
+    padding-top: 30px; /* Space for author tab */
   }
 
   .carousel-track {
     display: flex;
     transition: transform 0.4s ease;
-    overflow: visible; /* No cortar contenido */
+    width: 100%;
   }
 
   .carousel-item {
     min-width: 100%;
-    padding: 0 var(--spacing-sm);
+    width: 100%;
+    padding: 0 var(--spacing-md);
     flex-shrink: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
   }
 
   .testimonial-card {
-    margin: 0 auto;
+    margin: 0;
+    width: 100%;
     max-width: 100%;
-    overflow: visible; /* Asegurar que el contenido no se corte */
+    overflow: visible;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
   .testimonial-message {
-    min-height: 220px;
-    padding: var(--spacing-md);
+    min-height: auto;
+    padding: var(--spacing-xl);
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  .testimonial-message p {
+    font-size: var(--fs-14);
+    line-height: 1.7;
+    margin: 0;
   }
 
   .testimonial-author {
     padding: var(--spacing-md);
     padding-top: calc(var(--spacing-md) + 28px);
+    padding-bottom: calc(var(--spacing-md) + 50px);
+    min-height: auto;
+    margin-top: 0;
   }
 
   .testimonial-author-tab {
@@ -253,12 +301,34 @@
     height: 28px;
   }
 
+  .company-logo {
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    max-width: 150px;
+  }
+
+  .company-logo-image {
+    height: 35px;
+  }
+
+  .author-name {
+    font-size: var(--fs-16);
+    margin-right: 0;
+    padding-bottom: 0;
+  }
+
+  .author-role {
+    font-size: var(--fs-14);
+    margin-right: 0;
+    padding-bottom: 0;
+  }
+
   /* Carousel Controls */
   .carousel-controls {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--spacing-md);
+    gap: var(--spacing-xs);
     margin-top: var(--spacing-lg);
   }
 
@@ -285,6 +355,8 @@
   .carousel-dots {
     display: flex;
     gap: var(--spacing-xs);
+    align-items: center;
+    margin: 0 var(--spacing-xs);
   }
 
   .carousel-dots button {

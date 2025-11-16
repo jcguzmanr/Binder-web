@@ -138,8 +138,8 @@ export const WhyBinder = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  // Emojis para cada icono
-  const emojis = ['📧', '📄', '📊', '💬', '📱', '📋', '📝', '📧', '📑', '📈', '📌', '📦', '📎', '🔖'];
+  // Emojis para cada icono - primeros 3 son los principales de los slides
+  const emojis = ['📧', '📄', '⏱️', '💬', '📱', '📋', '📝', '📧', '📑', '📈', '📌', '📦', '📎', '🔖'];
 
   // Detectar tamaño de pantalla para posicionamiento responsive
   const [isMobile, setIsMobile] = useState(false);
@@ -225,39 +225,66 @@ export const WhyBinder = () => {
                 >
                   <p className="slide-question">{slide.question}</p>
                   <h2 className="slide-headline">{slide.headline}</h2>
-                  <p className="slide-support">{slide.support}</p>
+                  <p className="slide-support">
+                    {slide.support.split('Binder une todo lo legal en un solo espacio').map((part, i, arr) => 
+                      i === arr.length - 1 ? (
+                        <span key={i}>{part}</span>
+                      ) : (
+                        <span key={i}>
+                          {part}
+                          <strong style={{ color: '#96EFFF' }}>Binder une todo lo legal en un solo espacio</strong>
+                        </span>
+                      )
+                    )}
+                  </p>
                 </div>
               ))}
             </div>
-
-            {/* Navigation arrows */}
-            <button 
-              className="carousel-arrow carousel-arrow-prev"
-              onClick={prevSlide}
-              aria-label="Anterior"
-            >
-              ‹
-            </button>
-            <button 
-              className="carousel-arrow carousel-arrow-next"
-              onClick={nextSlide}
-              aria-label="Siguiente"
-            >
-              ›
-            </button>
           </div>
         </div>
+
+        {/* Navigation arrows - outside container */}
+        <button 
+          className="carousel-arrow carousel-arrow-prev"
+          onClick={prevSlide}
+          aria-label="Anterior"
+        >
+          ‹
+        </button>
+        <button 
+          className="carousel-arrow carousel-arrow-next"
+          onClick={nextSlide}
+          aria-label="Siguiente"
+        >
+          ›
+        </button>
         
         {/* Indicators */}
         <div className="carousel-indicators">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              className={`indicator ${index === currentSlide ? 'active' : ''}`}
-              onClick={() => goToSlide(index)}
-              aria-label={`Ir a slide ${index + 1}`}
-            />
-          ))}
+          <button 
+            className="carousel-nav-button carousel-nav-prev"
+            onClick={prevSlide}
+            aria-label="Anterior"
+          >
+            ‹
+          </button>
+          <div className="indicators-wrapper">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                className={`indicator ${index === currentSlide ? 'active' : ''}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Ir a slide ${index + 1}`}
+              />
+            ))}
+          </div>
+          <button 
+            className="carousel-nav-button carousel-nav-next"
+            onClick={nextSlide}
+            aria-label="Siguiente"
+          >
+            ›
+          </button>
         </div>
       </div>
     </section>

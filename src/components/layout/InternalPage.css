@@ -1,0 +1,122 @@
+.internal-page {
+  min-height: calc(100vh - 160px); /* Account for nav and footer */
+  padding: var(--spacing-3xl) var(--spacing-md);
+  padding-top: 140px; /* Extra space to avoid menu overlap */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.internal-page-container {
+  width: 100%;
+  max-width: 1400px; /* Same as container-wide */
+  margin: 0 auto;
+  padding: 0 var(--spacing-md); /* Same padding as container-wide */
+}
+
+.frosted-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: var(--spacing-2xl);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .frosted-glass {
+  background: rgba(27, 27, 27, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.internal-page-title {
+  font-size: var(--fs-40);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xl);
+  color: var(--navy);
+  text-align: center;
+}
+
+[data-theme="dark"] .internal-page-title {
+  color: var(--accent-light);
+}
+
+.internal-page-content {
+  color: var(--fg);
+  line-height: 1.8;
+  font-size: var(--fs-16);
+}
+
+.internal-page-content a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.internal-page-content a:hover {
+  color: var(--navy);
+  text-decoration: underline;
+}
+
+[data-theme="dark"] .internal-page-content a {
+  color: var(--accent-light);
+}
+
+[data-theme="dark"] .internal-page-content a:hover {
+  color: var(--accent);
+}
+
+.internal-page-content p {
+  margin-bottom: var(--spacing-md);
+}
+
+.internal-page-content h2 {
+  font-size: var(--fs-32);
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--navy);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-theme="dark"] .internal-page-content h2 {
+  color: var(--accent-light);
+}
+
+.internal-page-content h3 {
+  font-size: var(--fs-24);
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+  color: var(--navy);
+  font-weight: var(--font-weight-bold);
+}
+
+[data-theme="dark"] .internal-page-content h3 {
+  color: var(--accent-light);
+}
+
+.internal-page-content ul,
+.internal-page-content ol {
+  margin-left: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.internal-page-content li {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .internal-page {
+    padding: var(--spacing-xl) var(--spacing-sm);
+    padding-top: 120px; /* Less space on mobile but still enough */
+  }
+
+  .frosted-glass {
+    padding: var(--spacing-lg);
+  }
+
+  .internal-page-title {
+    font-size: var(--fs-32);
+  }
+}
+

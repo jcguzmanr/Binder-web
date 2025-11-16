@@ -6,6 +6,11 @@
   --scroll-progress: 0; /* Will be updated via JavaScript */
 }
 
+/* Make background transparent when animated background is active */
+body.has-animated-background .why-binder-section {
+  background-color: transparent;
+}
+
 .why-binder-section .container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -15,6 +20,8 @@
   width: 100%;
   max-width: 100%;
   padding-top: 30px; /* Espacio para la solapa */
+  padding-left: 70px; /* Espacio para flecha izquierda */
+  padding-right: 70px; /* Espacio para flecha derecha */
 }
 
 .why-binder-container {
@@ -22,15 +29,20 @@
   grid-column: 2 / -2; /* Spans columns 2 to 11, leaving 1 column on each side for centering */
   margin: 0 auto;
   background: #2F339B;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-xl) 0 var(--radius-xl) var(--radius-xl); /* top-left, top-right, bottom-right, bottom-left */
   padding: var(--spacing-3xl) var(--spacing-xl);
   height: 500px; /* Altura fija para todas las slides */
+  min-height: 500px; /* Asegurar altura mínima */
+  max-height: 500px; /* Asegurar altura máxima */
+  width: 100%; /* Ancho completo del grid */
+  max-width: 100%; /* No exceder el ancho del grid */
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-shadow: var(--shadow-xl);
   z-index: 1; /* Container content */
   overflow: visible; /* Permitir que la solapa se muestre */
+  box-sizing: border-box; /* Incluir padding en el ancho */
 }
 
 .why-binder-solapa {
@@ -63,7 +75,8 @@
   font-size: 2.5rem;
   opacity: calc(0.4 + var(--scroll-progress) * 0.4); /* More visible when centered */
   animation: float 6s ease-in-out infinite;
-  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform;
   /* Ensure icons don't cause overflow */
   max-width: 100vw;
@@ -96,12 +109,17 @@
   z-index: 2; /* Above container background, below icons */
   text-align: center;
   padding: var(--spacing-md) var(--spacing-lg);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Ocultar contenido que se desborde del carousel */
 }
 
 .slides-wrapper {
   position: relative;
-  min-height: 100%;
+  width: 100%;
   height: 100%;
+  min-height: 100%;
   display: flex;
   align-items: center;
 }
@@ -111,10 +129,17 @@
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   transform: translateX(100%);
-  transition: all 0.5s ease-in-out;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .slide.active {
@@ -122,11 +147,6 @@
   transform: translateX(0);
   pointer-events: auto;
   position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .slide-question {
@@ -136,6 +156,7 @@
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: var(--spacing-md);
   line-height: 1.4;
+  flex-shrink: 0;
 }
 
 .slide-headline {
@@ -145,6 +166,17 @@
   color: var(--pink);
   margin-bottom: var(--spacing-lg);
   line-height: 1.2;
+  max-height: 3.6em; /* Limitar altura a aproximadamente 3 líneas */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .slide-support {
@@ -155,14 +187,20 @@
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
+  flex-shrink: 1;
+  overflow: hidden;
+  max-height: 4.8em; /* Limitar altura a aproximadamente 3 líneas */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
-/* Navigation arrows */
+/* Navigation arrows - positioned outside container */
 .carousel-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #2F339B;
   color: var(--white);
   border: none;
   width: 50px;
@@ -173,32 +211,46 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-  z-index: 2;
-  opacity: 0.7;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 5; /* Above container */
+  opacity: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .carousel-arrow:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(47, 51, 155, 0.9);
   opacity: 1;
   transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-arrow-prev {
-  left: var(--spacing-md);
+  left: calc(8.33% - 30px); /* Positioned just outside container on left */
 }
 
 .carousel-arrow-next {
-  right: var(--spacing-md);
+  right: calc(8.33% - 30px); /* Positioned just outside container on right */
 }
 
 /* Indicators */
 .carousel-indicators {
   display: flex;
   justify-content: center;
-  gap: var(--spacing-sm);
+  align-items: center;
+  gap: var(--spacing-xs);
   margin-top: var(--spacing-lg);
   grid-column: 2 / -2;
+}
+
+.indicators-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.carousel-nav-button {
+  display: none; /* Hidden by default, shown only on mobile */
 }
 
 .indicator {
@@ -249,12 +301,24 @@
 @media (max-width: 768px) {
   .why-binder-section .container {
     padding-top: 40px; /* Espacio para la solapa en mobile */
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
   }
 
   .why-binder-container {
     grid-column: 1 / -1; /* Full width on mobile */
     padding: var(--spacing-xl) var(--spacing-md);
     height: 400px; /* Altura fija para todas las slides en mobile */
+    min-height: 400px;
+    max-height: 400px;
+  }
+
+  .carousel-arrow-prev {
+    left: var(--spacing-sm);
+  }
+
+  .carousel-arrow-next {
+    right: var(--spacing-sm);
   }
 
   .why-binder-solapa {
@@ -284,6 +348,26 @@
     display: flex;
     align-items: center;
   }
+
+  /* Textos más pequeños en mobile */
+  .slide-question {
+    font-size: clamp(0.75rem, 0.7rem + 0.5vw, 0.9rem);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .slide-headline {
+    font-size: clamp(1.25rem, 1.1rem + 1vw, 1.5rem);
+    margin-bottom: var(--spacing-md);
+    max-height: 4.5em; /* Ajustar para mobile */
+    -webkit-line-clamp: 4; /* Permitir más líneas en mobile */
+  }
+
+  .slide-support {
+    font-size: clamp(0.65rem, 0.6rem + 0.4vw, 0.75rem);
+    line-height: 1.5;
+    max-height: 4.5em; /* Ajustar para mobile */
+    -webkit-line-clamp: 4; /* Permitir más líneas en mobile */
+  }
 }
 
 @media (max-width: 480px) {
@@ -293,6 +377,37 @@
 
   .icon-placeholder {
     font-size: 1.2rem;
+  }
+
+  .carousel-indicators {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+  }
+
+  .carousel-nav-button {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--accent-light);
+    color: var(--accent);
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .carousel-nav-button:hover {
+    background-color: var(--accent);
+    color: var(--white);
+  }
+
+  .indicators-wrapper {
+    margin: 0 var(--spacing-xs);
   }
 }
 

@@ -1,0 +1,48 @@
+.gentle-waves-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg); /* Adapts to theme: white (light) or black (dark) */
+}
+
+/* Container for the animated background */
+.gentle-waves-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0; /* Behind content but above page background */
+  background-color: transparent; /* Clear - animation handles background */
+  pointer-events: none; /* Allow clicks to pass through */
+}
+
+.gentle-waves-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Content overlay - can be used for any content on top of the animation */
+.gentle-waves-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  /* Add padding if you want content */
+  /* padding: var(--spacing-3xl) var(--spacing-md); */
+}
+
+/* If you want the animation to work as a background for the entire site */
+/* You can use this class on the body or app container */
+.app-background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+

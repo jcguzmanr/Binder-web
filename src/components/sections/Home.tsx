@@ -18,23 +18,24 @@ export const Home = () => {
 
   return (
     <section id="home" className="home-section">
-      <div className="home-background">
-        <img 
-          src="/Dots BG 2 - Top.svg" 
-          alt="" 
-          className="dots-bg-top"
-          aria-hidden="true"
-        />
-        <img 
-          src="/Dots BG 1 - Bottom.svg" 
-          alt="" 
-          className="dots-bg-bottom"
-          aria-hidden="true"
-        />
-      </div>
-      
       <div className="container">
         <div className="home-content">
+          <a 
+            href={homeContent.badgeLink} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="home-badge"
+          >
+            <span className="home-badge-text">{homeContent.badgeText}</span>
+            <span className="home-badge-icon">
+              <img 
+                src="/proinnovate.png" 
+                alt="PRO innovate" 
+                className="home-badge-logo"
+              />
+            </span>
+          </a>
+          
           <p className="home-top-text">{homeContent.topText}</p>
           
           <h1 className="home-title">{homeContent.title}</h1>
