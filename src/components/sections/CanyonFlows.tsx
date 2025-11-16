@@ -100,6 +100,8 @@ export const CanyonMultiLayerFlows = ({ accentColor }: CanyonMultiLayerFlowsProp
     let time = 0;
 
     function animate() {
+      if (!canvas || !ctx) return;
+      
       time += 0.016;
 
       // Update dimensions if canvas was resized

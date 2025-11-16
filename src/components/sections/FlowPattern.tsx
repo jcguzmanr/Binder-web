@@ -56,8 +56,6 @@ export const FlowingPattern = ({ accentColor }: FlowingPatternProps) => {
     let time = 0;
     let mouseX = width / 2;
     let mouseY = height / 2;
-    let lastMouseX = mouseX;
-    let lastMouseY = mouseY;
 
     // Create points that seek oneness through flow
     const flowPoints: Array<{
@@ -71,7 +69,6 @@ export const FlowingPattern = ({ accentColor }: FlowingPatternProps) => {
     }> = [];
     
     const gridSize = 8;
-    const totalCells = (width / gridSize) * (height / gridSize);
 
     // Initialize flow points
     for (let x = gridSize / 2; x < width; x += gridSize) {
@@ -121,6 +118,8 @@ export const FlowingPattern = ({ accentColor }: FlowingPatternProps) => {
     let animationFrameId: number;
 
     function animate() {
+      if (!canvas || !ctx) return;
+      
       const currentWidth = canvas.width;
       const currentHeight = canvas.height;
       

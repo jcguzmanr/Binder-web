@@ -139,7 +139,6 @@ export const GentleWaves = ({ accentColor }: GentleWavesProps) => {
       for (let i = 0; i < numDiagonalLines; i++) {
         const offset = (i / numDiagonalLines) * width * 2 - width * 0.5;
         const amplitude = 30 + 20 * Math.cos(time.current * 0.25 + i * 0.1);
-        const frequency = 0.01 + 0.005 * Math.sin(time.current * 0.15 + i * 0.08);
         const phase = time.current * (0.3 + 0.2 * Math.sin(i * 0.1));
         const thickness = 0.7 + 0.5 * Math.sin(time.current + i * 0.25);
         const baseOpacity = theme === 'dark' ? 0.15 : 0.1;

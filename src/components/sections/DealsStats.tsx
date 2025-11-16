@@ -9,10 +9,9 @@ interface StatBlockProps {
     text: string;
     subtitle?: string;
   };
-  index: number;
 }
 
-const StatBlock = ({ item, index }: StatBlockProps) => {
+const StatBlock = ({ item }: StatBlockProps) => {
   if (item.value === null) {
     return (
       <div className="deals-stat-block">
@@ -50,7 +49,7 @@ export const DealsStats = () => {
       <div className="container-wide">
         <div className="deals-stats-grid">
           {items.map((item, index) => (
-            <StatBlock key={index} item={item} index={index} />
+            <StatBlock key={index} item={item} />
           ))}
         </div>
         <p className="deals-stats-description">{description}</p>
