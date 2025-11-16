@@ -1,0 +1,177 @@
+.deals-comparison-section {
+  position: relative;
+  padding: var(--spacing-3xl) 0;
+  background-color: var(--bg);
+  overflow: hidden;
+}
+
+/* Make background transparent when animated background is active */
+body.has-animated-background .deals-comparison-section {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .deals-comparison-section {
+  background-color: var(--gray-dark);
+}
+
+.deals-comparison-title {
+  text-align: center;
+  font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--navy);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.3;
+}
+
+[data-theme="dark"] .deals-comparison-title {
+  color: var(--accent-light);
+}
+
+.deals-comparison-table-container {
+  overflow-x: auto;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.deals-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  min-width: 600px;
+}
+
+[data-theme="dark"] .deals-comparison-table {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.deals-comparison-table thead {
+  background-color: var(--bright-purple);
+}
+
+[data-theme="dark"] .deals-comparison-table thead {
+  background-color: rgba(109, 60, 255, 0.2);
+}
+
+.deals-comparison-table th {
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: left;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--fs-16);
+  color: var(--white);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .deals-comparison-table th {
+  color: var(--accent-light);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.deals-comparison-feature-header {
+  width: 30%;
+}
+
+.deals-comparison-tradicional-header {
+  width: 35%;
+}
+
+.deals-comparison-deals-header {
+  width: 35%;
+  background-color: rgba(109, 60, 255, 0.3);
+}
+
+[data-theme="dark"] .deals-comparison-deals-header {
+  background-color: rgba(109, 60, 255, 0.25);
+}
+
+.deals-comparison-table tbody tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s ease;
+}
+
+[data-theme="dark"] .deals-comparison-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.deals-comparison-table tbody tr:hover {
+  background-color: rgba(109, 60, 255, 0.05);
+}
+
+[data-theme="dark"] .deals-comparison-table tbody tr:hover {
+  background-color: rgba(109, 60, 255, 0.1);
+}
+
+.deals-comparison-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.deals-comparison-table td {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--fs-16);
+  color: var(--gray-dark);
+  vertical-align: middle;
+}
+
+[data-theme="dark"] .deals-comparison-table td {
+  color: var(--white);
+}
+
+.deals-comparison-feature {
+  font-weight: var(--font-weight-medium);
+}
+
+.deals-comparison-tradicional {
+  color: var(--gray-dark);
+}
+
+[data-theme="dark"] .deals-comparison-tradicional {
+  color: var(--white);
+}
+
+.deals-comparison-deals {
+  background-color: rgba(109, 60, 255, 0.1);
+  font-weight: var(--font-weight-medium);
+  color: var(--navy);
+}
+
+[data-theme="dark"] .deals-comparison-deals {
+  background-color: rgba(109, 60, 255, 0.15);
+  color: var(--accent-light);
+}
+
+.deals-comparison-check {
+  color: var(--green);
+  font-size: 1.5em;
+  font-weight: var(--font-weight-bold);
+}
+
+.deals-comparison-cross {
+  color: var(--orange);
+  font-size: 1.5em;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .deals-comparison-section {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .deals-comparison-table-container {
+    margin: 0 var(--spacing-sm);
+  }
+
+  .deals-comparison-table {
+    font-size: var(--fs-14);
+  }
+
+  .deals-comparison-table th,
+  .deals-comparison-table td {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+

@@ -3,9 +3,25 @@ import { useTheme } from '../../context/ThemeContext';
 import './FlowPattern.css';
 
 // Adapted FlowingPattern animation with Binder color scheme
+interface FlowingPatternProps {
+  accentColor?: { r: number; g: number; b: number } | null;
+}
+
 // Points flow together in unity with teal accents, adapting to theme
-export const FlowingPattern = () => {
+// Can use custom accent color for specific pages
+export const FlowingPattern = ({ accentColor }: FlowingPatternProps) => {
   const { theme } = useTheme();
+  
+  // Default teal colors if no accent color provided
+  const defaultAccent = { r: 0, g: 152, b: 177 }; // --accent
+  const defaultAccentLight = { r: 174, g: 222, b: 230 }; // --accent-light
+  
+  // Use custom accent color or default
+  const accent = accentColor || defaultAccent;
+  const accentLight = accentColor
+    ? { r: Math.min(255, accentColor.r + 80), g: Math.min(255, accentColor.g + 40), b: Math.min(255, accentColor.b + 30) }
+    : defaultAccentLight;
+  
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -173,9 +189,9 @@ export const FlowingPattern = () => {
         ctx.arc(point.x, point.y, 0.5, 0, Math.PI * 2);
         
         if (theme === 'dark') {
-          ctx.fillStyle = `rgba(174, 222, 230, ${alpha * 0.3})`; // Reduced from 0.5 to 0.3
+          ctx.fillStyle = `rgba(${accentLight.r}, ${accentLight.g}, ${accentLight.b}, ${alpha * 0.3})`;
         } else {
-          ctx.fillStyle = `rgba(0, 152, 177, ${alpha * 0.3})`; // Reduced from 0.5 to 0.3
+          ctx.fillStyle = `rgba(${accent.r}, ${accent.g}, ${accent.b}, ${alpha * 0.3})`;
         }
         
         ctx.fill();
@@ -221,7 +237,7 @@ export const FlowingPattern = () => {
       // Clear flowPoints array to prevent memory leaks
       flowPoints.length = 0;
     };
-  }, [theme]);
+  }, [theme, accent.r, accent.g, accent.b, accentLight.r, accentLight.g, accentLight.b]);
 
   return (
     <div className="flowing-pattern-container">

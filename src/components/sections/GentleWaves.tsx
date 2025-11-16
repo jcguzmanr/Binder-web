@@ -2,10 +2,29 @@ import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import './GentleWaves.css';
 
+interface GentleWavesProps {
+  accentColor?: { r: number; g: number; b: number } | null;
+}
+
 // Adapted GentleWaves animation with Binder color scheme
 // Colors adapt to theme: clear background (white/black) with teal accents
-export const GentleWaves = () => {
+// Can use custom accent color for specific pages
+export const GentleWaves = ({ accentColor }: GentleWavesProps) => {
   const { theme } = useTheme();
+  
+  // Default teal colors if no accent color provided
+  const defaultAccent = { r: 0, g: 152, b: 177 }; // --accent
+  const defaultAccentLight = { r: 174, g: 222, b: 230 }; // --accent-light
+  const defaultVeryLightBlue = { r: 150, g: 239, b: 255 }; // --very-light-blue
+  
+  // Use custom accent color or default
+  const accent = accentColor || defaultAccent;
+  const accentLight = accentColor 
+    ? { r: Math.min(255, accentColor.r + 80), g: Math.min(255, accentColor.g + 40), b: Math.min(255, accentColor.b + 30) }
+    : defaultAccentLight;
+  const veryLightBlue = accentColor
+    ? { r: Math.min(255, accentColor.r + 60), g: Math.min(255, accentColor.g + 50), b: Math.min(255, accentColor.b + 20) }
+    : defaultVeryLightBlue;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const requestIdRef = useRef<number | null>(null);
   const [dimensions, setDimensions] = useState({ width: 500, height: 500 });
@@ -58,7 +77,7 @@ export const GentleWaves = () => {
       // Using teal accent colors with low opacity, adapting to theme
       // Only show grid in light mode
       if (theme === 'light') {
-        const gridColor = 'rgba(0, 152, 177, 0.08)'; // accent, subtle on light
+        const gridColor = `rgba(${accent.r}, ${accent.g}, ${accent.b}, 0.08)`;
         ctx.strokeStyle = gridColor;
         ctx.lineWidth = 0.3;
         
@@ -97,8 +116,8 @@ export const GentleWaves = () => {
         
         ctx.beginPath();
         ctx.lineWidth = thickness;
-        // Using accent teal color (#0098B1) with varying opacity, adapting to theme
-        ctx.strokeStyle = `rgba(0, 152, 177, ${opacity})`; // --accent
+        // Using accent color (custom or default teal) with varying opacity, adapting to theme
+        ctx.strokeStyle = `rgba(${accent.r}, ${accent.g}, ${accent.b}, ${opacity})`;
         
         // Draw a flowing line
         for (let x = 0; x < width; x += 2) {
@@ -128,8 +147,8 @@ export const GentleWaves = () => {
         
         ctx.beginPath();
         ctx.lineWidth = thickness;
-        // Using accent-light teal (#AEDEE6) for diagonal lines, adapting to theme
-        ctx.strokeStyle = `rgba(174, 222, 230, ${opacity})`; // --accent-light
+        // Using accent-light color (custom or default) for diagonal lines, adapting to theme
+        ctx.strokeStyle = `rgba(${accentLight.r}, ${accentLight.g}, ${accentLight.b}, ${opacity})`;
         
         // Draw diagonal flowing line
         const steps = 100;
@@ -162,8 +181,8 @@ export const GentleWaves = () => {
         
         ctx.beginPath();
         ctx.lineWidth = thickness;
-        // Using very-light-blue (#96EFFF) for vertical lines, adapting to theme
-        ctx.strokeStyle = `rgba(150, 239, 255, ${opacity})`; // --very-light-blue
+        // Using very-light-blue color (custom or default) for vertical lines, adapting to theme
+        ctx.strokeStyle = `rgba(${veryLightBlue.r}, ${veryLightBlue.g}, ${veryLightBlue.b}, ${opacity})`;
         
         // Draw a flowing vertical line
         for (let y = 0; y < height; y += 2) {
@@ -202,7 +221,7 @@ export const GentleWaves = () => {
       particles.current = [];
       time.current = 0;
     };
-  }, [dimensions, theme]);
+  }, [dimensions, theme, accent.r, accent.g, accent.b, accentLight.r, accentLight.g, accentLight.b, veryLightBlue.r, veryLightBlue.g, veryLightBlue.b]);
   
   return (
     <div className="gentle-waves-container">

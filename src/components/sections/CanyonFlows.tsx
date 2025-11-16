@@ -3,9 +3,21 @@ import { useTheme } from '../../context/ThemeContext';
 import './CanyonFlows.css';
 
 // Adapted CanyonMultiLayerFlows animation with Binder color scheme
+interface CanyonMultiLayerFlowsProps {
+  accentColor?: { r: number; g: number; b: number } | null;
+}
+
 // Particles flow naturally downward with teal accents, adapting to theme
-export const CanyonMultiLayerFlows = () => {
+// Can use custom accent color for specific pages
+export const CanyonMultiLayerFlows = ({ accentColor }: CanyonMultiLayerFlowsProps) => {
   const { theme } = useTheme();
+  
+  // Default teal colors if no accent color provided
+  const defaultTeal = { r: 0, g: 152, b: 177 }; // --accent
+  
+  // Use custom accent color or default
+  const tealColor = accentColor || defaultTeal;
+  
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number | null>(null);
 
@@ -142,26 +154,22 @@ export const CanyonMultiLayerFlows = () => {
         const opacity = 0.25 + depthFactor * 0.15;
         const size = 0.3 + depthFactor * 0.3;
 
-        // Use Binder teal colors instead of grayscale
+        // Use accent color (custom or default teal) instead of grayscale
         // Adapt brightness based on theme and layer
         let r: number, g: number, b: number;
         
         if (theme === 'dark') {
-          // Dark theme: use lighter teal colors
-          const tealBase = 0 + particle.layer * 8; // Start darker
-          const tealGreen = 152 + particle.layer * 5;
-          const tealBlue = 177 + particle.layer * 8;
-          r = tealBase;
-          g = tealGreen + particle.brightness * 20;
-          b = tealBlue + particle.brightness * 30;
+          // Dark theme: use lighter colors
+          const layerBrightness = particle.layer * 8;
+          r = Math.min(255, tealColor.r + layerBrightness);
+          g = Math.min(255, tealColor.g + particle.layer * 5 + particle.brightness * 20);
+          b = Math.min(255, tealColor.b + particle.layer * 8 + particle.brightness * 30);
         } else {
-          // Light theme: use darker teal colors for contrast
-          const tealBase = 0;
-          const tealGreen = 152 - particle.layer * 3;
-          const tealBlue = 177 - particle.layer * 5;
-          r = tealBase;
-          g = tealGreen - particle.brightness * 10;
-          b = tealBlue - particle.brightness * 15;
+          // Light theme: use darker colors for contrast
+          const layerDarkness = particle.layer * 3;
+          r = Math.max(0, tealColor.r - layerDarkness);
+          g = Math.max(0, tealColor.g - layerDarkness - particle.brightness * 10);
+          b = Math.max(0, tealColor.b - particle.layer * 5 - particle.brightness * 15);
         }
 
         if (opacity > 0 && size > 0) {
@@ -197,7 +205,7 @@ export const CanyonMultiLayerFlows = () => {
       }
       particles.length = 0;
     };
-  }, [theme]);
+  }, [theme, tealColor.r, tealColor.g, tealColor.b]);
 
   return (
     <div className="canyon-flows-container">
