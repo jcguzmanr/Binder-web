@@ -3,8 +3,8 @@ import { dealsContent } from '../../content/deals';
 import './DealsFAQ.css';
 
 export const DealsFAQ = () => {
-  const [openItems, setOpenItems] = useState<Set<string>>(new Set());
-  const { title, items } = dealsContent.faq;
+  const [openItems, setOpenItems] = useState<Set<string>>(new Set([dealsContent.faq.items[0]?.id || '']));
+  const { title, intro, items } = dealsContent.faq;
 
   const toggleItem = (id: string) => {
     setOpenItems(prev => {
@@ -22,6 +22,9 @@ export const DealsFAQ = () => {
     <section className="deals-faq-section">
       <div className="container-wide">
         <h2 className="deals-faq-title">{title}</h2>
+        {intro && (
+          <p className="deals-faq-intro">{intro}</p>
+        )}
         
         <div className="deals-faq-container">
           {items.map((item) => {

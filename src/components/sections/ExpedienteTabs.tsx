@@ -37,6 +37,9 @@ export const ExpedienteTabs = () => {
       
       <div className="container-wide">
         <h2 className="expediente-tabs-main-title">{mainTitle}</h2>
+        {expedienteDigitalContent.tabs.subtitle && (
+          <p className="expediente-tabs-subtitle">{expedienteDigitalContent.tabs.subtitle}</p>
+        )}
 
         {/* Desktop: Tabs Navigation */}
         {!isMobile && (

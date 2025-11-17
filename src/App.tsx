@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { BackgroundProvider } from './context/BackgroundContext';
 import { Navigation } from './components/layout/Navigation';
+import { ScrollToTop } from './components/layout/ScrollToTop';
 import { BackgroundRenderer } from './components/ui/BackgroundRenderer';
 import { Home } from './components/sections/Home';
 import { WhyBinder } from './components/sections/WhyBinder';
@@ -26,6 +27,7 @@ import { ReclamacionesPage } from './pages/legal/ReclamacionesPage';
 import { CLMPage } from './pages/casos-uso/CLMPage';
 import { GestionProcesosPage } from './pages/casos-uso/GestionProcesosPage';
 import { ExpedienteDigitalPage } from './pages/casos-uso/ExpedienteDigitalPage';
+import { ArchivePage } from './pages/casos-uso/ArchivePage';
 import './styles/globals.css';
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
       <BackgroundProvider>
         <Router>
           <div className="app">
+            <ScrollToTop />
             <BackgroundRenderer />
             <Navigation />
             <Routes>
@@ -100,6 +103,10 @@ function App() {
               <Route
                 path="/casos-uso/expediente-digital"
                 element={<ExpedienteDigitalPage />}
+              />
+              <Route
+                path="/casos-uso/archive"
+                element={<ArchivePage />}
               />
               <Route
                 path="/"

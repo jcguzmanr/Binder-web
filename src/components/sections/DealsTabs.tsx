@@ -37,6 +37,9 @@ export const DealsTabs = () => {
       
       <div className="container-wide">
         <h2 className="deals-tabs-main-title">{mainTitle}</h2>
+        {dealsContent.tabs.subtitle && (
+          <p className="deals-tabs-subtitle">{dealsContent.tabs.subtitle}</p>
+        )}
 
         {/* Desktop: Tabs Navigation */}
         {!isMobile && (

@@ -25,8 +25,11 @@ export const DealsComparison = () => {
             <thead>
               <tr>
                 <th className="deals-comparison-feature-header">Característica</th>
-                <th className="deals-comparison-tradicional-header">Gestión Tradicional</th>
-                <th className="deals-comparison-deals-header">Deals con IA</th>
+                <th className="deals-comparison-tradicional-header">Sin Binder</th>
+                <th className="deals-comparison-deals-header">
+                  <div className="deals-comparison-deals-tab"></div>
+                  Con Binder
+                </th>
               </tr>
             </thead>
             <tbody>

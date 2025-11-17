@@ -14,6 +14,19 @@ body.has-animated-background .deals-stats-section {
   background-color: var(--gray-dark);
 }
 
+.deals-stats-title {
+  text-align: center;
+  font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--navy);
+  margin-bottom: var(--spacing-2xl);
+  line-height: 1.3;
+}
+
+[data-theme="dark"] .deals-stats-title {
+  color: var(--white);
+}
+
 .deals-stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -89,7 +102,7 @@ body.has-animated-background .deals-stats-section {
 
 .deals-stats-description {
   font-size: clamp(1rem, 0.875rem + 1vw, 1.25rem);
-  color: var(--gray-dark);
+  color: var(--bright-purple);
   line-height: 1.6;
   text-align: center;
   max-width: 900px;
@@ -97,7 +110,7 @@ body.has-animated-background .deals-stats-section {
 }
 
 [data-theme="dark"] .deals-stats-description {
-  color: var(--white);
+  color: var(--bright-purple);
 }
 
 /* Responsive */

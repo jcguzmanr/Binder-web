@@ -30,19 +30,9 @@ export const ExpedienteTestimonials = () => {
                 <div className="expediente-testimonial-author">
                   <div className="expediente-testimonial-author-tab"></div>
                   <h4 className="expediente-author-name">{testimonial.name}</h4>
-                  <p className="expediente-author-role">{testimonial.role}</p>
-                  
-                  <div className="expediente-company-logo">
-                    {testimonial.logoPath ? (
-                      <img 
-                        src={testimonial.logoPath} 
-                        alt={testimonial.logoPlaceholder} 
-                        className="expediente-company-logo-image"
-                      />
-                    ) : (
-                      <span>{testimonial.logoPlaceholder}</span>
-                    )}
-                  </div>
+                  {testimonial.role && (
+                    <p className="expediente-author-role">{testimonial.role}</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -60,19 +50,9 @@ export const ExpedienteTestimonials = () => {
                     <div className="expediente-testimonial-author">
                       <div className="expediente-testimonial-author-tab"></div>
                       <h4 className="expediente-author-name">{testimonial.name}</h4>
-                      <p className="expediente-author-role">{testimonial.role}</p>
-                      
-                      <div className="expediente-company-logo">
-                        {testimonial.logoPath ? (
-                          <img 
-                            src={testimonial.logoPath} 
-                            alt={testimonial.logoPlaceholder} 
-                            className="expediente-company-logo-image"
-                          />
-                        ) : (
-                          <span>{testimonial.logoPlaceholder}</span>
-                        )}
-                      </div>
+                      {testimonial.role && (
+                        <p className="expediente-author-role">{testimonial.role}</p>
+                      )}
                     </div>
                   </div>
                 </div>

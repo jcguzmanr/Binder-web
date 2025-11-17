@@ -3,7 +3,7 @@ import { expedienteDigitalContent } from '../../content/expedienteDigital';
 import './ExpedienteFAQ.css';
 
 export const ExpedienteFAQ = () => {
-  const [openItems, setOpenItems] = useState<Set<string>>(new Set());
+  const [openItems, setOpenItems] = useState<Set<string>>(new Set([expedienteDigitalContent.faq.items[0]?.id || '']));
   const { title, items } = expedienteDigitalContent.faq;
 
   const toggleItem = (id: string) => {
@@ -22,6 +22,9 @@ export const ExpedienteFAQ = () => {
     <section className="expediente-faq-section">
       <div className="container-wide">
         <h2 className="expediente-faq-title">{title}</h2>
+        {expedienteDigitalContent.faq.intro && (
+          <p className="expediente-faq-intro">{expedienteDigitalContent.faq.intro}</p>
+        )}
         
         <div className="expediente-faq-container">
           {items.map((item) => {

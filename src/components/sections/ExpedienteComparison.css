@@ -37,7 +37,7 @@ body.has-animated-background .expediente-comparison-section {
   width: 100%;
   border-collapse: collapse;
   background-color: var(--white);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-xl) 0 var(--radius-xl) var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   min-width: 600px;
@@ -66,8 +66,18 @@ body.has-animated-background .expediente-comparison-section {
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
+.comparison-tradicional-header {
+  color: var(--gray-dark);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
 [data-theme="dark"] .expediente-comparison-table th {
   color: var(--accent-light);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .comparison-tradicional-header {
+  color: var(--white);
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -77,15 +87,41 @@ body.has-animated-background .expediente-comparison-section {
 
 .comparison-tradicional-header {
   width: 35%;
+  background-color: var(--gray-light);
+  color: var(--gray-dark);
+}
+
+[data-theme="dark"] .comparison-tradicional-header {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--white);
 }
 
 .comparison-digital-header {
   width: 35%;
-  background-color: rgba(95, 189, 255, 0.3);
+  background-color: var(--light-blue);
+  position: relative;
+  padding-top: calc(var(--spacing-md) + 30px);
+  color: var(--white);
 }
 
 [data-theme="dark"] .comparison-digital-header {
-  background-color: rgba(95, 189, 255, 0.25);
+  background-color: var(--light-blue);
+  color: var(--white);
+}
+
+.comparison-digital-tab {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  height: 30px;
+  width: 160px;
+  background-color: var(--light-blue);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  z-index: 3;
+}
+
+[data-theme="dark"] .comparison-digital-tab {
+  background-color: var(--light-blue);
 }
 
 .expediente-comparison-table tbody tr {
@@ -133,14 +169,14 @@ body.has-animated-background .expediente-comparison-section {
 }
 
 .comparison-digital {
-  background-color: rgba(95, 189, 255, 0.1);
-  font-weight: var(--font-weight-medium);
-  color: var(--navy);
+  background-color: transparent;
+  font-weight: var(--font-weight-regular);
+  color: var(--light-blue);
 }
 
 [data-theme="dark"] .comparison-digital {
-  background-color: rgba(95, 189, 255, 0.15);
-  color: var(--accent-light);
+  background-color: transparent;
+  color: var(--light-blue);
 }
 
 .comparison-check {

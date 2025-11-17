@@ -42,11 +42,14 @@ const StatBlock = ({ item }: StatBlockProps) => {
 };
 
 export const DealsStats = () => {
-  const { items, description } = dealsContent.stats;
+  const { title, items, description } = dealsContent.stats;
 
   return (
     <section className="deals-stats-section">
       <div className="container-wide">
+        {title && (
+          <h2 className="deals-stats-title">{title}</h2>
+        )}
         <div className="deals-stats-grid">
           {items.map((item, index) => (
             <StatBlock key={index} item={item} />

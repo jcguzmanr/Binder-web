@@ -25,8 +25,11 @@ export const ExpedienteComparison = () => {
             <thead>
               <tr>
                 <th className="comparison-feature-header">Característica</th>
-                <th className="comparison-tradicional-header">Mesa de Partes Tradicional</th>
-                <th className="comparison-digital-header">Expediente Digital</th>
+                <th className="comparison-tradicional-header">Sin Binder</th>
+                <th className="comparison-digital-header">
+                  <div className="comparison-digital-tab"></div>
+                  Con Binder
+                </th>
               </tr>
             </thead>
             <tbody>

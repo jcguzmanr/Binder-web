@@ -30,19 +30,9 @@ export const DealsTestimonials = () => {
                 <div className="deals-testimonial-author">
                   <div className="deals-testimonial-author-tab"></div>
                   <h4 className="deals-author-name">{testimonial.name}</h4>
-                  <p className="deals-author-role">{testimonial.role}</p>
-                  
-                  <div className="deals-company-logo">
-                    {testimonial.logoPath ? (
-                      <img 
-                        src={testimonial.logoPath} 
-                        alt={testimonial.logoPlaceholder} 
-                        className="deals-company-logo-image"
-                      />
-                    ) : (
-                      <span>{testimonial.logoPlaceholder}</span>
-                    )}
-                  </div>
+                  {testimonial.role && (
+                    <p className="deals-author-role">{testimonial.role}</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -60,19 +50,9 @@ export const DealsTestimonials = () => {
                     <div className="deals-testimonial-author">
                       <div className="deals-testimonial-author-tab"></div>
                       <h4 className="deals-author-name">{testimonial.name}</h4>
-                      <p className="deals-author-role">{testimonial.role}</p>
-                      
-                      <div className="deals-company-logo">
-                        {testimonial.logoPath ? (
-                          <img 
-                            src={testimonial.logoPath} 
-                            alt={testimonial.logoPlaceholder} 
-                            className="deals-company-logo-image"
-                          />
-                        ) : (
-                          <span>{testimonial.logoPlaceholder}</span>
-                        )}
-                      </div>
+                      {testimonial.role && (
+                        <p className="deals-author-role">{testimonial.role}</p>
+                      )}
                     </div>
                   </div>
                 </div>

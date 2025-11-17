@@ -1,16 +1,14 @@
 .expediente-hero-section {
   position: relative;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
   min-height: 100vh;
-  padding: calc(80px + var(--spacing-xl)) var(--spacing-md) var(--spacing-3xl);
-  background: linear-gradient(180deg, #FFFFFF 0%, #F5F5F5 100%);
+  padding: 0;
+  background: #FFFFFF;
   overflow: hidden;
 }
 
 [data-theme="dark"] .expediente-hero-section {
-  background: linear-gradient(180deg, #1B1B1B 0%, #0D0D0D 100%);
+  background: #1B1B1B;
 }
 
 /* Make background transparent when animated background is active */
@@ -18,68 +16,106 @@ body.has-animated-background .expediente-hero-section {
   background: transparent !important;
 }
 
-.expediente-hero-container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
+.expediente-hero-left {
+  flex: 0 0 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #FFFFFF;
+  padding: calc(80px + var(--spacing-xl)) var(--spacing-3xl);
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme="dark"] .expediente-hero-left {
+  background: #1B1B1B;
 }
 
 .expediente-hero-content {
-  text-align: center;
-  position: relative;
-  z-index: 1;
+  max-width: 600px;
+  width: 100%;
+}
+
+.expediente-hero-icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.expediente-hero-icon-container {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  background-color: var(--light-blue);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expediente-hero-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.expediente-hero-name {
+  font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--light-blue);
+  line-height: 1;
 }
 
 .expediente-hero-title {
   font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  font-size: clamp(1.75rem, 1rem + 4vw, 2.5rem);
+  font-size: clamp(1.5rem, 0.875rem + 3vw, 2rem);
   font-weight: bold;
   color: var(--light-blue);
   margin-bottom: var(--spacing-md);
   line-height: 1.2;
   letter-spacing: -0.01em;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+  text-align: left;
 }
 
 .expediente-hero-subtitle {
   font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  font-size: clamp(1rem, 0.625rem + 2vw, 1.5rem);
+  font-size: clamp(1rem, 0.625rem + 2vw, 1.25rem);
   font-weight: 500;
   color: #30339C;
   margin-bottom: var(--spacing-xl);
   line-height: 1.5;
-  max-width: 100%;
-  width: 100%;
+  text-align: left;
 }
 
 [data-theme="dark"] .expediente-hero-subtitle {
   color: #FFFFFF;
 }
 
-.expediente-hero-image-container {
-  margin: var(--spacing-lg) 0;
-  display: flex;
-  justify-content: center;
+.expediente-hero-right {
+  flex: 0 0 50%;
   position: relative;
-  width: 100%;
   overflow: hidden;
+  min-height: 100vh;
 }
 
 .expediente-hero-image {
   width: 100%;
-  max-width: 1200px;
-  height: auto;
+  height: 100%;
+  min-height: 100vh;
   object-fit: cover;
   object-position: center;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
   display: block;
   animation: slideUpFadeIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   opacity: 0;
   transform: translateY(60px);
-  min-height: 400px;
+}
+
+.expediente-hero-cta {
+  margin-top: var(--spacing-xl);
 }
 
 @keyframes slideUpFadeIn {
@@ -93,42 +129,50 @@ body.has-animated-background .expediente-hero-section {
   }
 }
 
-.expediente-hero-cta-floating {
-  position: absolute;
-  bottom: 1rem;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: slideUpFadeIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
-  pointer-events: auto;
-}
-
-.expediente-hero-cta-floating .btn--primary {
+.expediente-hero-cta .btn--primary {
   background-color: var(--light-blue);
   color: var(--white);
 }
 
-.expediente-hero-cta-floating .btn--primary:hover:not(:disabled) {
+.expediente-hero-cta .btn--primary:hover:not(:disabled) {
   background-color: var(--medium-blue);
   transform: translateY(-2px) scale(1.02);
   box-shadow: var(--shadow-lg);
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 968px) {
   .expediente-hero-section {
-    padding: calc(70px + var(--spacing-xl)) var(--spacing-md) var(--spacing-2xl);
+    flex-direction: column;
+  }
+
+  .expediente-hero-left {
+    flex: 1;
+    padding: calc(80px + var(--spacing-xl)) var(--spacing-md) var(--spacing-2xl);
     min-height: auto;
+    justify-content: center;
+  }
+
+  .expediente-hero-right {
+    flex: 1;
+    min-height: 60vh;
   }
 
   .expediente-hero-image {
-    max-width: 100%;
-    min-height: 300px;
+    min-height: 60vh;
+  }
+
+  .expediente-hero-content {
+    text-align: center;
+  }
+
+  .expediente-hero-title,
+  .expediente-hero-subtitle {
+    text-align: center;
+  }
+
+  .expediente-hero-icon-wrapper {
+    justify-content: center;
   }
 }
 
