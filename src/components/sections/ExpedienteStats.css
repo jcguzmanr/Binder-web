@@ -34,31 +34,63 @@ body.has-animated-background .expediente-stats-section {
   color: var(--white);
 }
 
-.expediente-stats-number {
-  margin-bottom: var(--spacing-xl);
+.expediente-stats-slideshow {
+  position: relative;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
-  gap: var(--spacing-xs);
-  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  min-height: 120px;
 }
 
-.expediente-stats-percentage {
-  font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  font-size: clamp(3rem, 2rem + 8vw, 6rem);
-  font-weight: var(--font-weight-bold);
+.expediente-stats-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(95, 189, 255, 0.2);
   color: var(--light-blue);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
   line-height: 1;
-  display: inline-block;
-  transition: transform 0.3s ease;
+  padding: 0;
+}
+
+.expediente-stats-arrow:hover {
+  background-color: var(--light-blue);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+.expediente-stats-arrow:active {
+  transform: scale(0.95);
+}
+
+.expediente-stats-text-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
 }
 
 .expediente-stats-text {
   font-size: clamp(1.5rem, 1.25rem + 2vw, 2.5rem);
   font-weight: var(--font-weight-bold);
   color: var(--light-blue);
-  line-height: 1;
+  line-height: 1.3;
+  text-align: center;
   display: inline-block;
+}
+
+.expediente-stats-text strong {
+  font-weight: var(--font-weight-bold);
 }
 
 [data-theme="dark"] .expediente-stats-text {
@@ -85,6 +117,25 @@ body.has-animated-background .expediente-stats-section {
 
   .expediente-stats-content {
     padding: var(--spacing-md);
+  }
+
+  .expediente-stats-slideshow {
+    gap: var(--spacing-md);
+    min-height: 100px;
+  }
+
+  .expediente-stats-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  .expediente-stats-text-container {
+    min-height: 100px;
+  }
+
+  .expediente-stats-text {
+    font-size: clamp(1.25rem, 1rem + 1.5vw, 1.75rem);
   }
 }
 
