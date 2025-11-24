@@ -25,7 +25,6 @@ import { AvisoLegalPage } from './pages/legal/AvisoLegalPage';
 import { SeguridadPage } from './pages/legal/SeguridadPage';
 import { ReclamacionesPage } from './pages/legal/ReclamacionesPage';
 import { CLMPage } from './pages/casos-uso/CLMPage';
-import { GestionProcesosPage } from './pages/casos-uso/GestionProcesosPage';
 import { ExpedienteDigitalPage } from './pages/casos-uso/ExpedienteDigitalPage';
 import { ArchivePage } from './pages/casos-uso/ArchivePage';
 import { CasesPage } from './pages/casos-uso/CasesPage';
