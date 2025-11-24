@@ -154,12 +154,20 @@ export const Contact = () => {
               </div>
 
               <div className="form-group">
-                <textarea
-                  placeholder={contactoContent.form.fields.message.placeholder}
+                <select
                   value={formData.message}
                   onChange={(e) => handleChange('message', e.target.value)}
-                  rows={4}
-                />
+                  className={formData.message ? '' : 'placeholder-selected'}
+                >
+                  <option value="" disabled>
+                    {contactoContent.form.fields.message.placeholder}
+                  </option>
+                  {contactoContent.form.fields.message.options?.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="form-group checkbox-group">

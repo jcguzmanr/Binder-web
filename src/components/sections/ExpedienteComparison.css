@@ -29,8 +29,10 @@ body.has-animated-background .expediente-comparison-section {
 
 .expediente-comparison-table-container {
   overflow-x: auto;
+  overflow-y: visible;
   margin: 0 auto;
   max-width: 100%;
+  padding-top: 30px;
 }
 
 .expediente-comparison-table {
@@ -38,9 +40,10 @@ body.has-animated-background .expediente-comparison-section {
   border-collapse: collapse;
   background-color: var(--white);
   border-radius: var(--radius-xl) 0 var(--radius-xl) var(--radius-xl);
-  overflow: hidden;
+  overflow: visible;
   box-shadow: var(--shadow-lg);
   min-width: 600px;
+  position: relative;
 }
 
 [data-theme="dark"] .expediente-comparison-table {
@@ -59,16 +62,11 @@ body.has-animated-background .expediente-comparison-section {
 
 .expediente-comparison-table th {
   padding: var(--spacing-md) var(--spacing-lg);
-  text-align: left;
+  text-align: center;
   font-weight: var(--font-weight-bold);
   font-size: var(--fs-16);
   color: var(--white);
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.comparison-tradicional-header {
-  color: var(--gray-dark);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="dark"] .expediente-comparison-table th {
@@ -76,40 +74,36 @@ body.has-animated-background .expediente-comparison-section {
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-[data-theme="dark"] .comparison-tradicional-header {
+.expediente-comparison-tradicional-header {
+  width: 50%;
+  background-color: var(--gray-light);
+  color: var(--gray-dark);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-xl) 0 0 0;
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme="dark"] .expediente-comparison-tradicional-header {
+  background-color: rgba(255, 255, 255, 0.1);
   color: var(--white);
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.comparison-feature-header {
-  width: 30%;
-}
-
-.comparison-tradicional-header {
-  width: 35%;
-  background-color: var(--gray-light);
-  color: var(--gray-dark);
-}
-
-[data-theme="dark"] .comparison-tradicional-header {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--white);
-}
-
-.comparison-digital-header {
-  width: 35%;
+.expediente-comparison-digital-header {
+  width: 50%;
   background-color: var(--light-blue);
   position: relative;
   padding-top: calc(var(--spacing-md) + 30px);
   color: var(--white);
 }
 
-[data-theme="dark"] .comparison-digital-header {
+[data-theme="dark"] .expediente-comparison-digital-header {
   background-color: var(--light-blue);
   color: var(--white);
 }
 
-.comparison-digital-tab {
+.expediente-comparison-digital-tab {
   position: absolute;
   top: -30px;
   right: 0;
@@ -117,10 +111,10 @@ body.has-animated-background .expediente-comparison-section {
   width: 160px;
   background-color: var(--light-blue);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  z-index: 3;
+  z-index: 1;
 }
 
-[data-theme="dark"] .comparison-digital-tab {
+[data-theme="dark"] .expediente-comparison-digital-tab {
   background-color: var(--light-blue);
 }
 
@@ -150,42 +144,39 @@ body.has-animated-background .expediente-comparison-section {
   font-size: var(--fs-16);
   color: var(--gray-dark);
   vertical-align: middle;
+  text-align: center;
 }
 
 [data-theme="dark"] .expediente-comparison-table td {
   color: var(--white);
 }
 
-.comparison-feature {
-  font-weight: var(--font-weight-medium);
-}
-
-.comparison-tradicional {
+.expediente-comparison-tradicional {
   color: var(--gray-dark);
 }
 
-[data-theme="dark"] .comparison-tradicional {
+[data-theme="dark"] .expediente-comparison-tradicional {
   color: var(--white);
 }
 
-.comparison-digital {
+.expediente-comparison-digital {
   background-color: transparent;
   font-weight: var(--font-weight-regular);
   color: var(--light-blue);
 }
 
-[data-theme="dark"] .comparison-digital {
+[data-theme="dark"] .expediente-comparison-digital {
   background-color: transparent;
   color: var(--light-blue);
 }
 
-.comparison-check {
+.expediente-comparison-check {
   color: var(--green);
   font-size: 1.5em;
   font-weight: var(--font-weight-bold);
 }
 
-.comparison-cross {
+.expediente-comparison-cross {
   color: var(--orange);
   font-size: 1.5em;
   font-weight: var(--font-weight-bold);

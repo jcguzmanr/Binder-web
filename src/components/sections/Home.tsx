@@ -38,7 +38,10 @@ export const Home = () => {
           
           <p className="home-top-text">{homeContent.topText}</p>
           
-          <h1 className="home-title">{homeContent.title}</h1>
+          <h1 className="home-title">
+            Gestiona, automatiza y analiza<br />
+            todo tu mundo legal
+          </h1>
           
           <p className="home-subtitle">{displayedText}</p>
           

@@ -18,6 +18,31 @@ export const ExpedienteFAQ = () => {
     });
   };
 
+  // Render answer with bold text for specific FAQs
+  const renderAnswer = (answer: string, id: string) => {
+    if (id === 'faq-2') {
+      // For FAQ about document search, make "buscador avanzado por palabra clave" bold
+      const boldText = 'buscador avanzado por palabra clave';
+      const index = answer.indexOf(boldText);
+      
+      if (index !== -1) {
+        const before = answer.slice(0, index);
+        const bold = answer.slice(index, index + boldText.length);
+        const after = answer.slice(index + boldText.length);
+
+        return (
+          <>
+            {before}
+            <strong>{bold}</strong>
+            {after}
+          </>
+        );
+      }
+    }
+    
+    return <>{answer}</>;
+  };
+
   return (
     <section className="expediente-faq-section">
       <div className="container-wide">
@@ -40,7 +65,7 @@ export const ExpedienteFAQ = () => {
                   <span className="expediente-faq-icon">{isOpen ? '−' : '+'}</span>
                 </button>
                 <div className={`expediente-faq-answer ${isOpen ? 'open' : ''}`}>
-                  <p>{item.answer}</p>
+                  <p>{renderAnswer(item.answer, item.id)}</p>
                 </div>
               </div>
             );

@@ -119,6 +119,8 @@ body.has-animated-background .deals-hero-section {
 .deals-hero-cta .btn--primary {
   background-color: var(--bright-purple);
   color: var(--white);
+  font-size: clamp(1rem, 0.875rem + 0.5vw, 1.125rem);
+  padding: 1rem 2rem;
 }
 
 .deals-hero-cta .btn--primary:hover:not(:disabled) {
@@ -160,6 +162,11 @@ body.has-animated-background .deals-hero-section {
 
   .deals-hero-icon-wrapper {
     justify-content: center;
+  }
+
+  .deals-hero-cta .btn--primary {
+    font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem);
+    padding: 0.875rem 1.75rem;
   }
 }
 

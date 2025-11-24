@@ -24,7 +24,6 @@ export const DealsComparison = () => {
           <table className="deals-comparison-table">
             <thead>
               <tr>
-                <th className="deals-comparison-feature-header">Característica</th>
                 <th className="deals-comparison-tradicional-header">Sin Binder</th>
                 <th className="deals-comparison-deals-header">
                   <div className="deals-comparison-deals-tab"></div>
@@ -35,9 +34,12 @@ export const DealsComparison = () => {
             <tbody>
               {rows.map((row, index) => (
                 <tr key={index} className="deals-comparison-row">
-                  <td className="deals-comparison-feature">{row.feature}</td>
-                  <td className="deals-comparison-tradicional">{renderValue(row.tradicional)}</td>
-                  <td className="deals-comparison-deals">{renderValue(row.deals)}</td>
+                  <td className="deals-comparison-tradicional">
+                    {renderValue(row.tradicional)}
+                  </td>
+                  <td className="deals-comparison-deals">
+                    {renderValue(row.deals)}
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { GentleWaves } from '../sections/GentleWaves';
 import { CanyonMultiLayerFlows } from '../sections/CanyonFlows';
 import { FlowingPattern } from '../sections/FlowPattern';
+import { AntigravityHero } from '../sections/AntigravityHero';
 import './BackgroundRenderer.css';
 
 export const BackgroundRenderer = () => {
@@ -29,6 +30,7 @@ export const BackgroundRenderer = () => {
       {background === 'gentle-waves' && <GentleWaves accentColor={accentColor} />}
       {background === 'canyon-flows' && <CanyonMultiLayerFlows accentColor={accentColor} />}
       {background === 'flow-pattern' && <FlowingPattern accentColor={accentColor} />}
+      {background === 'antigravity' && <AntigravityHero asBackground={true} />}
     </div>
   );
 };

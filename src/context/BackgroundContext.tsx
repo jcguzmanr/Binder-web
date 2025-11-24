@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
-export type BackgroundType = 'none' | 'gentle-waves' | 'canyon-flows' | 'flow-pattern';
+export type BackgroundType = 'none' | 'gentle-waves' | 'canyon-flows' | 'flow-pattern' | 'antigravity';
 
 interface BackgroundContextType {
   background: BackgroundType;
@@ -12,7 +12,7 @@ const BackgroundContext = createContext<BackgroundContextType | undefined>(undef
 export const BackgroundProvider = ({ children }: { children: ReactNode }) => {
   const [background, setBackground] = useState<BackgroundType>(() => {
     const stored = localStorage.getItem('binder-background');
-    const validBackgrounds: BackgroundType[] = ['none', 'gentle-waves', 'canyon-flows', 'flow-pattern'];
+    const validBackgrounds: BackgroundType[] = ['none', 'gentle-waves', 'canyon-flows', 'flow-pattern', 'antigravity'];
     if (stored && validBackgrounds.includes(stored as BackgroundType)) {
       return stored as BackgroundType;
     }

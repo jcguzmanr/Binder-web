@@ -119,6 +119,8 @@ body.has-animated-background .archive-hero-section {
 .archive-hero-cta .btn--primary {
   background-color: var(--light-blue);
   color: var(--white);
+  font-size: clamp(1rem, 0.875rem + 0.5vw, 1.125rem);
+  padding: 1rem 2rem;
 }
 
 .archive-hero-cta .btn--primary:hover:not(:disabled) {
@@ -160,6 +162,11 @@ body.has-animated-background .archive-hero-section {
 
   .archive-hero-icon-wrapper {
     justify-content: center;
+  }
+
+  .archive-hero-cta .btn--primary {
+    font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem);
+    padding: 0.875rem 1.75rem;
   }
 }
 

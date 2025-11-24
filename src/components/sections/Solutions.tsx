@@ -91,6 +91,18 @@ export const Solutions = () => {
     });
   };
 
+  // Map tab ID to image filename
+  const getImagePath = (tabId: string): string => {
+    const imageMap: Record<string, string> = {
+      'centralizacion': '/images/Solutions/HP-centralizacion.webp',
+      'automatizacion': '/images/Solutions/HP-automatizacion.webp',
+      'gestion': '/images/Solutions/HP-gestion.webp',
+      'analitica': '/images/Solutions/HP-analitica.webp',
+      'firma': '/images/Solutions/HP-firma.webp',
+    };
+    return imageMap[tabId] || '';
+  };
+
   return (
     <section id="soluciones" className="solutions-section">
       <div className="solutions-background"></div>
@@ -123,9 +135,19 @@ export const Solutions = () => {
               >
                 <div className="tab-grid">
                   <div className="tab-image">
-                    <div className="image-placeholder">
-                      <span>{tab.imagePlaceholder}</span>
-                    </div>
+                    <img 
+                      src={getImagePath(tab.id)} 
+                      alt={tab.imagePlaceholder}
+                      className="tab-image-content"
+                    />
+                    {/* Demo image with animation for Centralización */}
+                    {tab.id === 'centralizacion' && (
+                      <img 
+                        src="/images/Solutions/HP-demoimage.png" 
+                        alt="Demo de la aplicación"
+                        className="tab-image-content tab-demo-image"
+                      />
+                    )}
                     {/* Mascot for image position (Gestión) */}
                     {tab.id === 'gestion' && (
                       <div className={`binder-character-image position-${mascotPosition}`}>
@@ -176,9 +198,19 @@ export const Solutions = () => {
                   <div className={`accordion-content ${isOpen ? 'open' : ''}`}>
                     <div className="accordion-grid">
                       <div className="accordion-image">
-                        <div className="image-placeholder">
-                          <span>{tab.imagePlaceholder}</span>
-                        </div>
+                        <img 
+                          src={getImagePath(tab.id)} 
+                          alt={tab.imagePlaceholder}
+                          className="tab-image-content"
+                        />
+                        {/* Demo image with animation for Centralización (mobile) */}
+                        {tab.id === 'centralizacion' && (
+                          <img 
+                            src="/images/Solutions/HP-demoimage.png" 
+                            alt="Demo de la aplicación"
+                            className="tab-image-content tab-demo-image"
+                          />
+                        )}
                       </div>
 
                       <div className="accordion-text">

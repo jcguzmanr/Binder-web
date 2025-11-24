@@ -31,6 +31,18 @@ export const DealsTabs = () => {
     });
   };
 
+  // Map tab ID to image filename
+  const getImagePath = (tabId: string): string => {
+    const imageMap: Record<string, string> = {
+      'centralizacion-total': '/images/CLM/deals-centralizacion-total.webp',
+      'redaccion-inteligente': '/images/CLM/deals-redaccion-inteligente.webp',
+      'firma-electronica': '/images/CLM/deals-firma-electronica.webp',
+      'dashboards-analitica': '/images/CLM/deals-dashboards-analitica.webp',
+      'trazabilidad-auditoria': '/images/CLM/deals-trazabilidad-auditoria.webp',
+    };
+    return imageMap[tabId] || '';
+  };
+
   return (
     <section className="deals-tabs-section">
       <div className="deals-tabs-background"></div>
@@ -66,9 +78,11 @@ export const DealsTabs = () => {
               >
                 <div className="deals-tab-grid">
                   <div className="deals-tab-image">
-                    <div className="deals-image-placeholder">
-                      <span>{tab.imagePlaceholder}</span>
-                    </div>
+                    <img 
+                      src={getImagePath(tab.id)} 
+                      alt={tab.imagePlaceholder}
+                      className="deals-tab-image-content"
+                    />
                   </div>
 
                   <div className="deals-tab-text">
@@ -76,11 +90,13 @@ export const DealsTabs = () => {
                     <p className="deals-tab-subtitle">{tab.subtitle}</p>
                     <p className="deals-tab-description">{tab.description}</p>
                     
-                    <ul className="deals-tab-bullets">
-                      {tab.bullets.map((bullet, idx) => (
-                        <li key={idx}>{bullet}</li>
-                      ))}
-                    </ul>
+                    {tab.bullets && tab.bullets.length > 0 && (
+                      <ul className="deals-tab-bullets">
+                        {tab.bullets.map((bullet, idx) => (
+                          <li key={idx}>{bullet}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </div>
@@ -106,9 +122,11 @@ export const DealsTabs = () => {
                   <div className={`deals-accordion-content ${isOpen ? 'open' : ''}`}>
                     <div className="deals-accordion-grid">
                       <div className="deals-accordion-image">
-                        <div className="deals-image-placeholder">
-                          <span>{tab.imagePlaceholder}</span>
-                        </div>
+                        <img 
+                          src={getImagePath(tab.id)} 
+                          alt={tab.imagePlaceholder}
+                          className="deals-tab-image-content"
+                        />
                       </div>
 
                       <div className="deals-accordion-text">
@@ -116,11 +134,13 @@ export const DealsTabs = () => {
                         <p className="deals-tab-subtitle">{tab.subtitle}</p>
                         <p className="deals-tab-description">{tab.description}</p>
                         
-                        <ul className="deals-tab-bullets">
-                          {tab.bullets.map((bullet, idx) => (
-                            <li key={idx}>{bullet}</li>
-                          ))}
-                        </ul>
+                        {tab.bullets && tab.bullets.length > 0 && (
+                          <ul className="deals-tab-bullets">
+                            {tab.bullets.map((bullet, idx) => (
+                              <li key={idx}>{bullet}</li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     </div>
                   </div>

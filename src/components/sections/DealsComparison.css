@@ -29,8 +29,10 @@ body.has-animated-background .deals-comparison-section {
 
 .deals-comparison-table-container {
   overflow-x: auto;
+  overflow-y: visible;
   margin: 0 auto;
   max-width: 100%;
+  padding-top: 30px;
 }
 
 .deals-comparison-table {
@@ -38,9 +40,10 @@ body.has-animated-background .deals-comparison-section {
   border-collapse: collapse;
   background-color: var(--white);
   border-radius: var(--radius-xl) 0 var(--radius-xl) var(--radius-xl);
-  overflow: hidden;
+  overflow: visible;
   box-shadow: var(--shadow-lg);
   min-width: 600px;
+  position: relative;
 }
 
 [data-theme="dark"] .deals-comparison-table {
@@ -59,7 +62,7 @@ body.has-animated-background .deals-comparison-section {
 
 .deals-comparison-table th {
   padding: var(--spacing-md) var(--spacing-lg);
-  text-align: left;
+  text-align: center;
   font-weight: var(--font-weight-bold);
   font-size: var(--fs-16);
   color: var(--white);
@@ -71,15 +74,14 @@ body.has-animated-background .deals-comparison-section {
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.deals-comparison-feature-header {
-  width: 30%;
-}
-
 .deals-comparison-tradicional-header {
-  width: 35%;
+  width: 50%;
   background-color: var(--gray-light);
   color: var(--gray-dark);
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-xl) 0 0 0;
+  position: relative;
+  z-index: 2;
 }
 
 [data-theme="dark"] .deals-comparison-tradicional-header {
@@ -89,7 +91,7 @@ body.has-animated-background .deals-comparison-section {
 }
 
 .deals-comparison-deals-header {
-  width: 35%;
+  width: 50%;
   background-color: var(--bright-purple);
   position: relative;
   padding-top: calc(var(--spacing-md) + 30px);
@@ -109,7 +111,7 @@ body.has-animated-background .deals-comparison-section {
   width: 160px;
   background-color: var(--bright-purple);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  z-index: 3;
+  z-index: 1;
 }
 
 [data-theme="dark"] .deals-comparison-deals-tab {
@@ -142,14 +144,11 @@ body.has-animated-background .deals-comparison-section {
   font-size: var(--fs-16);
   color: var(--gray-dark);
   vertical-align: middle;
+  text-align: center;
 }
 
 [data-theme="dark"] .deals-comparison-table td {
   color: var(--white);
-}
-
-.deals-comparison-feature {
-  font-weight: var(--font-weight-medium);
 }
 
 .deals-comparison-tradicional {

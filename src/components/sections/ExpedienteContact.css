@@ -121,7 +121,8 @@ body.has-animated-background .expediente-contact-section {
 }
 
 .expediente-form-group input,
-.expediente-form-group textarea {
+.expediente-form-group textarea,
+.expediente-form-group select {
   width: 100%;
   padding: 0.875rem 1rem;
   font-size: var(--fs-16);
@@ -134,26 +135,41 @@ body.has-animated-background .expediente-contact-section {
 }
 
 [data-theme="dark"] .expediente-form-group input,
-[data-theme="dark"] .expediente-form-group textarea {
+[data-theme="dark"] .expediente-form-group textarea,
+[data-theme="dark"] .expediente-form-group select {
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--white);
 }
 
 .expediente-form-group input:focus,
-.expediente-form-group textarea:focus {
+.expediente-form-group textarea:focus,
+.expediente-form-group select:focus {
   outline: none;
   border-color: var(--light-blue);
   box-shadow: 0 0 0 3px rgba(95, 189, 255, 0.1);
 }
 
 .expediente-form-group input.error,
-.expediente-form-group textarea.error {
+.expediente-form-group textarea.error,
+.expediente-form-group select.error {
   border-color: var(--orange);
 }
 
 .expediente-form-group textarea {
   resize: vertical;
   min-height: 100px;
+}
+
+.expediente-form-group select {
+  cursor: pointer;
+}
+
+.expediente-form-group select.placeholder-selected {
+  color: var(--gray-dark);
+}
+
+[data-theme="dark"] .expediente-form-group select.placeholder-selected {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .expediente-checkbox-group label {
@@ -234,7 +250,8 @@ body.has-animated-background .expediente-contact-section {
   }
 
   .expediente-form-group input,
-  .expediente-form-group textarea {
+  .expediente-form-group textarea,
+  .expediente-form-group select {
     padding: 0.75rem;
   }
 
@@ -242,4 +259,10 @@ body.has-animated-background .expediente-contact-section {
     display: none;
   }
 }
+
+
+
+
+
+
 

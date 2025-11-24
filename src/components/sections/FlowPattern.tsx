@@ -212,6 +212,45 @@ export const FlowingPattern = ({ accentColor }: FlowingPatternProps) => {
             : (gridSize / 2 - (point.y % gridSize)) * 0.01;
       });
 
+      // Add noise texture overlay to make points less textual
+      const imageData = ctx.getImageData(0, 0, currentWidth, currentHeight);
+      const data = imageData.data;
+      const noiseIntensity = 8; // Adjust noise intensity (0-255)
+      
+      for (let i = 0; i < data.length; i += 4) {
+        // Add random noise to RGB channels
+        const noiseValue = (Math.random() - 0.5) * noiseIntensity;
+        data[i] = Math.max(0, Math.min(255, data[i] + noiseValue));     // R
+        data[i + 1] = Math.max(0, Math.min(255, data[i + 1] + noiseValue)); // G
+        data[i + 2] = Math.max(0, Math.min(255, data[i + 2] + noiseValue)); // B
+        // Alpha channel stays the same
+      }
+      
+      ctx.putImageData(imageData, 0, 0);
+
+      // Add radial gradient fade from center to make center lighter
+      const centerX = currentWidth / 2;
+      const centerY = currentHeight / 2;
+      const maxRadius = Math.sqrt(centerX * centerX + centerY * centerY);
+      const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius);
+      
+      if (theme === 'dark') {
+        // Dark theme: fade to darker/transparent in center
+        gradient.addColorStop(0, 'rgba(27, 27, 27, 0.6)'); // More opaque in center
+        gradient.addColorStop(0.3, 'rgba(27, 27, 27, 0.3)');
+        gradient.addColorStop(0.6, 'rgba(27, 27, 27, 0.1)');
+        gradient.addColorStop(1, 'rgba(27, 27, 27, 0)'); // Transparent at edges
+      } else {
+        // Light theme: fade to white/transparent in center
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.6)'); // More opaque in center
+        gradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.3)');
+        gradient.addColorStop(0.6, 'rgba(255, 255, 255, 0.1)');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)'); // Transparent at edges
+      }
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, currentWidth, currentHeight);
+
       animationFrameId = requestAnimationFrame(animate);
     }
 

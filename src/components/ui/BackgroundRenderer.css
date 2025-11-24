@@ -12,7 +12,8 @@
 /* Ensure animation containers are properly positioned */
 .background-renderer .gentle-waves-container,
 .background-renderer .canyon-flows-container,
-.background-renderer .flowing-pattern-container {
+.background-renderer .flowing-pattern-container,
+.background-renderer .antigravity-hero {
   position: fixed;
   top: 0;
   left: 0;
@@ -27,6 +28,15 @@
 }
 
 .background-renderer .flowing-pattern-container canvas {
+  pointer-events: none;
+}
+
+/* Antigravity background - allow mouse interaction for particles */
+.background-renderer .antigravity-hero {
+  pointer-events: none;
+}
+
+.background-renderer .antigravity-hero canvas {
   pointer-events: none;
 }
 

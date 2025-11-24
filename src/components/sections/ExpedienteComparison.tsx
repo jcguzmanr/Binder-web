@@ -7,9 +7,9 @@ export const ExpedienteComparison = () => {
   const renderValue = (value: string | boolean) => {
     if (typeof value === 'boolean') {
       return value ? (
-        <span className="comparison-check">✓</span>
+        <span className="expediente-comparison-check">✓</span>
       ) : (
-        <span className="comparison-cross">✗</span>
+        <span className="expediente-comparison-cross">✗</span>
       );
     }
     return <span>{value}</span>;
@@ -24,20 +24,18 @@ export const ExpedienteComparison = () => {
           <table className="expediente-comparison-table">
             <thead>
               <tr>
-                <th className="comparison-feature-header">Característica</th>
-                <th className="comparison-tradicional-header">Sin Binder</th>
-                <th className="comparison-digital-header">
-                  <div className="comparison-digital-tab"></div>
+                <th className="expediente-comparison-tradicional-header">Sin Binder</th>
+                <th className="expediente-comparison-digital-header">
+                  <div className="expediente-comparison-digital-tab"></div>
                   Con Binder
                 </th>
               </tr>
             </thead>
             <tbody>
               {rows.map((row, index) => (
-                <tr key={index} className="comparison-row">
-                  <td className="comparison-feature">{row.feature}</td>
-                  <td className="comparison-tradicional">{renderValue(row.tradicional)}</td>
-                  <td className="comparison-digital">{renderValue(row.expedienteDigital)}</td>
+                <tr key={index} className="expediente-comparison-row">
+                  <td className="expediente-comparison-tradicional">{renderValue(row.tradicional)}</td>
+                  <td className="expediente-comparison-digital">{renderValue(row.expedienteDigital)}</td>
                 </tr>
               ))}
             </tbody>

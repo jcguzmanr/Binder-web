@@ -101,6 +101,16 @@ body.has-animated-background .apps-section {
   mix-blend-mode: normal;
 }
 
+/* Deals icon - change SVG line color to bright-purple while keeping white background */
+.app-icon-deals .app-icon-img {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(5000%) hue-rotate(250deg) brightness(0.9) contrast(1.2);
+}
+
+/* Archive icon - change SVG line color to light-blue while keeping white background */
+.app-icon-archive .app-icon-img {
+  filter: brightness(0) saturate(100%) invert(70%) sepia(100%) saturate(2000%) hue-rotate(180deg) brightness(1.1) contrast(1.1);
+}
+
 .app-name-group {
   flex: 1;
 }

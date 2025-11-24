@@ -1,0 +1,208 @@
+.cases-comparison-section {
+  position: relative;
+  padding: var(--spacing-3xl) 0;
+  background-color: var(--bg);
+  overflow: hidden;
+}
+
+/* Make background transparent when animated background is active */
+body.has-animated-background .cases-comparison-section {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .cases-comparison-section {
+  background-color: var(--gray-dark);
+}
+
+.cases-comparison-title {
+  text-align: center;
+  font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
+  font-weight: var(--font-weight-bold);
+  color: #30339C;
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.3;
+}
+
+[data-theme="dark"] .cases-comparison-title {
+  color: #30339C;
+}
+
+.cases-comparison-table-container {
+  overflow-x: auto;
+  overflow-y: visible;
+  margin: 0 auto;
+  max-width: 100%;
+  padding-top: 30px;
+}
+
+.cases-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--white);
+  border-radius: var(--radius-xl) 0 var(--radius-xl) var(--radius-xl);
+  overflow: visible;
+  box-shadow: var(--shadow-lg);
+  min-width: 600px;
+  position: relative;
+}
+
+[data-theme="dark"] .cases-comparison-table {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.cases-comparison-table thead {
+  background-color: #30339C;
+}
+
+[data-theme="dark"] .cases-comparison-table thead {
+  background-color: rgba(48, 51, 156, 0.2);
+}
+
+.cases-comparison-table th {
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--fs-16);
+  color: var(--white);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .cases-comparison-table th {
+  color: var(--accent-light);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.cases-comparison-sin-binder-header {
+  width: 50%;
+  background-color: var(--gray-light);
+  color: var(--gray-dark);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-xl) 0 0 0;
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme="dark"] .cases-comparison-sin-binder-header {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.cases-comparison-con-binder-header {
+  width: 50%;
+  background-color: #30339C;
+  position: relative;
+  padding-top: calc(var(--spacing-md) + 30px);
+  color: var(--white);
+}
+
+[data-theme="dark"] .cases-comparison-con-binder-header {
+  background-color: #30339C;
+  color: var(--white);
+}
+
+.cases-comparison-con-binder-tab {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  height: 30px;
+  width: 160px;
+  background-color: #30339C;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  z-index: 1;
+}
+
+[data-theme="dark"] .cases-comparison-con-binder-tab {
+  background-color: #30339C;
+}
+
+.cases-comparison-table tbody tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s ease;
+}
+
+[data-theme="dark"] .cases-comparison-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cases-comparison-table tbody tr:hover {
+  background-color: rgba(48, 51, 156, 0.05);
+}
+
+[data-theme="dark"] .cases-comparison-table tbody tr:hover {
+  background-color: rgba(48, 51, 156, 0.1);
+}
+
+.cases-comparison-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.cases-comparison-table td {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--fs-16);
+  color: var(--gray-dark);
+  vertical-align: middle;
+  text-align: center;
+}
+
+[data-theme="dark"] .cases-comparison-table td {
+  color: var(--white);
+}
+
+.cases-comparison-feature {
+  font-weight: var(--font-weight-medium);
+}
+
+.cases-comparison-sin-binder {
+  color: var(--gray-dark);
+}
+
+[data-theme="dark"] .cases-comparison-sin-binder {
+  color: var(--white);
+}
+
+.cases-comparison-con-binder {
+  background-color: transparent;
+  font-weight: var(--font-weight-regular);
+  color: #30339C;
+}
+
+[data-theme="dark"] .cases-comparison-con-binder {
+  background-color: transparent;
+  color: #30339C;
+}
+
+.cases-comparison-check {
+  color: var(--green);
+  font-size: 1.5em;
+  font-weight: var(--font-weight-bold);
+}
+
+.cases-comparison-cross {
+  color: var(--orange);
+  font-size: 1.5em;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cases-comparison-section {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .cases-comparison-table-container {
+    margin: 0 var(--spacing-sm);
+  }
+
+  .cases-comparison-table {
+    font-size: var(--fs-14);
+  }
+
+  .cases-comparison-table th,
+  .cases-comparison-table td {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+

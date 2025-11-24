@@ -12,6 +12,7 @@ const backgroundOptions: BackgroundOption[] = [
   { id: 'gentle-waves', name: 'Gentle Waves' },
   { id: 'canyon-flows', name: 'Canyon Flows' },
   { id: 'flow-pattern', name: 'Flow Pattern' },
+  { id: 'antigravity', name: 'Antigravity' },
 ];
 
 export const BackgroundToggle = () => {

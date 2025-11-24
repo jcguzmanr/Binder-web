@@ -1,0 +1,195 @@
+.cases-faq-section {
+  position: relative;
+  padding: var(--spacing-3xl) 0;
+  background-color: var(--bg);
+  overflow: hidden;
+}
+
+/* Make background transparent when animated background is active */
+body.has-animated-background .cases-faq-section {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .cases-faq-section {
+  background-color: var(--gray-dark);
+}
+
+.cases-faq-title {
+  text-align: center;
+  font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
+  font-weight: var(--font-weight-bold);
+  color: #30339C;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.3;
+}
+
+[data-theme="dark"] .cases-faq-title {
+  color: #30339C;
+}
+
+.cases-faq-intro {
+  text-align: center;
+  font-size: clamp(1rem, 0.875rem + 0.75vw, 1.25rem);
+  font-weight: var(--font-weight-regular);
+  color: #30339C;
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.6;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+[data-theme="dark"] .cases-faq-intro {
+  color: var(--white);
+}
+
+.cases-faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.cases-faq-item {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .cases-faq-item {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cases-faq-item:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.cases-faq-button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  gap: var(--spacing-md);
+}
+
+.cases-faq-button:hover {
+  background-color: rgba(48, 51, 156, 0.05);
+}
+
+[data-theme="dark"] .cases-faq-button:hover {
+  background-color: rgba(48, 51, 156, 0.1);
+}
+
+.cases-faq-button.active {
+  background-color: rgba(48, 51, 156, 0.1);
+}
+
+[data-theme="dark"] .cases-faq-button.active {
+  background-color: rgba(48, 51, 156, 0.15);
+}
+
+.cases-faq-question {
+  font-size: var(--fs-16);
+  font-weight: var(--font-weight-medium);
+  color: #30339C;
+  flex: 1;
+  line-height: 1.4;
+}
+
+[data-theme="dark"] .cases-faq-question {
+  color: var(--accent-light);
+}
+
+.cases-faq-icon {
+  font-size: var(--fs-24);
+  font-weight: var(--font-weight-bold);
+  color: #30339C;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, color 0.3s ease;
+  border-radius: 50%;
+  background-color: rgba(48, 51, 156, 0.1);
+}
+
+.cases-faq-button.active .cases-faq-icon {
+  transform: rotate(180deg);
+  background-color: #30339C;
+  color: var(--white);
+}
+
+.cases-faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 var(--spacing-lg);
+}
+
+.cases-faq-answer.open {
+  max-height: 500px;
+  padding: 0 var(--spacing-lg) var(--spacing-md);
+}
+
+.cases-faq-answer p {
+  font-size: var(--fs-16);
+  color: var(--gray-dark);
+  line-height: 1.6;
+  margin: 0;
+}
+
+[data-theme="dark"] .cases-faq-answer p {
+  color: var(--white);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cases-faq-section {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .cases-faq-container {
+    gap: var(--spacing-xs);
+  }
+
+  .cases-faq-button {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .cases-faq-question {
+    font-size: var(--fs-14);
+  }
+
+  .cases-faq-icon {
+    width: 24px;
+    height: 24px;
+    font-size: var(--fs-20);
+  }
+
+  .cases-faq-answer {
+    padding: 0 var(--spacing-md);
+  }
+
+  .cases-faq-answer.open {
+    padding: 0 var(--spacing-md) var(--spacing-sm);
+  }
+
+  .cases-faq-answer p {
+    font-size: var(--fs-14);
+  }
+}
+

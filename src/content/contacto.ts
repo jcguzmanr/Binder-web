@@ -32,7 +32,14 @@ export const contactoContent = {
         label: "Cuéntanos brevemente tus necesidades legales",
         placeholder: "¿Qué desafíos enfrenta tu área legal?",
         required: false,
-        type: "textarea",
+        type: "select",
+        options: [
+          "Gestión documental desordenada",
+          "Trazabilidad baja de procesos",
+          "Exceso de tareas operativas",
+          "Riesgo por plazos invisibles",
+          "Sin indicadores de desempeño",
+        ],
       },
     },
     consent: {

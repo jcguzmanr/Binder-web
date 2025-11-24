@@ -33,7 +33,7 @@ export const Apps = () => {
               style={{ '--app-color': app.color } as React.CSSProperties}
             >
               <div className="app-card-header">
-                <div className="app-icon">
+                <div className={`app-icon app-icon-${app.id}`}>
                   <img 
                     src={getAppIcon(app.id)} 
                     alt={`${app.name} icon`}

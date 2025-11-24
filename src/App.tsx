@@ -28,6 +28,8 @@ import { CLMPage } from './pages/casos-uso/CLMPage';
 import { GestionProcesosPage } from './pages/casos-uso/GestionProcesosPage';
 import { ExpedienteDigitalPage } from './pages/casos-uso/ExpedienteDigitalPage';
 import { ArchivePage } from './pages/casos-uso/ArchivePage';
+import { CasesPage } from './pages/casos-uso/CasesPage';
+import { TestAnimationPage } from './pages/TestAnimationPage';
 import './styles/globals.css';
 
 function App() {
@@ -98,7 +100,7 @@ function App() {
               />
               <Route
                 path="/casos-uso/gestion-procesos"
-                element={<GestionProcesosPage />}
+                element={<CasesPage />}
               />
               <Route
                 path="/casos-uso/expediente-digital"
@@ -107,6 +109,14 @@ function App() {
               <Route
                 path="/casos-uso/archive"
                 element={<ArchivePage />}
+              />
+              <Route
+                path="/cases"
+                element={<CasesPage />}
+              />
+              <Route
+                path="/test/antigravity"
+                element={<TestAnimationPage />}
               />
               <Route
                 path="/"

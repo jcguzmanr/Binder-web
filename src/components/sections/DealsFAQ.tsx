@@ -18,6 +18,41 @@ export const DealsFAQ = () => {
     });
   };
 
+  // Render answer with bold text
+  const renderAnswer = (answer: string, boldParts?: string[]) => {
+    if (!boldParts || boldParts.length === 0) {
+      return <>{answer}</>;
+    }
+
+    let parts: (string | JSX.Element)[] = [];
+    let lastIndex = 0;
+    const sortedBoldParts = [...boldParts].sort((a, b) => {
+      const indexA = answer.toLowerCase().indexOf(a.toLowerCase());
+      const indexB = answer.toLowerCase().indexOf(b.toLowerCase());
+      return indexA - indexB;
+    });
+
+    sortedBoldParts.forEach((boldPart, idx) => {
+      const index = answer.toLowerCase().indexOf(boldPart.toLowerCase(), lastIndex);
+      if (index !== -1) {
+        // Add text before bold part
+        if (index > lastIndex) {
+          parts.push(answer.slice(lastIndex, index));
+        }
+        // Add bold part
+        parts.push(<strong key={`bold-${idx}`}>{answer.slice(index, index + boldPart.length)}</strong>);
+        lastIndex = index + boldPart.length;
+      }
+    });
+
+    // Add remaining text
+    if (lastIndex < answer.length) {
+      parts.push(answer.slice(lastIndex));
+    }
+
+    return <>{parts}</>;
+  };
+
   return (
     <section className="deals-faq-section">
       <div className="container-wide">
@@ -40,7 +75,7 @@ export const DealsFAQ = () => {
                   <span className="deals-faq-icon">{isOpen ? '−' : '+'}</span>
                 </button>
                 <div className={`deals-faq-answer ${isOpen ? 'open' : ''}`}>
-                  <p>{item.answer}</p>
+                  <p>{renderAnswer(item.answer, item.boldParts)}</p>
                 </div>
               </div>
             );

@@ -31,6 +31,40 @@ export const ExpedienteTabs = () => {
     });
   };
 
+  // Map tab ID to image filename
+  const getImagePath = (tabId: string): string => {
+    const imageMap: Record<string, string> = {
+      'automatizacion': '/images/archive/expediente-automatizacion.webp',
+      'alertas': '/images/archive/expediente-alertas.webp',
+      'colaboracion': '/images/archive/expediente-colaboracion.webp',
+      'analitica': '/images/archive/expediente-analitica.webp',
+      'predictibilidad': '/images/archive/expediente-predictibilidad.webp',
+    };
+    return imageMap[tabId] || '';
+  };
+
+  // Render subtitle with bold text
+  const renderSubtitle = (text: string) => {
+    const boldText = 'flujos automatizados con IA';
+    const index = text.indexOf(boldText);
+    
+    if (index === -1) {
+      return <>{text}</>;
+    }
+
+    const before = text.slice(0, index);
+    const bold = text.slice(index, index + boldText.length);
+    const after = text.slice(index + boldText.length);
+
+    return (
+      <>
+        {before}
+        <strong>{bold}</strong>
+        {after}
+      </>
+    );
+  };
+
   return (
     <section className="expediente-tabs-section">
       <div className="expediente-tabs-background"></div>
@@ -38,7 +72,9 @@ export const ExpedienteTabs = () => {
       <div className="container-wide">
         <h2 className="expediente-tabs-main-title">{mainTitle}</h2>
         {expedienteDigitalContent.tabs.subtitle && (
-          <p className="expediente-tabs-subtitle">{expedienteDigitalContent.tabs.subtitle}</p>
+          <p className="expediente-tabs-subtitle">
+            {renderSubtitle(expedienteDigitalContent.tabs.subtitle)}
+          </p>
         )}
 
         {/* Desktop: Tabs Navigation */}
@@ -66,9 +102,11 @@ export const ExpedienteTabs = () => {
               >
                 <div className="expediente-tab-grid">
                   <div className="expediente-tab-image">
-                    <div className="expediente-image-placeholder">
-                      <span>{tab.imagePlaceholder}</span>
-                    </div>
+                    <img 
+                      src={getImagePath(tab.id)} 
+                      alt={tab.imagePlaceholder}
+                      className="expediente-tab-image-content"
+                    />
                   </div>
 
                   <div className="expediente-tab-text">
@@ -76,11 +114,13 @@ export const ExpedienteTabs = () => {
                     <p className="expediente-tab-subtitle">{tab.subtitle}</p>
                     <p className="expediente-tab-description">{tab.description}</p>
                     
-                    <ul className="expediente-tab-bullets">
-                      {tab.bullets.map((bullet, idx) => (
-                        <li key={idx}>{bullet}</li>
-                      ))}
-                    </ul>
+                    {tab.bullets && tab.bullets.length > 0 && (
+                      <ul className="expediente-tab-bullets">
+                        {tab.bullets.map((bullet, idx) => (
+                          <li key={idx}>{bullet}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </div>
@@ -106,9 +146,11 @@ export const ExpedienteTabs = () => {
                   <div className={`expediente-accordion-content ${isOpen ? 'open' : ''}`}>
                     <div className="expediente-accordion-grid">
                       <div className="expediente-accordion-image">
-                        <div className="expediente-image-placeholder">
-                          <span>{tab.imagePlaceholder}</span>
-                        </div>
+                        <img 
+                          src={getImagePath(tab.id)} 
+                          alt={tab.imagePlaceholder}
+                          className="expediente-tab-image-content"
+                        />
                       </div>
 
                       <div className="expediente-accordion-text">
@@ -116,11 +158,13 @@ export const ExpedienteTabs = () => {
                         <p className="expediente-tab-subtitle">{tab.subtitle}</p>
                         <p className="expediente-tab-description">{tab.description}</p>
                         
-                        <ul className="expediente-tab-bullets">
-                          {tab.bullets.map((bullet, idx) => (
-                            <li key={idx}>{bullet}</li>
-                          ))}
-                        </ul>
+                        {tab.bullets && tab.bullets.length > 0 && (
+                          <ul className="expediente-tab-bullets">
+                            {tab.bullets.map((bullet, idx) => (
+                              <li key={idx}>{bullet}</li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     </div>
                   </div>
