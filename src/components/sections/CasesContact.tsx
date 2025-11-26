@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { contactoContent } from '../../content/contacto';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './CasesContact.css';
 
 interface FormData {
@@ -31,6 +32,11 @@ export const CasesContact = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -95,7 +101,11 @@ export const CasesContact = () => {
   };
 
   return (
-    <section id="cases-contact" className="cases-contact-section">
+    <section 
+      id="cases-contact" 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`cases-contact-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         <div className="cases-contact-grid">
           <div className="cases-contact-text">

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { dealsContent } from '../../content/deals';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './DealsTabs.css';
 
 export const DealsTabs = () => {
@@ -8,6 +9,11 @@ export const DealsTabs = () => {
   const [openAccordions, setOpenAccordions] = useState<Set<number>>(new Set());
   const tabNavigationRef = useRef<HTMLDivElement>(null);
   const { mainTitle, tabs } = dealsContent.tabs;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     const checkMobile = () => {
@@ -44,7 +50,10 @@ export const DealsTabs = () => {
   };
 
   return (
-    <section className="deals-tabs-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`deals-tabs-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="deals-tabs-background"></div>
       
       <div className="container-wide">

@@ -1,10 +1,20 @@
 import { casesContent } from '../../content/cases';
 import { Button } from '../ui/Button';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './CasesHero.css';
 
 export const CasesHero = () => {
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
+
   return (
-    <section className="cases-hero-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`cases-hero-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="cases-hero-left">
         <div className="cases-hero-content">
           <div className="cases-hero-icon-wrapper">

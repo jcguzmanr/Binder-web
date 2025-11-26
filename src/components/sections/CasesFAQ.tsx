@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import { casesContent } from '../../content/cases';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './CasesFAQ.css';
 
 export const CasesFAQ = () => {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set([casesContent.faq.items[0]?.id || '']));
   const { title, intro, items } = casesContent.faq;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   const toggleItem = (id: string) => {
     setOpenItems(prev => {
@@ -77,7 +83,10 @@ export const CasesFAQ = () => {
   };
 
   return (
-    <section className="cases-faq-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`cases-faq-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         <h2 className="cases-faq-title">{title}</h2>
         {intro && (

@@ -240,6 +240,12 @@ body.has-animated-background .home-section {
   pointer-events: auto;
 }
 
+.home-cta-floating .btn {
+  padding: 1rem 2rem;
+  font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem);
+  font-weight: var(--font-weight-bold);
+}
+
 .home-cta {
   margin-top: var(--spacing-xl);
 }
@@ -252,6 +258,11 @@ body.has-animated-background .home-section {
 
   .home-image {
     max-width: 100%;
+  }
+
+  .home-cta-floating .btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
   }
 }
 

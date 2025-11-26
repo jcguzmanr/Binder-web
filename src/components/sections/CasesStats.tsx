@@ -1,5 +1,6 @@
 import { casesContent } from '../../content/cases';
 import { useNumberAnimation } from '../../hooks/useNumberAnimation';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './CasesStats.css';
 
 interface StatBlockProps {
@@ -43,9 +44,17 @@ const StatBlock = ({ item }: StatBlockProps) => {
 
 export const CasesStats = () => {
   const { title, items, description } = casesContent.stats;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   return (
-    <section className="cases-stats-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`cases-stats-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         {title && (
           <h2 className="cases-stats-title">{title}</h2>

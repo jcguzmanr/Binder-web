@@ -1,10 +1,20 @@
 import { expedienteDigitalContent } from '../../content/expedienteDigital';
 import { Button } from '../ui/Button';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './ExpedienteHero.css';
 
 export const ExpedienteHero = () => {
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
+
   return (
-    <section className="expediente-hero-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`expediente-hero-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="expediente-hero-left">
         <div className="expediente-hero-content">
           <div className="expediente-hero-icon-wrapper">

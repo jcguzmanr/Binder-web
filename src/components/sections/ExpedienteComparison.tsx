@@ -1,8 +1,14 @@
 import { expedienteDigitalContent } from '../../content/expedienteDigital';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './ExpedienteComparison.css';
 
 export const ExpedienteComparison = () => {
   const { title, rows } = expedienteDigitalContent.comparison;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   const renderValue = (value: string | boolean) => {
     if (typeof value === 'boolean') {
@@ -16,7 +22,10 @@ export const ExpedienteComparison = () => {
   };
 
   return (
-    <section className="expediente-comparison-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`expediente-comparison-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         <h2 className="expediente-comparison-title">{title}</h2>
         

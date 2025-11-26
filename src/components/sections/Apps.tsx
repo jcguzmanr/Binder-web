@@ -1,4 +1,5 @@
 import { appsContent } from '../../content/apps';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './Apps.css';
 
 // Map app IDs to their corresponding SVG icon files
@@ -16,9 +17,18 @@ const getAppIcon = (appId: string): string => {
 
 export const Apps = () => {
   const { mainTitle, subtitle, apps } = appsContent;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   return (
-    <section id="apps" className="apps-section">
+    <section 
+      id="apps" 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`apps-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         <div className="apps-header">
           <h2 className="apps-title">{mainTitle}</h2>

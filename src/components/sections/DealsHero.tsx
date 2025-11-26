@@ -1,10 +1,20 @@
 import { dealsContent } from '../../content/deals';
 import { Button } from '../ui/Button';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './DealsHero.css';
 
 export const DealsHero = () => {
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
+
   return (
-    <section className="deals-hero-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`deals-hero-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="deals-hero-left">
         <div className="deals-hero-content">
           <div className="deals-hero-icon-wrapper">

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { expedienteDigitalContent } from '../../content/expedienteDigital';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './ExpedienteStats.css';
 
 interface SlideText {
@@ -100,8 +101,17 @@ export const ExpedienteStats = () => {
     return <>{parts}</>;
   };
 
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
+
   return (
-    <section className="expediente-stats-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`expediente-stats-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         <div className="expediente-stats-content">
           <h2 className="expediente-stats-question">{expedienteDigitalContent.stats.question}</h2>

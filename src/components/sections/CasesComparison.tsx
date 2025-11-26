@@ -1,8 +1,14 @@
 import { casesContent } from '../../content/cases';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './CasesComparison.css';
 
 export const CasesComparison = () => {
   const { title, rows } = casesContent.comparison;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   const renderValue = (value: string | boolean) => {
     if (typeof value === 'boolean') {
@@ -16,7 +22,10 @@ export const CasesComparison = () => {
   };
 
   return (
-    <section className="cases-comparison-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`cases-comparison-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         <h2 className="cases-comparison-title">{title}</h2>
         

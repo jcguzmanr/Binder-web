@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import { dealsContent } from '../../content/deals';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './DealsFAQ.css';
 
 export const DealsFAQ = () => {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set([dealsContent.faq.items[0]?.id || '']));
   const { title, intro, items } = dealsContent.faq;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   const toggleItem = (id: string) => {
     setOpenItems(prev => {
@@ -54,7 +60,10 @@ export const DealsFAQ = () => {
   };
 
   return (
-    <section className="deals-faq-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`deals-faq-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         <h2 className="deals-faq-title">{title}</h2>
         {intro && (

@@ -1,8 +1,14 @@
 import { dealsContent } from '../../content/deals';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './DealsComparison.css';
 
 export const DealsComparison = () => {
   const { title, rows } = dealsContent.comparison;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   const renderValue = (value: string | boolean) => {
     if (typeof value === 'boolean') {
@@ -16,7 +22,10 @@ export const DealsComparison = () => {
   };
 
   return (
-    <section className="deals-comparison-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`deals-comparison-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         <h2 className="deals-comparison-title">{title}</h2>
         

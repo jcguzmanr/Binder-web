@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { casesContent } from '../../content/cases';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './CasesTabs.css';
 
 export const CasesTabs = () => {
@@ -8,6 +9,11 @@ export const CasesTabs = () => {
   const [openAccordions, setOpenAccordions] = useState<Set<number>>(new Set());
   const tabNavigationRef = useRef<HTMLDivElement>(null);
   const { mainTitle, subtitle, tabs } = casesContent.tabs;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     const checkMobile = () => {
@@ -74,7 +80,10 @@ export const CasesTabs = () => {
   };
 
   return (
-    <section className="cases-tabs-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`cases-tabs-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="cases-tabs-background"></div>
       
       <div className="container-wide">

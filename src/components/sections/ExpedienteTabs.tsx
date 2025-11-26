@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { expedienteDigitalContent } from '../../content/expedienteDigital';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './ExpedienteTabs.css';
 
 export const ExpedienteTabs = () => {
@@ -8,6 +9,11 @@ export const ExpedienteTabs = () => {
   const [openAccordions, setOpenAccordions] = useState<Set<number>>(new Set());
   const tabNavigationRef = useRef<HTMLDivElement>(null);
   const { mainTitle, tabs } = expedienteDigitalContent.tabs;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     const checkMobile = () => {
@@ -66,7 +72,10 @@ export const ExpedienteTabs = () => {
   };
 
   return (
-    <section className="expediente-tabs-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`expediente-tabs-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="expediente-tabs-background"></div>
       
       <div className="container-wide">

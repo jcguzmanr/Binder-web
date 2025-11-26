@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { solucionesContent } from '../../content/soluciones';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './Solutions.css';
 
 export const Solutions = () => {
@@ -9,6 +10,11 @@ export const Solutions = () => {
   const [mascotPosition, setMascotPosition] = useState('0');
   const tabNavigationRef = useRef<HTMLDivElement>(null);
   const { mainTitle, tabs } = solucionesContent;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     const checkMobile = () => {
@@ -104,7 +110,11 @@ export const Solutions = () => {
   };
 
   return (
-    <section id="soluciones" className="solutions-section">
+    <section 
+      id="soluciones" 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`solutions-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="solutions-background"></div>
       
       <div className="container-wide">

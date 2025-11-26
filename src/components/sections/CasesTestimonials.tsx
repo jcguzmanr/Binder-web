@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import { casesContent } from '../../content/cases';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './CasesTestimonials.css';
 
 export const CasesTestimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { mainTitle, testimonials } = casesContent.testimonials;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -15,7 +21,10 @@ export const CasesTestimonials = () => {
   };
 
   return (
-    <section className="cases-testimonials-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`cases-testimonials-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         <h2 className="cases-testimonials-title">{mainTitle}</h2>
         

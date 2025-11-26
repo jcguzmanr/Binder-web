@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import { expedienteDigitalContent } from '../../content/expedienteDigital';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './ExpedienteFAQ.css';
 
 export const ExpedienteFAQ = () => {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set([expedienteDigitalContent.faq.items[0]?.id || '']));
   const { title, items } = expedienteDigitalContent.faq;
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
 
   const toggleItem = (id: string) => {
     setOpenItems(prev => {
@@ -44,7 +50,10 @@ export const ExpedienteFAQ = () => {
   };
 
   return (
-    <section className="expediente-faq-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`expediente-faq-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="container-wide">
         <h2 className="expediente-faq-title">{title}</h2>
         {expedienteDigitalContent.faq.intro && (

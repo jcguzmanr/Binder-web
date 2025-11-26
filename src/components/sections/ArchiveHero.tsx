@@ -1,10 +1,20 @@
 import { archiveContent } from '../../content/archive';
 import { Button } from '../ui/Button';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './ArchiveHero.css';
 
 export const ArchiveHero = () => {
+  const { elementRef, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  });
+
   return (
-    <section className="archive-hero-section">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`archive-hero-section scroll-animate ${isVisible ? 'visible' : ''}`}
+    >
       <div className="archive-hero-left">
         <div className="archive-hero-content">
           <div className="archive-hero-icon-wrapper">
