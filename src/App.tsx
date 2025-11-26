@@ -3,6 +3,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { BackgroundProvider } from './context/BackgroundContext';
 import { Navigation } from './components/layout/Navigation';
 import { ScrollToTop } from './components/layout/ScrollToTop';
+import { GoogleAnalytics } from './components/layout/GoogleAnalytics';
 import { BackgroundRenderer } from './components/ui/BackgroundRenderer';
 import { Home } from './components/sections/Home';
 import { WhyBinder } from './components/sections/WhyBinder';
@@ -38,6 +39,7 @@ function App() {
         <Router>
           <div className="app">
             <ScrollToTop />
+            <GoogleAnalytics />
             <BackgroundRenderer />
             <Navigation />
             <Routes>
