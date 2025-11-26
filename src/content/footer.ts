@@ -44,7 +44,7 @@ export const footerContent = {
     },
   ] as FooterColumn[],
   socialLinks: {
-    linkedin: "https://www.linkedin.com/company/binder-legal",
+    linkedin: "https://www.linkedin.com/company/thelegalbinder/",
   },
   legalNote: "© 2025 Binder. Todos los derechos reservados.",
 };

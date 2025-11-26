@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { footerContent } from '../../content/footer';
 import './Footer.css';
 
@@ -11,6 +10,12 @@ export const Footer = () => {
 
   const isHashLink = (href: string) => {
     return href.startsWith('#');
+  };
+
+  const handleInternalLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    // Force full page reload for internal links to avoid scroll animation
+    window.location.href = href;
   };
 
   return (
@@ -35,9 +40,10 @@ export const Footer = () => {
                       </li>
                     );
                   } else {
+                    // Use regular <a> tag with full page reload for internal routes
                     return (
                       <li key={linkIndex}>
-                        <Link to={link.href}>{link.label}</Link>
+                        <a href={link.href} onClick={(e) => handleInternalLinkClick(e, link.href)}>{link.label}</a>
                       </li>
                     );
                   }

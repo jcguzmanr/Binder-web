@@ -17,8 +17,8 @@ export const InternalPage = ({ title, children }: InternalPageProps) => {
   });
 
   useEffect(() => {
-    // Scroll to top when route changes
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to top instantly when route changes (no smooth scroll to avoid visible scroll animation)
+    window.scrollTo({ top: 0, behavior: 'auto' });
   }, [location.pathname]);
 
   return (
