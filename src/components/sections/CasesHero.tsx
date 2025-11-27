@@ -41,13 +41,9 @@ export const CasesHero = () => {
       </div>
       <div className="cases-hero-right">
         <img 
-          src="/images/CasesRef/seccion1.png" 
+          src="/cases-hero.png" 
           alt="Cases hero" 
           className="cases-hero-image"
-          onError={(e) => {
-            // Fallback si la imagen no existe
-            (e.target as HTMLImageElement).style.display = 'none';
-          }}
         />
       </div>
     </section>

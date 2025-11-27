@@ -11,7 +11,7 @@ export const footerContent = {
     {
       title: "Compañía",
       links: [
-        { label: "Sobre Binder", href: "#home" },
+        { label: "Sobre Binder", href: "/sobrebinder" },
         { label: "Iniciar sesión", href: "https://app.binder.com.pe" },
       ],
     },

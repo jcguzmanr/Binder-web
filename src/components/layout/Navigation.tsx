@@ -23,7 +23,7 @@ export const Navigation = () => {
             setIsMobileMenuOpen(false);
           }
           
-          // Only detect active section on home page
+            // Only detect active section on home page
           if (location.pathname === '/') {
             const sections = ['home', 'porquebinder', 'soluciones', 'apps', 'testimonios', 'contacto'];
             const scrollPosition = window.scrollY + 150; // Offset for fixed nav

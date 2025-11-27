@@ -19,6 +19,7 @@ import { GentleWavesPage } from './components/sections/GentleWaves';
 import { CanyonFlowsPage } from './components/sections/CanyonFlows';
 import { FlowPatternPage } from './components/sections/FlowPattern';
 import { PorQueBinderPage } from './pages/PorQueBinderPage';
+import { SobreBinderPage } from './pages/SobreBinderPage';
 import { FuncionalidadesPage } from './pages/FuncionalidadesPage';
 import { SolucionesPage } from './pages/SolucionesPage';
 import { TestimoniosPage } from './pages/TestimoniosPage';
@@ -66,6 +67,10 @@ function App() {
               <Route
                 path="/porquebinder"
                 element={<PorQueBinderPage />}
+              />
+              <Route
+                path="/sobrebinder"
+                element={<SobreBinderPage />}
               />
               <Route
                 path="/funcionalidades"

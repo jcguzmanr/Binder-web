@@ -12,6 +12,17 @@ export const Footer = () => {
     return href.startsWith('#');
   };
 
+  const handleHashLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If element not found, navigate to home with hash
+      window.location.href = `/${href}`;
+    }
+  };
+
   const handleInternalLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     // Force full page reload for internal links to avoid scroll animation
@@ -36,7 +47,7 @@ export const Footer = () => {
                   } else if (isHashLink(link.href)) {
                     return (
                       <li key={linkIndex}>
-                        <a href={link.href}>{link.label}</a>
+                        <a href={link.href} onClick={(e) => handleHashLinkClick(e, link.href)}>{link.label}</a>
                       </li>
                     );
                   } else {
