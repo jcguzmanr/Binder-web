@@ -41,7 +41,7 @@ body.has-animated-background .why-binder-section {
   justify-content: center;
   box-shadow: var(--shadow-xl);
   z-index: 1; /* Container content */
-  overflow: hidden; /* Ocultar emojis que se salgan del contenedor */
+  overflow: visible; /* Permitir que la solapa se muestre */
   box-sizing: border-box; /* Incluir padding en el ancho */
 }
 
@@ -53,8 +53,9 @@ body.has-animated-background .why-binder-section {
   height: 50px;
   background: #2F339B;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  z-index: 3;
+  z-index: 4;
 }
+
 
 /* Floating icons - positioned inside the blue container */
 .floating-icons {
@@ -309,6 +310,7 @@ body.has-animated-background .why-binder-section {
     height: 400px; /* Altura fija para todas las slides en mobile */
     min-height: 400px;
     max-height: 400px;
+    overflow: visible;
   }
 
   .carousel-arrow-prev {
@@ -323,7 +325,7 @@ body.has-animated-background .why-binder-section {
     right: 0;
     width: 120px;
     height: 40px;
-    top: -40px; /* Ajustar posición para mobile */
+    top: 0;
   }
 
   .carousel-content {

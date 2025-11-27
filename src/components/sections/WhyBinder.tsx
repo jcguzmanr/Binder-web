@@ -122,7 +122,6 @@ export const WhyBinder = () => {
           onMouseLeave={() => setIsPaused(false)}
         >
           <div className="why-binder-solapa"></div>
-          
           {/* Floating icons - positioned inside the blue container */}
           <div className="floating-icons">
             {iconPositions.map((pos, index) => (
