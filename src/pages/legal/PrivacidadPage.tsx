@@ -18,6 +18,14 @@ export const PrivacidadPage = () => {
         Utilizamos la información recopilada para proporcionar, mantener y mejorar nuestros 
         servicios, así como para comunicarnos con usted sobre actualizaciones y nuevas funciones.
       </p>
+      <h2>Cookies y Tecnologías Similares</h2>
+      <p>
+        Utilizamos cookies y tecnologías similares para mejorar su experiencia en nuestro sitio web, 
+        analizar el uso del sitio y personalizar el contenido. Para obtener información detallada 
+        sobre los tipos de cookies que utilizamos, cómo las utilizamos y cómo puede gestionarlas, 
+        consulte nuestra{' '}
+        <a href="/legal/cookies">Política de Cookies</a>.
+      </p>
       <h2>Protección de Datos</h2>
       <p>
         Implementamos medidas de seguridad técnicas y organizativas para proteger sus datos 

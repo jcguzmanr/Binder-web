@@ -36,6 +36,7 @@ export const footerContent = {
       title: "Legal",
       links: [
         { label: "Política de privacidad", href: "/legal/privacidad" },
+        { label: "Política de cookies", href: "/legal/cookies" },
         { label: "Términos y condiciones", href: "/legal/terminos" },
         { label: "Aviso legal", href: "/legal/aviso" },
         { label: "Seguridad de datos / cumplimiento", href: "/legal/seguridad" },

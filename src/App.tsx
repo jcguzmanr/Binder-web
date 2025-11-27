@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { BackgroundProvider } from './context/BackgroundContext';
+import { CookieProvider } from './context/CookieContext';
 import { Navigation } from './components/layout/Navigation';
 import { ScrollToTop } from './components/layout/ScrollToTop';
 import { GoogleAnalytics } from './components/layout/GoogleAnalytics';
 import { BackgroundRenderer } from './components/ui/BackgroundRenderer';
+import { CookieBanner } from './components/ui/CookieBanner';
+import { CookieSettings } from './components/ui/CookieSettings';
 import { Home } from './components/sections/Home';
 import { WhyBinder } from './components/sections/WhyBinder';
 import { Solutions } from './components/sections/Solutions';
@@ -20,7 +23,9 @@ import { FuncionalidadesPage } from './pages/FuncionalidadesPage';
 import { SolucionesPage } from './pages/SolucionesPage';
 import { TestimoniosPage } from './pages/TestimoniosPage';
 import { ContactoPage } from './pages/ContactoPage';
+import { GraciasPage } from './pages/GraciasPage';
 import { PrivacidadPage } from './pages/legal/PrivacidadPage';
+import { CookiesPage } from './pages/legal/CookiesPage';
 import { TerminosPage } from './pages/legal/TerminosPage';
 import { AvisoLegalPage } from './pages/legal/AvisoLegalPage';
 import { SeguridadPage } from './pages/legal/SeguridadPage';
@@ -36,12 +41,15 @@ function App() {
   return (
     <ThemeProvider>
       <BackgroundProvider>
-        <Router>
-          <div className="app">
-            <ScrollToTop />
-            <GoogleAnalytics />
-            <BackgroundRenderer />
-            <Navigation />
+        <CookieProvider>
+          <Router>
+            <div className="app">
+              <ScrollToTop />
+              <GoogleAnalytics />
+              <BackgroundRenderer />
+              <CookieBanner />
+              <CookieSettings />
+              <Navigation />
             <Routes>
               <Route
                 path="/gentle-waves"
@@ -76,8 +84,16 @@ function App() {
                 element={<ContactoPage />}
               />
               <Route
+                path="/gracias"
+                element={<GraciasPage />}
+              />
+              <Route
                 path="/legal/privacidad"
                 element={<PrivacidadPage />}
+              />
+              <Route
+                path="/legal/cookies"
+                element={<CookiesPage />}
               />
               <Route
                 path="/legal/terminos"
@@ -136,6 +152,7 @@ function App() {
             <Footer />
           </div>
         </Router>
+        </CookieProvider>
       </BackgroundProvider>
     </ThemeProvider>
   );
