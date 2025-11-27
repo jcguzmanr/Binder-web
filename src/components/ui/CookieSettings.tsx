@@ -8,7 +8,6 @@ export const CookieSettings = () => {
     closeSettings,
     preferences,
     updatePreferences,
-    acceptAll,
   } = useCookie();
 
   const [localPreferences, setLocalPreferences] = useState(preferences);
