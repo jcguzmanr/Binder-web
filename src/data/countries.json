@@ -1,0 +1,95 @@
+{
+  "countries": [
+    {
+      "code": "PE",
+      "name": "Perú",
+      "flag": "🇵🇪",
+      "dialCode": "+51"
+    },
+    {
+      "code": "US",
+      "name": "Estados Unidos",
+      "flag": "🇺🇸",
+      "dialCode": "+1"
+    },
+    {
+      "code": "MX",
+      "name": "México",
+      "flag": "🇲🇽",
+      "dialCode": "+52"
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "flag": "🇨🇴",
+      "dialCode": "+57"
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "flag": "🇨🇱",
+      "dialCode": "+56"
+    },
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "flag": "🇦🇷",
+      "dialCode": "+54"
+    },
+    {
+      "code": "BR",
+      "name": "Brasil",
+      "flag": "🇧🇷",
+      "dialCode": "+55"
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "flag": "🇪🇨",
+      "dialCode": "+593"
+    },
+    {
+      "code": "BO",
+      "name": "Bolivia",
+      "flag": "🇧🇴",
+      "dialCode": "+591"
+    },
+    {
+      "code": "PY",
+      "name": "Paraguay",
+      "flag": "🇵🇾",
+      "dialCode": "+595"
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay",
+      "flag": "🇺🇾",
+      "dialCode": "+598"
+    },
+    {
+      "code": "VE",
+      "name": "Venezuela",
+      "flag": "🇻🇪",
+      "dialCode": "+58"
+    },
+    {
+      "code": "ES",
+      "name": "España",
+      "flag": "🇪🇸",
+      "dialCode": "+34"
+    },
+    {
+      "code": "CA",
+      "name": "Canadá",
+      "flag": "🇨🇦",
+      "dialCode": "+1"
+    },
+    {
+      "code": "GB",
+      "name": "Reino Unido",
+      "flag": "🇬🇧",
+      "dialCode": "+44"
+    }
+  ]
+}
+

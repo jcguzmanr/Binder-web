@@ -1,12 +1,23 @@
 import { useState, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { contactoContent } from '../../content/contacto';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import blockedEmailDomains from '../../data/blockedEmailDomains.json';
+import countriesData from '../../data/countries.json';
 import './Contact.css';
+
+interface Country {
+  code: string;
+  name: string;
+  flag: string;
+  dialCode: string;
+}
 
 interface FormData {
   name: string;
   company: string;
   email: string;
+  phoneCountry: string;
   phone: string;
   message: string;
   consent: boolean;
@@ -17,13 +28,22 @@ interface FormErrors {
   company?: string;
   email?: string;
   consent?: string;
+  submit?: string;
 }
 
 export const Contact = () => {
+  const navigate = useNavigate();
+  const countries = countriesData.countries as Country[];
+  const blockedDomains = blockedEmailDomains.blockedDomains as string[];
+  
+  // Encontrar Perú como país por defecto
+  const defaultCountry = countries.find(c => c.code === 'PE') || countries[0];
+  
   const [formData, setFormData] = useState<FormData>({
     name: '',
     company: '',
     email: '',
+    phoneCountry: defaultCountry.code,
     phone: '',
     message: '',
     consent: false,
@@ -31,7 +51,6 @@ export const Contact = () => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
   const { elementRef, isVisible } = useScrollAnimation({
     threshold: 0.1,
     rootMargin: '0px',
@@ -53,6 +72,12 @@ export const Contact = () => {
       newErrors.email = 'El correo es requerido';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Correo inválido';
+    } else {
+      // Validar dominio bloqueado
+      const emailDomain = formData.email.split('@')[1]?.toLowerCase();
+      if (emailDomain && blockedDomains.includes(emailDomain)) {
+        newErrors.email = 'Por favor, utiliza un correo corporativo. No se permiten correos personales (Gmail, Hotmail, etc.)';
+      }
     }
 
     if (!formData.consent) {
@@ -71,25 +96,61 @@ export const Contact = () => {
     }
 
     setIsSubmitting(true);
+    setErrors({}); // Clear previous errors
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({
-        name: '',
-        company: '',
-        email: '',
-        phone: '',
-        message: '',
-        consent: false,
+    try {
+      const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
+      
+      if (!webhookUrl) {
+        throw new Error('Webhook URL no configurada');
+      }
+
+      // Enviar datos al webhook
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          phone: formData.phone 
+            ? `${countries.find(c => c.code === formData.phoneCountry)?.dialCode || ''} ${formData.phone}`.trim()
+            : null,
+          phoneCountry: formData.phoneCountry,
+          challenge: formData.message || null,
+          consent: formData.consent,
+          timestamp: new Date().toISOString(),
+          source: 'contact-form',
+        }),
       });
-      setSubmitSuccess(false);
-    }, 3000);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `Error ${response.status}: ${response.statusText}`);
+      }
+
+      // Guardar datos en sessionStorage para la página de agradecimiento
+      const submissionData = {
+        name: formData.name,
+        company: formData.company,
+        email: formData.email,
+      };
+      sessionStorage.setItem('formSubmission', JSON.stringify(submissionData));
+      
+      // Redirigir a página de agradecimiento
+      navigate('/gracias');
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setErrors({ 
+        submit: error instanceof Error 
+          ? error.message 
+          : 'Hubo un error al enviar el formulario. Por favor, intenta nuevamente.' 
+      });
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (field: keyof FormData, value: string | boolean) => {
@@ -97,6 +158,10 @@ export const Contact = () => {
     // Clear error when user starts typing
     if (errors[field as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
+    }
+    // Clear email error when email changes
+    if (field === 'email' && errors.email) {
+      setErrors(prev => ({ ...prev, email: undefined }));
     }
   };
 
@@ -155,12 +220,26 @@ export const Contact = () => {
               </div>
 
               <div className="form-group">
-                <input
-                  type="tel"
-                  placeholder={contactoContent.form.fields.phone.placeholder}
-                  value={formData.phone}
-                  onChange={(e) => handleChange('phone', e.target.value)}
-                />
+                <div className="phone-input-wrapper">
+                  <select
+                    className="phone-country-select"
+                    value={formData.phoneCountry}
+                    onChange={(e) => handleChange('phoneCountry', e.target.value)}
+                  >
+                    {countries.map((country) => (
+                      <option key={country.code} value={country.code}>
+                        {country.flag} {country.dialCode}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="tel"
+                    placeholder={contactoContent.form.fields.phone.placeholder}
+                    value={formData.phone}
+                    onChange={(e) => handleChange('phone', e.target.value)}
+                    className="phone-number-input"
+                  />
+                </div>
               </div>
 
               <div className="form-group">
@@ -192,12 +271,18 @@ export const Contact = () => {
                 {errors.consent && <span className="error-message">{errors.consent}</span>}
               </div>
 
+              {errors.submit && (
+                <div className="form-group">
+                  <span className="error-message">{errors.submit}</span>
+                </div>
+              )}
+
               <button 
                 type="submit" 
                 className="submit-button"
-                disabled={isSubmitting || submitSuccess}
+                disabled={isSubmitting}
               >
-                {isSubmitting ? 'Enviando...' : submitSuccess ? '¡Enviado!' : contactoContent.form.submitText}
+                {isSubmitting ? 'Enviando...' : contactoContent.form.submitText}
               </button>
             </form>
           </div>
