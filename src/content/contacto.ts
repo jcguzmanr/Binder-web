@@ -24,7 +24,7 @@ export const contactoContent = {
       },
       phone: {
         label: "Teléfono",
-        placeholder: "+51 999 999 999",
+        placeholder: "999 999 999",
         required: false,
         type: "tel",
       },
