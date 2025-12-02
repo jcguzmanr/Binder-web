@@ -47,7 +47,7 @@ body.has-animated-background .expediente-hero-section {
   width: 80px;
   height: 80px;
   flex-shrink: 0;
-  background-color: var(--light-blue);
+  background-color: var(--white);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xs);
   display: flex;
@@ -59,7 +59,9 @@ body.has-animated-background .expediente-hero-section {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  /* Use the exact same color as expediente-hero-name: var(--light-blue) = #5FBDFF */
+  /* Filter to convert black SVG to #5FBDFF (RGB: 95, 189, 255) */
+  filter: brightness(0) saturate(100%) invert(37%) sepia(100%) saturate(2000%) hue-rotate(195deg) brightness(1.15) contrast(1.05);
 }
 
 .expediente-hero-name {

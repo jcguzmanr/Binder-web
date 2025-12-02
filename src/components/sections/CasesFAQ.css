@@ -142,7 +142,7 @@ body.has-animated-background .cases-faq-section {
 
 .cases-faq-answer.open {
   max-height: 500px;
-  padding: 0 var(--spacing-lg) var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-md);
 }
 
 .cases-faq-answer p {
@@ -185,7 +185,7 @@ body.has-animated-background .cases-faq-section {
   }
 
   .cases-faq-answer.open {
-    padding: 0 var(--spacing-md) var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-md) var(--spacing-sm);
   }
 
   .cases-faq-answer p {

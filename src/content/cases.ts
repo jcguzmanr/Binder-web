@@ -38,7 +38,7 @@ export const casesContent = {
     description: "Binder organiza, automatiza y da visibilidad a todo tu flujo legal para que el tiempo del equipo genere valor.",
   },
   tabs: {
-    mainTitle: "Del archivo físico a la gestión inteligente.",
+    mainTitle: "Del archivo físico a la gestión inteligente",
     subtitle: "Binder integra expediente digital y mesa de partes online para que todo el ciclo judicial y administrativo sea 100 % trazable. Cada documento, resolución y notificación queda registrado, vinculado al expediente correspondiente y disponible desde cualquier dispositivo.",
     tabs: [
       {

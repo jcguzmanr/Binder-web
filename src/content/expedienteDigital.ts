@@ -33,7 +33,7 @@ export const expedienteDigitalContent = {
     description: "Binder organiza, automatiza y da visibilidad a todo tu flujo legal para que el tiempo del equipo genere valor.",
   },
   tabs: {
-    mainTitle: "Menos seguimiento. Más resultados.",
+    mainTitle: "Menos seguimiento Más resultados.",
     subtitle: "Binder convierte la operación jurídica en flujos automatizados con IA, diseñados para dar visibilidad y orden en cada paso. Desde la recepción de solicitudes hasta su cierre, todo queda centralizado, trazado y asignado.",
     tabs: [
       {
