@@ -57,7 +57,17 @@ export const CasesStats = () => {
     >
       <div className="container-wide">
         {title && (
-          <h2 className="cases-stats-title">{title}</h2>
+          <h2 className="cases-stats-title">
+            {title.split('documento').map((part, index, array) => 
+              index === array.length - 1 ? (
+                <span key={index}>{part}</span>
+              ) : (
+                <span key={index}>
+                  {part}documento<br />
+                </span>
+              )
+            )}
+          </h2>
         )}
         <div className="cases-stats-grid">
           {items.map((item, index) => (

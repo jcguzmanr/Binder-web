@@ -167,7 +167,13 @@ export const Navigation = () => {
                   Agendar demo
                 </Button>
               </a>
-              <Button variant="secondary">Ingresar</Button>
+              <a 
+                href="https://thelegalbinder.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="secondary">Ingresar</Button>
+              </a>
             </div>
           </div>
         </div>
@@ -210,7 +216,13 @@ export const Navigation = () => {
                   Agendar demo
                 </Button>
               </a>
-              <Button variant="secondary">Ingresar</Button>
+              <a 
+                href="https://thelegalbinder.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="secondary">Ingresar</Button>
+              </a>
             </div>
           </div>
         )}

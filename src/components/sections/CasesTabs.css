@@ -2,7 +2,8 @@
   position: relative;
   padding: var(--spacing-3xl) 0;
   background: transparent;
-  overflow: hidden;
+  overflow: visible;
+  width: 100%;
 }
 
 /* Make background transparent when animated background is active */
@@ -11,13 +12,7 @@ body.has-animated-background .cases-tabs-section {
 }
 
 .cases-tabs-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: transparent;
-  pointer-events: none;
+  display: none;
 }
 
 .cases-tabs-main-title {
@@ -43,7 +38,7 @@ body.has-animated-background .cases-tabs-section {
   font-weight: var(--font-weight-regular);
   color: #30339C;
   margin-bottom: var(--spacing-xl);
-  max-width: 900px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
@@ -58,6 +53,8 @@ body.has-animated-background .cases-tabs-section {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--spacing-md);
+  position: relative;
+  z-index: 1;
 }
 
 /* Tabs Navigation */
@@ -103,18 +100,16 @@ body.has-animated-background .cases-tabs-section {
 }
 
 .cases-tab-button.active {
-  background-color: var(--white);
-  color: var(--gray-dark);
+  background-color: #30339C;
+  color: var(--white);
   box-shadow: none;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid #30339C;
   border-bottom: none;
 }
 
 [data-theme="dark"] .cases-tab-button.active {
-  background-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #30339C;
+  border: 1px solid #30339C;
   border-bottom: none;
   color: var(--white);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -154,9 +149,9 @@ body.has-animated-background .cases-tabs-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xl);
-  background-color: var(--white);
+  background-color: #30339C;
   border-radius: 0 0 var(--radius-xl) var(--radius-xl);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid #30339C;
   border-top: none;
   padding: var(--spacing-xl);
   padding-top: var(--spacing-xl);
@@ -168,10 +163,8 @@ body.has-animated-background .cases-tabs-section {
 }
 
 [data-theme="dark"] .cases-tab-grid {
-  background-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #30339C;
+  border: 1px solid #30339C;
   border-top: none;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
@@ -217,7 +210,7 @@ body.has-animated-background .cases-tabs-section {
 .cases-tab-title {
   font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
-  color: #30339C;
+  color: var(--white);
   margin-bottom: var(--spacing-sm);
   line-height: 1.2;
 }
@@ -225,7 +218,7 @@ body.has-animated-background .cases-tabs-section {
 .cases-tab-subtitle {
   font-size: clamp(1rem, 0.875rem + 0.75vw, 1.25rem);
   font-weight: var(--font-weight-medium);
-  color: var(--gray-dark);
+  color: var(--white);
   margin-bottom: var(--spacing-md);
 }
 
@@ -235,7 +228,7 @@ body.has-animated-background .cases-tabs-section {
 
 .cases-tab-description {
   font-size: var(--fs-16);
-  color: var(--gray-dark);
+  color: var(--white);
   margin-bottom: var(--spacing-md);
   line-height: 1.6;
 }
@@ -255,7 +248,7 @@ body.has-animated-background .cases-tabs-section {
   padding-left: var(--spacing-md);
   margin-bottom: var(--spacing-sm);
   font-size: var(--fs-16);
-  color: var(--gray-dark);
+  color: var(--white);
   line-height: 1.5;
 }
 
@@ -267,7 +260,7 @@ body.has-animated-background .cases-tabs-section {
   content: '•';
   position: absolute;
   left: 0;
-  color: #30339C;
+  color: var(--white);
   font-weight: var(--font-weight-bold);
   font-size: 1.2em;
 }

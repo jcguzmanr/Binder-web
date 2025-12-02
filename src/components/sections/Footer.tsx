@@ -36,31 +36,45 @@ export const Footer = () => {
         <div className="footer-columns">
           {columns.map((column, index) => (
             <div key={index} className="footer-column">
-              <h4 className="column-title">{column.title}</h4>
-              <ul className="column-links">
-                {column.links.map((link, linkIndex) => {
-                  if (isExternalLink(link.href)) {
-                    return (
-                      <li key={linkIndex}>
-                        <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
-                      </li>
-                    );
-                  } else if (isHashLink(link.href)) {
-                    return (
-                      <li key={linkIndex}>
-                        <a href={link.href} onClick={(e) => handleHashLinkClick(e, link.href)}>{link.label}</a>
-                      </li>
-                    );
-                  } else {
-                    // Use regular <a> tag with full page reload for internal routes
-                    return (
-                      <li key={linkIndex}>
-                        <a href={link.href} onClick={(e) => handleInternalLinkClick(e, link.href)}>{link.label}</a>
-                      </li>
-                    );
-                  }
-                })}
-              </ul>
+              <div>
+                <h4 className="column-title">{column.title}</h4>
+                <ul className="column-links">
+                  {column.links.map((link, linkIndex) => {
+                    if (isExternalLink(link.href)) {
+                      return (
+                        <li key={linkIndex}>
+                          <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                        </li>
+                      );
+                    } else if (isHashLink(link.href)) {
+                      return (
+                        <li key={linkIndex}>
+                          <a href={link.href} onClick={(e) => handleHashLinkClick(e, link.href)}>{link.label}</a>
+                        </li>
+                      );
+                    } else {
+                      // Use regular <a> tag with full page reload for internal routes
+                      return (
+                        <li key={linkIndex}>
+                          <a href={link.href} onClick={(e) => handleInternalLinkClick(e, link.href)}>{link.label}</a>
+                        </li>
+                      );
+                    }
+                  })}
+                </ul>
+              </div>
+              {index === 0 && (
+                <div className="footer-badge footer-badge-column">
+                  <span className="footer-badge-text">{homeContent.badgeText}</span>
+                  <span className="footer-badge-icon">
+                    <img 
+                      src="/proinnovate.png" 
+                      alt="PRO innovate" 
+                      className="footer-badge-logo"
+                    />
+                  </span>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -81,12 +95,7 @@ export const Footer = () => {
               </svg>
               LinkedIn
             </a>
-            <a 
-              href={homeContent.badgeLink} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="footer-badge"
-            >
+            <div className="footer-badge footer-badge-bottom">
               <span className="footer-badge-text">{homeContent.badgeText}</span>
               <span className="footer-badge-icon">
                 <img 
@@ -95,7 +104,7 @@ export const Footer = () => {
                   className="footer-badge-logo"
                 />
               </span>
-            </a>
+            </div>
           </div>
         </div>
       </div>

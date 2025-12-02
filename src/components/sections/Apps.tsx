@@ -63,11 +63,11 @@ export const Apps = () => {
               
               <p className="app-description">{app.description}</p>
 
-              <div className="app-image-preview">
+              {/* <div className="app-image-preview">
                 <div className="preview-placeholder">
                   <span>Vista previa</span>
                 </div>
-              </div>
+              </div> */}
 
               <Link to={app.link} className="app-link">
                 Ver más

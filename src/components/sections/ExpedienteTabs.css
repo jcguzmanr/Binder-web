@@ -103,18 +103,16 @@ body.has-animated-background .expediente-tabs-section {
 }
 
 .expediente-tab-button.active {
-  background-color: var(--white);
-  color: var(--gray-dark);
+  background-color: var(--light-blue);
+  color: var(--white);
   box-shadow: none;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--light-blue);
   border-bottom: none;
 }
 
 [data-theme="dark"] .expediente-tab-button.active {
-  background-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--light-blue);
+  border: 1px solid var(--light-blue);
   border-bottom: none;
   color: var(--white);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -154,9 +152,9 @@ body.has-animated-background .expediente-tabs-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xl);
-  background-color: var(--white);
+  background-color: var(--light-blue);
   border-radius: 0 0 var(--radius-xl) var(--radius-xl);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--light-blue);
   border-top: none;
   padding: var(--spacing-xl);
   padding-top: var(--spacing-xl);
@@ -168,10 +166,8 @@ body.has-animated-background .expediente-tabs-section {
 }
 
 [data-theme="dark"] .expediente-tab-grid {
-  background-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--light-blue);
+  border: 1px solid var(--light-blue);
   border-top: none;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
@@ -217,7 +213,7 @@ body.has-animated-background .expediente-tabs-section {
 .expediente-tab-title {
   font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
-  color: var(--light-blue);
+  color: var(--white);
   margin-bottom: var(--spacing-sm);
   line-height: 1.2;
 }
@@ -225,7 +221,7 @@ body.has-animated-background .expediente-tabs-section {
 .expediente-tab-subtitle {
   font-size: clamp(1rem, 0.875rem + 0.75vw, 1.25rem);
   font-weight: var(--font-weight-medium);
-  color: var(--gray-dark);
+  color: var(--white);
   margin-bottom: var(--spacing-md);
 }
 
@@ -235,7 +231,7 @@ body.has-animated-background .expediente-tabs-section {
 
 .expediente-tab-description {
   font-size: var(--fs-16);
-  color: var(--gray-dark);
+  color: var(--white);
   margin-bottom: var(--spacing-md);
   line-height: 1.6;
 }
@@ -255,7 +251,7 @@ body.has-animated-background .expediente-tabs-section {
   padding-left: var(--spacing-md);
   margin-bottom: var(--spacing-sm);
   font-size: var(--fs-16);
-  color: var(--gray-dark);
+  color: var(--white);
   line-height: 1.5;
 }
 
@@ -267,7 +263,7 @@ body.has-animated-background .expediente-tabs-section {
   content: '•';
   position: absolute;
   left: 0;
-  color: var(--light-blue);
+  color: var(--white);
   font-weight: var(--font-weight-bold);
   font-size: 1.2em;
 }
