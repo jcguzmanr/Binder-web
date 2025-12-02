@@ -190,15 +190,41 @@ body.has-animated-background .expediente-comparison-section {
 
   .expediente-comparison-table-container {
     margin: 0 var(--spacing-sm);
+    overflow-x: visible; /* Eliminar scroll horizontal */
   }
 
   .expediente-comparison-table {
-    font-size: var(--fs-14);
+    font-size: var(--fs-12);
+    min-width: auto; /* Eliminar min-width para que quepa */
+    width: 100%;
   }
 
   .expediente-comparison-table th,
   .expediente-comparison-table td {
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--fs-12);
+  }
+
+  .expediente-comparison-tradicional-header,
+  .expediente-comparison-digital-header {
+    width: 50%;
+    font-size: var(--fs-12);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .expediente-comparison-digital-header {
+    padding-top: calc(var(--spacing-xs) + 25px);
+  }
+
+  .expediente-comparison-digital-tab {
+    width: 120px;
+    height: 25px;
+    top: -25px;
+  }
+
+  .expediente-comparison-check,
+  .expediente-comparison-cross {
+    font-size: 1.2em;
   }
 }
 

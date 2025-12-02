@@ -190,15 +190,41 @@ body.has-animated-background .deals-comparison-section {
 
   .deals-comparison-table-container {
     margin: 0 var(--spacing-sm);
+    overflow-x: visible; /* Eliminar scroll horizontal */
   }
 
   .deals-comparison-table {
-    font-size: var(--fs-14);
+    font-size: var(--fs-12);
+    min-width: auto; /* Eliminar min-width para que quepa */
+    width: 100%;
   }
 
   .deals-comparison-table th,
   .deals-comparison-table td {
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--fs-12);
+  }
+
+  .deals-comparison-tradicional-header,
+  .deals-comparison-deals-header {
+    width: 50%;
+    font-size: var(--fs-12);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .deals-comparison-deals-header {
+    padding-top: calc(var(--spacing-xs) + 25px);
+  }
+
+  .deals-comparison-deals-tab {
+    width: 120px;
+    height: 25px;
+    top: -25px;
+  }
+
+  .deals-comparison-check,
+  .deals-comparison-cross {
+    font-size: 1.2em;
   }
 }
 
