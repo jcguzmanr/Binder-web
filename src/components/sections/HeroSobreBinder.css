@@ -1,6 +1,6 @@
 .hero-sobre-binder {
   position: relative;
-  padding: var(--spacing-3xl) 0;
+  padding: calc(var(--spacing-3xl) + 80px) 0 var(--spacing-3xl);
   background-color: var(--bg);
   background-image: url('/sobrebinderhero.png');
   background-position: right center;
@@ -82,7 +82,7 @@ body.has-animated-background .hero-sobre-binder {
 
 @media (max-width: 640px) {
   .hero-sobre-binder {
-    padding: var(--spacing-2xl) 0;
+    padding: calc(var(--spacing-2xl) + 60px) 0 var(--spacing-2xl);
   }
 
   .hero-sobre-binder-content {

@@ -88,7 +88,7 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className={`navigation ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className={`navigation ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
       <div className="container-wide">
         <div className="nav-content">
           {/* Left side: Mobile Menu Toggle and Logo */}

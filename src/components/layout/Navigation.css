@@ -187,6 +187,11 @@
   display: inline-flex;
 }
 
+/* Hide "Agendar demo" button in nav-actions when mobile menu is open */
+.navigation.mobile-menu-open .nav-actions a:first-child {
+  display: none;
+}
+
 .mobile-menu-actions a {
   text-decoration: none;
   display: flex;
@@ -290,9 +295,23 @@
   flex-direction: row;
   align-items: center;
   gap: 0.75rem;
-  margin-top: 0.5rem;
-  padding-top: 1rem;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--gray-light);
+}
+
+.mobile-menu-actions a {
+  flex: 1;
+  min-width: 0;
+}
+
+.mobile-menu-actions a .btn {
+  width: 100%;
+}
+
+.mobile-menu-actions .btn {
+  flex: 1;
+  min-width: 0;
 }
 
 .mobile-menu-actions .theme-toggle {

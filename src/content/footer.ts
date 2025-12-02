@@ -20,7 +20,6 @@ export const footerContent = {
       links: [
         { label: "Por qué Binder", href: "#porquebinder" },
         { label: "Funcionalidades", href: "#soluciones" },
-        { label: "Testimonios", href: "#testimonios" },
         { label: "Contacto", href: "#contacto" },
       ],
     },
