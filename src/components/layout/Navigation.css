@@ -399,5 +399,10 @@
   .mobile-menu a {
     font-size: 0.9375rem; /* 15px for mobile */
   }
+
+  .mobile-menu-actions {
+    margin-top: 3rem; /* Más espacio arriba en mobile */
+    padding-top: 2.5rem; /* Más padding arriba en mobile */
+  }
 }
 

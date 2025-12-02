@@ -325,7 +325,7 @@ body.has-animated-background .why-binder-section {
     right: 0;
     width: 120px;
     height: 40px;
-    top: 0;
+    top: -40px;
   }
 
   .carousel-content {
