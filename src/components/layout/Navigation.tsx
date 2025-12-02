@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../ui/Button';
-import { ThemeToggle } from '../ui/ThemeToggle';
-import { BackgroundToggle } from '../ui/BackgroundToggle';
+// import { ThemeToggle } from '../ui/ThemeToggle';
+// import { BackgroundToggle } from '../ui/BackgroundToggle';
 import './Navigation.css';
 
 export const Navigation = () => {
