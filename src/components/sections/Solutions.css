@@ -493,6 +493,8 @@ body.has-animated-background .solutions-section {
 
 .accordion-image {
   order: -1;
+  position: relative;
+  overflow: hidden;
 }
 
 .accordion-text {

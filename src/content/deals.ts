@@ -23,9 +23,9 @@ export interface ComparisonRow {
 
 export const dealsContent = {
   hero: {
-    title: "CLM con IA - Centraliza, automatiza y mide el ciclo de vida de tus contratos.",
+    title: "CLM con IA - Centraliza, automatiza y mide el ciclo de vida de tus contratos",
     subtitle: "Una sola plataforma para crear, revisar, firmar y controlar tus contratos con trazabilidad total",
-    ctaText: "Solicita tu Demo",
+    ctaText: "Solicita tu demo",
   },
   stats: {
     title: "La gestión de contratos sigue siendo el mayor punto de fuga del área legal.",

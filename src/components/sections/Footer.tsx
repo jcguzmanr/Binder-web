@@ -1,4 +1,5 @@
 import { footerContent } from '../../content/footer';
+import { homeContent } from '../../content/home';
 import './Footer.css';
 
 export const Footer = () => {
@@ -65,6 +66,8 @@ export const Footer = () => {
         </div>
 
         <div className="footer-bottom">
+          <p className="legal-note">{legalNote}</p>
+          
           <div className="social-links">
             <a 
               href={socialLinks.linkedin} 
@@ -78,9 +81,22 @@ export const Footer = () => {
               </svg>
               LinkedIn
             </a>
+            <a 
+              href={homeContent.badgeLink} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="footer-badge"
+            >
+              <span className="footer-badge-text">{homeContent.badgeText}</span>
+              <span className="footer-badge-icon">
+                <img 
+                  src="/proinnovate.png" 
+                  alt="PRO innovate" 
+                  className="footer-badge-logo"
+                />
+              </span>
+            </a>
           </div>
-
-          <p className="legal-note">{legalNote}</p>
         </div>
       </div>
     </footer>

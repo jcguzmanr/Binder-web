@@ -36,7 +36,7 @@ export const BloqueDestacadoHumano = () => {
                 }
               }}
             >
-              Solicita tu Demo
+              Solicita tu demo
             </button>
           </div>
         </div>

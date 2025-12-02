@@ -44,13 +44,16 @@ body.has-animated-background .deals-contact-section {
 
 .deals-contact-text {
   padding-right: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 }
 
 .deals-contact-title {
   font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
   color: var(--bright-purple);
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: 0;
   line-height: 1.2;
   text-align: left;
 }
@@ -60,7 +63,7 @@ body.has-animated-background .deals-contact-section {
   font-weight: var(--font-weight-medium);
   font-family: var(--font-family);
   color: #30339C;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 0;
   line-height: 1.5;
 }
 
@@ -73,6 +76,7 @@ body.has-animated-background .deals-contact-section {
   font-weight: var(--font-weight-regular);
   color: var(--navy);
   line-height: 1.6;
+  margin-bottom: 0;
 }
 
 [data-theme="dark"] .deals-contact-cta {
@@ -106,7 +110,7 @@ body.has-animated-background .deals-contact-section {
   font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
   color: var(--navy);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 0;
   text-align: center;
 }
 
@@ -256,7 +260,7 @@ body.has-animated-background .deals-contact-section {
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  margin-top: var(--spacing-sm);
+  margin-top: 0;
 }
 
 .deals-submit-button:hover:not(:disabled) {

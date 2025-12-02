@@ -25,7 +25,7 @@ export const Navigation = () => {
           
             // Only detect active section on home page
           if (location.pathname === '/') {
-            const sections = ['home', 'porquebinder', 'soluciones', 'apps', 'testimonios', 'contacto'];
+            const sections = ['home', 'porquebinder', 'soluciones', 'apps', 'contacto'];
             const scrollPosition = window.scrollY + 150; // Offset for fixed nav
             
             let currentSection = '';
@@ -66,7 +66,7 @@ export const Navigation = () => {
     { label: '¿Por qué Binder?', href: '#porquebinder', sectionId: 'porquebinder' },
     { label: 'Funcionalidades', href: '#soluciones', sectionId: 'soluciones' },
     { label: 'Soluciones', href: '#apps', sectionId: 'apps' },
-    { label: 'Testimonios', href: '#testimonios', sectionId: 'testimonios' },
+    // { label: 'Testimonios', href: '#testimonios', sectionId: 'testimonios' },
     { label: 'Contacto', href: '#contacto', sectionId: 'contacto' },
   ];
 
@@ -146,8 +146,8 @@ export const Navigation = () => {
           {/* Right side: Actions */}
           <div className="nav-content-right">
             <div className="nav-actions">
-              <ThemeToggle />
-              <BackgroundToggle />
+              {/* <ThemeToggle /> */}
+              {/* <BackgroundToggle /> */}
               <a 
                 href="#contacto"
                 onClick={(e) => {
@@ -164,7 +164,7 @@ export const Navigation = () => {
                 }}
               >
                 <Button variant="primary">
-                  Agendar Demo
+                  Agendar demo
                 </Button>
               </a>
               <Button variant="secondary">Ingresar</Button>
@@ -188,8 +188,8 @@ export const Navigation = () => {
               </a>
             ))}
             <div className="mobile-menu-actions">
-              <ThemeToggle />
-              <BackgroundToggle />
+              {/* <ThemeToggle /> */}
+              {/* <BackgroundToggle /> */}
               <a 
                 href="#contacto"
                 onClick={(e) => {
@@ -207,7 +207,7 @@ export const Navigation = () => {
                 }}
               >
                 <Button variant="primary">
-                  Agendar Demo
+                  Agendar demo
                 </Button>
               </a>
               <Button variant="secondary">Ingresar</Button>

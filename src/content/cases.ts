@@ -22,9 +22,9 @@ export interface ComparisonRow {
 
 export const casesContent = {
   hero: {
-    title: "Gestión de Procesos Legales – Digitaliza y controla tus procesos judiciales y administrativos.",
-    subtitle: "Centraliza expedientes, oficios y presentaciones en un solo entorno digital con trazabilidad, alertas y cumplimiento garantizado de gestionar tus casos.",
-    ctaText: "Agenda tu Demo",
+    title: "Gestión de Procesos Legales - Digitaliza y controla tus procesos judiciales y administrativos",
+    subtitle: "Centraliza expedientes, oficios y presentaciones en un solo entorno digital con trazabilidad, alertas y cumplimiento garantizado.",
+    ctaText: "Agenda tu demo",
   },
   stats: {
     title: "¿Cuántas veces tu equipo perdió un documento justo cuando más lo necesitaba?",

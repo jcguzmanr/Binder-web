@@ -66,6 +66,7 @@ body.has-animated-background .cases-hero-section {
   line-height: 1.2;
   letter-spacing: -0.01em;
   text-align: left;
+  white-space: pre-line;
 }
 
 .cases-hero-subtitle {

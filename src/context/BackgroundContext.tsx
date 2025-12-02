@@ -11,15 +11,21 @@ const BackgroundContext = createContext<BackgroundContextType | undefined>(undef
 
 export const BackgroundProvider = ({ children }: { children: ReactNode }) => {
   const [background, setBackground] = useState<BackgroundType>(() => {
+    // Always default to 'antigravity'
     const stored = localStorage.getItem('binder-background');
     const validBackgrounds: BackgroundType[] = ['none', 'gentle-waves', 'canyon-flows', 'flow-pattern', 'antigravity'];
-    if (stored && validBackgrounds.includes(stored as BackgroundType)) {
-      return stored as BackgroundType;
+    
+    // If no stored value or stored value is 'none', default to 'antigravity'
+    if (!stored || stored === 'none' || !validBackgrounds.includes(stored as BackgroundType)) {
+      return 'antigravity';
     }
-    return 'none';
+    
+    // Use stored value if it's valid and not 'none'
+    return stored as BackgroundType;
   });
 
   useEffect(() => {
+    // Save current background to localStorage
     localStorage.setItem('binder-background', background);
     
     // Add/remove class to body based on background

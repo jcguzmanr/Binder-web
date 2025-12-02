@@ -20,7 +20,7 @@ export const appsContent = {
       description: "Digitaliza expedientes completos y mantén control total de todos tus flujos legales. Seguimiento en tiempo real y acceso instantáneo.",
       color: "var(--navy)",
       imagePlaceholder: "Icono de Cases",
-      link: "#cases",
+      link: "/casos-uso/gestion-procesos",
       status: 'available',
     },
     {
@@ -30,7 +30,7 @@ export const appsContent = {
       description: "Optimiza la gestión contractual de principio a fin. Automatiza tareas repetitivas y reduce tiempos de revisión con inteligencia artificial.",
       color: "var(--bright-purple)",
       imagePlaceholder: "Icono de Deals",
-      link: "#deals",
+      link: "/casos-uso/clm",
       status: 'available',
     },
     {
@@ -40,7 +40,7 @@ export const appsContent = {
       description: "Centraliza todas las solicitudes y tareas operativas del equipo. Intake único con trazabilidad completa desde el inicio.",
       color: "var(--light-blue)",
       imagePlaceholder: "Icono de Archive",
-      link: "#archive",
+      link: "/casos-uso/archive",
       status: 'available',
     },
     // Comentadas temporalmente - se mostrarán más adelante

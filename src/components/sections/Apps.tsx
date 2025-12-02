@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { appsContent } from '../../content/apps';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './Apps.css';
@@ -68,9 +69,9 @@ export const Apps = () => {
                 </div>
               </div>
 
-              <a href={app.link} className="app-link">
+              <Link to={app.link} className="app-link">
                 Ver más
-              </a>
+              </Link>
             </div>
           ))}
         </div>

@@ -4,7 +4,7 @@ export const homeContent = {
   topText: "El workspace legal todo en uno",
   title: "Gestiona, automatiza y analiza todo tu mundo legal",
   subtitle: "La plataforma legal que conecta contratos, expedientes y procesos con trazabilidad total.",
-  ctaText: "Agendar Demo",
+  ctaText: "Agendar demo",
   ctaLink: "#contacto",
   // Placeholder for main image
   imagePlaceholder: "Captura de interfaz del panel de Binder",

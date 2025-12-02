@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './context/ThemeContext';
 import { BackgroundProvider } from './context/BackgroundContext';
 import { CookieProvider } from './context/CookieContext';
 import { Navigation } from './components/layout/Navigation';
 import { ScrollToTop } from './components/layout/ScrollToTop';
 import { GoogleAnalytics } from './components/layout/GoogleAnalytics';
+import { GlobalHead } from './components/layout/GlobalHead';
 import { BackgroundRenderer } from './components/ui/BackgroundRenderer';
 import { CookieBanner } from './components/ui/CookieBanner';
 import { CookieSettings } from './components/ui/CookieSettings';
@@ -12,7 +14,7 @@ import { Home } from './components/sections/Home';
 import { WhyBinder } from './components/sections/WhyBinder';
 import { Solutions } from './components/sections/Solutions';
 import { Apps } from './components/sections/Apps';
-import { Testimonials } from './components/sections/Testimonials';
+// import { Testimonials } from './components/sections/Testimonials';
 import { Contact } from './components/sections/Contact';
 import { Footer } from './components/sections/Footer';
 import { GentleWavesPage } from './components/sections/GentleWaves';
@@ -40,11 +42,13 @@ import './styles/globals.css';
 
 function App() {
   return (
-    <ThemeProvider>
-      <BackgroundProvider>
-        <CookieProvider>
-          <Router>
+    <HelmetProvider>
+      <ThemeProvider>
+        <BackgroundProvider>
+          <CookieProvider>
+            <Router>
             <div className="app">
+              <GlobalHead />
               <ScrollToTop />
               <GoogleAnalytics />
               <BackgroundRenderer />
@@ -148,7 +152,7 @@ function App() {
                     <WhyBinder />
                     <Solutions />
                     <Apps />
-                    <Testimonials />
+                    {/* <Testimonials /> */}
                     <Contact />
                   </main>
                 }
@@ -160,6 +164,7 @@ function App() {
         </CookieProvider>
       </BackgroundProvider>
     </ThemeProvider>
+    </HelmetProvider>
   );
 }
 
