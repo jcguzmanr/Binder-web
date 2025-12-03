@@ -85,23 +85,9 @@
   display: none; /* Hidden by default, shown on desktop */
 }
 
-.footer-badge-bottom {
-  display: none; /* Hidden by default, shown only on mobile */
-}
-
 @media (min-width: 969px) {
   .footer-badge-column {
     display: inline-flex;
-  }
-  
-  .footer-badge-bottom {
-    display: none; /* Always hidden on desktop */
-  }
-}
-
-@media (max-width: 968px) {
-  .footer-badge-bottom {
-    display: inline-flex; /* Shown only on mobile */
   }
 }
 

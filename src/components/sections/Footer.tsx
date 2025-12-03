@@ -95,16 +95,6 @@ export const Footer = () => {
               </svg>
               LinkedIn
             </a>
-            <div className="footer-badge footer-badge-bottom">
-              <span className="footer-badge-text">{homeContent.badgeText}</span>
-              <span className="footer-badge-icon">
-                <img 
-                  src="/proinnovate.png" 
-                  alt="PRO innovate" 
-                  className="footer-badge-logo"
-                />
-              </span>
-            </div>
           </div>
         </div>
       </div>
