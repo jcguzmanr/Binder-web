@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { homeContent } from '../../content/home';
 import { Button } from '../ui/Button';
 import { useTypewriter } from '../../hooks/useTypewriter';
@@ -16,6 +17,30 @@ export const Home = () => {
     typingSpeed: 30 // milliseconds between characters
   });
 
+  const [showVideo, setShowVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleCanPlayThrough = () => {
+      // Small delay to ensure smooth transition
+      setTimeout(() => {
+        setShowVideo(true);
+      }, 100);
+    };
+
+    video.addEventListener('canplaythrough', handleCanPlayThrough);
+    
+    // Start loading the video
+    video.load();
+
+    return () => {
+      video.removeEventListener('canplaythrough', handleCanPlayThrough);
+    };
+  }, []);
+
   return (
     <section id="home" className="home-section">
       <div className="container">
@@ -30,11 +55,26 @@ export const Home = () => {
           <p className="home-subtitle">{displayedText}</p>
           
           <div className="home-image-container">
+            {/* Placeholder image - shown initially, fades out when video is ready */}
             <img 
-              src="/Plataforma.png" 
+              src="/images/home/hero-binder-home-img.png" 
               alt="Captura de interfaz del panel de Binder" 
-              className="home-image"
+              className={`home-image ${showVideo ? 'fade-out' : ''}`}
             />
+            
+            {/* Video - loads in background, shown when ready */}
+            <video
+              ref={videoRef}
+              className={`home-video ${showVideo ? 'fade-in' : 'hidden'}`}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+            >
+              <source src="/images/home/hero-binder-home-vid.mp4" type="video/mp4" />
+            </video>
+            
             <div className="home-cta-floating">
               <Button variant="primary" onClick={() => {
                 document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
