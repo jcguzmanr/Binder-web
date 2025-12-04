@@ -172,7 +172,7 @@ export const Navigation = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="secondary">Ingresar</Button>
+                <Button variant="secondary">Iniciar sesión</Button>
               </a>
             </div>
           </div>
@@ -221,7 +221,7 @@ export const Navigation = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="secondary">Ingresar</Button>
+                <Button variant="secondary">Iniciar sesión</Button>
               </a>
             </div>
           </div>
