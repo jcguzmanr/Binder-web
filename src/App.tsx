@@ -35,7 +35,6 @@ import { SeguridadPage } from './pages/legal/SeguridadPage';
 import { ReclamacionesPage } from './pages/legal/ReclamacionesPage';
 import { CLMPage } from './pages/casos-uso/CLMPage';
 import { ExpedienteDigitalPage } from './pages/casos-uso/ExpedienteDigitalPage';
-import { ArchivePage } from './pages/casos-uso/ArchivePage';
 import { CasesPage } from './pages/casos-uso/CasesPage';
 import { TestAnimationPage } from './pages/TestAnimationPage';
 import './styles/globals.css';
@@ -131,10 +130,6 @@ function App() {
               <Route
                 path="/casos-uso/expediente-digital"
                 element={<ExpedienteDigitalPage />}
-              />
-              <Route
-                path="/casos-uso/archive"
-                element={<ArchivePage />}
               />
               <Route
                 path="/cases"

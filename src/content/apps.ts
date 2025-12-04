@@ -40,7 +40,7 @@ export const appsContent = {
       description: "Centraliza todas las solicitudes y tareas operativas del equipo. Intake único con trazabilidad completa desde el inicio.",
       color: "var(--light-blue)",
       imagePlaceholder: "Icono de Archive",
-      link: "/casos-uso/archive",
+      link: "/casos-uso/expediente-digital",
       status: 'available',
     },
     // Comentadas temporalmente - se mostrarán más adelante
