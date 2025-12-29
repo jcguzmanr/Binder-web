@@ -735,3 +735,9 @@ Para preguntas sobre esta implementación, contactar al equipo de desarrollo.
 
 **Nota:** Este brief asume que el frontend ya está implementado y solo necesita la URL del webhook para funcionar. El frontend manejará la redirección a la página de agradecimiento automáticamente después de recibir una respuesta exitosa (200) del API Gateway.
 
+
+
+
+
+
+

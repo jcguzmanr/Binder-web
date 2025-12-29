@@ -49,6 +49,18 @@ export const CasesTabs = () => {
     return imageMap[tabId] || '';
   };
 
+  // Map tab ID to demo image filename (from Solutions-finalimages folder)
+  const getDemoImagePath = (tabId: string): string => {
+    const demoImageMap: Record<string, string> = {
+      'centralizacion-total': '/images/Solutions-finalimages/HP-centralizacion-1.png',
+      'redaccion-inteligente': '/images/Solutions-finalimages/HP-automatizacion-1.png',
+      'firma-electronica': '/images/Solutions-finalimages/HP-firmaelectronica-1.png',
+      'dashboards-analitica': '/images/Solutions-finalimages/HP-analitica-1.png',
+      'trazabilidad-auditoria': '/images/Solutions-finalimages/HP-trazabilidad-1.png',
+    };
+    return demoImageMap[tabId] || '';
+  };
+
   const formatSubtitle = (text: string) => {
     // Format "expediente digital y mesa de partes online" in bold
     if (text.includes('expediente digital y mesa de partes online')) {
@@ -133,6 +145,14 @@ export const CasesTabs = () => {
                       alt={tab.imagePlaceholder}
                       className="cases-tab-image-content"
                     />
+                    {/* Demo image with animation for all tabs */}
+                    {getDemoImagePath(tab.id) && (
+                      <img 
+                        src={getDemoImagePath(tab.id)} 
+                        alt="Demo de la aplicación"
+                        className="cases-tab-image-content cases-tab-demo-image"
+                      />
+                    )}
                   </div>
 
                   <div className="cases-tab-text">
@@ -179,6 +199,14 @@ export const CasesTabs = () => {
                           alt={tab.imagePlaceholder}
                           className="cases-tab-image-content"
                         />
+                        {/* Demo image with animation for all tabs (mobile) */}
+                        {getDemoImagePath(tab.id) && (
+                          <img 
+                            src={getDemoImagePath(tab.id)} 
+                            alt="Demo de la aplicación"
+                            className="cases-tab-image-content cases-tab-demo-image"
+                          />
+                        )}
                       </div>
 
                       <div className="cases-accordion-text">

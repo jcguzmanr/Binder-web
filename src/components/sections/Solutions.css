@@ -181,14 +181,16 @@ body.has-animated-background .solutions-section {
   z-index: 1;
 }
 
-/* Demo image animation - appears on top, bottom right corner, 1/4 of container */
+/* Demo image animation - appears on top, bottom right corner */
 .tab-demo-image {
   position: absolute;
   bottom: var(--spacing-md);
   right: var(--spacing-md);
-  width: 50%;
-  height: 50%;
-  object-fit: cover;
+  max-width: 50%;
+  max-height: 50%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   opacity: 0;

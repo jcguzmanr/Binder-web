@@ -177,6 +177,7 @@ body.has-animated-background .deals-tabs-section {
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
 }
 
 .deals-tab-image-content {
@@ -186,6 +187,42 @@ body.has-animated-background .deals-tabs-section {
   object-fit: cover;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 1;
+}
+
+/* Demo image animation - appears on top, bottom right corner */
+.deals-tab-demo-image {
+  position: absolute;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
+  max-width: 50%;
+  max-height: 50%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: scale(0.9) translateY(20px);
+  animation: fadeInScaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+  z-index: 10;
+}
+
+.deals-tab-content:not(.active) .deals-tab-demo-image {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes fadeInScaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .deals-image-placeholder {
@@ -370,6 +407,8 @@ body.has-animated-background .deals-tabs-section {
 
 .deals-accordion-image {
   order: -1;
+  position: relative;
+  overflow: hidden;
 }
 
 .deals-accordion-text {

@@ -109,6 +109,18 @@ export const Solutions = () => {
     return imageMap[tabId] || '';
   };
 
+  // Map tab ID to demo image filename (from Solutions-finalimages folder)
+  const getDemoImagePath = (tabId: string): string => {
+    const demoImageMap: Record<string, string> = {
+      'centralizacion': '/images/Solutions-finalimages/HP-centralizacion-1.png',
+      'automatizacion': '/images/Solutions-finalimages/HP-automatizacion-1.png',
+      'gestion': '/images/Solutions-finalimages/HP-gestion-1.png',
+      'analitica': '/images/Solutions-finalimages/HP-analitica-1.png',
+      'firma': '/images/Solutions-finalimages/HP-firmaelectronica-1.png',
+    };
+    return demoImageMap[tabId] || '';
+  };
+
   return (
     <section 
       id="soluciones" 
@@ -150,10 +162,10 @@ export const Solutions = () => {
                       alt={tab.imagePlaceholder}
                       className="tab-image-content"
                     />
-                    {/* Demo image with animation for Centralización */}
-                    {tab.id === 'centralizacion' && (
+                    {/* Demo image with animation for all tabs */}
+                    {getDemoImagePath(tab.id) && (
                       <img 
-                        src="/images/Solutions/HP-demoimage.png" 
+                        src={getDemoImagePath(tab.id)} 
                         alt="Demo de la aplicación"
                         className="tab-image-content tab-demo-image"
                       />
@@ -213,10 +225,10 @@ export const Solutions = () => {
                           alt={tab.imagePlaceholder}
                           className="tab-image-content"
                         />
-                        {/* Demo image with animation for Centralización (mobile) */}
-                        {tab.id === 'centralizacion' && (
+                        {/* Demo image with animation for all tabs (mobile) */}
+                        {getDemoImagePath(tab.id) && (
                           <img 
-                            src="/images/Solutions/HP-demoimage.png" 
+                            src={getDemoImagePath(tab.id)} 
                             alt="Demo de la aplicación"
                             className="tab-image-content tab-demo-image"
                           />
