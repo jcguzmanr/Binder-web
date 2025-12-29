@@ -11,7 +11,7 @@ export const PageHead = ({
   title, 
   description, 
   canonicalUrl,
-  ogImage = '/metatag-binder.jpeg'
+  ogImage = '/metatag.jpeg'
 }: PageHeadProps) => {
   const siteUrl = 'https://binderla.com';
   const fullUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
@@ -39,3 +39,6 @@ export const PageHead = ({
     </Helmet>
   );
 };
+
+
+
