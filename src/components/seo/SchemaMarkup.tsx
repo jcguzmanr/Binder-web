@@ -16,7 +16,7 @@ interface SchemaMarkupProps {
 }
 
 export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
-  const siteUrl = 'https://binderla.com';
+  const siteUrl = 'https://binder.la';
 
   const getSchema = () => {
     switch (type) {

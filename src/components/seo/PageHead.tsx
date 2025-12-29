@@ -13,7 +13,7 @@ export const PageHead = ({
   canonicalUrl,
   ogImage = '/metatag.jpeg'
 }: PageHeadProps) => {
-  const siteUrl = 'https://binderla.com';
+  const siteUrl = 'https://binder.la';
   const fullUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
   const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
@@ -29,6 +29,11 @@ export const PageHead = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImageUrl} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={title} />
+      <meta property="og:site_name" content="Binder" />
+      <meta property="og:locale" content="es_ES" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -36,6 +41,7 @@ export const PageHead = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImageUrl} />
+      <meta name="twitter:image:alt" content={title} />
     </Helmet>
   );
 };
