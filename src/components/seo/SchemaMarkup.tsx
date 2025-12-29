@@ -1,8 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 
 interface BreadcrumbItem {
-  name: string;
-  url: string;
+  name?: string;
+  url?: string;
+  label?: string;
+  path?: string;
 }
 
 interface SchemaMarkupProps {
@@ -36,12 +38,19 @@ export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
         return {
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
-          itemListElement: data.breadcrumbs.map((crumb, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            name: crumb.name,
-            item: crumb.url.startsWith('http') ? crumb.url : `${siteUrl}${crumb.url}`
-          }))
+          itemListElement: data.breadcrumbs.map((crumb, index) => {
+            // Support both formats: { name, url } and { label, path }
+            const name = crumb.name || crumb.label || '';
+            const url = crumb.url || crumb.path || '';
+            const fullUrl = url.startsWith('http') ? url : `${siteUrl}${url}`;
+            
+            return {
+              '@type': 'ListItem',
+              position: index + 1,
+              name: name,
+              item: fullUrl
+            };
+          })
         };
 
       case 'faqPage':
@@ -75,3 +84,5 @@ export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
     </Helmet>
   );
 };
+
+
