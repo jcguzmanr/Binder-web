@@ -1,8 +1,22 @@
 import { InternalPage } from '../components/layout/InternalPage';
+import { PageHead } from '../components/seo/PageHead';
+import { SchemaMarkup } from '../components/seo/SchemaMarkup';
 
 export const SolucionesPage = () => {
+  const breadcrumbs = [
+    { label: 'Inicio', path: '/' },
+    { label: 'Soluciones', path: '/soluciones' }
+  ];
+
   return (
-    <InternalPage title="Soluciones">
+    <>
+      <PageHead
+        title="Soluciones - Plataforma Legal Binder | CLM, Gestión de Procesos, Expediente Digital"
+        description="Binder ofrece soluciones especializadas: CLM con IA, gestión de procesos legales, expediente digital y mesa de partes para áreas legales corporativas."
+        canonicalUrl="/soluciones"
+      />
+      <SchemaMarkup type="breadcrumbList" data={{ breadcrumbs }} />
+      <InternalPage title="Soluciones" breadcrumbs={breadcrumbs}>
       <p>
         Binder ofrece soluciones especializadas para diferentes necesidades del sector legal, 
         adaptándose a las particularidades de cada organización.
@@ -27,7 +41,8 @@ export const SolucionesPage = () => {
         Nuestras soluciones se adaptan a las necesidades específicas de su organización, 
         creciendo junto con su negocio y evolucionando según sus requerimientos.
       </p>
-    </InternalPage>
+      </InternalPage>
+    </>
   );
 };
 

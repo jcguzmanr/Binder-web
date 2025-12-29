@@ -181,7 +181,7 @@ export const CasesContact = () => {
 
           <div className="cases-contact-form-container">
             <div className="cases-contact-decoration">
-              <img src="/Clerk-2.png" alt="Clerk" className="cases-clerk-decoration-image" />
+              <img src="/Clerk-2.png" alt="" className="cases-clerk-decoration-image" role="presentation" />
             </div>
             <form onSubmit={handleSubmit} className="cases-contact-form">
               <h3 className="cases-form-title">{contactoContent.form.title}</h3>

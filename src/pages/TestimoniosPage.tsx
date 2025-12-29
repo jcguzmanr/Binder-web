@@ -1,8 +1,22 @@
 import { InternalPage } from '../components/layout/InternalPage';
+import { PageHead } from '../components/seo/PageHead';
+import { SchemaMarkup } from '../components/seo/SchemaMarkup';
 
 export const TestimoniosPage = () => {
+  const breadcrumbs = [
+    { label: 'Inicio', path: '/' },
+    { label: 'Testimonios', path: '/testimonios' }
+  ];
+
   return (
-    <InternalPage title="Testimonios">
+    <>
+      <PageHead
+        title="Testimonios - Clientes Binder | Casos de Éxito"
+        description="Descubre cómo Binder ha transformado la gestión legal de empresas como Laive, Grupo EFE y Rodman & Asociados. Testimonios reales de clientes."
+        canonicalUrl="/testimonios"
+      />
+      <SchemaMarkup type="breadcrumbList" data={{ breadcrumbs }} />
+      <InternalPage title="Testimonios" breadcrumbs={breadcrumbs}>
       <p>
         Descubra cómo nuestras soluciones han transformado la gestión legal de diversas 
         organizaciones en diferentes sectores.
@@ -34,7 +48,8 @@ export const TestimoniosPage = () => {
         <li>Mejora del 95% en organización de documentos</li>
         <li>Satisfacción del cliente superior al 90%</li>
       </ul>
-    </InternalPage>
+      </InternalPage>
+    </>
   );
 };
 

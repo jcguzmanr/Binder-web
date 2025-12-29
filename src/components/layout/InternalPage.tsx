@@ -1,14 +1,16 @@
 import { ReactNode, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { Breadcrumbs } from './Breadcrumbs';
 import './InternalPage.css';
 
 interface InternalPageProps {
   title: string;
   children: ReactNode;
+  breadcrumbs?: Array<{ label: string; path: string }>;
 }
 
-export const InternalPage = ({ title, children }: InternalPageProps) => {
+export const InternalPage = ({ title, children, breadcrumbs }: InternalPageProps) => {
   const location = useLocation();
   const { elementRef, isVisible } = useScrollAnimation({
     threshold: 0.1,
@@ -21,9 +23,12 @@ export const InternalPage = ({ title, children }: InternalPageProps) => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [location.pathname]);
 
+  const defaultBreadcrumbs = breadcrumbs || [{ label: 'Inicio', path: '/' }, { label: title, path: location.pathname }];
+
   return (
     <main className="internal-page">
       <div className="internal-page-container">
+        {breadcrumbs && <Breadcrumbs items={defaultBreadcrumbs} />}
         <div 
           ref={elementRef as React.RefObject<HTMLDivElement>}
           className={`frosted-glass scroll-animate ${isVisible ? 'visible' : ''}`}

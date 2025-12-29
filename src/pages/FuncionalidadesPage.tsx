@@ -1,8 +1,22 @@
 import { InternalPage } from '../components/layout/InternalPage';
+import { PageHead } from '../components/seo/PageHead';
+import { SchemaMarkup } from '../components/seo/SchemaMarkup';
 
 export const FuncionalidadesPage = () => {
+  const breadcrumbs = [
+    { label: 'Inicio', path: '/' },
+    { label: 'Funcionalidades', path: '/funcionalidades' }
+  ];
+
   return (
-    <InternalPage title="Funcionalidades">
+    <>
+      <PageHead
+        title="Funcionalidades - Plataforma Legal Binder"
+        description="Funcionalidades de Binder: gestión de contratos con IA, gestión de casos, mesa de partes digital y cumplimiento normativo para equipos legales."
+        canonicalUrl="/funcionalidades"
+      />
+      <SchemaMarkup type="breadcrumbList" data={{ breadcrumbs }} />
+      <InternalPage title="Funcionalidades" breadcrumbs={breadcrumbs}>
       <p>
         Nuestra plataforma ofrece una amplia gama de funcionalidades diseñadas para 
         optimizar la gestión legal y mejorar la productividad de su equipo.
@@ -27,7 +41,8 @@ export const FuncionalidadesPage = () => {
         Manténgase al día con las regulaciones y requisitos de cumplimiento. Nuestro 
         sistema le ayuda a gestionar y documentar todos los aspectos de cumplimiento legal.
       </p>
-    </InternalPage>
+      </InternalPage>
+    </>
   );
 };
 

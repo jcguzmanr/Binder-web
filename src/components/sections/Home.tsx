@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { homeContent } from '../../content/home';
 import { Button } from '../ui/Button';
 import { useTypewriter } from '../../hooks/useTypewriter';
+import { PageHead } from '../seo/PageHead';
 import './Home.css';
 
 const subtitles = [
@@ -42,7 +43,13 @@ export const Home = () => {
   }, []);
 
   return (
-    <section id="home" className="home-section">
+    <>
+      <PageHead
+        title="Binder - Plataforma Legal con IA | CLM y Legal Ops"
+        description="Binder centraliza, automatiza y analiza la gestión legal con IA. CLM, gestión de procesos y expediente digital para áreas legales corporativas."
+        canonicalUrl="/"
+      />
+      <section id="home" className="home-section">
       <div className="container">
         <div className="home-content">
           <p className="home-top-text">{homeContent.topText}</p>
@@ -58,7 +65,7 @@ export const Home = () => {
             {/* Placeholder image - shown initially, fades out when video is ready */}
             <img 
               src="/images/home/hero-binder-home-img.png" 
-              alt="Captura de interfaz del panel de Binder" 
+              alt="Dashboard principal de Binder mostrando la plataforma legal con IA para gestión de contratos, procesos y expedientes digitales" 
               className={`home-image ${showVideo ? 'fade-out' : ''}`}
             />
             
@@ -86,6 +93,7 @@ export const Home = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

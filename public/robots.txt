@@ -1,0 +1,17 @@
+# Robots.txt para Binder Web
+# Permite el crawling de contenido principal y bloquea páginas de test
+
+User-agent: *
+Allow: /
+
+# Bloquear páginas de test y desarrollo
+Disallow: /test/
+Disallow: /gentle-waves
+Disallow: /canyon-flows
+Disallow: /flow-pattern
+
+# Bloquear página de agradecimiento (no necesita indexación)
+Disallow: /gracias
+
+# Sitemap
+Sitemap: https://binderla.com/sitemap.xml

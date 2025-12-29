@@ -159,7 +159,12 @@ export const Solutions = () => {
                   <div className="tab-image">
                     <img 
                       src={getImagePath(tab.id)} 
-                      alt={tab.imagePlaceholder}
+                      alt={tab.id === 'centralizacion' ? 'Captura de pantalla de Binder mostrando centralización de documentos y procesos legales' : 
+                           tab.id === 'automatizacion' ? 'Interfaz de Binder demostrando automatización de flujos legales con IA' :
+                           tab.id === 'gestion' ? 'Dashboard de Binder para gestión de procesos legales con trazabilidad' :
+                           tab.id === 'analitica' ? 'Panel de analítica y métricas legales de Binder con dashboards' :
+                           tab.id === 'firma' ? 'Interfaz de firma electrónica integrada en Binder' :
+                           tab.imagePlaceholder}
                       className="tab-image-content"
                     />
                     {/* Demo image with animation for all tabs */}
@@ -173,7 +178,7 @@ export const Solutions = () => {
                     {/* Mascot for image position (Gestión) */}
                     {tab.id === 'gestion' && (
                       <div className={`binder-character-image position-${mascotPosition}`}>
-                        <img src="/Clerk.png" alt="Clerk" className="clerk-image" />
+                        <img src="/Clerk.png" alt="" className="clerk-image" role="presentation" />
                       </div>
                     )}
                   </div>
@@ -192,7 +197,7 @@ export const Solutions = () => {
                     {/* Binder character placeholder - hidden for Gestión */}
                     {tab.id !== 'gestion' && (
                       <div className={`binder-character position-${mascotPosition}`}>
-                        <img src="/Clerk.png" alt="Clerk" className="clerk-image" />
+                        <img src="/Clerk.png" alt="" className="clerk-image" role="presentation" />
                       </div>
                     )}
                   </div>
@@ -222,14 +227,19 @@ export const Solutions = () => {
                       <div className="accordion-image">
                         <img 
                           src={getImagePath(tab.id)} 
-                          alt={tab.imagePlaceholder}
+                          alt={tab.id === 'centralizacion' ? 'Captura de pantalla de Binder mostrando centralización de documentos y procesos legales' : 
+                               tab.id === 'automatizacion' ? 'Interfaz de Binder demostrando automatización de flujos legales con IA' :
+                               tab.id === 'gestion' ? 'Dashboard de Binder para gestión de procesos legales con trazabilidad' :
+                               tab.id === 'analitica' ? 'Panel de analítica y métricas legales de Binder con dashboards' :
+                               tab.id === 'firma' ? 'Interfaz de firma electrónica integrada en Binder' :
+                               tab.imagePlaceholder}
                           className="tab-image-content"
                         />
                         {/* Demo image with animation for all tabs (mobile) */}
                         {getDemoImagePath(tab.id) && (
                           <img 
                             src={getDemoImagePath(tab.id)} 
-                            alt="Demo de la aplicación"
+                            alt={`Demo interactivo de ${tab.title} en la plataforma Binder`}
                             className="tab-image-content tab-demo-image"
                           />
                         )}
@@ -248,7 +258,7 @@ export const Solutions = () => {
 
                         {/* Binder character placeholder */}
                         <div className="binder-character">
-                          <img src="/Clerk.png" alt="Clerk" className="clerk-image" />
+                          <img src="/Clerk.png" alt="" className="clerk-image" role="presentation" />
                         </div>
                       </div>
                     </div>

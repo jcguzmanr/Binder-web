@@ -181,7 +181,7 @@ export const ExpedienteContact = () => {
 
           <div className="expediente-contact-form-container">
             <div className="expediente-contact-decoration">
-              <img src="/Clerk-2.png" alt="Clerk" className="expediente-clerk-decoration-image" />
+              <img src="/Clerk-2.png" alt="" className="expediente-clerk-decoration-image" role="presentation" />
             </div>
             <form onSubmit={handleSubmit} className="expediente-contact-form">
               <h3 className="expediente-form-title">{contactoContent.form.title}</h3>

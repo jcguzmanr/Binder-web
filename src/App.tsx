@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './context/ThemeContext';
 import { BackgroundProvider } from './context/BackgroundContext';
@@ -133,7 +133,7 @@ function App() {
               />
               <Route
                 path="/cases"
-                element={<CasesPage />}
+                element={<Navigate to="/casos-uso/gestion-procesos" replace />}
               />
               <Route
                 path="/test/antigravity"

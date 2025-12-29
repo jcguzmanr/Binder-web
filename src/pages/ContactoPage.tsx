@@ -1,8 +1,22 @@
 import { InternalPage } from '../components/layout/InternalPage';
+import { PageHead } from '../components/seo/PageHead';
+import { SchemaMarkup } from '../components/seo/SchemaMarkup';
 
 export const ContactoPage = () => {
+  const breadcrumbs = [
+    { label: 'Inicio', path: '/' },
+    { label: 'Contacto', path: '/contacto' }
+  ];
+
   return (
-    <InternalPage title="Contacto">
+    <>
+      <PageHead
+        title="Contacto - Solicita tu Demo | Binder"
+        description="Contacta con Binder para obtener más información sobre nuestra plataforma legal con IA o agendar una demostración personalizada."
+        canonicalUrl="/contacto"
+      />
+      <SchemaMarkup type="breadcrumbList" data={{ breadcrumbs }} />
+      <InternalPage title="Contacto" breadcrumbs={breadcrumbs}>
       <p>
         Estamos aquí para ayudarle. Contáctenos para obtener más información sobre nuestras 
         soluciones o para agendar una demostración personalizada.
@@ -28,7 +42,8 @@ export const ContactoPage = () => {
         Visítenos en nuestras oficinas para conocer más sobre nuestras soluciones y 
         discutir cómo podemos ayudarle.
       </p>
-    </InternalPage>
+      </InternalPage>
+    </>
   );
 };
 

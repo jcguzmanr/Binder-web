@@ -181,7 +181,7 @@ export const Contact = () => {
 
           <div className="contact-form-container">
             <div className="contact-decoration">
-              <img src="/Clerk-2.png" alt="Clerk" className="clerk-decoration-image" />
+              <img src="/Clerk-2.png" alt="" className="clerk-decoration-image" role="presentation" />
             </div>
             <form onSubmit={handleSubmit} className="contact-form">
               <h3 className="form-title">{contactoContent.form.title}</h3>
