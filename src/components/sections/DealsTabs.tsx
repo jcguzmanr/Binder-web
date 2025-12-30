@@ -96,6 +96,7 @@ export const DealsTabs = () => {
               <div
                 key={tab.id}
                 className={`deals-tab-content ${index === activeTab ? 'active' : ''}`}
+                data-tab-id={tab.id}
               >
                 <div className="deals-tab-grid">
                   <div className="deals-tab-image">

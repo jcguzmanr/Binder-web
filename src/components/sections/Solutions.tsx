@@ -154,6 +154,7 @@ export const Solutions = () => {
               <div
                 key={tab.id}
                 className={`tab-content ${index === activeTab ? 'active' : ''}`}
+                data-tab-id={tab.id}
               >
                 <div className="tab-grid">
                   <div className="tab-image">

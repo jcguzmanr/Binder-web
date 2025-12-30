@@ -181,7 +181,7 @@ body.has-animated-background .solutions-section {
   z-index: 1;
 }
 
-/* Demo image animation - appears on top, bottom right corner */
+/* Demo image animation - appears on top, bottom right corner by default */
 .tab-demo-image {
   position: absolute;
   bottom: var(--spacing-md);
@@ -197,6 +197,44 @@ body.has-animated-background .solutions-section {
   transform: scale(0.9) translateY(20px);
   animation: fadeInScaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
   z-index: 10;
+}
+
+/* Centralización: Demo image in top-left corner */
+.tab-content[data-tab-id="centralizacion"] .tab-demo-image {
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  bottom: auto;
+  right: auto;
+  animation: fadeInScaleUpTopLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+}
+
+/* Gestión: Demo image in top-left corner */
+.tab-content[data-tab-id="gestion"] .tab-demo-image {
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  bottom: auto;
+  right: auto;
+  animation: fadeInScaleUpTopLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+}
+
+/* Firma Electrónica: Demo image in top-left corner */
+.tab-content[data-tab-id="firma"] .tab-demo-image {
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  bottom: auto;
+  right: auto;
+  animation: fadeInScaleUpTopLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+}
+
+@keyframes fadeInScaleUpTopLeft {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .tab-content:not(.active) .tab-demo-image {

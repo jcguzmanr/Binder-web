@@ -137,6 +137,7 @@ export const CasesTabs = () => {
               <div
                 key={tab.id}
                 className={`cases-tab-content ${index === activeTab ? 'active' : ''}`}
+                data-tab-id={tab.id}
               >
                 <div className="cases-tab-grid">
                   <div className="cases-tab-image">
