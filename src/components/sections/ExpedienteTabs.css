@@ -232,6 +232,15 @@ body.has-animated-background .expediente-tabs-section {
   animation: fadeInScaleUpTopLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
 }
 
+/* Predictibilidad: Demo image in top-right corner */
+.expediente-tab-content[data-tab-id="predictibilidad"] .expediente-tab-demo-image {
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  bottom: auto;
+  left: auto;
+  animation: fadeInScaleUpTopRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+}
+
 @keyframes fadeInScaleUp {
   0% {
     opacity: 0;
@@ -244,6 +253,17 @@ body.has-animated-background .expediente-tabs-section {
 }
 
 @keyframes fadeInScaleUpTopLeft {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeInScaleUpTopRight {
   0% {
     opacity: 0;
     transform: scale(0.9) translateY(-20px);
