@@ -226,7 +226,7 @@ body.has-animated-background .expediente-tabs-section {
 /* Analítica: Demo image in top-left corner with offset */
 .expediente-tab-content[data-tab-id="analitica"] .expediente-tab-demo-image {
   top: var(--spacing-md);
-  left: calc(var(--spacing-md) + 50px);
+  left: calc(var(--spacing-md) + 80px);
   bottom: auto;
   right: auto;
   animation: fadeInScaleUpTopLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
