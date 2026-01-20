@@ -307,9 +307,9 @@ body.has-animated-background .why-binder-section {
   .why-binder-container {
     grid-column: 1 / -1; /* Full width on mobile */
     padding: var(--spacing-xl) var(--spacing-md);
-    height: 400px; /* Altura fija para todas las slides en mobile */
-    min-height: 400px;
-    max-height: 400px;
+    height: 500px; /* Altura aumentada para mobile */
+    min-height: 500px;
+    max-height: 500px;
     overflow: visible;
   }
 
@@ -364,9 +364,11 @@ body.has-animated-background .why-binder-section {
 
   .slide-support {
     font-size: clamp(0.65rem, 0.6rem + 0.4vw, 0.75rem);
-    line-height: 1.5;
-    max-height: 4.5em; /* Ajustar para mobile */
-    -webkit-line-clamp: 4; /* Permitir más líneas en mobile */
+    line-height: 1.6;
+    max-height: none; /* Permitir que el texto se muestre completo */
+    -webkit-line-clamp: none; /* Sin límite de líneas */
+    display: block; /* Cambiar de -webkit-box a block para mostrar todo */
+    overflow: visible; /* Permitir que el texto se muestre completo */
   }
 }
 

@@ -82,12 +82,28 @@
 /* Badge positioning */
 .footer-badge-column {
   margin-top: auto;
-  display: none; /* Hidden by default, shown on desktop */
+}
+
+/* Desktop badge - shown only on desktop */
+.footer-badge-desktop {
+  display: none; /* Hidden by default */
 }
 
 @media (min-width: 969px) {
-  .footer-badge-column {
+  .footer-badge-desktop {
     display: inline-flex;
+  }
+}
+
+/* Mobile badge - shown only on mobile, positioned after last column */
+.footer-badge-mobile {
+  display: inline-flex;
+  margin-top: var(--spacing-sm);
+}
+
+@media (min-width: 969px) {
+  .footer-badge-mobile {
+    display: none; /* Hidden on desktop */
   }
 }
 

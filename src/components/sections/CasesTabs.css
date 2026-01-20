@@ -188,11 +188,13 @@ body.has-animated-background .cases-tabs-section {
   z-index: 1;
 }
 
-/* Demo image animation - appears on top, bottom left corner */
+/* Demo image animation - appears on top-left corner by default (homogenized) */
 .cases-tab-demo-image {
   position: absolute;
-  bottom: var(--spacing-md);
+  top: var(--spacing-md);
   left: var(--spacing-md);
+  bottom: auto;
+  right: auto;
   max-width: 50%;
   max-height: 50%;
   width: auto;
@@ -201,52 +203,14 @@ body.has-animated-background .cases-tabs-section {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   opacity: 0;
-  transform: scale(0.9) translateY(20px);
-  animation: fadeInScaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+  transform: scale(0.9) translateY(-20px);
+  animation: fadeInScaleUpTopLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
   z-index: 10;
 }
 
 .cases-tab-content:not(.active) .cases-tab-demo-image {
   animation: none;
   opacity: 0;
-}
-
-/* Redacción Inteligente: Demo image in top-left corner */
-.cases-tab-content[data-tab-id="redaccion-inteligente"] .cases-tab-demo-image {
-  top: var(--spacing-md);
-  left: var(--spacing-md);
-  bottom: auto;
-  right: auto;
-  animation: fadeInScaleUpTopLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
-}
-
-/* Firma Electrónica: Demo image in top-left corner */
-.cases-tab-content[data-tab-id="firma-electronica"] .cases-tab-demo-image {
-  top: var(--spacing-md);
-  left: var(--spacing-md);
-  bottom: auto;
-  right: auto;
-  animation: fadeInScaleUpTopLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
-}
-
-/* Trazabilidad y Auditoría: Demo image in top-left corner */
-.cases-tab-content[data-tab-id="trazabilidad-auditoria"] .cases-tab-demo-image {
-  top: var(--spacing-md);
-  left: var(--spacing-md);
-  bottom: auto;
-  right: auto;
-  animation: fadeInScaleUpTopLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
-}
-
-@keyframes fadeInScaleUp {
-  0% {
-    opacity: 0;
-    transform: scale(0.9) translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
 }
 
 @keyframes fadeInScaleUpTopLeft {

@@ -63,8 +63,8 @@ export const Footer = () => {
                   })}
                 </ul>
               </div>
-              {index === 0 && (
-                <div className="footer-badge footer-badge-column">
+              {index === 3 && (
+                <div className="footer-badge footer-badge-column footer-badge-mobile">
                   <span className="footer-badge-text">{homeContent.badgeText}</span>
                   <span className="footer-badge-icon">
                     <img 
