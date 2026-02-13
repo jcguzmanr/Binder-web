@@ -9,10 +9,12 @@ interface BackgroundOption {
 
 const backgroundOptions: BackgroundOption[] = [
   { id: 'none', name: 'Sin fondo' },
-  { id: 'gentle-waves', name: 'Gentle Waves' },
-  { id: 'canyon-flows', name: 'Canyon Flows' },
-  { id: 'flow-pattern', name: 'Flow Pattern' },
-  { id: 'antigravity', name: 'Antigravity' },
+  { id: 'video', name: 'Video fondo' },
+  // Temporalmente desactivados:
+  // { id: 'gentle-waves', name: 'Gentle Waves' },
+  // { id: 'canyon-flows', name: 'Canyon Flows' },
+  // { id: 'flow-pattern', name: 'Flow Pattern' },
+  // { id: 'antigravity', name: 'Antigravity' },
 ];
 
 export const BackgroundToggle = () => {
@@ -72,4 +74,3 @@ export const BackgroundToggle = () => {
     </div>
   );
 };
-

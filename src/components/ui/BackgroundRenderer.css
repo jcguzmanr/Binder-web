@@ -9,34 +9,21 @@
   overflow: hidden;
 }
 
-/* Ensure animation containers are properly positioned */
-.background-renderer .gentle-waves-container,
-.background-renderer .canyon-flows-container,
-.background-renderer .flowing-pattern-container,
-.background-renderer .antigravity-hero {
+.background-renderer-video {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   z-index: -1;
-}
-
-/* Allow mouse interaction for flow pattern - but events go through to window */
-.background-renderer .flowing-pattern-container {
+  object-fit: cover;
+  object-position: center;
   pointer-events: none;
+  filter: saturate(1.05);
 }
 
-.background-renderer .flowing-pattern-container canvas {
-  pointer-events: none;
+@media (max-aspect-ratio: 16/9) {
+  .background-renderer-video {
+    object-position: center center;
+  }
 }
-
-/* Antigravity background - allow mouse interaction for particles */
-.background-renderer .antigravity-hero {
-  pointer-events: none;
-}
-
-.background-renderer .antigravity-hero canvas {
-  pointer-events: none;
-}
-

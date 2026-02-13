@@ -112,6 +112,16 @@ body.has-animated-background {
   background-color: transparent;
 }
 
+/*
+  Utility for sections that need a custom background while global
+  background (video/animation) is active.
+*/
+body.has-animated-background .section-has-local-background.section-has-local-background {
+  background: var(--section-bg, var(--bg)) !important;
+  background-color: var(--section-bg-color, var(--bg)) !important;
+  background-image: var(--section-bg-image, none) !important;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-weight: var(--font-weight-bold);
@@ -232,4 +242,3 @@ button {
     padding: var(--spacing-2xl) 0;
   }
 }
-

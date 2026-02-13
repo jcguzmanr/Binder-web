@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
-export type BackgroundType = 'none' | 'gentle-waves' | 'canyon-flows' | 'flow-pattern' | 'antigravity';
+export type BackgroundType = 'none' | 'video';
 
 interface BackgroundContextType {
   background: BackgroundType;
@@ -11,17 +11,23 @@ const BackgroundContext = createContext<BackgroundContextType | undefined>(undef
 
 export const BackgroundProvider = ({ children }: { children: ReactNode }) => {
   const [background, setBackground] = useState<BackgroundType>(() => {
-    // Always default to 'antigravity'
+    // New default background: video.
     const stored = localStorage.getItem('binder-background');
-    const validBackgrounds: BackgroundType[] = ['none', 'gentle-waves', 'canyon-flows', 'flow-pattern', 'antigravity'];
-    
-    // If no stored value or stored value is 'none', default to 'antigravity'
-    if (!stored || stored === 'none' || !validBackgrounds.includes(stored as BackgroundType)) {
-      return 'antigravity';
+
+    if (!stored) {
+      return 'video';
     }
-    
-    // Use stored value if it's valid and not 'none'
-    return stored as BackgroundType;
+
+    if (stored === 'none' || stored === 'video') {
+      return stored;
+    }
+
+    // Migrate legacy animated backgrounds to video.
+    if (stored === 'gentle-waves' || stored === 'canyon-flows' || stored === 'flow-pattern' || stored === 'antigravity') {
+      return 'video';
+    }
+
+    return 'video';
   });
 
   useEffect(() => {
@@ -50,4 +56,3 @@ export const useBackground = () => {
   }
   return context;
 };
-
