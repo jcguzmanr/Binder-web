@@ -113,7 +113,8 @@ export const WhyBinder = () => {
     <section 
       id="porquebinder" 
       ref={elementRef as React.RefObject<HTMLElement>}
-      className={`why-binder-section scroll-animate ${isVisible ? 'visible' : ''}`}
+      className={`why-binder-section section-has-local-background scroll-animate ${isVisible ? 'visible' : ''}`}
+      style={{ '--section-bg': '#FFFFFF' } as React.CSSProperties}
     >
       <div className="container">
         <div 
@@ -213,4 +214,3 @@ export const WhyBinder = () => {
     </section>
   );
 };
-

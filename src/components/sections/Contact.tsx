@@ -169,7 +169,8 @@ export const Contact = () => {
     <section 
       id="contacto" 
       ref={elementRef as React.RefObject<HTMLElement>}
-      className={`contact-section scroll-animate ${isVisible ? 'visible' : ''}`}
+      className={`contact-section section-has-local-background scroll-animate ${isVisible ? 'visible' : ''}`}
+      style={{ '--section-bg': '#FFFFFF' } as React.CSSProperties}
     >
       <div className="container-wide">
         <div className="contact-grid">
@@ -291,4 +292,3 @@ export const Contact = () => {
     </section>
   );
 };
-
