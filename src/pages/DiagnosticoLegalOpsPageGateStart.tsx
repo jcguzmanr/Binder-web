@@ -499,9 +499,11 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                     {questions.map((_, index) => {
                       const status = answers[index] !== null ? 'done' : index === currentQuestionIndex ? 'current' : 'pending';
                       return (
-                        <span key={index} className={`diagnostico-step ${status}`}>
-                          {index + 1}
-                        </span>
+                        <span
+                          key={index}
+                          className={`diagnostico-step ${status}`}
+                          aria-label={`Pregunta ${index + 1}`}
+                        />
                       );
                     })}
                   </div>
