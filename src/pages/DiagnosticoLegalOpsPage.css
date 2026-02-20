@@ -1,0 +1,448 @@
+.diagnostico-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8fbfd 0%, #ffffff 45%);
+  padding-top: 5.5rem;
+}
+
+.diagnostico-video-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.diagnostico-video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.22;
+  filter: saturate(1.05);
+}
+
+.diagnostico-hero {
+  padding-bottom: var(--spacing-xl);
+}
+
+.diagnostico-hero h1 {
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3.4rem);
+  color: var(--navy);
+  margin-bottom: var(--spacing-sm);
+}
+
+.diagnostico-subtitle {
+  font-size: var(--fs-24);
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-dark);
+  margin-bottom: var(--spacing-sm);
+}
+
+.diagnostico-description {
+  max-width: 900px;
+  font-size: var(--fs-20);
+  color: #2f3a52;
+}
+
+.diagnostico-proof {
+  display: inline-block;
+  margin-top: var(--spacing-sm);
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  background: #e7f7fb;
+  color: #006779;
+  font-weight: var(--font-weight-medium);
+}
+
+.diagnostico-stage {
+  padding-top: var(--spacing-sm);
+}
+
+.diagnostico-card {
+  background: #ffffff;
+  border: 1px solid #d4ecf2;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(1.25rem, 1rem + 1vw, 2.5rem);
+}
+
+.diagnostico-card h2 {
+  color: var(--navy);
+  margin-bottom: var(--spacing-xs);
+  font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem);
+}
+
+.diagnostico-card p {
+  color: #304055;
+}
+
+.diagnostico-form {
+  margin-top: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.diagnostico-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.diagnostico-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-weight: var(--font-weight-medium);
+  color: #0f2338;
+}
+
+.diagnostico-form-grid input,
+.diagnostico-form-grid select {
+  width: 100%;
+  border: 1px solid #c4ddeb;
+  border-radius: var(--radius-md);
+  padding: 0.72rem 0.85rem;
+  font-size: var(--fs-16);
+  color: var(--fg);
+  background: #ffffff;
+}
+
+.diagnostico-form-grid input:focus,
+.diagnostico-form-grid select:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 152, 177, 0.16);
+}
+
+.diagnostico-form-grid input.error,
+.diagnostico-form-grid select.error {
+  border-color: #d53b54;
+}
+
+.error-text {
+  color: #d53b54;
+  font-size: var(--fs-14);
+  font-weight: var(--font-weight-medium);
+}
+
+.submit-error {
+  margin-top: 0.8rem;
+}
+
+.diagnostico-note {
+  margin: 0;
+  font-size: var(--fs-14);
+  color: #4f6176;
+}
+
+.diagnostico-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  color: #243e5b;
+}
+
+.diagnostico-checkbox-label input {
+  margin-top: 0.2rem;
+}
+
+.diagnostico-primary-button,
+.diagnostico-secondary-button {
+  border-radius: 999px;
+  padding: 0.82rem 1.3rem;
+  font-size: var(--fs-16);
+  font-weight: var(--font-weight-bold);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.diagnostico-primary-button {
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 152, 177, 0.25);
+  align-self: flex-start;
+}
+
+.diagnostico-secondary-button {
+  background: #ecf4f8;
+  color: #15314e;
+}
+
+.diagnostico-primary-button:hover,
+.diagnostico-secondary-button:hover {
+  transform: translateY(-1px);
+}
+
+.diagnostico-primary-button:disabled,
+.diagnostico-secondary-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.diagnostico-instruction {
+  margin-bottom: var(--spacing-md);
+}
+
+.diagnostico-progress-block {
+  margin-bottom: var(--spacing-md);
+}
+
+.diagnostico-steps {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.diagnostico-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 30px;
+  border-radius: var(--radius-md);
+  font-size: var(--fs-14);
+  border: 1px solid #d4e5ef;
+  color: #6c7e91;
+  background: #f8fbfd;
+}
+
+.diagnostico-step.current {
+  border-color: #0098b1;
+  color: #006779;
+}
+
+.diagnostico-step.done {
+  border-color: #0098b1;
+  background: #ddf4f7;
+  color: #006779;
+}
+
+.diagnostico-question-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid #e1eff6;
+  padding: clamp(1rem, 0.9rem + 0.8vw, 1.8rem);
+}
+
+.diagnostico-question-card header span {
+  font-size: var(--fs-14);
+  color: #5f7082;
+}
+
+.diagnostico-question-card h3 {
+  margin-top: 0.35rem;
+  color: #132f4e;
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.7rem);
+}
+
+.diagnostico-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+
+.diagnostico-option {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #d4e5ef;
+  background: #f8fbfd;
+  border-radius: var(--radius-lg);
+  padding: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.diagnostico-option strong {
+  color: #183b63;
+}
+
+.diagnostico-option span {
+  color: #456180;
+  font-size: var(--fs-14);
+}
+
+.diagnostico-option.selected {
+  border-color: var(--accent);
+  background: #e5f7fb;
+}
+
+.diagnostico-question-actions {
+  margin-top: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.diagnostico-result-card h2 span {
+  color: #006779;
+}
+
+.diagnostico-result-subtitle {
+  color: #526679;
+  font-size: var(--fs-20);
+}
+
+.diagnostico-level-track {
+  margin: var(--spacing-md) 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.diagnostico-level-node {
+  text-align: center;
+  border-radius: var(--radius-md);
+  padding: 0.6rem;
+  border: 1px solid #d4e5ef;
+  background: #f8fbfd;
+  color: #607387;
+  font-size: var(--fs-14);
+  font-weight: var(--font-weight-medium);
+}
+
+.diagnostico-level-node.active {
+  border-color: #0098b1;
+  background: #ddf4f7;
+  color: #005e6e;
+}
+
+.diagnostico-highlight {
+  border: 1px solid #d8ecf7;
+  background: #f8fcff;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-sm);
+}
+
+.diagnostico-highlight h3 {
+  color: #1b3f66;
+  margin-bottom: 0.5rem;
+  font-size: var(--fs-24);
+}
+
+.diagnostico-lists {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.diagnostico-lists h4 {
+  color: #1b3f66;
+  font-size: var(--fs-20);
+}
+
+.diagnostico-lists ul,
+.diagnostico-lists ol {
+  margin-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  color: #304055;
+}
+
+.diagnostico-cta-text {
+  margin-top: var(--spacing-sm);
+  font-weight: var(--font-weight-medium);
+  color: #243e5b;
+}
+
+.diagnostico-material-placeholder {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-lg);
+  border: 1px dashed #9cc7da;
+  background: #f7fcff;
+}
+
+.diagnostico-material-placeholder h3 {
+  color: #1b3f66;
+  font-size: var(--fs-24);
+  margin-bottom: 0.4rem;
+}
+
+.diagnostico-material-button {
+  margin-top: 0.4rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  font-weight: var(--font-weight-medium);
+  background: #e9f3f8;
+  color: #5c7488;
+}
+
+.diagnostico-final-form-block {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid #dcecf5;
+}
+
+.diagnostico-close-block {
+  margin-top: var(--spacing-md);
+  background: linear-gradient(135deg, #edf8fd 0%, #f5f8ff 100%);
+  border: 1px solid #d7eaf6;
+  border-radius: var(--radius-xl);
+  padding: clamp(1rem, 0.8rem + 0.9vw, 1.8rem);
+}
+
+.diagnostico-close-block h3 {
+  font-size: clamp(1.2rem, 1rem + 0.9vw, 1.7rem);
+  color: #193e65;
+}
+
+.diagnostico-close-block ul {
+  margin-left: 1.2rem;
+  color: #294661;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+@media (max-width: 900px) {
+  .diagnostico-form-grid,
+  .diagnostico-options,
+  .diagnostico-lists {
+    grid-template-columns: 1fr;
+  }
+
+  .diagnostico-question-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .diagnostico-primary-button,
+  .diagnostico-secondary-button {
+    width: 100%;
+  }
+
+  .diagnostico-level-track {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .diagnostico-page {
+    padding-top: 5rem;
+  }
+
+  .diagnostico-proof {
+    border-radius: var(--radius-md);
+    display: block;
+  }
+
+  .diagnostico-steps {
+    gap: 0.3rem;
+  }
+
+  .diagnostico-step {
+    height: 26px;
+    padding: 0.25rem;
+  }
+}

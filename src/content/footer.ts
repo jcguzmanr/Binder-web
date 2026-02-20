@@ -20,6 +20,8 @@ export const footerContent = {
       links: [
         { label: "Por qué Binder", href: "#porquebinder" },
         { label: "Funcionalidades", href: "#soluciones" },
+        { label: "Diagnóstico legal (formulario al inicio)", href: "/diagnostico-legal-ops-formulario-inicio" },
+        { label: "Diagnóstico legal (formulario al final)", href: "/diagnostico-legal-ops-formulario-final" },
         { label: "Contacto", href: "#contacto" },
       ],
     },
@@ -48,4 +50,3 @@ export const footerContent = {
   },
   legalNote: "© 2025 Binder. Todos los derechos reservados.",
 };
-

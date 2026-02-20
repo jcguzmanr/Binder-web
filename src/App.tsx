@@ -27,6 +27,8 @@ import { SolucionesPage } from './pages/SolucionesPage';
 import { TestimoniosPage } from './pages/TestimoniosPage';
 import { ContactoPage } from './pages/ContactoPage';
 import { GraciasPage } from './pages/GraciasPage';
+import { DiagnosticoLegalOpsPage } from './pages/DiagnosticoLegalOpsPage';
+import { DiagnosticoLegalOpsPageGateStart } from './pages/DiagnosticoLegalOpsPageGateStart';
 import { PrivacidadPage } from './pages/legal/PrivacidadPage';
 import { CookiesPage } from './pages/legal/CookiesPage';
 import { TerminosPage } from './pages/legal/TerminosPage';
@@ -94,6 +96,18 @@ function App() {
               <Route
                 path="/gracias"
                 element={<GraciasPage />}
+              />
+              <Route
+                path="/diagnostico-legal-ops-formulario-final"
+                element={<DiagnosticoLegalOpsPage />}
+              />
+              <Route
+                path="/diagnostico-legal-ops-formulario-inicio"
+                element={<DiagnosticoLegalOpsPageGateStart />}
+              />
+              <Route
+                path="/diagnostico-legal-ops"
+                element={<Navigate to="/diagnostico-legal-ops-formulario-final" replace />}
               />
               <Route
                 path="/legal/privacidad"
@@ -164,4 +178,3 @@ function App() {
 }
 
 export default App;
-
