@@ -23,7 +23,7 @@ export const Navigation = () => {
             setIsMobileMenuOpen(false);
           }
           
-            // Only detect active section on home page
+            // Detect active section: home page vs doc page
           if (location.pathname === '/') {
             const sections = ['home', 'porquebinder', 'soluciones', 'apps', 'contacto'];
             const scrollPosition = window.scrollY + 150; // Offset for fixed nav
@@ -41,11 +41,29 @@ export const Navigation = () => {
               }
             }
             
-            // If no section found, check if we're at the top (home)
             if (!currentSection && window.scrollY < 200) {
               currentSection = 'home';
             }
             
+            setActiveSection(currentSection);
+          } else if (location.pathname === '/docs/prep-reunion-oka-ciberseguridad') {
+            const docSections = ['contexto', 'arquitectura', 'ciberseguridad', 'regulacion', 'operacion', 'preguntas', 'postura', 'outsourcing'];
+            const scrollPosition = window.scrollY + 120;
+            let currentSection = '';
+            for (const sectionId of docSections) {
+              const element = document.getElementById(sectionId);
+              if (element) {
+                const offsetTop = element.offsetTop;
+                const offsetHeight = element.offsetHeight;
+                if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                  currentSection = sectionId;
+                  break;
+                }
+              }
+            }
+            if (!currentSection && document.getElementById('contexto') && window.scrollY < 300) {
+              currentSection = 'contexto';
+            }
             setActiveSection(currentSection);
           }
           ticking = false;
@@ -60,27 +78,44 @@ export const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobileMenuOpen, location.pathname]);
 
-  // On home page, use hash links for OnePage scroll behavior
-  // On internal pages, these links navigate to home sections
+  // On home page: OnePage sections. On doc page: document sections. Else: go to home with hash
   const navLinks = [
     { label: '¿Por qué Binder?', href: '#porquebinder', sectionId: 'porquebinder' },
     { label: 'Funcionalidades', href: '#soluciones', sectionId: 'soluciones' },
     { label: 'Soluciones', href: '#apps', sectionId: 'apps' },
-    // { label: 'Testimonios', href: '#testimonios', sectionId: 'testimonios' },
     { label: 'Contacto', href: '#contacto', sectionId: 'contacto' },
   ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const docNavLinks = [
+    { label: 'Contexto', href: '#contexto', sectionId: 'contexto' },
+    { label: 'Arquitectura', href: '#arquitectura', sectionId: 'arquitectura' },
+    { label: 'Ciberseguridad', href: '#ciberseguridad', sectionId: 'ciberseguridad' },
+    { label: 'Regulación SBS', href: '#regulacion', sectionId: 'regulacion' },
+    { label: 'Operación', href: '#operacion', sectionId: 'operacion' },
+    { label: 'Preguntas', href: '#preguntas', sectionId: 'preguntas' },
+    { label: 'Postura', href: '#postura', sectionId: 'postura' },
+    { label: 'Outsourcing', href: '#outsourcing', sectionId: 'outsourcing' },
+  ];
+
+  const isDocPage = location.pathname === '/docs/prep-reunion-oka-ciberseguridad';
+  const currentNavLinks = isDocPage ? docNavLinks : navLinks;
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, sectionId?: string) => {
     if (location.pathname === '/') {
-      // On home page, use smooth scroll
       e.preventDefault();
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
         setIsMobileMenuOpen(false);
       }
+    } else if (isDocPage) {
+      e.preventDefault();
+      const element = document.getElementById(sectionId || href.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setIsMobileMenuOpen(false);
+      }
     } else {
-      // On internal pages, navigate to home with hash
       e.preventDefault();
       window.location.href = `/${href}`;
       setIsMobileMenuOpen(false);
@@ -88,7 +123,7 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className={`navigation ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
+    <nav className={`navigation ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''} ${isDocPage ? 'navigation--doc' : ''}`}>
       <div className="container-wide">
         <div className="nav-content">
           {/* Left side: Mobile Menu Toggle and Logo */}
@@ -131,49 +166,55 @@ export const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="nav-links">
-            {navLinks.map((link) => (
+            {currentNavLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className={location.pathname === '/' && activeSection === link.sectionId ? 'active' : ''}
+                onClick={(e) => handleNavClick(e, link.href, link.sectionId)}
+                className={activeSection === link.sectionId ? 'active' : ''}
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          {/* Right side: Actions */}
+          {/* Right side: Actions — doc page shows only "Inicio", rest show CTA + Iniciar sesión */}
           <div className="nav-content-right">
             <div className="nav-actions">
-              {/* <ThemeToggle /> */}
-              {/* <BackgroundToggle /> */}
-              <a 
-                href="#contacto"
-                onClick={(e) => {
-                  if (location.pathname === '/') {
-                    e.preventDefault();
-                    const element = document.querySelector('#contacto');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  } else {
-                    e.preventDefault();
-                    window.location.href = '/#contacto';
-                  }
-                }}
-              >
-                <Button variant="primary">
-                  Agendar demo
-                </Button>
-              </a>
-              <a 
-                href="https://thelegalbinder.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="secondary">Iniciar sesión</Button>
-              </a>
+              {isDocPage ? (
+                <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="secondary">Inicio</Button>
+                </Link>
+              ) : (
+                <>
+                  <a 
+                    href="#contacto"
+                    onClick={(e) => {
+                      if (location.pathname === '/') {
+                        e.preventDefault();
+                        const element = document.querySelector('#contacto');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      } else {
+                        e.preventDefault();
+                        window.location.href = '/#contacto';
+                      }
+                    }}
+                  >
+                    <Button variant="primary">
+                      Agendar demo
+                    </Button>
+                  </a>
+                  <a 
+                    href="https://thelegalbinder.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="secondary">Iniciar sesión</Button>
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -181,48 +222,54 @@ export const Navigation = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="mobile-menu">
-            {navLinks.map((link) => (
+            {currentNavLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => {
-                  handleNavClick(e, link.href);
+                  handleNavClick(e, link.href, link.sectionId);
                 }}
-                className={location.pathname === '/' && activeSection === link.sectionId ? 'active' : ''}
+                className={activeSection === link.sectionId ? 'active' : ''}
               >
                 {link.label}
               </a>
             ))}
             <div className="mobile-menu-actions">
-              {/* <ThemeToggle /> */}
-              {/* <BackgroundToggle /> */}
-              <a 
-                href="#contacto"
-                onClick={(e) => {
-                  if (location.pathname === '/') {
-                    e.preventDefault();
-                    const element = document.querySelector('#contacto');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  } else {
-                    e.preventDefault();
-                    window.location.href = '/#contacto';
-                  }
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                <Button variant="primary">
-                  Agendar demo
-                </Button>
-              </a>
-              <a 
-                href="https://thelegalbinder.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="secondary">Iniciar sesión</Button>
-              </a>
+              {isDocPage ? (
+                <Link to="/" onClick={() => setIsMobileMenuOpen(false)} style={{ flex: 1, minWidth: 0 }}>
+                  <Button variant="secondary" className="btn" style={{ width: '100%' }}>Inicio</Button>
+                </Link>
+              ) : (
+                <>
+                  <a 
+                    href="#contacto"
+                    onClick={(e) => {
+                      if (location.pathname === '/') {
+                        e.preventDefault();
+                        const element = document.querySelector('#contacto');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      } else {
+                        e.preventDefault();
+                        window.location.href = '/#contacto';
+                      }
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    <Button variant="primary">
+                      Agendar demo
+                    </Button>
+                  </a>
+                  <a 
+                    href="https://thelegalbinder.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="secondary">Iniciar sesión</Button>
+                  </a>
+                </>
+              )}
             </div>
           </div>
         )}

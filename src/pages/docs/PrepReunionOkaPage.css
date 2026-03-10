@@ -1,0 +1,263 @@
+/* Prep Reunión OKA — Doc page. Uses globals: --accent, --navy, --green, --orange, --bright-purple, --medium-blue, --pink, --fg, --gray-dark, --gray-light, --white */
+.prep-reunion-doc {
+  --doc-bg-base: #FAFBFC;
+  --doc-bg-card: #FFFFFF;
+  --doc-border: #E8EAED;
+  --doc-border-accent: rgba(0, 152, 177, 0.25);
+  --doc-text-secondary: #5F6368;
+  --doc-text-muted: #949494;
+  --doc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --doc-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+  background: var(--doc-bg-base);
+  color: var(--fg);
+  padding-top: 0;
+  min-height: 100vh;
+}
+
+[data-theme="dark"] .prep-reunion-doc {
+  --doc-bg-base: #1B1B1B;
+  --doc-bg-card: #252525;
+  --doc-border: #333;
+  --doc-border-accent: rgba(0, 152, 177, 0.35);
+  --doc-text-secondary: #b0b0b0;
+  --doc-text-muted: #888;
+}
+
+.prep-reunion-doc .doc-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.prep-reunion-doc .top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--doc-border);
+}
+.prep-reunion-doc .top-bar .logo-img { height: 36px; width: auto; }
+.prep-reunion-doc .top-bar .badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  background: rgba(0, 152, 177, 0.08);
+  border: 1px solid rgba(0, 152, 177, 0.15);
+  border-radius: 100px;
+  padding: 5px 14px;
+}
+
+.prep-reunion-doc .hero { padding: 48px 0 36px; text-align: left; }
+.prep-reunion-doc .hero h1 { font-size: 38px; color: var(--accent); margin-bottom: 8px; letter-spacing: -0.8px; font-weight: 500; }
+.prep-reunion-doc .hero .subtitle { font-size: 16px; color: var(--doc-text-secondary); font-weight: 300; margin-bottom: 24px; }
+.prep-reunion-doc .hero-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+.prep-reunion-doc .hero-meta-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 400; color: var(--doc-text-muted); }
+.prep-reunion-doc .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+.prep-reunion-doc .section { padding: 40px 0; scroll-margin-top: 20px; }
+.prep-reunion-doc .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; text-align: left; }
+.prep-reunion-doc .section-icon {
+  width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+}
+.prep-reunion-doc .section-title { font-size: 21px; color: var(--fg); letter-spacing: -0.3px; font-weight: 500; }
+.prep-reunion-doc .section-subtitle { font-size: 10.5px; color: var(--doc-text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
+.prep-reunion-doc .divider { height: 1px; background: var(--doc-border); }
+
+.prep-reunion-doc .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.prep-reunion-doc .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.prep-reunion-doc .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
+
+.prep-reunion-doc .card {
+  background: var(--doc-bg-card);
+  border: 1px solid var(--doc-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--doc-shadow-sm);
+  text-align: left;
+  transition: all 0.2s;
+}
+.prep-reunion-doc .card:hover { box-shadow: var(--doc-shadow-md); border-color: var(--doc-border-accent); }
+.prep-reunion-doc .card-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+.prep-reunion-doc .card h3 { font-size: 14.5px; font-weight: 500; margin-bottom: 6px; }
+.prep-reunion-doc .card p, .prep-reunion-doc .card li { font-size: 12.5px; color: var(--doc-text-secondary); font-weight: 300; line-height: 1.7; }
+.prep-reunion-doc .card ul { list-style: none; padding: 0; }
+.prep-reunion-doc .card ul li { padding: 3px 0 3px 16px; position: relative; }
+.prep-reunion-doc .card ul li::before {
+  content: ''; position: absolute; left: 0; top: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+
+.prep-reunion-doc .flow-container {
+  background: var(--doc-bg-card);
+  border: 1px solid var(--doc-border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--doc-shadow-sm);
+  overflow-x: auto;
+}
+.prep-reunion-doc .flow { display: flex; align-items: center; min-width: 860px; justify-content: flex-start; }
+.prep-reunion-doc .flow-step { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 100px; text-align: center; }
+.prep-reunion-doc .flow-step .icon-box {
+  width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 19px; border: 2px solid;
+}
+.prep-reunion-doc .flow-step .step-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; }
+.prep-reunion-doc .flow-step .step-desc { font-size: 10px; color: var(--doc-text-muted); font-weight: 300; max-width: 95px; }
+.prep-reunion-doc .flow-arrow { font-size: 15px; color: var(--gray-light); padding: 0 4px; flex-shrink: 0; }
+
+.prep-reunion-doc .sec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.prep-reunion-doc .sec-card {
+  background: var(--doc-bg-card);
+  border: 1px solid var(--doc-border);
+  border-radius: 11px;
+  padding: 18px;
+  box-shadow: var(--doc-shadow-sm);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+.prep-reunion-doc .sec-card .sec-top-bar { position: absolute; top: 0; left: 0; width: 100%; height: 3px; }
+.prep-reunion-doc .sec-card .sec-icon { font-size: 20px; margin-bottom: 6px; }
+.prep-reunion-doc .sec-card h4 { font-size: 13px; font-weight: 500; margin-bottom: 5px; }
+.prep-reunion-doc .sec-card p { font-size: 11.5px; color: var(--doc-text-secondary); font-weight: 300; line-height: 1.65; }
+
+.prep-reunion-doc .reg-timeline { position: relative; padding-left: 26px; text-align: left; }
+.prep-reunion-doc .reg-timeline::before {
+  content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--bright-purple), var(--navy));
+  border-radius: 2px;
+}
+.prep-reunion-doc .reg-item { position: relative; padding: 12px 0 24px 22px; }
+.prep-reunion-doc .reg-dot {
+  position: absolute; left: -22px; top: 18px; width: 13px; height: 13px; border-radius: 50%;
+  border: 3px solid; background: var(--doc-bg-base);
+}
+.prep-reunion-doc .reg-item .reg-date { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px; }
+.prep-reunion-doc .reg-item h4 { font-size: 13.5px; font-weight: 500; margin-bottom: 2px; }
+.prep-reunion-doc .reg-item p { font-size: 12px; color: var(--doc-text-secondary); font-weight: 300; line-height: 1.65; }
+
+.prep-reunion-doc .q-list { display: flex; flex-direction: column; gap: 9px; }
+.prep-reunion-doc .q-item {
+  background: var(--doc-bg-card);
+  border: 1px solid var(--doc-border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  box-shadow: var(--doc-shadow-sm);
+  text-align: left;
+  transition: all 0.2s;
+}
+.prep-reunion-doc .q-item:hover { border-color: var(--doc-border-accent); box-shadow: var(--doc-shadow-md); }
+.prep-reunion-doc .q-number {
+  width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.prep-reunion-doc .q-text { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+.prep-reunion-doc .q-why { font-size: 11px; color: var(--doc-text-muted); font-weight: 300; font-style: italic; }
+
+.prep-reunion-doc .stake-card {
+  display: flex; gap: 12px; align-items: center;
+  background: var(--doc-bg-card);
+  border: 1px solid var(--doc-border);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: var(--doc-shadow-sm);
+  text-align: left;
+}
+.prep-reunion-doc .stake-avatar {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; flex-shrink: 0;
+}
+.prep-reunion-doc .stake-info h4 { font-size: 13px; font-weight: 500; }
+.prep-reunion-doc .stake-info .stake-role { font-size: 10px; color: var(--doc-text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.prep-reunion-doc .stake-info .stake-focus { font-size: 11.5px; color: var(--doc-text-secondary); font-weight: 300; margin-top: 2px; }
+
+.prep-reunion-doc .posture-card {
+  background: rgba(0, 152, 177, 0.03);
+  border: 1px solid rgba(0, 152, 177, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: left;
+}
+.prep-reunion-doc .posture-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.prep-reunion-doc .posture-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.prep-reunion-doc .posture-do, .prep-reunion-doc .posture-dont { padding: 16px; border-radius: 10px; }
+.prep-reunion-doc .posture-do { background: rgba(0, 212, 78, 0.05); border: 1px solid rgba(0, 212, 78, 0.15); }
+.prep-reunion-doc .posture-dont { background: rgba(255, 144, 0, 0.05); border: 1px solid rgba(255, 144, 0, 0.15); }
+.prep-reunion-doc .posture-do h4, .prep-reunion-doc .posture-dont h4 { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+.prep-reunion-doc .posture-do h4 { color: var(--green); }
+.prep-reunion-doc .posture-dont h4 { color: var(--orange); }
+.prep-reunion-doc .posture-do li, .prep-reunion-doc .posture-dont li { color: var(--doc-text-secondary); padding: 2px 0; font-size: 12px; font-weight: 300; }
+
+.prep-reunion-doc .layers { display: flex; flex-direction: column; gap: 2px; }
+.prep-reunion-doc .layer { padding: 12px 18px; border-radius: 8px; display: flex; align-items: center; gap: 12px; }
+.prep-reunion-doc .layer-name { font-size: 12.5px; font-weight: 500; min-width: 75px; }
+.prep-reunion-doc .layer-desc { font-size: 11.5px; color: var(--doc-text-secondary); font-weight: 300; }
+.prep-reunion-doc .layer-arrow { text-align: center; font-size: 14px; color: var(--gray-light); padding: 2px 0; }
+
+.prep-reunion-doc .doc-sidebar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 220px;
+  height: calc(100vh - 80px);
+  background: var(--white);
+  border-right: 1px solid var(--doc-border);
+  padding: 24px 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.03);
+}
+[data-theme="dark"] .prep-reunion-doc .doc-sidebar {
+  background: var(--gray-dark);
+  border-right-color: var(--doc-border);
+}
+.prep-reunion-doc .sidebar-logo { padding: 0 20px 20px; border-bottom: 1px solid var(--doc-border); margin-bottom: 16px; }
+.prep-reunion-doc .sidebar-logo img { height: 28px; width: auto; }
+.prep-reunion-doc .sidebar-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--doc-text-muted); padding: 0 20px; margin-bottom: 10px; }
+.prep-reunion-doc .sidebar-nav { list-style: none; padding: 0; flex: 1; }
+.prep-reunion-doc .sidebar-nav li { margin: 0; }
+.prep-reunion-doc .sidebar-nav a {
+  display: flex; align-items: center; gap: 10px; padding: 9px 20px; font-size: 12px; font-weight: 400;
+  color: var(--doc-text-secondary); text-decoration: none; transition: all 0.15s; border-left: 3px solid transparent;
+}
+.prep-reunion-doc .sidebar-nav a:hover { background: rgba(0, 152, 177, 0.04); color: var(--accent); border-left-color: var(--accent); }
+.prep-reunion-doc .sidebar-nav a.active { border-left-color: var(--accent); color: var(--accent); background: rgba(0, 152, 177, 0.04); }
+.prep-reunion-doc .sidebar-nav .nav-icon { font-size: 14px; width: 20px; text-align: center; flex-shrink: 0; }
+.prep-reunion-doc .sidebar-nav .nav-num { font-size: 9px; font-weight: 700; color: var(--doc-text-muted); background: rgba(0, 0, 0, 0.03); border-radius: 4px; padding: 1px 5px; margin-left: auto; }
+.prep-reunion-doc .sidebar-footer { padding: 16px 20px 0; border-top: 1px solid var(--doc-border); margin-top: auto; }
+.prep-reunion-doc .sidebar-footer .conf-badge {
+  font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent);
+  background: rgba(0, 152, 177, 0.06); border: 1px solid rgba(0, 152, 177, 0.12); border-radius: 6px; padding: 5px 10px; display: inline-block;
+}
+.prep-reunion-doc .sidebar-footer .date-text { font-size: 10px; font-weight: 300; color: var(--doc-text-muted); margin-top: 8px; }
+
+.prep-reunion-doc .page-wrapper { margin-left: 220px; padding-top: 100px; }
+
+.prep-reunion-doc .doc-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 0; border-top: 1px solid var(--doc-border); margin-top: 32px;
+}
+.prep-reunion-doc .doc-footer .footer-text { font-size: 10.5px; color: var(--doc-text-muted); font-weight: 300; }
+.prep-reunion-doc .doc-footer .footer-text .brand { color: var(--accent); font-weight: 500; }
+.prep-reunion-doc .doc-footer .logo-img { height: 24px; width: auto; opacity: 0.6; }
+
+.prep-reunion-doc { scroll-behavior: smooth; scroll-padding-top: 100px; }
+
+@media print {
+  .prep-reunion-doc .doc-sidebar { display: none; }
+  .prep-reunion-doc .page-wrapper { margin-left: 0; }
+  .prep-reunion-doc .card, .prep-reunion-doc .sec-card, .prep-reunion-doc .q-item, .prep-reunion-doc .stake-card, .prep-reunion-doc .flow-container, .prep-reunion-doc .posture-card { box-shadow: none; }
+}
+@media (max-width: 900px) {
+  .prep-reunion-doc .doc-sidebar { display: none; }
+  .prep-reunion-doc .page-wrapper { margin-left: 0; }
+  .prep-reunion-doc .grid-2, .prep-reunion-doc .grid-3, .prep-reunion-doc .sec-grid, .prep-reunion-doc .posture-grid { grid-template-columns: 1fr; }
+  .prep-reunion-doc .grid-4 { grid-template-columns: 1fr 1fr; }
+  .prep-reunion-doc .hero h1 { font-size: 26px; }
+}

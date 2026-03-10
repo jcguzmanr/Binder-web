@@ -27,7 +27,6 @@ import { SolucionesPage } from './pages/SolucionesPage';
 import { TestimoniosPage } from './pages/TestimoniosPage';
 import { ContactoPage } from './pages/ContactoPage';
 import { GraciasPage } from './pages/GraciasPage';
-import { DiagnosticoLegalOpsPage } from './pages/DiagnosticoLegalOpsPage';
 import { DiagnosticoLegalOpsPageGateStart } from './pages/DiagnosticoLegalOpsPageGateStart';
 import { PrivacidadPage } from './pages/legal/PrivacidadPage';
 import { CookiesPage } from './pages/legal/CookiesPage';
@@ -39,6 +38,7 @@ import { CLMPage } from './pages/casos-uso/CLMPage';
 import { ExpedienteDigitalPage } from './pages/casos-uso/ExpedienteDigitalPage';
 import { CasesPage } from './pages/casos-uso/CasesPage';
 import { TestAnimationPage } from './pages/TestAnimationPage';
+import { PrepReunionOkaPage } from './pages/docs/PrepReunionOkaPage';
 import './styles/globals.css';
 
 function App() {
@@ -98,16 +98,12 @@ function App() {
                 element={<GraciasPage />}
               />
               <Route
-                path="/diagnostico-legal-ops-formulario-final"
-                element={<DiagnosticoLegalOpsPage />}
-              />
-              <Route
                 path="/diagnostico-legal-ops-formulario-inicio"
                 element={<DiagnosticoLegalOpsPageGateStart />}
               />
               <Route
                 path="/diagnostico-legal-ops"
-                element={<Navigate to="/diagnostico-legal-ops-formulario-final" replace />}
+                element={<Navigate to="/diagnostico-legal-ops-formulario-inicio" replace />}
               />
               <Route
                 path="/legal/privacidad"
@@ -152,6 +148,10 @@ function App() {
               <Route
                 path="/test/antigravity"
                 element={<TestAnimationPage />}
+              />
+              <Route
+                path="/docs/prep-reunion-oka-ciberseguridad"
+                element={<PrepReunionOkaPage />}
               />
               <Route
                 path="/"
