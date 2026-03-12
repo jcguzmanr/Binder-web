@@ -7,14 +7,11 @@ import './DiagnosticoLegalOpsPage.css';
 
 type Stage = 'gate' | 'quiz' | 'result';
 type RoleOption = 'Legal Counsel' | 'Head of Legal' | 'GC' | 'Legal Ops' | 'Compliance' | 'Procurement' | 'Otros';
-type CompanySize = '1-50' | '51-200' | '201-1000' | '1000+';
-
 interface GateFormData {
   name: string;
   email: string;
   company: string;
   role: RoleOption | '';
-  companySize: CompanySize | '';
 }
 
 interface GateErrors {
@@ -22,7 +19,6 @@ interface GateErrors {
   email?: string;
   company?: string;
   role?: string;
-  companySize?: string;
   submit?: string;
 }
 
@@ -166,7 +162,6 @@ const levels: LevelContent[] = [
 ];
 
 const roleOptions: RoleOption[] = ['Legal Counsel', 'Head of Legal', 'GC', 'Legal Ops', 'Compliance', 'Procurement', 'Otros'];
-const companySizeOptions: CompanySize[] = ['1-50', '51-200', '201-1000', '1000+'];
 
 const getLevelByNoCount = (noCount: number): LevelContent => {
   if (noCount >= 6) return levels[0];
@@ -185,7 +180,6 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     email: '',
     company: '',
     role: '',
-    companySize: '',
   });
   const [gateErrors, setGateErrors] = useState<GateErrors>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -230,10 +224,6 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
 
     if (!gateFormData.role) {
       errors.role = 'Selecciona tu cargo.';
-    }
-
-    if (!gateFormData.companySize) {
-      errors.companySize = 'Selecciona el tamaño de empresa.';
     }
 
     setGateErrors(errors);
@@ -304,7 +294,6 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
           timestamp: new Date().toISOString(),
           source: 'legal-ops-diagnosis',
           role: gateFormData.role,
-          companySize: gateFormData.companySize,
           diagnosis: {
             levelNumber: finalLevel.number,
             levelName: finalLevel.level,
@@ -435,28 +424,6 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                       </select>
                       {gateErrors.role && <span className="error-text">{gateErrors.role}</span>}
                     </label>
-
-                    <label>
-                      Tamaño de empresa
-                      <select
-                        value={gateFormData.companySize}
-                        onChange={(event) =>
-                          setGateFormData((prev) => ({
-                            ...prev,
-                            companySize: event.target.value as CompanySize | '',
-                          }))
-                        }
-                        className={gateErrors.companySize ? 'error' : ''}
-                      >
-                        <option value="">Selecciona el tamaño</option>
-                        {companySizeOptions.map((option) => (
-                          <option key={option} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                      {gateErrors.companySize && <span className="error-text">{gateErrors.companySize}</span>}
-                    </label>
                   </div>
 
                   <p className="diagnostico-note">
@@ -479,7 +446,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
               <div className="diagnostico-card">
                 <h2>Evalúa tu madurez Legal Ops en minutos</h2>
                 <p className="diagnostico-instruction">
-                  Responde 7 preguntas. Mientras más No tengas, más urgente es avanzar hacia un modelo con visibilidad y control.
+                  Responde 7 preguntas. Mientras más <strong>"No"</strong> tengas, más urgente es avanzar hacia un modelo con visibilidad y control.
                 </p>
 
                 <div className="diagnostico-progress-block">
@@ -566,15 +533,12 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                   Tu nivel de madurez Legal Ops: <span>Nivel {finalLevel.number} - {finalLevel.level}</span>
                 </h2>
                 <p className="diagnostico-result-subtitle">No se trata de hacer más, sino de ver más claro.</p>
-                <p>
-                  Hoy tu operación muestra señales de {finalLevel.symptom}. La oportunidad más rápida está en {finalLevel.opportunity}.
-                </p>
 
                 <div className="diagnostico-level-track" aria-label="Barra visual de madurez">
                   {[1, 2, 3, 4].map((levelNumber) => (
                     <span
                       key={levelNumber}
-                      className={`diagnostico-level-node ${levelNumber <= finalLevel.number ? 'active' : ''}`}
+                      className={`diagnostico-level-node ${levelNumber === finalLevel.number ? 'active' : ''}`}
                     >
                       Nivel {levelNumber}
                     </span>
@@ -608,6 +572,24 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
 
                 <p className="diagnostico-cta-text">{finalLevel.ctaText}</p>
 
+                <div className="diagnostico-close-block">
+                  <h3>Las áreas legales que escalan no son las más grandes: son las más conectadas.</h3>
+                  <p>
+                    Según nuestro benchmark regional, equipos con trazabilidad, flujos automatizados y visibilidad centralizada
+                    logran:
+                  </p>
+                  <ul>
+                    <li>+35% eficiencia en gestión contractual</li>
+                    <li>40% tiempos de respuesta</li>
+                    <li>+27% satisfacción interna</li>
+                  </ul>
+                  <p>
+                    ¿Quieres que lo aterricemos a tu realidad? En una demo vemos tu flujo actual y te proponemos una ruta por fases.
+                  </p>
+                </div>
+
+                <p className="diagnostico-roadmap-text">Un roadmap en dos fases</p>
+
                 {gateErrors.submit && <p className="error-text submit-error">{gateErrors.submit}</p>}
 
                 <button
@@ -616,24 +598,8 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                   onClick={handleSubmitDiagnosis}
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Enviando...' : finalLevel.buttonLabel}
+                  {isSubmitting ? 'Enviando...' : 'Ver roadmap en una demo'}
                 </button>
-              </div>
-
-              <div className="diagnostico-close-block">
-                <h3>Las áreas legales que escalan no son las más grandes: son las más conectadas.</h3>
-                <p>
-                  Según nuestro benchmark regional, equipos con trazabilidad, flujos automatizados y visibilidad centralizada
-                  logran:
-                </p>
-                <ul>
-                  <li>+35% eficiencia en gestión contractual</li>
-                  <li>40% tiempos de respuesta</li>
-                  <li>+27% satisfacción interna</li>
-                </ul>
-                <p>
-                  ¿Quieres que lo aterricemos a tu realidad? En una demo vemos tu flujo actual y te proponemos una ruta por fases.
-                </p>
               </div>
             </div>
           </section>

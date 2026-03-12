@@ -95,6 +95,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
+  min-width: 0; /* Safari: evita que la celda se expanda por el contenido del select */
   font-weight: var(--font-weight-medium);
   color: #0f2338;
 }
@@ -102,6 +103,9 @@
 .diagnostico-form-grid input,
 .diagnostico-form-grid select {
   width: 100%;
+  min-width: 0; /* Safari: permite que respete el ancho del grid en lugar del contenido */
+  max-width: 100%;
+  box-sizing: border-box;
   border: 1px solid #c4ddeb;
   border-radius: var(--radius-md);
   padding: 0.72rem 0.85rem;
@@ -192,6 +196,19 @@
   margin-bottom: var(--spacing-md);
 }
 
+.diagnostico-level-indicator {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+}
+
+.diagnostico-level-indicator span,
+.diagnostico-level-indicator strong,
+.diagnostico-level-indicator small {
+  margin: 0;
+}
+
 .diagnostico-steps {
   margin-top: 0.55rem;
   display: grid;
@@ -280,7 +297,12 @@
 }
 
 .diagnostico-result-card h2 span {
-  color: #006779;
+  color: var(--pink);
+}
+
+.diagnostico-result-card .diagnostico-primary-button {
+  display: block;
+  margin-inline: auto;
 }
 
 .diagnostico-result-subtitle {
@@ -307,9 +329,9 @@
 }
 
 .diagnostico-level-node.active {
-  border-color: #0098b1;
-  background: #ddf4f7;
-  color: #005e6e;
+  border-color: var(--pink);
+  background: color-mix(in srgb, var(--pink) 18% transparent);
+  color: var(--pink);
 }
 
 .diagnostico-highlight {
@@ -350,6 +372,15 @@
   margin-top: var(--spacing-sm);
   font-weight: var(--font-weight-medium);
   color: #243e5b;
+}
+
+.diagnostico-roadmap-text {
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  text-align: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--fs-20);
+  color: var(--navy);
 }
 
 .diagnostico-material-placeholder {

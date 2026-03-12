@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKA — Prep Reunión Técnica | Ciberseguridad & Integración</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --teal:          #0098B1;
+    --teal-light:    #AEDEE6;
+    --accent-teal:   #8AD0DC;
+    --white:         #FFFFFF;
+    --black:         #000000;
+    --gray-dark:     #1B1B1B;
+    --gray-mid:      #949494;
+    --gray-light:    #DFDFDF;
+    --orange:        #FF9000;
+    --green:         #00D44E;
+    --very-light-blue: #96EFFF;
+    --light-blue:    #5FBDFF;
+    --medium-blue:   #3987BE;
+    --purple:        #6D3CFF;
+    --navy:          #30339C;
+    --pink:          #F251FF;
+
+    --bg-base:       #FAFBFC;
+    --bg-card:       #FFFFFF;
+    --border:        #E8EAED;
+    --border-accent: rgba(0,152,177,0.25);
+    --text-primary:  #1B1B1B;
+    --text-secondary:#5F6368;
+    --text-muted:    #949494;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', -apple-system, sans-serif;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ═══ TYPOGRAPHY — Montserrat hierarchy ═══ */
+  /* Titulares: Medium (500) / Subtítulos: Medium (500) / Body: Light (300) / Bold solo para alta relevancia */
+  h1, h2, .section-title { font-weight: 500; }
+  h3, h4, .card-label, .section-subtitle { font-weight: 500; }
+  p, li, .body-text { font-weight: 300; }
+  strong { font-weight: 700; } /* Bold = solo alta relevancia */
+
+  .container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ═══ HEADER BAR ═══ */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .top-bar .logo-img {
+    height: 36px;
+    width: auto;
+  }
+  .top-bar .badge {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--teal);
+    background: rgba(0,152,177,0.08);
+    border: 1px solid rgba(0,152,177,0.15);
+    border-radius: 100px;
+    padding: 5px 14px;
+  }
+
+  /* ═══ HERO ═══ */
+  .hero {
+    padding: 48px 0 36px;
+    text-align: left;
+  }
+  .hero h1 {
+    font-size: 38px;
+    color: var(--teal);
+    margin-bottom: 8px;
+    letter-spacing: -0.8px;
+    font-weight: 500;
+  }
+  .hero .subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ═══ SECTIONS ═══ */
+  .section { padding: 40px 0; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+  .section-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 21px;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+    font-weight: 500;
+  }
+  .section-subtitle {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .divider { height: 1px; background: var(--border); }
+
+  /* ═══ GRIDS ═══ */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
+
+  /* ═══ CARDS ═══ */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+    transition: all 0.2s;
+  }
+  .card:hover { box-shadow: var(--shadow-md); border-color: var(--border-accent); }
+  .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+  .card h3 { font-size: 14.5px; font-weight: 500; margin-bottom: 6px; }
+  .card p, .card li { font-size: 12.5px; color: var(--text-secondary); font-weight: 300; line-height: 1.7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li { padding: 3px 0 3px 16px; position: relative; }
+  .card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 11px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  /* ═══ FLOW ═══ */
+  .flow-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    overflow-x: auto;
+  }
+  .flow {
+    display: flex;
+    align-items: center;
+    min-width: 860px;
+    justify-content: flex-start;
+  }
+  .flow-step {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 6px;
+    min-width: 100px; text-align: center;
+  }
+  .flow-step .icon-box {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; border: 2px solid;
+  }
+  .flow-step .step-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; }
+  .flow-step .step-desc { font-size: 10px; color: var(--text-muted); font-weight: 300; max-width: 95px; }
+  .flow-arrow { font-size: 15px; color: var(--gray-light); padding: 0 4px; flex-shrink: 0; }
+
+  /* ═══ SECURITY GRID ═══ */
+  .sec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .sec-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+    text-align: left;
+  }
+  .sec-card .sec-top-bar { position: absolute; top: 0; left: 0; width: 100%; height: 3px; }
+  .sec-card .sec-icon { font-size: 20px; margin-bottom: 6px; }
+  .sec-card h4 { font-size: 13px; font-weight: 500; margin-bottom: 5px; }
+  .sec-card p { font-size: 11.5px; color: var(--text-secondary); font-weight: 300; line-height: 1.65; }
+
+  /* ═══ TIMELINE ═══ */
+  .reg-timeline { position: relative; padding-left: 26px; text-align: left; }
+  .reg-timeline::before {
+    content: ''; position: absolute;
+    left: 7px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--teal), var(--purple), var(--navy));
+    border-radius: 2px;
+  }
+  .reg-item { position: relative; padding: 12px 0 24px 22px; }
+  .reg-dot {
+    position: absolute;
+    left: -22px; top: 18px;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    border: 3px solid;
+    background: var(--bg-base);
+  }
+  .reg-item .reg-date { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px; }
+  .reg-item h4 { font-size: 13.5px; font-weight: 500; margin-bottom: 2px; }
+  .reg-item p { font-size: 12px; color: var(--text-secondary); font-weight: 300; line-height: 1.65; }
+
+  /* ═══ QUESTIONS ═══ */
+  .q-list { display: flex; flex-direction: column; gap: 9px; }
+  .q-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex; gap: 12px;
+    align-items: flex-start;
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+    transition: all 0.2s;
+  }
+  .q-item:hover { border-color: var(--border-accent); box-shadow: var(--shadow-md); }
+  .q-number {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .q-text { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+  .q-why { font-size: 11px; color: var(--text-muted); font-weight: 300; font-style: italic; }
+
+  /* ═══ STAKEHOLDERS ═══ */
+  .stake-card {
+    display: flex; gap: 12px; align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+  }
+  .stake-avatar {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  .stake-info h4 { font-size: 13px; font-weight: 500; }
+  .stake-info .stake-role { font-size: 10px; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stake-info .stake-focus { font-size: 11.5px; color: var(--text-secondary); font-weight: 300; margin-top: 2px; }
+
+  /* ═══ POSTURE ═══ */
+  .posture-card {
+    background: rgba(0,152,177,0.03);
+    border: 1px solid rgba(0,152,177,0.12);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: left;
+  }
+  .posture-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .posture-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .posture-do, .posture-dont { padding: 16px; border-radius: 10px; }
+  .posture-do { background: rgba(0,212,78,0.05); border: 1px solid rgba(0,212,78,0.15); }
+  .posture-dont { background: rgba(255,144,0,0.05); border: 1px solid rgba(255,144,0,0.15); }
+  .posture-do h4, .posture-dont h4 { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+  .posture-do h4 { color: var(--green); }
+  .posture-dont h4 { color: var(--orange); }
+  .posture-do li, .posture-dont li { color: var(--text-secondary); padding: 2px 0; font-size: 12px; font-weight: 300; }
+
+  /* ═══ LAYERS ═══ */
+  .layers { display: flex; flex-direction: column; gap: 2px; }
+  .layer { padding: 12px 18px; border-radius: 8px; display: flex; align-items: center; gap: 12px; }
+  .layer-name { font-size: 12.5px; font-weight: 500; min-width: 75px; }
+  .layer-desc { font-size: 11.5px; color: var(--text-secondary); font-weight: 300; }
+  .layer-arrow { text-align: center; font-size: 14px; color: var(--gray-light); padding: 2px 0; }
+
+  /* ═══ SIDEBAR ═══ */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 220px;
+    height: 100vh;
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.03);
+  }
+  .sidebar-logo {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .sidebar-logo img { height: 28px; width: auto; }
+  .sidebar-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    padding: 0 20px;
+    margin-bottom: 10px;
+  }
+  .sidebar-nav { list-style: none; padding: 0; flex: 1; }
+  .sidebar-nav li { margin: 0; }
+  .sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  .sidebar-nav a:hover {
+    background: rgba(0,152,177,0.04);
+    color: var(--teal);
+    border-left-color: var(--teal);
+  }
+  .sidebar-nav a .nav-icon {
+    font-size: 14px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .sidebar-nav a .nav-num {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: rgba(0,0,0,0.03);
+    border-radius: 4px;
+    padding: 1px 5px;
+    margin-left: auto;
+  }
+  .sidebar-footer {
+    padding: 16px 20px 0;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+  .sidebar-footer .conf-badge {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--teal);
+    background: rgba(0,152,177,0.06);
+    border: 1px solid rgba(0,152,177,0.12);
+    border-radius: 6px;
+    padding: 5px 10px;
+    display: inline-block;
+  }
+  .sidebar-footer .date-text {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  /* Push main content to account for sidebar */
+  .page-wrapper {
+    margin-left: 220px;
+  }
+
+  /* ═══ FOOTER ═══ */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+  .footer-text { font-size: 10.5px; color: var(--text-muted); font-weight: 300; }
+  .footer-text .brand { color: var(--teal); font-weight: 500; }
+  .footer .logo-img { height: 24px; width: auto; opacity: 0.6; }
+
+  /* Smooth scroll */
+  html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+
+  /* ═══ PRINT ═══ */
+  @media print {
+    body { background: #fff; }
+    .sidebar { display: none; }
+    .page-wrapper { margin-left: 0; }
+    .card, .sec-card, .q-item, .stake-card, .flow-container, .posture-card { box-shadow: none; }
+  }
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .page-wrapper { margin-left: 0; }
+    .grid-2, .grid-3, .sec-grid, .posture-grid { grid-template-columns: 1fr; }
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR NAVIGATION ═══ -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <img src="logo.svg" alt="Binder">
+  </div>
+  <div class="sidebar-label">Navegación</div>
+  <ul class="sidebar-nav">
+    <li><a href="#contexto"><span class="nav-icon">📋</span> Contexto <span class="nav-num">01</span></a></li>
+    <li><a href="#arquitectura"><span class="nav-icon">⚙️</span> Arquitectura <span class="nav-num">02</span></a></li>
+    <li><a href="#ciberseguridad"><span class="nav-icon">🛡</span> Ciberseguridad <span class="nav-num">03</span></a></li>
+    <li><a href="#regulacion"><span class="nav-icon">⚖️</span> Regulación SBS <span class="nav-num">04</span></a></li>
+    <li><a href="#operacion"><span class="nav-icon">🔄</span> Operación <span class="nav-num">05</span></a></li>
+    <li><a href="#preguntas"><span class="nav-icon">❓</span> Preguntas <span class="nav-num">06</span></a></li>
+    <li><a href="#postura"><span class="nav-icon">🎯</span> Postura <span class="nav-num">07</span></a></li>
+    <li><a href="#outsourcing"><span class="nav-icon">📋</span> Outsourcing <span class="nav-num">08</span></a></li>
+  </ul>
+  <div class="sidebar-footer">
+    <div class="conf-badge">Confidencial</div>
+    <div class="date-text">Marzo 2026</div>
+  </div>
+</nav>
+
+<div class="page-wrapper">
+<div class="container">
+
+  <!-- ═══ TOP BAR ═══ -->
+  <div class="top-bar">
+    <div class="badge">Preparación de reunión — Confidencial</div>
+    <img src="logo.svg" alt="Binder" class="logo-img">
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <h1>OKA / Hiraoka</h1>
+    <p class="subtitle">Reunión técnica — Integración, Ciberseguridad y Operación diaria</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="dot" style="background:var(--teal)"></div>Martes 10 Marzo 2026</div>
+      <div class="hero-meta-item"><div class="dot" style="background:var(--purple)"></div>Equipo técnico OKA</div>
+      <div class="hero-meta-item"><div class="dot" style="background:var(--green)"></div>Francisco (Contraparte técnica)</div>
+      <div class="hero-meta-item"><div class="dot" style="background:var(--orange)"></div>JC</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 1. CONTEXTO ═══ -->
+  <div class="section" id="contexto">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(0,152,177,0.08);color:var(--teal)">📋</div>
+      <div>
+        <div class="section-subtitle">Sección 1</div>
+        <div class="section-title">Contexto del Proyecto</div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-bottom:18px">
+      <div class="card">
+        <div class="card-label" style="color:var(--teal)">Cliente</div>
+        <h3>OKA / Hiraoka</h3>
+        <p>Financiera especializada en productos Hiraoka. Volumen creciente de transacciones con exposición regulatoria en crédito y pagos.</p>
+      </div>
+      <div class="card">
+        <div class="card-label" style="color:var(--orange)">Problema</div>
+        <h3>Cumplimiento manual</h3>
+        <p>Procesos en Excel + macros inestables. Sin trazabilidad ni escalabilidad. Riesgo operativo ante auditorías SBS/UIF y crecimiento de volumen.</p>
+      </div>
+      <div class="card">
+        <div class="card-label" style="color:var(--green)">Solución</div>
+        <h3>Plataforma centralizada</h3>
+        <p>Infraestructura de cumplimiento moderna en AWS. Ingesta robusta, procesamiento asíncrono, base de datos estructurada, alertas y señales.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:500;margin-bottom:10px;color:var(--text-secondary)">Stakeholders clave</h3>
+    <div class="grid-4" style="margin-bottom:18px">
+      <div class="stake-card">
+        <div class="stake-avatar" style="background:rgba(242,81,255,0.08);color:var(--pink)">PE</div>
+        <div class="stake-info">
+          <h4>Pamela Egusquiza</h4>
+          <div class="stake-role">Oficial de Riesgo</div>
+          <div class="stake-focus">Operadora principal. Busca ser owner de la información.</div>
+        </div>
+      </div>
+      <div class="stake-card">
+        <div class="stake-avatar" style="background:rgba(57,135,190,0.08);color:var(--medium-blue)">C</div>
+        <div class="stake-info">
+          <h4>Carlos</h4>
+          <div class="stake-role">Jefatura</div>
+          <div class="stake-focus">Decisor. Foco en visibilidad, control y sostenibilidad.</div>
+        </div>
+      </div>
+      <div class="stake-card">
+        <div class="stake-avatar" style="background:rgba(255,144,0,0.08);color:var(--orange)">F</div>
+        <div class="stake-info">
+          <h4>Francisco</h4>
+          <div class="stake-role">Equipo técnico OKA</div>
+          <div class="stake-focus">Contraparte técnica. Quiere detalle de integración y ciberseguridad.</div>
+        </div>
+      </div>
+      <div class="stake-card">
+        <div class="stake-avatar" style="background:rgba(0,152,177,0.08);color:var(--teal)">JC</div>
+        <div class="stake-info">
+          <h4>JC</h4>
+          <div class="stake-role">Dir. Operación Consultiva</div>
+          <div class="stake-focus">Liderar propuesta. Mapear postura de seguridad de OKA.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:500;margin-bottom:10px;color:var(--text-secondary)">Fuentes de datos que integra la plataforma</h3>
+    <div class="grid-3">
+      <div class="card" style="border-left:3px solid var(--teal)">
+        <div class="card-label" style="color:var(--teal)">Mambu</div>
+        <h3>Motor transaccional</h3>
+        <p>Cuentas, titulares, montos, estados, saldos, cuotas, canal de origen.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--purple)">
+        <div class="card-label" style="color:var(--purple)">Analytics</div>
+        <h3>Perfil del cliente</h3>
+        <p>DNI, rango de ingresos, tipo de empleo, dirección (L1-L3), estado PEP.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--medium-blue)">
+        <div class="card-label" style="color:var(--medium-blue)">GesIntel</div>
+        <h3>Cumplimiento & screening</h3>
+        <p>PEP actual/histórico, watchlists, adverse media, riesgo final (verde / amarillo / rojo).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 2. ARQUITECTURA ═══ -->
+  <div class="section" id="arquitectura">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(57,135,190,0.08);color:var(--medium-blue)">⚙️</div>
+      <div>
+        <div class="section-subtitle">Sección 2 — Lo que Francisco quiere saber</div>
+        <div class="section-title">Integración & Arquitectura</div>
+      </div>
+    </div>
+
+    <div class="flow-container" style="margin-bottom:18px">
+      <h3 style="font-size:12px;font-weight:500;margin-bottom:16px;color:var(--text-secondary)">Flujo end-to-end (ingesta mensual)</h3>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="icon-box" style="background:rgba(0,152,177,0.06);border-color:var(--teal);color:var(--teal)">👤</div>
+          <div class="step-label" style="color:var(--teal)">Usuario</div>
+          <div class="step-desc">Selecciona fuente + periodo</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="icon-box" style="background:rgba(109,60,255,0.06);border-color:var(--purple);color:var(--purple)">🖥</div>
+          <div class="step-label" style="color:var(--purple)">UI / Next.js</div>
+          <div class="step-desc">Solicita URL firmada</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="icon-box" style="background:rgba(255,144,0,0.06);border-color:var(--orange);color:var(--orange)">🔑</div>
+          <div class="step-label" style="color:var(--orange)">Lambda API</div>
+          <div class="step-desc">Presigned PUT URL</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="icon-box" style="background:rgba(0,212,78,0.06);border-color:var(--green);color:var(--green)">📦</div>
+          <div class="step-label" style="color:var(--green)">S3</div>
+          <div class="step-desc">XLS crudo + checksum</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="icon-box" style="background:rgba(57,135,190,0.06);border-color:var(--medium-blue);color:var(--medium-blue)">🔄</div>
+          <div class="step-label" style="color:var(--medium-blue)">Step Functions</div>
+          <div class="step-desc">Validar → Parse → Normalizar</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="icon-box" style="background:rgba(48,51,156,0.06);border-color:var(--navy);color:var(--navy)">🗄</div>
+          <div class="step-label" style="color:var(--navy)">RDS PostgreSQL</div>
+          <div class="step-desc">Core + Mart views</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="icon-box" style="background:rgba(242,81,255,0.06);border-color:var(--pink);color:var(--pink)">📊</div>
+          <div class="step-label" style="color:var(--pink)">Dashboard</div>
+          <div class="step-desc">Alertas, casos, 360</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label" style="color:var(--medium-blue)">Capas de datos</div>
+        <div class="layers">
+          <div class="layer" style="background:rgba(0,152,177,0.05)">
+            <div class="layer-name" style="color:var(--teal)">Staging</div>
+            <div class="layer-desc">Raw snapshot por archivo. Control de calidad e integridad (runId).</div>
+          </div>
+          <div class="layer-arrow">↓</div>
+          <div class="layer" style="background:rgba(109,60,255,0.05)">
+            <div class="layer-name" style="color:var(--purple)">Core</div>
+            <div class="layer-desc">Entidades normalizadas: customers, accounts, transactions, screening.</div>
+          </div>
+          <div class="layer-arrow">↓</div>
+          <div class="layer" style="background:rgba(0,212,78,0.05)">
+            <div class="layer-name" style="color:var(--green)">Mart</div>
+            <div class="layer-desc">Snapshots por periodo, señales, métricas de calidad, risk drivers.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label" style="color:var(--orange)">Puntos clave para Francisco</div>
+        <ul>
+          <li><strong>Fase 1 no toca APIs</strong> — solo consumimos exports XLS que ya generan. Cero riesgo de integración directa.</li>
+          <li><strong>Presigned URLs</strong> — el archivo va directo a S3, nunca pasa por el backend en memoria.</li>
+          <li><strong>Idempotencia</strong> — si resuben un archivo, el sistema detecta duplicados por checksum.</li>
+          <li><strong>Step Functions orquesta</strong> — cada paso es independiente, auditable y con rollback.</li>
+          <li><strong>Fase 2 (API)</strong> depende de accesos que OKA habilite. No es requisito para operar.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 3. CIBERSEGURIDAD ═══ -->
+  <div class="section" id="ciberseguridad">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(48,51,156,0.08);color:var(--navy)">🛡</div>
+      <div>
+        <div class="section-subtitle">Sección 3 — Núcleo de la reunión</div>
+        <div class="section-title">Controles de Ciberseguridad</div>
+      </div>
+    </div>
+
+    <div class="sec-grid" style="margin-bottom:18px">
+      <div class="sec-card">
+        <div class="sec-top-bar" style="background:var(--teal)"></div>
+        <div class="sec-icon">🔐</div>
+        <h4>Control de accesos</h4>
+        <p><strong>IAM mínimo privilegio</strong> — cada Lambda con rol específico. Cognito/OIDC con roles: Oficial de Riesgo / Jefatura / Admin. MFA obligatorio. Buckets S3 privados.</p>
+      </div>
+      <div class="sec-card">
+        <div class="sec-top-bar" style="background:var(--green)"></div>
+        <div class="sec-icon">🔒</div>
+        <h4>Cifrado</h4>
+        <p><strong>KMS</strong> para cifrado en reposo (S3 + RDS). <strong>TLS 1.2+</strong> en tránsito. Llaves gestionadas con rotación automática.</p>
+      </div>
+      <div class="sec-card">
+        <div class="sec-top-bar" style="background:var(--purple)"></div>
+        <div class="sec-icon">📊</div>
+        <h4>Trazabilidad y logs</h4>
+        <p><strong>CloudWatch + X-Ray</strong> — logs inmutables con retención definida. Cada ingesta registra: quién, cuándo, qué, checksum. Alarmas por fallos.</p>
+      </div>
+      <div class="sec-card">
+        <div class="sec-top-bar" style="background:var(--medium-blue)"></div>
+        <div class="sec-icon">🖥</div>
+        <h4>Segregación de ambientes</h4>
+        <p><strong>dev / staging / prod</strong> completamente separados (cuentas o prefijos). Infra as Code (Terraform/CDK). CI/CD con GitHub Actions.</p>
+      </div>
+      <div class="sec-card">
+        <div class="sec-top-bar" style="background:var(--orange)"></div>
+        <div class="sec-icon">👁</div>
+        <h4>Protección de PII</h4>
+        <p>Política de <strong>minimización</strong> — solo datos necesarios. <strong>Mascarado</strong> en UI donde aplique. Sin exposición innecesaria de datos sensibles.</p>
+      </div>
+      <div class="sec-card">
+        <div class="sec-top-bar" style="background:var(--pink)"></div>
+        <div class="sec-icon">🚨</div>
+        <h4>Respuesta a incidentes</h4>
+        <p>Alarmas CloudWatch por anomalías. Procedimiento de escalamiento definido. Logs para análisis post-mortem. Compatible con reportería SBS.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--navy)">Alineación con frameworks</div>
+      <h3>La arquitectura cubre controles clave de ISO 27001, ISO 22301 y SOC 2</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:12px">
+        <div>
+          <div style="font-size:11.5px;font-weight:500;color:var(--teal);margin-bottom:6px">ISO 27001</div>
+          <ul><li>Gestión de riesgos</li><li>Control de accesos (IAM)</li><li>Cifrado (KMS/TLS)</li><li>Registro y monitoreo</li><li>Gestión de incidentes</li></ul>
+        </div>
+        <div>
+          <div style="font-size:11.5px;font-weight:500;color:var(--green);margin-bottom:6px">ISO 22301</div>
+          <ul><li>RTO/RPO definibles</li><li>Backups automáticos</li><li>Ambientes alternos</li><li>DRP compatible</li><li>Step Functions con retry</li></ul>
+        </div>
+        <div>
+          <div style="font-size:11.5px;font-weight:500;color:var(--purple);margin-bottom:6px">SOC 2</div>
+          <ul><li>Segregación dev/prod</li><li>Autenticación fuerte</li><li>Change management (CI/CD)</li><li>Acceso mínimo necesario</li><li>Logs inmutables</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 4. REGULACIÓN SBS ═══ -->
+  <div class="section" id="regulacion">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(255,144,0,0.08);color:var(--orange)">⚖️</div>
+      <div>
+        <div class="section-subtitle">Sección 4 — Contexto regulatorio</div>
+        <div class="section-title">Marco SBS — Ciberseguridad en Financieras Perú</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <div class="reg-timeline">
+          <div class="reg-item">
+            <div class="reg-dot" style="border-color:var(--teal)"></div>
+            <div class="reg-date" style="color:var(--teal)">Feb 2021</div>
+            <h4>Resolución SBS N° 504-2021</h4>
+            <p>Reglamento para Gestión de Seguridad de la Información y Ciberseguridad. Norma marco vigente. Exige SGSI-C, programa de ciberseguridad, reporte de incidentes.</p>
+          </div>
+          <div class="reg-item">
+            <div class="reg-dot" style="border-color:var(--purple)"></div>
+            <div class="reg-date" style="color:var(--purple)">Q1 2025</div>
+            <h4>Actualización Fase 1 (FMI)</h4>
+            <p>Modificaciones prioritarias con consultoría del Fondo Monetario Internacional. Cambios en reportería de incidentes y supervisión.</p>
+          </div>
+          <div class="reg-item">
+            <div class="reg-dot" style="border-color:var(--medium-blue)"></div>
+            <div class="reg-date" style="color:var(--medium-blue)">Jul 2025</div>
+            <h4>Comité de alto nivel SBS</h4>
+            <p>Actualización de equipos de supervisión. Comité para alinear iniciativas de ciberseguridad en el sector financiero.</p>
+          </div>
+          <div class="reg-item">
+            <div class="reg-dot" style="border-color:var(--green)"></div>
+            <div class="reg-date" style="color:var(--green)">Dic 2025</div>
+            <h4>Oficial de Datos Personales</h4>
+            <p>Resolución 100-2025-JUS. Designación obligatoria para empresas reguladas. Ley 29733 de Protección de Datos reforzada.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <div class="card-label" style="color:var(--orange)">Régimen aplicable a OKA</div>
+          <h3>Probablemente Régimen General (Res. 504-2021)</h3>
+          <p style="margin-top:4px">Como financiera, OKA caería en el régimen más exigente:</p>
+          <ul style="margin-top:4px">
+            <li><strong>SGSI-C</strong> formalizado con políticas y procedimientos</li>
+            <li><strong>Comité de Riesgos</strong> con funciones de seguridad</li>
+            <li><strong>Función de seguridad independiente</strong> de TI</li>
+            <li><strong>Programa de ciberseguridad</strong> con diagnóstico y mejora</li>
+            <li><strong>Reporte obligatorio</strong> ante incidentes significativos</li>
+            <li><strong>Outsourcing cloud</strong> — notificación a SBS requerida</li>
+          </ul>
+        </div>
+        <div class="card" style="background:rgba(0,152,177,0.02);border-color:rgba(0,152,177,0.15)">
+          <div class="card-label" style="color:var(--teal)">Oportunidad estratégica</div>
+          <p>La presión regulatoria creciente (actualización FMI 2025-2026) <strong>justifica la inversión de OKA</strong> en formalizar controles. La plataforma no solo resuelve cumplimiento operativo — <strong>fortalece su postura ante la SBS</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 5. OPERACIÓN ═══ -->
+  <div class="section" id="operacion">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(0,212,78,0.08);color:var(--green)">🔄</div>
+      <div>
+        <div class="section-subtitle">Sección 5</div>
+        <div class="section-title">Operación día a día</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label" style="color:var(--green)">Modelo operativo</div>
+        <h3>Quién hace qué y cuándo</h3>
+        <ul>
+          <li><strong>Pamela (Oficial de Riesgo)</strong> — carga XLS mensual por fuente, revisa alertas, clasifica casos, genera reportes.</li>
+          <li><strong>Carlos (Jefatura)</strong> — monitorea dashboards, valida escalamientos, reporta a dirección.</li>
+          <li><strong>Sistema</strong> — procesa automáticamente: valida, normaliza, cruza, genera señales.</li>
+          <li><strong>Servicio recurrente</strong> — ajusta reglas, umbrales, evoluciona el sistema por cambios regulatorios.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label" style="color:var(--teal)">Capacidades del workspace</div>
+        <h3>Lo que ven los usuarios</h3>
+        <ul>
+          <li><strong>Panel de ingestas</strong> — estado de cada carga, errores, métricas de calidad.</li>
+          <li><strong>Matriz consolidada</strong> — data cruzada con filtros (monto, canal, PEP, riesgo).</li>
+          <li><strong>Customer 360</strong> — vista unificada por cliente con semáforo y drivers visibles.</li>
+          <li><strong>Señales y alertas</strong> — clasificadas: informativas, revisión humana, escalamiento.</li>
+          <li><strong>Exportación</strong> — XLS/CSV para reportería externa o auditoría.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 6. PREGUNTAS ═══ -->
+  <div class="section" id="preguntas">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(109,60,255,0.08);color:var(--purple)">❓</div>
+      <div>
+        <div class="section-subtitle">Sección 6</div>
+        <div class="section-title">Preguntas estratégicas para Francisco</div>
+      </div>
+    </div>
+
+    <div class="q-list">
+      <div class="q-item">
+        <div class="q-number" style="background:rgba(0,152,177,0.08);color:var(--teal)">1</div>
+        <div class="q-content">
+          <div class="q-text">¿Bajo qué régimen de la Resolución 504-2021 opera OKA? ¿General o Simplificado?</div>
+          <div class="q-why">Define el nivel de exigencia regulatoria y los controles mínimos que debemos cumplir.</div>
+        </div>
+      </div>
+      <div class="q-item">
+        <div class="q-number" style="background:rgba(109,60,255,0.08);color:var(--purple)">2</div>
+        <div class="q-content">
+          <div class="q-text">¿Manejan algún framework de referencia para ciberseguridad? ¿NIST? ¿ISO 27001?</div>
+          <div class="q-why">Permite alinear la arquitectura a su lenguaje y criterios de evaluación internos.</div>
+        </div>
+      </div>
+      <div class="q-item">
+        <div class="q-number" style="background:rgba(57,135,190,0.08);color:var(--medium-blue)">3</div>
+        <div class="q-content">
+          <div class="q-text">¿Han hecho la notificación a SBS sobre uso de servicios cloud? ¿O se formalizaría con este proyecto?</div>
+          <div class="q-why">Outsourcing TI en financieras requiere aviso formal a SBS. Mejor saber si es trámite nuevo o existente.</div>
+        </div>
+      </div>
+      <div class="q-item">
+        <div class="q-number" style="background:rgba(0,212,78,0.08);color:var(--green)">4</div>
+        <div class="q-content">
+          <div class="q-text">¿Tienen definido un RTO y RPO para los procesos de cumplimiento?</div>
+          <div class="q-why">Determina requerimientos de disponibilidad y backup para la plataforma.</div>
+        </div>
+      </div>
+      <div class="q-item">
+        <div class="q-number" style="background:rgba(255,144,0,0.08);color:var(--orange)">5</div>
+        <div class="q-content">
+          <div class="q-text">¿Tienen un proceso de evaluación de proveedores tecnológicos? ¿Necesitan un security dossier?</div>
+          <div class="q-why">Posiciona proactivamente y demuestra que entendemos sus requerimientos de gobernanza.</div>
+        </div>
+      </div>
+      <div class="q-item">
+        <div class="q-number" style="background:rgba(48,51,156,0.08);color:var(--navy)">6</div>
+        <div class="q-content">
+          <div class="q-text">¿Han tenido alguna observación de auditoría o supervisión SBS reciente sobre cumplimiento?</div>
+          <div class="q-why">Si hay dolor reciente, la solución se convierte en respuesta directa a esa observación.</div>
+        </div>
+      </div>
+      <div class="q-item">
+        <div class="q-number" style="background:rgba(242,81,255,0.08);color:var(--pink)">7</div>
+        <div class="q-content">
+          <div class="q-text">¿Tienen restricciones sobre residencia de datos o regiones AWS permitidas?</div>
+          <div class="q-why">Regulación y política interna pueden exigir que los datos permanezcan en una región específica.</div>
+        </div>
+      </div>
+      <div class="q-item">
+        <div class="q-number" style="background:rgba(138,208,220,0.1);color:var(--teal)">8</div>
+        <div class="q-content">
+          <div class="q-text">¿Cómo manejan hoy el control de accesos a la información de cumplimiento?</div>
+          <div class="q-why">Entender su estado actual permite diseñar una transición suave, no un cambio brusco.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 7. POSTURA ═══ -->
+  <div class="section" id="postura">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(242,81,255,0.08);color:var(--pink)">🎯</div>
+      <div>
+        <div class="section-subtitle">Sección 7</div>
+        <div class="section-title">Postura para la reunión</div>
+      </div>
+    </div>
+
+    <div class="posture-card">
+      <h3>Escuchar y mapear, no vender</h3>
+      <p style="color:var(--text-secondary);font-size:12.5px;font-weight:300;margin-bottom:12px">El objetivo es entender la postura de ciberseguridad de OKA y posicionar la arquitectura como extensión natural de sus controles existentes.</p>
+      <div class="posture-grid">
+        <div class="posture-do">
+          <h4>Sí hacer</h4>
+          <ul style="list-style:none;padding:0">
+            <li>• Preguntar antes de afirmar</li>
+            <li>• Hablar en su lenguaje (SBS, SGSI-C, UIF)</li>
+            <li>• Mostrar que la arquitectura ya tiene controles alineados</li>
+            <li>• Ofrecer preparar un security dossier si lo necesitan</li>
+            <li>• Validar sus preocupaciones antes de dar soluciones</li>
+            <li>• Tomar notas de sus lineamientos internos</li>
+          </ul>
+        </div>
+        <div class="posture-dont">
+          <h4>No hacer</h4>
+          <ul style="list-style:none;padding:0">
+            <li>• No prometer certificaciones que no tenemos</li>
+            <li>• No minimizar sus preocupaciones de seguridad</li>
+            <li>• No hablar de Fase 2 (API) si no preguntan</li>
+            <li>• No asumir que usan frameworks específicos</li>
+            <li>• No entrar en detalles de pricing</li>
+            <li>• No comprometer alcances no definidos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px">
+      <div class="card" style="background:rgba(0,212,78,0.03);border-color:rgba(0,212,78,0.15)">
+        <div class="card-label" style="color:var(--green)">Frase de cierre sugerida</div>
+        <p style="font-size:13.5px;font-style:italic">"La arquitectura está diseñada alineada a los controles que exige la SBS. Podemos preparar un dossier de seguridad formal que documente cada control implementado y cómo mapea a sus requerimientos internos."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 8. OUTSOURCING ═══ -->
+  <div class="section" id="outsourcing">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(138,208,220,0.1);color:var(--teal)">📋</div>
+      <div>
+        <div class="section-subtitle">Sección 8 — Si surge el tema</div>
+        <div class="section-title">Outsourcing tecnológico en financieras</div>
+      </div>
+    </div>
+
+    <div class="grid-4">
+      <div class="card" style="border-top:3px solid var(--teal)">
+        <h3 style="font-size:13px">Evaluación del proveedor</h3>
+        <p style="margin-top:4px">Matriz de riesgos, evaluación de seguridad, declaración de subprocesadores (AWS). Evaluación anual.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--purple)">
+        <h3 style="font-size:13px">Cláusulas contractuales</h3>
+        <p style="margin-top:4px">Derecho de auditoría, confidencialidad reforzada, notificación de incidentes, subcontratación informada.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--green)">
+        <h3 style="font-size:13px">Gobierno del servicio</h3>
+        <p style="margin-top:4px">SLAs definidos, reportes periódicos, comité de seguimiento, KPIs de disponibilidad.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--orange)">
+        <h3 style="font-size:13px">Plan de salida</h3>
+        <p style="margin-top:4px">Migración de datos, plazo de entrega, eliminación certificada, continuidad post-terminación.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="footer">
+    <div class="footer-text">Material interno de preparación — <span class="brand">OKA / Hiraoka</span> · Reunión técnica Marzo 2026 · Confidencial</div>
+    <img src="logo.svg" alt="Binder" class="logo-img">
+  </div>
+
+</div>
+</div><!-- end page-wrapper -->
+
+<script>
+// Highlight active sidebar link on scroll
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.sidebar-nav a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => {
+        a.style.borderLeftColor = 'transparent';
+        a.style.color = '';
+        a.style.background = '';
+      });
+      const active = document.querySelector('.sidebar-nav a[href="#' + entry.target.id + '"]');
+      if (active) {
+        active.style.borderLeftColor = '#0098B1';
+        active.style.color = '#0098B1';
+        active.style.background = 'rgba(0,152,177,0.04)';
+      }
+    }
+  });
+}, { threshold: 0.2, rootMargin: '-20px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
