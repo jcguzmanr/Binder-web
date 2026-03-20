@@ -4,6 +4,10 @@ import { contactoContent } from '../../content/contacto';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import blockedEmailDomains from '../../data/blockedEmailDomains.json';
 import countriesData from '../../data/countries.json';
+import {
+  CORPORATE_EMAIL_REQUIRED_MESSAGE,
+  isBlockedPersonalEmailDomain,
+} from '../../utils/corporateEmailValidation';
 import './Contact.css';
 
 interface Country {
@@ -73,10 +77,9 @@ export const Contact = () => {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Correo inválido';
     } else {
-      // Validar dominio bloqueado
       const emailDomain = formData.email.split('@')[1]?.toLowerCase();
-      if (emailDomain && blockedDomains.includes(emailDomain)) {
-        newErrors.email = 'Por favor, utiliza un correo corporativo. No se permiten correos personales (Gmail, Hotmail, etc.)';
+      if (emailDomain && isBlockedPersonalEmailDomain(emailDomain, blockedDomains)) {
+        newErrors.email = CORPORATE_EMAIL_REQUIRED_MESSAGE;
       }
     }
 

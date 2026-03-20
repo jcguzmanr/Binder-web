@@ -4,6 +4,11 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { getEventBySlug } from '../../content/eventos';
 import blockedEmailDomains from '../../data/blockedEmailDomains.json';
 import countriesData from '../../data/countries.json';
+import {
+  CORPORATE_EMAIL_REQUIRED_MESSAGE,
+  getEmailDomain,
+  isBlockedPersonalEmailDomain,
+} from '../../utils/corporateEmailValidation';
 import './EventPage.css';
 
 /** External webhook for event registrations — configure in `.env` as `VITE_EVENTS_WEBHOOK_URL`. */
@@ -106,15 +111,15 @@ export function EventPage() {
     const next: FieldErrors = {};
     if (!form.firstName.trim()) next.firstName = 'El nombre es requerido';
     if (!form.lastName.trim()) next.lastName = 'El apellido es requerido';
-    if (!form.email.trim()) {
+    const emailTrimmed = form.email.trim();
+    if (!emailTrimmed) {
       next.email = 'El correo es requerido';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrimmed)) {
       next.email = 'Correo inválido';
     } else {
-      const domain = form.email.split('@')[1]?.toLowerCase();
-      if (domain && blockedDomains.includes(domain)) {
-        next.email =
-          'Por favor, utiliza un correo corporativo. No se permiten correos personales (Gmail, Hotmail, etc.)';
+      const domain = getEmailDomain(emailTrimmed);
+      if (domain && isBlockedPersonalEmailDomain(domain, blockedDomains)) {
+        next.email = CORPORATE_EMAIL_REQUIRED_MESSAGE;
       }
     }
     if (!form.jobTitle.trim()) next.jobTitle = 'El cargo es requerido';
@@ -139,8 +144,14 @@ export function EventPage() {
     setErrors((prev) => ({ ...prev, submit: undefined }));
 
     const dial = countries.find((c) => c.code === form.phoneCountry)?.dialCode || '';
-    const phoneFull =
-      form.phone.trim() ? `${dial} ${form.phone}`.trim() : null;
+    const phoneDigits = form.phone.replace(/\D/g, '');
+    const phoneFull = phoneDigits ? `${dial} ${phoneDigits}`.trim() : null;
+
+    const at = form.email.trim().lastIndexOf('@');
+    const emailNormalized =
+      at > 0
+        ? `${form.email.trim().slice(0, at + 1)}${form.email.trim().slice(at + 1).toLowerCase()}`
+        : form.email.trim();
 
     try {
       const res = await fetch(EVENTS_WEBHOOK_URL, {
@@ -149,7 +160,7 @@ export function EventPage() {
         body: JSON.stringify({
           firstName: form.firstName.trim(),
           lastName: form.lastName.trim(),
-          email: form.email.trim(),
+          email: emailNormalized,
           jobTitle: form.jobTitle.trim(),
           company: form.company.trim(),
           phone: phoneFull,
@@ -413,10 +424,14 @@ export function EventPage() {
                         </select>
                         <input
                           type="tel"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
                           className="event-phone-number"
-                          placeholder="Teléfono"
+                          placeholder="Teléfono (solo números)"
                           value={form.phone}
-                          onChange={(e) => setField('phone', e.target.value)}
+                          onChange={(e) =>
+                            setField('phone', e.target.value.replace(/\D/g, ''))
+                          }
                           autoComplete="tel-national"
                         />
                       </div>

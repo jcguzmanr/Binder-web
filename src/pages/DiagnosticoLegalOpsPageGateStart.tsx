@@ -1,6 +1,10 @@
 import { FormEvent, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import blockedEmailDomains from '../data/blockedEmailDomains.json';
+import {
+  CORPORATE_EMAIL_REQUIRED_MESSAGE,
+  isBlockedPersonalEmailDomain,
+} from '../utils/corporateEmailValidation';
 import { PageHead } from '../components/seo/PageHead';
 import { SchemaMarkup } from '../components/seo/SchemaMarkup';
 import './DiagnosticoLegalOpsPage.css';
@@ -217,8 +221,8 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
       errors.email = 'Ingresa un email válido.';
     } else {
       const domain = gateFormData.email.split('@')[1]?.toLowerCase();
-      if (domain && blockedDomains.includes(domain)) {
-        errors.email = 'Por favor utiliza un correo corporativo.';
+      if (domain && isBlockedPersonalEmailDomain(domain, blockedDomains)) {
+        errors.email = CORPORATE_EMAIL_REQUIRED_MESSAGE;
       }
     }
 
