@@ -39,6 +39,12 @@ El frontend utiliza la variable de entorno `VITE_WEBHOOK_URL` que debe estar con
 - **Desarrollo:** Archivo `.env` local
 - **Producción (Vercel):** Variables de entorno en el dashboard de Vercel
 
+### Webinar / eventos (`/eventos/:slug`)
+Las landing de eventos usan un webhook **separado**:
+- **`VITE_EVENTS_WEBHOOK_URL`** — URL del endpoint que recibirá el registro (mismo patrón `POST` + `Content-Type: application/json`).
+- Payload incluye: `firstName`, `lastName`, `email`, `jobTitle`, `company`, `phone`, `phoneCountry`, `consent`, `timestamp`, `source` (p. ej. `evento-webinar-legalops-binder-niubox`), `eventSlug`.
+- Opcional: **`VITE_LINKEDIN_PARTNER_ID`** — ID del LinkedIn Insight Tag (solo se inyecta el script si está definido).
+
 ---
 
 ## 📦 Estructura de Datos Enviados

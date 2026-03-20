@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './context/ThemeContext';
 import { BackgroundProvider } from './context/BackgroundContext';
@@ -39,7 +39,72 @@ import { ExpedienteDigitalPage } from './pages/casos-uso/ExpedienteDigitalPage';
 import { CasesPage } from './pages/casos-uso/CasesPage';
 import { TestAnimationPage } from './pages/TestAnimationPage';
 import { PrepReunionOkaPage } from './pages/docs/PrepReunionOkaPage';
+import { EventPage } from './pages/eventos/EventPage';
 import './styles/globals.css';
+
+function AppLayout() {
+  const location = useLocation();
+  const isEventPage = location.pathname.startsWith('/eventos/');
+
+  return (
+    <div className="app">
+      <GlobalHead />
+      <ScrollToTop />
+      <GoogleAnalytics />
+      {!isEventPage && <BackgroundRenderer />}
+      <CookieBanner />
+      <CookieSettings />
+      {!isEventPage && <Navigation />}
+      <Routes>
+        <Route path="/gentle-waves" element={<GentleWavesPage />} />
+        <Route path="/canyon-flows" element={<CanyonFlowsPage />} />
+        <Route path="/flow-pattern" element={<FlowPatternPage />} />
+        <Route path="/porquebinder" element={<PorQueBinderPage />} />
+        <Route path="/sobrebinder" element={<SobreBinderPage />} />
+        <Route path="/funcionalidades" element={<FuncionalidadesPage />} />
+        <Route path="/soluciones" element={<SolucionesPage />} />
+        <Route path="/testimonios" element={<TestimoniosPage />} />
+        <Route path="/contacto" element={<ContactoPage />} />
+        <Route path="/gracias" element={<GraciasPage />} />
+        <Route
+          path="/diagnostico-legal-ops-formulario-inicio"
+          element={<DiagnosticoLegalOpsPageGateStart />}
+        />
+        <Route
+          path="/diagnostico-legal-ops"
+          element={<Navigate to="/diagnostico-legal-ops-formulario-inicio" replace />}
+        />
+        <Route path="/legal/privacidad" element={<PrivacidadPage />} />
+        <Route path="/legal/cookies" element={<CookiesPage />} />
+        <Route path="/legal/terminos" element={<TerminosPage />} />
+        <Route path="/legal/aviso" element={<AvisoLegalPage />} />
+        <Route path="/legal/seguridad" element={<SeguridadPage />} />
+        <Route path="/legal/reclamaciones" element={<ReclamacionesPage />} />
+        <Route path="/casos-uso/clm" element={<CLMPage />} />
+        <Route path="/casos-uso/gestion-procesos" element={<CasesPage />} />
+        <Route path="/casos-uso/expediente-digital" element={<ExpedienteDigitalPage />} />
+        <Route path="/cases" element={<Navigate to="/casos-uso/gestion-procesos" replace />} />
+        <Route path="/test/antigravity" element={<TestAnimationPage />} />
+        <Route path="/docs/prep-reunion-oka-ciberseguridad" element={<PrepReunionOkaPage />} />
+        <Route path="/eventos/:slug" element={<EventPage />} />
+        <Route
+          path="/"
+          element={
+            <main>
+              <Home />
+              <WhyBinder />
+              <Solutions />
+              <Apps />
+              {/* <Testimonials /> */}
+              <Contact />
+            </main>
+          }
+        />
+      </Routes>
+      {!isEventPage && <Footer />}
+    </div>
+  );
+}
 
 function App() {
   return (
@@ -48,131 +113,11 @@ function App() {
         <BackgroundProvider>
           <CookieProvider>
             <Router>
-            <div className="app">
-              <GlobalHead />
-              <ScrollToTop />
-              <GoogleAnalytics />
-              <BackgroundRenderer />
-              <CookieBanner />
-              <CookieSettings />
-              <Navigation />
-            <Routes>
-              <Route
-                path="/gentle-waves"
-                element={<GentleWavesPage />}
-              />
-              <Route
-                path="/canyon-flows"
-                element={<CanyonFlowsPage />}
-              />
-              <Route
-                path="/flow-pattern"
-                element={<FlowPatternPage />}
-              />
-              <Route
-                path="/porquebinder"
-                element={<PorQueBinderPage />}
-              />
-              <Route
-                path="/sobrebinder"
-                element={<SobreBinderPage />}
-              />
-              <Route
-                path="/funcionalidades"
-                element={<FuncionalidadesPage />}
-              />
-              <Route
-                path="/soluciones"
-                element={<SolucionesPage />}
-              />
-              <Route
-                path="/testimonios"
-                element={<TestimoniosPage />}
-              />
-              <Route
-                path="/contacto"
-                element={<ContactoPage />}
-              />
-              <Route
-                path="/gracias"
-                element={<GraciasPage />}
-              />
-              <Route
-                path="/diagnostico-legal-ops-formulario-inicio"
-                element={<DiagnosticoLegalOpsPageGateStart />}
-              />
-              <Route
-                path="/diagnostico-legal-ops"
-                element={<Navigate to="/diagnostico-legal-ops-formulario-inicio" replace />}
-              />
-              <Route
-                path="/legal/privacidad"
-                element={<PrivacidadPage />}
-              />
-              <Route
-                path="/legal/cookies"
-                element={<CookiesPage />}
-              />
-              <Route
-                path="/legal/terminos"
-                element={<TerminosPage />}
-              />
-              <Route
-                path="/legal/aviso"
-                element={<AvisoLegalPage />}
-              />
-              <Route
-                path="/legal/seguridad"
-                element={<SeguridadPage />}
-              />
-              <Route
-                path="/legal/reclamaciones"
-                element={<ReclamacionesPage />}
-              />
-              <Route
-                path="/casos-uso/clm"
-                element={<CLMPage />}
-              />
-              <Route
-                path="/casos-uso/gestion-procesos"
-                element={<CasesPage />}
-              />
-              <Route
-                path="/casos-uso/expediente-digital"
-                element={<ExpedienteDigitalPage />}
-              />
-              <Route
-                path="/cases"
-                element={<Navigate to="/casos-uso/gestion-procesos" replace />}
-              />
-              <Route
-                path="/test/antigravity"
-                element={<TestAnimationPage />}
-              />
-              <Route
-                path="/docs/prep-reunion-oka-ciberseguridad"
-                element={<PrepReunionOkaPage />}
-              />
-              <Route
-                path="/"
-                element={
-                  <main>
-                    <Home />
-                    <WhyBinder />
-                    <Solutions />
-                    <Apps />
-                    {/* <Testimonials /> */}
-                    <Contact />
-                  </main>
-                }
-              />
-            </Routes>
-            <Footer />
-          </div>
-        </Router>
-        </CookieProvider>
-      </BackgroundProvider>
-    </ThemeProvider>
+              <AppLayout />
+            </Router>
+          </CookieProvider>
+        </BackgroundProvider>
+      </ThemeProvider>
     </HelmetProvider>
   );
 }
