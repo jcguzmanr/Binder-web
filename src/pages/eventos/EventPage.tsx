@@ -164,7 +164,9 @@ export function EventPage() {
 
     if (!EVENTS_WEBHOOK_URL) {
       setErrors({
-        submit: 'Registro temporalmente no disponible. Intenta más tarde o contacta a Binder.',
+        submit:
+          'Registro no disponible en este entorno. Falta configurar VITE_EVENTS_WEBHOOK_URL. ' +
+          'Si estás en producción, agrégalo en Vercel > Settings > Environment Variables.',
       });
       return;
     }
@@ -221,8 +223,8 @@ export function EventPage() {
       setErrors({
         submit:
           err instanceof Error
-            ? err.message
-            : 'Hubo un error al enviar. Por favor, intenta nuevamente.',
+            ? `No se pudo enviar tu registro. ${err.message}`
+            : 'No se pudo enviar tu registro por un error de red. Intenta nuevamente en unos minutos.',
       });
     } finally {
       setSubmitting(false);
@@ -411,13 +413,18 @@ export function EventPage() {
                         </select>
                         <input type="tel" inputMode="numeric" pattern="[0-9]*" className="ev-phone-number" placeholder="Teléfono (solo números)" value={form.phone} onChange={(e) => setField('phone', e.target.value.replace(/\D/g, ''))} autoComplete="tel-national" />
                       </div>
-                      <label className="ev-consent ev-form-full">
-                        <input type="checkbox" checked={form.consent} onChange={(e) => setField('consent', e.target.checked)} />
-                        <span>
+                      <div className="ev-consent ev-form-full">
+                        <input
+                          id="event-consent-checkbox"
+                          type="checkbox"
+                          checked={form.consent}
+                          onChange={(e) => setField('consent', e.target.checked)}
+                        />
+                        <label htmlFor="event-consent-checkbox">
                           Acepto el tratamiento de mis datos según la{' '}
                           <Link to="/legal/privacidad" target="_blank" rel="noopener noreferrer">política de privacidad</Link>.
-                        </span>
-                      </label>
+                        </label>
+                      </div>
                       {errors.consent && <div className="ev-field-error ev-form-full">{errors.consent}</div>}
                     </div>
 
