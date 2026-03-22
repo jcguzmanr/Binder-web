@@ -88,6 +88,14 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-padding-top: 80px; /* Account for fixed nav */
+  /* La página debe poder crecer con el contenido (evita límites de herramientas preview) */
+  max-width: none !important;
+  max-height: none !important;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* Smooth scrolling with better performance */
@@ -105,6 +113,16 @@ body {
   color: var(--fg);
   background-color: var(--bg);
   min-height: 100vh;
+  max-width: none !important;
+  max-height: none !important;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
 }
 
 /* Make body background transparent when animated background is active */

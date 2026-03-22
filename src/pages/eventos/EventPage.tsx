@@ -11,12 +11,8 @@ import {
 } from '../../utils/corporateEmailValidation';
 import './EventPage.css';
 
-/** External webhook for event registrations — configure in `.env` as `VITE_EVENTS_WEBHOOK_URL`. */
-const EVENTS_WEBHOOK_URL = import.meta.env.VITE_EVENTS_WEBHOOK_URL as string | undefined;
-
-/** LinkedIn Insight Tag partner ID — configure as `VITE_LINKEDIN_PARTNER_ID` when available. */
+const EVENTS_WEBHOOK_URL = (import.meta.env.VITE_EVENTS_WEBHOOK_URL as string | undefined)?.trim();
 const LINKEDIN_PARTNER_ID = import.meta.env.VITE_LINKEDIN_PARTNER_ID as string | undefined;
-
 const SITE_URL = 'https://binder.la';
 
 declare global {
@@ -53,6 +49,21 @@ interface FieldErrors {
   company?: string;
   consent?: string;
   submit?: string;
+}
+
+/** Logos Binder + Niubox + Nexum (reutilizado en barra desktop y toolbar móvil) */
+function WebinarPartnerLogos() {
+  return (
+    <>
+      <Link to="/" aria-label="Binder — inicio">
+        <img src="/lightmode_default.svg" alt="Binder" className="ev-logo-binder" />
+      </Link>
+      <img src="/imgs-webinar/niubox_logo.webp" alt="Niubox" className="ev-logo-niubox-img" />
+      <div className="ev-logo-nexum-wrap" aria-label="Nexum">
+        <img src="/imgs-webinar/nexum_logo.png" alt="Nexum" className="ev-logo-nexum-img" />
+      </div>
+    </>
+  );
 }
 
 export function EventPage() {
@@ -104,6 +115,24 @@ export function EventPage() {
         );
       }
       delete window._linkedin_partner_id;
+    };
+  }, []);
+
+  /* Quitar límites inline en <html> (p. ej. preview con max-width/max-height) para que la página crezca con el contenido */
+  useEffect(() => {
+    const el = document.documentElement;
+    const prev = {
+      maxWidth: el.style.maxWidth,
+      maxHeight: el.style.maxHeight,
+      overflow: el.style.overflow,
+    };
+    el.style.removeProperty('max-width');
+    el.style.removeProperty('max-height');
+    el.style.removeProperty('overflow');
+    return () => {
+      if (prev.maxWidth) el.style.maxWidth = prev.maxWidth;
+      if (prev.maxHeight) el.style.maxHeight = prev.maxHeight;
+      if (prev.overflow) el.style.overflow = prev.overflow;
     };
   }, []);
 
@@ -208,6 +237,12 @@ export function EventPage() {
     }
   };
 
+  const scrollToRegister = useCallback(() => {
+    const registerSection = document.getElementById('registro');
+    if (!registerSection) return;
+    registerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, []);
+
   if (!event) {
     return <Navigate to="/" replace />;
   }
@@ -230,289 +265,225 @@ export function EventPage() {
         <meta name="twitter:description" content={event.seoDescription} />
       </Helmet>
 
-      <div className="event-page">
-        <div className="event-page-inner">
-          <nav className="event-nav" aria-label="Evento">
-            <div className="event-nav-logos">
-              <Link to="/" className="event-nav-logo-link" aria-label="Binder — inicio">
-                <img src="/lightmode_default.svg" alt="Binder" />
+      <div className="ev">
+        {/* ── HERO ── */}
+        <section className="ev-hero">
+          {/* Móvil: toolbar superior con Binder + CTA a formulario */}
+          <header className="ev-hero-toolbar-mobile">
+            <div className="ev-hero-toolbar-mobile-inner">
+              <Link to="/" aria-label="Binder — inicio">
+                <img src="/lightmode_default.svg" alt="Binder" className="ev-logo-binder ev-logo-binder--toolbar" />
               </Link>
-              {event.coHostPill && (
-                <>
-                  <div className="event-logo-divider" aria-hidden />
-                  <span className="event-logo-pill">{event.coHostPill}</span>
-                </>
-              )}
+              <button
+                type="button"
+                className="ev-hero-toolbar-register-btn"
+                onClick={scrollToRegister}
+              >
+                Inscríbete
+              </button>
             </div>
-            <span className="event-nav-tag">{event.navTag}</span>
-          </nav>
+          </header>
 
-          <div className="event-hero">
-            <div className="event-hero-left">
-              <div className="event-hero-left-block">
-                {event.heroImageUrl ? (
-                  <div className="event-key-visual">
-                    <img src={event.heroImageUrl} alt={event.heroImageAlt || ''} />
-                  </div>
-                ) : null}
-
-                <div>
-                  <div className="event-badge">{event.badgeText}</div>
-                  <h1>
-                    <span className="event-title-eyebrow">
-                      {event.titleLine1Before}
-                      <em>{event.titleLine1Highlight}</em>
-                      {event.titleLine1After}
-                    </span>
-                    <span className="event-title-sub">{event.titleLine2}</span>
-                  </h1>
-                  <p className="event-hero-subtitle">{event.description}</p>
-
-                  <div className="event-meta">
-                    {event.meta.map((row) => (
-                      <div key={row.label} className="event-meta-row">
-                        <div className="event-meta-icon" aria-hidden>
-                          {row.icon}
+          {/* Izquierda: columna exterior azul (#30339c); panel morado; video como fondo de .ev-hero-content-inner */}
+          <div className="ev-hero-left">
+            <div className="ev-hero-left-surface">
+              <div className="ev-hero-left-purple">
+                <div className="ev-hero-left-content">
+                  <div className="ev-hero-content">
+                    <div className="ev-hero-content-stack">
+                      <div className="ev-hero-content-inner">
+                        <div className="ev-logo-bar ev-logo-bar--hero-inner">
+                          <WebinarPartnerLogos />
                         </div>
-                        <div className="event-meta-content">
-                          <div className="event-meta-label">{row.label}</div>
-                          <div className="event-meta-value">
-                            {row.badge && (
-                              <span
-                                className="event-zoom-badge"
-                                style={
-                                  row.badge.background
-                                    ? { background: row.badge.background }
-                                    : undefined
-                                }
-                              >
-                                {row.badge.text}
-                              </span>
-                            )}
-                            {row.value ? <span>{row.value}</span> : null}
-                            {row.sub ? (
-                              <span className="event-meta-sub"> {row.sub}</span>
-                            ) : null}
+                        <video
+                          className="ev-video-bg ev-video-bg--hero-inner"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          preload="auto"
+                          aria-hidden
+                        >
+                          <source src="/videos/videobackground.mp4" type="video/mp4" />
+                        </video>
+                        <div className="ev-hero-main">
+                          <div className="ev-badge">{event.badgeText.toUpperCase()}</div>
+                          <h1 className="ev-title">
+                            <span className="ev-title-main">
+                              {event.titleLine1Before}
+                              {event.titleLine1Highlight}
+                              {event.titleLine1After}
+                            </span>
+                            <span className="ev-title-sub">{event.titleLine2}</span>
+                          </h1>
+
+                          <p className="ev-title-lead">{event.description}</p>
+
+                          <div className="ev-speakers-row">
+                            {event.speakers.map((s) => (
+                              <div key={s.name} className="ev-speaker-item">
+                                <div className="ev-speaker-photo">
+                                  {s.avatarUrl ? <img src={s.avatarUrl} alt="" /> : s.initials}
+                                </div>
+                                <div className="ev-speaker-info">
+                                  <div className="ev-speaker-name">{s.name.toUpperCase()}</div>
+                                  <div className="ev-speaker-role">{s.role}</div>
+                                </div>
+                              </div>
+                            ))}
                           </div>
                         </div>
                       </div>
-                    ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div className="event-hero-right" id="registro">
-              {success ? (
-                <div className="event-form-success">
-                  <div className="event-form-success-icon" aria-hidden>
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <h2 className="event-form-success-title">
-                    ¡Te has registrado correctamente!
-                  </h2>
-                  <p className="event-form-success-text">
-                    Revisa tu correo para los siguientes pasos. Si no ves el mensaje, revisa
-                    spam o promociones.
-                  </p>
+          {/* Columna derecha: azul sólido; sponsors arriba, formulario centrado debajo */}
+          <div className="ev-hero-right" id="registro">
+            <div className="ev-hero-right-inner">
+              <div className="ev-sponsor-bar">
+                <img
+                  src="/imgs-webinar/minprod_logo.png"
+                  alt="PERÚ — Ministerio de la Producción"
+                  className="ev-logo-minprod"
+                />
+                <div>
+                  <div className="ev-sponsor-cofin">Cofinanciado por</div>
+                  <img
+                    src="/imgs-webinar/proinnovate_logo.png"
+                    alt="ProInnovate"
+                    className="ev-logo-proinnovate"
+                  />
                 </div>
-              ) : (
-                <>
-                  <p className="event-form-heading">{event.formHeading}</p>
-                  <p className="event-form-sub">
-                    {event.formSubtext}
-                    {event.formSubtextStrong ? (
-                      <strong>{event.formSubtextStrong}</strong>
-                    ) : null}
-                  </p>
+              </div>
 
+              <div className="ev-hero-right-body">
+                <div className="ev-form-card">
+                <p className="ev-form-heading">{event.formHeading}</p>
+                <p className="ev-form-sub">
+                  {event.formSubtext}
+                  {event.formSubtextStrong && <strong>{event.formSubtextStrong}</strong>}
+                </p>
+
+                {success ? (
+                  <div className="ev-form-success">
+                    <div className="ev-form-success-icon" aria-hidden>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <h2 className="ev-form-success-title">¡Te has registrado correctamente!</h2>
+                    <p className="ev-form-success-text">
+                      Revisa tu correo para los siguientes pasos. Si no ves el mensaje, revisa spam o promociones.
+                    </p>
+                  </div>
+                ) : (
                   <form onSubmit={handleSubmit} noValidate>
-                    <div className="event-form-grid">
+                    <div className="ev-form-grid">
                       <div>
-                        <input
-                          type="text"
-                          placeholder="Nombre *"
-                          value={form.firstName}
-                          onChange={(e) => setField('firstName', e.target.value)}
-                          className={errors.firstName ? 'event-input-error' : ''}
-                          autoComplete="given-name"
-                          aria-invalid={!!errors.firstName}
-                        />
-                        {errors.firstName && (
-                          <div className="event-field-error">{errors.firstName}</div>
-                        )}
+                        <input type="text" placeholder="Nombre *" value={form.firstName} onChange={(e) => setField('firstName', e.target.value)} className={errors.firstName ? 'ev-input-error' : ''} autoComplete="given-name" aria-invalid={!!errors.firstName} />
+                        {errors.firstName && <div className="ev-field-error">{errors.firstName}</div>}
                       </div>
                       <div>
-                        <input
-                          type="text"
-                          placeholder="Apellido *"
-                          value={form.lastName}
-                          onChange={(e) => setField('lastName', e.target.value)}
-                          className={errors.lastName ? 'event-input-error' : ''}
-                          autoComplete="family-name"
-                          aria-invalid={!!errors.lastName}
-                        />
-                        {errors.lastName && (
-                          <div className="event-field-error">{errors.lastName}</div>
-                        )}
+                        <input type="text" placeholder="Apellido *" value={form.lastName} onChange={(e) => setField('lastName', e.target.value)} className={errors.lastName ? 'ev-input-error' : ''} autoComplete="family-name" aria-invalid={!!errors.lastName} />
+                        {errors.lastName && <div className="ev-field-error">{errors.lastName}</div>}
                       </div>
-
-                      <div className="event-form-full">
-                        <input
-                          type="email"
-                          placeholder="Email corporativo *"
-                          value={form.email}
-                          onChange={(e) => setField('email', e.target.value)}
-                          className={errors.email ? 'event-input-error' : ''}
-                          autoComplete="email"
-                          aria-invalid={!!errors.email}
-                        />
-                        {errors.email && (
-                          <div className="event-field-error">{errors.email}</div>
-                        )}
-                      </div>
-
-                      <div>
-                        <input
-                          type="text"
-                          placeholder="Cargo *"
-                          value={form.jobTitle}
-                          onChange={(e) => setField('jobTitle', e.target.value)}
-                          className={errors.jobTitle ? 'event-input-error' : ''}
-                          autoComplete="organization-title"
-                          aria-invalid={!!errors.jobTitle}
-                        />
-                        {errors.jobTitle && (
-                          <div className="event-field-error">{errors.jobTitle}</div>
-                        )}
+                      <div className="ev-form-full">
+                        <input type="email" placeholder="Email corporativo *" value={form.email} onChange={(e) => setField('email', e.target.value)} className={errors.email ? 'ev-input-error' : ''} autoComplete="email" aria-invalid={!!errors.email} />
+                        {errors.email && <div className="ev-field-error">{errors.email}</div>}
                       </div>
                       <div>
-                        <input
-                          type="text"
-                          placeholder="Empresa *"
-                          value={form.company}
-                          onChange={(e) => setField('company', e.target.value)}
-                          className={errors.company ? 'event-input-error' : ''}
-                          autoComplete="organization"
-                          aria-invalid={!!errors.company}
-                        />
-                        {errors.company && (
-                          <div className="event-field-error">{errors.company}</div>
-                        )}
+                        <input type="text" placeholder="Cargo *" value={form.jobTitle} onChange={(e) => setField('jobTitle', e.target.value)} className={errors.jobTitle ? 'ev-input-error' : ''} autoComplete="organization-title" aria-invalid={!!errors.jobTitle} />
+                        {errors.jobTitle && <div className="ev-field-error">{errors.jobTitle}</div>}
                       </div>
-
-                      <div className="event-phone-row">
-                        <select
-                          className="event-phone-country"
-                          value={form.phoneCountry}
-                          onChange={(e) => setField('phoneCountry', e.target.value)}
-                          aria-label="Código de país"
-                        >
+                      <div>
+                        <input type="text" placeholder="Empresa *" value={form.company} onChange={(e) => setField('company', e.target.value)} className={errors.company ? 'ev-input-error' : ''} autoComplete="organization" aria-invalid={!!errors.company} />
+                        {errors.company && <div className="ev-field-error">{errors.company}</div>}
+                      </div>
+                      <div className="ev-phone-row">
+                        <select className="ev-phone-country" value={form.phoneCountry} onChange={(e) => setField('phoneCountry', e.target.value)} aria-label="Código de país">
                           {countries.map((c) => (
-                            <option key={c.code} value={c.code}>
-                              {c.flag} {c.dialCode}
-                            </option>
+                            <option key={c.code} value={c.code}>{c.flag} {c.dialCode}</option>
                           ))}
                         </select>
-                        <input
-                          type="tel"
-                          inputMode="numeric"
-                          pattern="[0-9]*"
-                          className="event-phone-number"
-                          placeholder="Teléfono (solo números)"
-                          value={form.phone}
-                          onChange={(e) =>
-                            setField('phone', e.target.value.replace(/\D/g, ''))
-                          }
-                          autoComplete="tel-national"
-                        />
+                        <input type="tel" inputMode="numeric" pattern="[0-9]*" className="ev-phone-number" placeholder="Teléfono (solo números)" value={form.phone} onChange={(e) => setField('phone', e.target.value.replace(/\D/g, ''))} autoComplete="tel-national" />
                       </div>
-
-                      <label className="event-consent event-form-full">
-                        <input
-                          type="checkbox"
-                          checked={form.consent}
-                          onChange={(e) => setField('consent', e.target.checked)}
-                        />
+                      <label className="ev-consent ev-form-full">
+                        <input type="checkbox" checked={form.consent} onChange={(e) => setField('consent', e.target.checked)} />
                         <span>
                           Acepto el tratamiento de mis datos según la{' '}
-                          <Link to="/legal/privacidad" target="_blank" rel="noopener noreferrer">
-                            política de privacidad
-                          </Link>
-                          .
+                          <Link to="/legal/privacidad" target="_blank" rel="noopener noreferrer">política de privacidad</Link>.
                         </span>
                       </label>
-                      {errors.consent && (
-                        <div className="event-field-error event-form-full">{errors.consent}</div>
-                      )}
+                      {errors.consent && <div className="ev-field-error ev-form-full">{errors.consent}</div>}
                     </div>
 
-                    {errors.submit && (
-                      <p className="event-form-error" role="alert">
-                        {errors.submit}
-                      </p>
-                    )}
+                    {errors.submit && <p className="ev-form-error" role="alert">{errors.submit}</p>}
 
-                    <button type="submit" className="event-cta-btn" disabled={submitting}>
+                    <button type="submit" className="ev-cta-btn" disabled={submitting}>
                       {submitting ? 'Enviando…' : event.ctaText}
                     </button>
 
                     {event.formNoteHtml && (
-                      <p
-                        className="event-form-note"
-                        dangerouslySetInnerHTML={{ __html: event.formNoteHtml }}
-                      />
+                      <p className="ev-form-note" dangerouslySetInnerHTML={{ __html: event.formNoteHtml }} />
                     )}
                   </form>
-                </>
-              )}
+                )}
+                </div>
+
+                <div className="ev-divider" />
+
+                <div className="ev-info-row">
+                <div className="ev-info-card">
+                  <div className="ev-info-icon" aria-hidden>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="ev-info-title">MIÉRCOLES 15 DE ABRIL</div>
+                    <div className="ev-info-sub">11:00 a.m.</div>
+                  </div>
+                </div>
+
+                <div className="ev-info-divider" />
+
+                <div className="ev-info-card">
+                  <div className="ev-info-icon" aria-hidden>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="23 7 16 12 23 17 23 7" />
+                      <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="ev-info-title">VÍA ZOOM | 60 MIN</div>
+                    <div className="ev-info-sub">Acceso gratuito con cupos limitados</div>
+                  </div>
+                </div>
+                </div>
+              </div>
             </div>
           </div>
+        </section>
 
-          <section className="event-speakers" aria-labelledby="event-speakers-heading">
-            <h2 id="event-speakers-heading" className="event-speakers-label">
-              Speakers
-            </h2>
-            <div className="event-speakers-grid">
-              {event.speakers.map((s) => (
-                <article key={s.name} className="event-speaker-card">
-                  <div className="event-speaker-avatar">
-                    {s.avatarUrl ? (
-                      <img src={s.avatarUrl} alt="" />
-                    ) : (
-                      s.initials
-                    )}
-                  </div>
-                  <div className="event-speaker-info">
-                    <div className="event-speaker-name">{s.name}</div>
-                    <div className="event-speaker-role">{s.role}</div>
-                    <p className="event-speaker-bio">{s.bio}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <footer className="event-footer">
-            <div className="event-footer-logos">
-              {event.footerLogos.map((logo, i) => (
-                <Fragment key={logo}>
-                  {i > 0 ? <div className="event-footer-sep" aria-hidden /> : null}
-                  <span className="event-footer-logo">{logo}</span>
-                </Fragment>
-              ))}
-            </div>
-            <div className="event-footer-note">{event.footerNote}</div>
-          </footer>
-        </div>
+        {/* ── FOOTER ── */}
+        <footer className="ev-footer">
+          <div className="ev-footer-logos">
+            {event.footerLogos.map((logo, i) => (
+              <Fragment key={logo}>
+                {i > 0 ? <div className="ev-footer-sep" aria-hidden /> : null}
+                <span className="ev-footer-logo">{logo}</span>
+              </Fragment>
+            ))}
+          </div>
+          <div className="ev-footer-note">{event.footerNote}</div>
+        </footer>
       </div>
     </>
   );
