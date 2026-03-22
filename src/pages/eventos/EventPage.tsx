@@ -11,7 +11,8 @@ import {
 } from '../../utils/corporateEmailValidation';
 import './EventPage.css';
 
-const EVENTS_WEBHOOK_URL = (import.meta.env.VITE_EVENTS_WEBHOOK_URL as string | undefined)?.trim();
+const EVENTS_WEBHOOK_URL =
+  'https://binder0.bubbleapps.io/version-test/api/1.1/wf/evento-de-cierre/initialize';
 const LINKEDIN_PARTNER_ID = import.meta.env.VITE_LINKEDIN_PARTNER_ID as string | undefined;
 const SITE_URL = 'https://binder.la';
 
@@ -161,15 +162,6 @@ export function EventPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!event || !validate()) return;
-
-    if (!EVENTS_WEBHOOK_URL) {
-      setErrors({
-        submit:
-          'Registro no disponible en este entorno. Falta configurar VITE_EVENTS_WEBHOOK_URL. ' +
-          'Si estás en producción, agrégalo en Vercel > Settings > Environment Variables.',
-      });
-      return;
-    }
 
     setSubmitting(true);
     setErrors((prev) => ({ ...prev, submit: undefined }));
