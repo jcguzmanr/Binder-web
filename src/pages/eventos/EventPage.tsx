@@ -268,6 +268,9 @@ export function EventPage() {
               <Link to="/" aria-label="Binder — inicio">
                 <img src="/lightmode_default.svg" alt="Binder" className="ev-logo-binder ev-logo-binder--toolbar" />
               </Link>
+              <span className="ev-hero-toolbar-date" aria-label="Fecha y hora del evento">
+                MIE 15 ABRIL · 11:00 a.m.
+              </span>
               <button
                 type="button"
                 className="ev-hero-toolbar-register-btn"
