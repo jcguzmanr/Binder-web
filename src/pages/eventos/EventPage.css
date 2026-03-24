@@ -183,6 +183,10 @@ section.ev-hero {
   gap: 12px;
 }
 
+.ev-hero-toolbar-date {
+  display: none;
+}
+
 .ev-logo-binder--toolbar {
   height: 24px;
 }
@@ -311,7 +315,9 @@ section.ev-hero {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 80px;
 }
 
 .ev-badge {
@@ -487,15 +493,6 @@ section.ev-hero {
 .ev-logo-minprod {
   height: 44px;
   width: auto;
-}
-
-.ev-sponsor-cofin {
-  font-size: 8px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 4px;
 }
 
 .ev-logo-proinnovate {
@@ -902,6 +899,20 @@ section.ev-hero {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border-bottom: 1px solid rgba(47, 44, 118, 0.12);
+  }
+
+  .ev-hero-toolbar-date {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: rgba(47, 44, 118, 0.55);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* Ocultar Minprod / ProInnovate en móvil */
