@@ -1,0 +1,99 @@
+.hito2-anexos-page {
+  line-height: 1.45;
+}
+
+.hito2-anexos-intro {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.hito2-anexos-section {
+  margin-bottom: 1.25rem;
+}
+
+.hito2-anexos-section h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.hito2-anexos-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+[data-theme='dark'] .hito2-anexos-table-wrap {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.hito2-anexos-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.hito2-anexos-table th,
+.hito2-anexos-table td {
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .hito2-anexos-table th,
+[data-theme='dark'] .hito2-anexos-table td {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.hito2-anexos-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  background: rgba(0, 152, 177, 0.1);
+}
+
+[data-theme='dark'] .hito2-anexos-table thead th {
+  background: rgba(0, 152, 177, 0.18);
+}
+
+.hito2-anexos-table tbody tr:nth-child(even) td {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme='dark'] .hito2-anexos-table tbody tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hito2-anexos-table td:nth-child(1) {
+  width: 120px;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.hito2-anexos-table td:nth-child(2) {
+  width: 160px;
+  white-space: nowrap;
+}
+
+.hito2-anexos-table td:nth-child(4) {
+  width: 90px;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .hito2-anexos-table {
+    font-size: 0.84rem;
+  }
+
+  .hito2-anexos-table th,
+  .hito2-anexos-table td {
+    padding: 0.45rem 0.55rem;
+  }
+}

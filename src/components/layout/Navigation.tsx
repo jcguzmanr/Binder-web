@@ -98,7 +98,8 @@ export const Navigation = () => {
   ];
 
   const isDocPage = location.pathname === '/docs/prep-reunion-oka-ciberseguridad';
-  const currentNavLinks = isDocPage ? docNavLinks : navLinks;
+  const isHito2AnexosPage = location.pathname === '/hito2/anexos';
+  const currentNavLinks = isDocPage ? docNavLinks : isHito2AnexosPage ? [] : navLinks;
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, sectionId?: string) => {
     if (location.pathname === '/') {
@@ -129,16 +130,18 @@ export const Navigation = () => {
           {/* Left side: Mobile Menu Toggle and Logo */}
           <div className="nav-content-left">
             {/* Mobile Menu Toggle */}
-            <button
-              className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={isMobileMenuOpen}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
+            {!isHito2AnexosPage && (
+              <button
+                className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+                aria-expanded={isMobileMenuOpen}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            )}
             {location.pathname === '/' ? (
               <a 
                 href="#home" 
@@ -185,6 +188,26 @@ export const Navigation = () => {
                 <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button variant="secondary">Inicio</Button>
                 </Link>
+              ) : isHito2AnexosPage ? (
+                <a 
+                  href="#contacto"
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      const element = document.querySelector('#contacto');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    } else {
+                      e.preventDefault();
+                      window.location.href = '/#contacto';
+                    }
+                  }}
+                >
+                  <Button variant="primary">
+                    Agendar demo
+                  </Button>
+                </a>
               ) : (
                 <>
                   <a 
@@ -239,6 +262,27 @@ export const Navigation = () => {
                 <Link to="/" onClick={() => setIsMobileMenuOpen(false)} style={{ flex: 1, minWidth: 0 }}>
                   <Button variant="secondary" className="btn" style={{ width: '100%' }}>Inicio</Button>
                 </Link>
+              ) : isHito2AnexosPage ? (
+                <a 
+                  href="#contacto"
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      const element = document.querySelector('#contacto');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    } else {
+                      e.preventDefault();
+                      window.location.href = '/#contacto';
+                    }
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  <Button variant="primary">
+                    Agendar demo
+                  </Button>
+                </a>
               ) : (
                 <>
                   <a 

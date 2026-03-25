@@ -20,7 +20,7 @@ declare global {
   interface Window {
     _linkedin_partner_id?: string;
     _linkedin_data_partner_ids?: string[];
-    lintrk?: (a: string, b: string) => void;
+    lintrk?: ((a: string, b?: unknown) => void) & { q?: unknown[] };
   }
 }
 
