@@ -6,6 +6,7 @@ import { CookieProvider } from './context/CookieContext';
 import { Navigation } from './components/layout/Navigation';
 import { ScrollToTop } from './components/layout/ScrollToTop';
 import { GoogleAnalytics } from './components/layout/GoogleAnalytics';
+import { LinkedInInsightTag } from './components/layout/LinkedInInsightTag';
 import { GlobalHead } from './components/layout/GlobalHead';
 import { BackgroundRenderer } from './components/ui/BackgroundRenderer';
 import { CookieBanner } from './components/ui/CookieBanner';
@@ -39,6 +40,7 @@ import { ExpedienteDigitalPage } from './pages/casos-uso/ExpedienteDigitalPage';
 import { CasesPage } from './pages/casos-uso/CasesPage';
 import { TestAnimationPage } from './pages/TestAnimationPage';
 import { PrepReunionOkaPage } from './pages/docs/PrepReunionOkaPage';
+import { Hito2AnexosPage } from './pages/docs/Hito2AnexosPage';
 import { EventPage } from './pages/eventos/EventPage';
 import './styles/globals.css';
 
@@ -51,6 +53,7 @@ function AppLayout() {
       <GlobalHead />
       <ScrollToTop />
       <GoogleAnalytics />
+      <LinkedInInsightTag />
       {!isEventPage && <BackgroundRenderer />}
       <CookieBanner />
       <CookieSettings />
@@ -86,6 +89,7 @@ function AppLayout() {
         <Route path="/cases" element={<Navigate to="/casos-uso/gestion-procesos" replace />} />
         <Route path="/test/antigravity" element={<TestAnimationPage />} />
         <Route path="/docs/prep-reunion-oka-ciberseguridad" element={<PrepReunionOkaPage />} />
+        <Route path="/hito2/anexos" element={<Hito2AnexosPage />} />
         <Route path="/eventos/:slug" element={<EventPage />} />
         <Route
           path="/"
