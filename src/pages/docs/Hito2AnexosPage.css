@@ -83,7 +83,17 @@
 }
 
 .hito2-anexos-table td:nth-child(4) {
-  width: 90px;
+  min-width: 7rem;
+}
+
+.hito2-anexos-cell-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: flex-start;
+}
+
+.hito2-anexos-link {
   white-space: nowrap;
 }
 
