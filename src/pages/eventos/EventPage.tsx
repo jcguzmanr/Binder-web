@@ -347,14 +347,11 @@ export function EventPage() {
                   alt="PERÚ — Ministerio de la Producción"
                   className="ev-logo-minprod"
                 />
-                <div>
-                  <div className="ev-sponsor-cofin">Cofinanciado por</div>
-                  <img
-                    src="/imgs-webinar/proinnovate_logo.png"
-                    alt="ProInnovate"
-                    className="ev-logo-proinnovate"
-                  />
-                </div>
+                <img
+                  src="/imgs-webinar/proinnovate_logo.png"
+                  alt="ProInnovate"
+                  className="ev-logo-proinnovate"
+                />
               </div>
 
               <div className="ev-hero-right-body">
