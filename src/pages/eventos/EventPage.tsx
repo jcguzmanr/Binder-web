@@ -59,7 +59,7 @@ function WebinarPartnerLogos() {
       <Link to="/" aria-label="Binder — inicio">
         <img src="/lightmode_default.svg" alt="Binder" className="ev-logo-binder" />
       </Link>
-      <img src="/imgs-webinar/niubox_logo.webp" alt="Niubox" className="ev-logo-niubox-img" />
+      <img src="/imgs-webinar/niubox_logo.png" alt="Niubox" className="ev-logo-niubox-img" />
       <div className="ev-logo-nexum-wrap" aria-label="Nexum">
         <img src="/imgs-webinar/nexum_logo.png" alt="Nexum" className="ev-logo-nexum-img" />
       </div>

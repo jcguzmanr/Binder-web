@@ -402,6 +402,11 @@ section.ev-hero {
   box-shadow: 0 8px 32px rgba(47, 44, 118, 0.18);
 }
 
+/* Fondo blanco detrás del retrato (p. ej. PNG con transparencia) */
+.ev-speaker-photo:has(img[src*='carlos']) {
+  background: #fff;
+}
+
 .ev-speaker-photo img {
   width: 100%;
   height: 100%;
