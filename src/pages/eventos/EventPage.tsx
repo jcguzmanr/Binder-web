@@ -13,8 +13,21 @@ import { getBubbleWorkflowErrorMessage } from '../../utils/bubbleWorkflowError';
 import { normalizeBubbleWorkflowPostUrl } from '../../utils/bubbleWorkflowUrl';
 import './EventPage.css';
 
+/** Payload alineado con API Workflow `evento-de-cierre` en Bubble (tipos: text / yes-no / text para timestamp). */
+interface EventoCierreBubblePayload {
+  firstName: string;
+  lastName: string;
+  email: string;
+  jobTitle: string;
+  company: string;
+  phone: string;
+  phoneCountry: string;
+  consent: boolean;
+  timestamp: string;
+}
+
 const DEFAULT_EVENTS_WEBHOOK_URL =
-  'https://binder0.bubbleapps.io/version-test/api/1.1/wf/binderla-formulario';
+  'https://binder0.bubbleapps.io/version-test/api/1.1/wf/evento-de-cierre';
 
 const EVENTS_WEBHOOK_URL = normalizeBubbleWorkflowPostUrl(
   import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim() || DEFAULT_EVENTS_WEBHOOK_URL
@@ -174,7 +187,7 @@ export function EventPage() {
 
     const dial = countries.find((c) => c.code === form.phoneCountry)?.dialCode || '';
     const phoneDigits = form.phone.replace(/\D/g, '');
-    const phoneFull = phoneDigits ? `${dial} ${phoneDigits}`.trim() : null;
+    const phoneText = phoneDigits ? `${dial} ${phoneDigits}`.trim() : '';
 
     const at = form.email.trim().lastIndexOf('@');
     const emailNormalized =
@@ -182,18 +195,16 @@ export function EventPage() {
         ? `${form.email.trim().slice(0, at + 1)}${form.email.trim().slice(at + 1).toLowerCase()}`
         : form.email.trim();
 
-    const requestBody = {
+    const requestBody: EventoCierreBubblePayload = {
       firstName: form.firstName.trim(),
       lastName: form.lastName.trim(),
       email: emailNormalized,
       jobTitle: form.jobTitle.trim(),
       company: form.company.trim(),
-      phone: phoneFull,
+      phone: phoneText,
       phoneCountry: form.phoneCountry,
       consent: form.consent,
       timestamp: new Date().toISOString(),
-      source: `evento-${event.slug}`,
-      eventSlug: event.slug,
     };
 
     try {
