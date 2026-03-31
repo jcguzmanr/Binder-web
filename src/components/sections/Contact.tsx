@@ -10,9 +10,8 @@ import {
 } from '../../utils/corporateEmailValidation';
 import { getBubbleWorkflowErrorMessage } from '../../utils/bubbleWorkflowError';
 import {
-  EVENTO_CIERRE_WEBHOOK_URL,
-  type EventoCierreBubblePayload,
-  splitFullNameForBubble,
+  HOME_CONTACT_WEBHOOK_URL,
+  type BinderlaFormularioPayload,
 } from '../../utils/eventoCierreBubble';
 import './Contact.css';
 
@@ -118,24 +117,22 @@ export const Contact = () => {
           ? `${formData.email.trim().slice(0, at + 1)}${formData.email.trim().slice(at + 1).toLowerCase()}`
           : formData.email.trim();
 
-      const { firstName, lastName } = splitFullNameForBubble(formData.name);
-
-      const requestBody: EventoCierreBubblePayload = {
-        Nombres: formData.name.trim(),
-        firstName,
-        lastName,
-        email: emailNormalized,
-        jobTitle: formData.message.trim() || '-',
+      const fullName = formData.name.trim();
+      const requestBody: BinderlaFormularioPayload = {
+        name: fullName,
         company: formData.company.trim(),
+        email: emailNormalized,
         phone: phoneText,
         phoneCountry: formData.phoneCountry,
+        challenge: formData.message.trim() || '-',
         consent: formData.consent,
         timestamp: new Date().toISOString(),
+        source: 'contact-form',
       };
 
-      console.debug('[Contact] evento-cierre → request', {
-        webhookUrl: EVENTO_CIERRE_WEBHOOK_URL,
-        webhookFromViteEnv: Boolean(import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim()),
+      console.debug('[Contact] binderla-formulario → request', {
+        webhookUrl: HOME_CONTACT_WEBHOOK_URL,
+        webhookFromViteEnv: Boolean(import.meta.env.VITE_HOME_CONTACT_WEBHOOK_URL?.trim()),
         context: 'contact-landing',
         body: requestBody,
         formRaw: { ...formData },
@@ -145,7 +142,7 @@ export const Contact = () => {
         },
       });
 
-      const response = await fetch(EVENTO_CIERRE_WEBHOOK_URL, {
+      const response = await fetch(HOME_CONTACT_WEBHOOK_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -163,7 +160,7 @@ export const Contact = () => {
         }
       }
 
-      console.debug('[Contact] evento-cierre ← response', {
+      console.debug('[Contact] binderla-formulario ← response', {
         ok: response.ok,
         status: response.status,
         statusText: response.statusText,
@@ -175,7 +172,7 @@ export const Contact = () => {
 
       if (!response.ok) {
         const msg = getBubbleWorkflowErrorMessage(response, parsed, rawText);
-        console.error('[Contact] evento-cierre fallido', { messageShown: msg, parsedJson: parsed });
+        console.error('[Contact] binderla-formulario fallido', { messageShown: msg, parsedJson: parsed });
         throw new Error(msg);
       }
 
@@ -191,10 +188,10 @@ export const Contact = () => {
       navigate('/gracias');
       
     } catch (error) {
-      console.error('[Contact] evento-cierre excepción / red', {
+      console.error('[Contact] binderla-formulario excepción / red', {
         error,
-        webhookUrl: EVENTO_CIERRE_WEBHOOK_URL,
-        webhookFromViteEnv: Boolean(import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim()),
+        webhookUrl: HOME_CONTACT_WEBHOOK_URL,
+        webhookFromViteEnv: Boolean(import.meta.env.VITE_HOME_CONTACT_WEBHOOK_URL?.trim()),
       });
       setErrors({ 
         submit: error instanceof Error 

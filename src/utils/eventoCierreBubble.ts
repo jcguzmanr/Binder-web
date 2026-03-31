@@ -23,6 +23,30 @@ export const EVENTO_CIERRE_WEBHOOK_URL = normalizeBubbleWorkflowPostUrl(
   import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim() || DEFAULT_EVENTS_WEBHOOK_URL
 );
 
+const DEFAULT_HOME_CONTACT_WEBHOOK_URL =
+  'https://binder0.bubbleapps.io/version-test/api/1.1/wf/binderla-formulario/initialize';
+
+/** Formulario de contacto del home (`Contact`). `VITE_HOME_CONTACT_WEBHOOK_URL` opcional. */
+export const HOME_CONTACT_WEBHOOK_URL = normalizeBubbleWorkflowPostUrl(
+  import.meta.env.VITE_HOME_CONTACT_WEBHOOK_URL?.trim() || DEFAULT_HOME_CONTACT_WEBHOOK_URL
+);
+
+/**
+ * Payload para el workflow Bubble `binderla-formulario` (Create Leads).
+ * `name` debe ser el nombre completo: en Bubble suele mapearse a Apellidos.
+ */
+export interface BinderlaFormularioPayload {
+  name: string;
+  company: string;
+  email: string;
+  phone: string;
+  phoneCountry: string;
+  challenge: string;
+  consent: boolean;
+  timestamp: string;
+  source: 'contact-form';
+}
+
 /**
  * Parte nombre completo en first/last para Bubble.
  * Si solo hay un token, lastName es "-". Si algo falta tras trim, ese lado es "-".
