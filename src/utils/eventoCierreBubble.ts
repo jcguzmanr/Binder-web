@@ -2,6 +2,8 @@ import { normalizeBubbleWorkflowPostUrl } from './bubbleWorkflowUrl';
 
 /** Contrato compartido con workflow Bubble `evento-de-cierre` (Contact y EventPage). */
 export interface EventoCierreBubblePayload {
+  /** Nombre completo — parámetro esperado por el workflow Bubble (`Nombres`). */
+  Nombres: string;
   firstName: string;
   lastName: string;
   email: string;

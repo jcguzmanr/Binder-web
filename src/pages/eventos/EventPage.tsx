@@ -179,6 +179,7 @@ export function EventPage() {
         : form.email.trim();
 
     const requestBody: EventoCierreBubblePayload = {
+      Nombres: `${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
       firstName: form.firstName.trim(),
       lastName: form.lastName.trim(),
       email: emailNormalized,

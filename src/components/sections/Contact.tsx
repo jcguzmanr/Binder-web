@@ -121,6 +121,7 @@ export const Contact = () => {
       const { firstName, lastName } = splitFullNameForBubble(formData.name);
 
       const requestBody: EventoCierreBubblePayload = {
+        Nombres: formData.name.trim(),
         firstName,
         lastName,
         email: emailNormalized,
