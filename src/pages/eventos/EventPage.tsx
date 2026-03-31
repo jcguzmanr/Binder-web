@@ -9,10 +9,14 @@ import {
   getEmailDomain,
   isBlockedPersonalEmailDomain,
 } from '../../utils/corporateEmailValidation';
+import { getBubbleWorkflowErrorMessage } from '../../utils/bubbleWorkflowError';
 import './EventPage.css';
 
+const DEFAULT_EVENTS_WEBHOOK_URL =
+  'https://binder0.bubbleapps.io/version-test/api/1.1/wf/binderla-formulario/initialize';
+
 const EVENTS_WEBHOOK_URL =
-  'https://binder0.bubbleapps.io/version-test/api/1.1/wf/evento-de-cierre/initialize';
+  import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim() || DEFAULT_EVENTS_WEBHOOK_URL;
 const LINKEDIN_PARTNER_ID = import.meta.env.VITE_LINKEDIN_PARTNER_ID as string | undefined;
 const SITE_URL = 'https://binder.la';
 
@@ -176,31 +180,59 @@ export function EventPage() {
         ? `${form.email.trim().slice(0, at + 1)}${form.email.trim().slice(at + 1).toLowerCase()}`
         : form.email.trim();
 
+    const requestBody = {
+      firstName: form.firstName.trim(),
+      lastName: form.lastName.trim(),
+      email: emailNormalized,
+      jobTitle: form.jobTitle.trim(),
+      company: form.company.trim(),
+      phone: phoneFull,
+      phoneCountry: form.phoneCountry,
+      consent: form.consent,
+      timestamp: new Date().toISOString(),
+      source: `evento-${event.slug}`,
+      eventSlug: event.slug,
+    };
+
     try {
+      console.debug('[EventPage] registro → request', {
+        webhookUrl: EVENTS_WEBHOOK_URL,
+        webhookFromViteEnv: Boolean(import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim()),
+        eventSlug: event.slug,
+        body: requestBody,
+      });
+
       const res = await fetch(EVENTS_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName: form.firstName.trim(),
-          lastName: form.lastName.trim(),
-          email: emailNormalized,
-          jobTitle: form.jobTitle.trim(),
-          company: form.company.trim(),
-          phone: phoneFull,
-          phoneCountry: form.phoneCountry,
-          consent: form.consent,
-          timestamp: new Date().toISOString(),
-          source: `evento-${event.slug}`,
-          eventSlug: event.slug,
-        }),
+        body: JSON.stringify(requestBody),
       });
 
+      const rawText = await res.text();
+      let parsed: unknown = null;
+      if (rawText) {
+        try {
+          parsed = JSON.parse(rawText) as unknown;
+        } catch {
+          /* cuerpo no JSON */
+        }
+      }
+
+      const debugResponse = {
+        ok: res.ok,
+        status: res.status,
+        statusText: res.statusText,
+        contentType: res.headers.get('content-type'),
+        bodyLength: rawText.length,
+        bodyPreview: rawText.slice(0, 1200),
+        parsedJson: parsed,
+      };
+      console.debug('[EventPage] registro ← response', debugResponse);
+
       if (!res.ok) {
-        const errBody = await res.json().catch(() => ({}));
-        throw new Error(
-          (errBody as { error?: string }).error ||
-            `Error ${res.status}: ${res.statusText}`
-        );
+        const msg = getBubbleWorkflowErrorMessage(res, parsed, rawText);
+        console.error('[EventPage] registro fallido', { ...debugResponse, messageShown: msg });
+        throw new Error(msg);
       }
 
       setSuccess(true);
@@ -211,7 +243,15 @@ export function EventPage() {
         });
       }
     } catch (err) {
-      console.error('Event registration error:', err);
+      console.error('[EventPage] registro excepción / red', {
+        error: err,
+        webhookUrl: EVENTS_WEBHOOK_URL,
+        webhookFromViteEnv: Boolean(import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim()),
+        hint:
+          err instanceof TypeError
+            ? 'Suele ser CORS, red, o URL bloqueada. Compara webhookUrl con la que probaste en curl.'
+            : undefined,
+      });
       setErrors({
         submit:
           err instanceof Error
