@@ -39,7 +39,10 @@ export interface BinderlaFormularioPayload {
   name: string;
   company: string;
   email: string;
-  phone: string;
+  /** Preferido en integraciones en inglés; mismo valor que `telefono`. */
+  phone: string | null;
+  /** Misma cadena que `phone`; muchos workflows Bubble mapean el campo Teléfono a este nombre. */
+  telefono: string | null;
   phoneCountry: string;
   challenge: string;
   consent: boolean;

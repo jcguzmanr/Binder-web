@@ -109,7 +109,7 @@ export const Contact = () => {
     try {
       const dial = countries.find((c) => c.code === formData.phoneCountry)?.dialCode || '';
       const phoneDigits = formData.phone.replace(/\D/g, '');
-      const phoneText = phoneDigits ? `${dial} ${phoneDigits}`.trim() : '';
+      const phoneFormatted = phoneDigits ? `${dial} ${phoneDigits}`.trim() : null;
 
       const at = formData.email.trim().lastIndexOf('@');
       const emailNormalized =
@@ -122,7 +122,8 @@ export const Contact = () => {
         name: fullName,
         company: formData.company.trim(),
         email: emailNormalized,
-        phone: phoneText,
+        phone: phoneFormatted,
+        telefono: phoneFormatted,
         phoneCountry: formData.phoneCountry,
         challenge: formData.message.trim() || '-',
         consent: formData.consent,
@@ -138,7 +139,7 @@ export const Contact = () => {
         formRaw: { ...formData },
         hints: {
           desafioEmpty: !formData.message.trim(),
-          phoneEmpty: !phoneText,
+          phoneEmpty: !phoneFormatted,
         },
       });
 
