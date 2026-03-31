@@ -5,6 +5,7 @@ import {
   CORPORATE_EMAIL_REQUIRED_MESSAGE,
   isBlockedPersonalEmailDomain,
 } from '../utils/corporateEmailValidation';
+import { normalizeBubbleWorkflowPostUrl } from '../utils/bubbleWorkflowUrl';
 import { PageHead } from '../components/seo/PageHead';
 import { SchemaMarkup } from '../components/seo/SchemaMarkup';
 import './DiagnosticoLegalOpsPage.css';
@@ -278,11 +279,11 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     try {
       const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
 
-      if (!webhookUrl) {
+      if (!webhookUrl?.trim()) {
         throw new Error('Webhook URL no configurada');
       }
 
-      const response = await fetch(webhookUrl, {
+      const response = await fetch(normalizeBubbleWorkflowPostUrl(webhookUrl), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -8,6 +8,7 @@ import {
   CORPORATE_EMAIL_REQUIRED_MESSAGE,
   isBlockedPersonalEmailDomain,
 } from '../../utils/corporateEmailValidation';
+import { normalizeBubbleWorkflowPostUrl } from '../../utils/bubbleWorkflowUrl';
 import './ExpedienteContact.css';
 
 interface Country {
@@ -104,13 +105,12 @@ export const ExpedienteContact = () => {
     
     try {
       const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
-      
-      if (!webhookUrl) {
+
+      if (!webhookUrl?.trim()) {
         throw new Error('Webhook URL no configurada');
       }
 
-      // Enviar datos al webhook
-      const response = await fetch(webhookUrl, {
+      const response = await fetch(normalizeBubbleWorkflowPostUrl(webhookUrl), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

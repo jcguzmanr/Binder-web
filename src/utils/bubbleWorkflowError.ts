@@ -1,7 +1,7 @@
 /**
- * Bubble workflow API (POST .../wf/{name}/initialize) often returns JSON like:
- * { statusCode: 404, body: { message: "Workflow foo not in initialization mode" } }
- * The frontend must read body.message, not only error.
+ * Bubble workflow API (POST .../wf/{name}) often returns JSON like:
+ * { statusCode: 404, body: { message: "..." } } when the URL o modo no coincide.
+ * El frontend debe leer body.message, no solo error.
  */
 export function getBubbleWorkflowErrorMessage(
   res: Response,

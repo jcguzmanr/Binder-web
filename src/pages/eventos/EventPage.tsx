@@ -10,13 +10,15 @@ import {
   isBlockedPersonalEmailDomain,
 } from '../../utils/corporateEmailValidation';
 import { getBubbleWorkflowErrorMessage } from '../../utils/bubbleWorkflowError';
+import { normalizeBubbleWorkflowPostUrl } from '../../utils/bubbleWorkflowUrl';
 import './EventPage.css';
 
 const DEFAULT_EVENTS_WEBHOOK_URL =
-  'https://binder0.bubbleapps.io/version-test/api/1.1/wf/binderla-formulario/initialize';
+  'https://binder0.bubbleapps.io/version-test/api/1.1/wf/binderla-formulario';
 
-const EVENTS_WEBHOOK_URL =
-  import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim() || DEFAULT_EVENTS_WEBHOOK_URL;
+const EVENTS_WEBHOOK_URL = normalizeBubbleWorkflowPostUrl(
+  import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim() || DEFAULT_EVENTS_WEBHOOK_URL
+);
 const LINKEDIN_PARTNER_ID = import.meta.env.VITE_LINKEDIN_PARTNER_ID as string | undefined;
 const SITE_URL = 'https://binder.la';
 
