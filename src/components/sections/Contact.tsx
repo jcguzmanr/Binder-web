@@ -8,7 +8,12 @@ import {
   CORPORATE_EMAIL_REQUIRED_MESSAGE,
   isBlockedPersonalEmailDomain,
 } from '../../utils/corporateEmailValidation';
-import { normalizeBubbleWorkflowPostUrl } from '../../utils/bubbleWorkflowUrl';
+import { getBubbleWorkflowErrorMessage } from '../../utils/bubbleWorkflowError';
+import {
+  EVENTO_CIERRE_WEBHOOK_URL,
+  type EventoCierreBubblePayload,
+  splitFullNameForBubble,
+} from '../../utils/eventoCierreBubble';
 import './Contact.css';
 
 interface Country {
@@ -103,35 +108,74 @@ export const Contact = () => {
     setErrors({}); // Clear previous errors
     
     try {
-      const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
+      const dial = countries.find((c) => c.code === formData.phoneCountry)?.dialCode || '';
+      const phoneDigits = formData.phone.replace(/\D/g, '');
+      const phoneText = phoneDigits ? `${dial} ${phoneDigits}`.trim() : '';
 
-      if (!webhookUrl?.trim()) {
-        throw new Error('Webhook URL no configurada');
-      }
+      const at = formData.email.trim().lastIndexOf('@');
+      const emailNormalized =
+        at > 0
+          ? `${formData.email.trim().slice(0, at + 1)}${formData.email.trim().slice(at + 1).toLowerCase()}`
+          : formData.email.trim();
 
-      const response = await fetch(normalizeBubbleWorkflowPostUrl(webhookUrl), {
+      const { firstName, lastName } = splitFullNameForBubble(formData.name);
+
+      const requestBody: EventoCierreBubblePayload = {
+        firstName,
+        lastName,
+        email: emailNormalized,
+        jobTitle: formData.message.trim() || '-',
+        company: formData.company.trim(),
+        phone: phoneText,
+        phoneCountry: formData.phoneCountry,
+        consent: formData.consent,
+        timestamp: new Date().toISOString(),
+      };
+
+      console.debug('[Contact] evento-cierre → request', {
+        webhookUrl: EVENTO_CIERRE_WEBHOOK_URL,
+        webhookFromViteEnv: Boolean(import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim()),
+        context: 'contact-landing',
+        body: requestBody,
+        formRaw: { ...formData },
+        hints: {
+          desafioEmpty: !formData.message.trim(),
+          phoneEmpty: !phoneText,
+        },
+      });
+
+      const response = await fetch(EVENTO_CIERRE_WEBHOOK_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: formData.name,
-          company: formData.company,
-          email: formData.email,
-          phone: formData.phone 
-            ? `${countries.find(c => c.code === formData.phoneCountry)?.dialCode || ''} ${formData.phone}`.trim()
-            : null,
-          phoneCountry: formData.phoneCountry,
-          challenge: formData.message || null,
-          consent: formData.consent,
-          timestamp: new Date().toISOString(),
-          source: 'contact-form',
-        }),
+        body: JSON.stringify(requestBody),
+      });
+
+      const rawText = await response.text();
+      let parsed: unknown = null;
+      if (rawText) {
+        try {
+          parsed = JSON.parse(rawText) as unknown;
+        } catch {
+          /* no JSON */
+        }
+      }
+
+      console.debug('[Contact] evento-cierre ← response', {
+        ok: response.ok,
+        status: response.status,
+        statusText: response.statusText,
+        contentType: response.headers.get('content-type'),
+        bodyLength: rawText.length,
+        bodyPreview: rawText.slice(0, 1200),
+        parsedJson: parsed,
       });
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Error ${response.status}: ${response.statusText}`);
+        const msg = getBubbleWorkflowErrorMessage(response, parsed, rawText);
+        console.error('[Contact] evento-cierre fallido', { messageShown: msg, parsedJson: parsed });
+        throw new Error(msg);
       }
 
       // Guardar datos en sessionStorage para la página de agradecimiento
@@ -146,7 +190,11 @@ export const Contact = () => {
       navigate('/gracias');
       
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('[Contact] evento-cierre excepción / red', {
+        error,
+        webhookUrl: EVENTO_CIERRE_WEBHOOK_URL,
+        webhookFromViteEnv: Boolean(import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim()),
+      });
       setErrors({ 
         submit: error instanceof Error 
           ? error.message 

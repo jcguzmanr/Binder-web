@@ -10,28 +10,11 @@ import {
   isBlockedPersonalEmailDomain,
 } from '../../utils/corporateEmailValidation';
 import { getBubbleWorkflowErrorMessage } from '../../utils/bubbleWorkflowError';
-import { normalizeBubbleWorkflowPostUrl } from '../../utils/bubbleWorkflowUrl';
+import {
+  EVENTO_CIERRE_WEBHOOK_URL,
+  type EventoCierreBubblePayload,
+} from '../../utils/eventoCierreBubble';
 import './EventPage.css';
-
-/** Payload alineado con API Workflow `evento-de-cierre` en Bubble (tipos: text / yes-no / text para timestamp). */
-interface EventoCierreBubblePayload {
-  firstName: string;
-  lastName: string;
-  email: string;
-  jobTitle: string;
-  company: string;
-  phone: string;
-  phoneCountry: string;
-  consent: boolean;
-  timestamp: string;
-}
-
-const DEFAULT_EVENTS_WEBHOOK_URL =
-  'https://binder0.bubbleapps.io/version-test/api/1.1/wf/evento-de-cierre';
-
-const EVENTS_WEBHOOK_URL = normalizeBubbleWorkflowPostUrl(
-  import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim() || DEFAULT_EVENTS_WEBHOOK_URL
-);
 const LINKEDIN_PARTNER_ID = import.meta.env.VITE_LINKEDIN_PARTNER_ID as string | undefined;
 const SITE_URL = 'https://binder.la';
 
@@ -209,13 +192,13 @@ export function EventPage() {
 
     try {
       console.debug('[EventPage] registro → request', {
-        webhookUrl: EVENTS_WEBHOOK_URL,
+        webhookUrl: EVENTO_CIERRE_WEBHOOK_URL,
         webhookFromViteEnv: Boolean(import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim()),
         eventSlug: event.slug,
         body: requestBody,
       });
 
-      const res = await fetch(EVENTS_WEBHOOK_URL, {
+      const res = await fetch(EVENTO_CIERRE_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody),
@@ -258,7 +241,7 @@ export function EventPage() {
     } catch (err) {
       console.error('[EventPage] registro excepción / red', {
         error: err,
-        webhookUrl: EVENTS_WEBHOOK_URL,
+        webhookUrl: EVENTO_CIERRE_WEBHOOK_URL,
         webhookFromViteEnv: Boolean(import.meta.env.VITE_EVENTS_WEBHOOK_URL?.trim()),
         hint:
           err instanceof TypeError
