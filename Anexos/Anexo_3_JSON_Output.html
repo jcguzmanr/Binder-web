@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anexo 3 — Output Estructurado por IA: Contrato</title>
+<style>
+  :root {
+    --accent: #0098B1;
+    --fg: #1B1B1B;
+    --bg: #F5F5F5;
+    --white: #FFFFFF;
+    --border: #DFDFDF;
+    --gray-medium: #6B7280;
+    --gray-lightest: #F9FAFB;
+    --accent-light: #AEDEE6;
+    --positive: #22C55E;
+    --warning: #EAB308;
+    --danger: #EF4444;
+    --deals: #6D3CFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, sans-serif; background: var(--bg); color: var(--fg); }
+  .page { max-width: 1000px; margin: 0 auto; padding: 40px 32px; }
+  .header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+  .logo { width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; }
+  .header h1 { font-size: 24px; font-weight: 700; }
+  .subtitle { color: var(--gray-medium); font-size: 14px; margin-bottom: 32px; padding-left: 56px; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,152,177,0.1); color: var(--accent); }
+
+  .section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 14px 20px;
+    background: var(--gray-lightest);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-medium); }
+
+  .section-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+
+  .json-container {
+    padding: 24px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+
+  .json-key { color: #0098B1; }
+  .json-string { color: #059669; }
+  .json-number { color: #6D3CFF; }
+  .json-bool { color: #DC2626; }
+  .json-null { color: var(--gray-medium); font-style: italic; }
+  .json-bracket { color: var(--fg); }
+  .json-comment { color: #9CA3AF; font-style: italic; font-size: 12px; }
+
+  .indent-1 { padding-left: 24px; }
+  .indent-2 { padding-left: 48px; }
+  .indent-3 { padding-left: 72px; }
+  .indent-4 { padding-left: 96px; }
+
+  .highlight-row {
+    background: rgba(0,152,177,0.04);
+    margin: 0 -24px;
+    padding: 2px 24px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .warn-row {
+    background: rgba(234,179,8,0.06);
+    margin: 0 -24px;
+    padding: 2px 24px;
+    border-left: 3px solid var(--warning);
+  }
+
+  /* Mapping preview */
+  .mapping-grid {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .map-col-header {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-medium);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+
+  .map-arrow {
+    text-align: center;
+    color: var(--accent);
+    font-size: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+
+  .map-field {
+    font-family: 'SF Mono', monospace;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+
+  .map-source { background: rgba(0,152,177,0.06); color: var(--accent); }
+  .map-target { background: rgba(109,60,255,0.06); color: var(--deals); }
+  .map-mid { text-align: center; color: var(--gray-medium); font-size: 14px; }
+
+  .footer { text-align: center; padding: 24px 0; color: var(--gray-medium); font-size: 12px; }
+  .footer span { color: var(--accent); font-weight: 600; }
+
+  .prompt-info {
+    padding: 16px 20px;
+    background: rgba(109,60,255,0.04);
+    border: 1px dashed rgba(109,60,255,0.2);
+    border-radius: 8px;
+    margin: 0 24px 24px;
+    font-size: 12px;
+    color: var(--gray-medium);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .prompt-info code {
+    background: rgba(109,60,255,0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--deals);
+    font-family: monospace;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="logo">B</div>
+    <h1>Output Estructurado por IA — Contrato</h1>
+  </div>
+  <div class="subtitle">
+    <span class="badge">Anexo 3</span> &nbsp;Onboarding Pipeline — Fase 3.3: ContractClosurePrompt Output
+  </div>
+
+  <!-- JSON Output -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">📄 structured_data — JSON Output</span>
+      <span class="section-badge" style="background: rgba(34,197,94,0.12); color: var(--positive);">Válido ✓</span>
+    </div>
+
+    <div class="prompt-info">
+      🧠 Generado por <code>ContractClosurePrompt v1.4</code> — Modelo: Claude Sonnet · Tokens: 1,847 · Latencia: 2.3s
+    </div>
+
+    <div class="json-container">
+      <div><span class="json-bracket">{</span></div>
+
+      <div class="indent-1"><span class="json-key">"extraction_id"</span>: <span class="json-string">"ext_2026_0407_acme_001"</span>,</div>
+      <div class="indent-1"><span class="json-key">"document_type"</span>: <span class="json-string">"contract"</span>,</div>
+      <div class="indent-1"><span class="json-key">"application"</span>: <span class="json-string">"Deals"</span>,</div>
+      <div class="indent-1"><span class="json-key">"extraction_timestamp"</span>: <span class="json-string">"2026-04-07T14:32:18Z"</span>,</div>
+      <div class="indent-1"><span class="json-key">"prompt_version"</span>: <span class="json-string">"contract_closure_v1.4"</span>,</div>
+      <div class="indent-1"><span class="json-key">"confidence_score"</span>: <span class="json-number">0.94</span>,</div>
+
+      <div class="indent-1">&nbsp;</div>
+      <div class="indent-1"><span class="json-comment">// ── Datos del Contrato ──</span></div>
+      <div class="indent-1 highlight-row"><span class="json-key">"contract"</span>: <span class="json-bracket">{</span></div>
+      <div class="indent-2"><span class="json-key">"title"</span>: <span class="json-string">"Contrato de Prestación de Servicios"</span>,</div>
+      <div class="indent-2 highlight-row"><span class="json-key">"contract_date"</span>: <span class="json-string">"2026-03-15"</span>,</div>
+      <div class="indent-2 highlight-row"><span class="json-key">"expiration_date"</span>: <span class="json-string">"2028-03-15"</span>,</div>
+      <div class="indent-2"><span class="json-key">"duration_months"</span>: <span class="json-number">24</span>,</div>
+      <div class="indent-2 highlight-row"><span class="json-key">"amount"</span>: <span class="json-number">185000.00</span>,</div>
+      <div class="indent-2"><span class="json-key">"currency"</span>: <span class="json-string">"USD"</span>,</div>
+      <div class="indent-2"><span class="json-key">"contract_type"</span>: <span class="json-string">"service_agreement"</span>,</div>
+      <div class="indent-2"><span class="json-key">"subject"</span>: <span class="json-string">"Consultoría tecnológica y desarrollo de software"</span>,</div>
+      <div class="indent-2"><span class="json-key">"governing_law"</span>: <span class="json-string">"Perú"</span>,</div>
+      <div class="indent-2"><span class="json-key">"has_annexes"</span>: <span class="json-bool">true</span>,</div>
+      <div class="indent-2"><span class="json-key">"annexes_referenced"</span>: <span class="json-bracket">[</span><span class="json-string">"Anexo A"</span><span class="json-bracket">]</span></div>
+      <div class="indent-1"><span class="json-bracket">}</span>,</div>
+
+      <div class="indent-1">&nbsp;</div>
+      <div class="indent-1"><span class="json-comment">// ── Partes Involucradas ──</span></div>
+      <div class="indent-1"><span class="json-key">"parties"</span>: <span class="json-bracket">[</span></div>
+
+      <div class="indent-2"><span class="json-bracket">{</span></div>
+      <div class="indent-3"><span class="json-key">"role"</span>: <span class="json-string">"contractor"</span>,</div>
+      <div class="indent-3 highlight-row"><span class="json-key">"entity_name"</span>: <span class="json-string">"ACME CORPORATION S.A.C."</span>,</div>
+      <div class="indent-3"><span class="json-key">"tax_id"</span>: <span class="json-string">"20512345678"</span>,</div>
+      <div class="indent-3"><span class="json-key">"representative"</span>: <span class="json-string">"Roberto Méndez Torres"</span>,</div>
+      <div class="indent-3"><span class="json-key">"rep_id_type"</span>: <span class="json-string">"DNI"</span>,</div>
+      <div class="indent-3"><span class="json-key">"rep_id_number"</span>: <span class="json-string">"45678912"</span>,</div>
+      <div class="indent-3"><span class="json-key">"address"</span>: <span class="json-string">"Av. Javier Prado Este 4200, Surco, Lima"</span></div>
+      <div class="indent-2"><span class="json-bracket">}</span>,</div>
+
+      <div class="indent-2"><span class="json-bracket">{</span></div>
+      <div class="indent-3"><span class="json-key">"role"</span>: <span class="json-string">"provider"</span>,</div>
+      <div class="indent-3 highlight-row"><span class="json-key">"entity_name"</span>: <span class="json-string">"TECH SOLUTIONS PERÚ S.A."</span>,</div>
+      <div class="indent-3"><span class="json-key">"tax_id"</span>: <span class="json-string">"20698745123"</span>,</div>
+      <div class="indent-3"><span class="json-key">"representative"</span>: <span class="json-string">"María Elena Vásquez"</span>,</div>
+      <div class="indent-3"><span class="json-key">"rep_id_type"</span>: <span class="json-string">"DNI"</span>,</div>
+      <div class="indent-3 warn-row"><span class="json-key">"rep_id_number"</span>: <span class="json-string">"3216549B"</span>,  <span class="json-comment">// ⚠️ low confidence — posible error OCR</span></div>
+      <div class="indent-3"><span class="json-key">"address"</span>: <span class="json-string">"Calle Las Begonias 475, San Isidro, Lima"</span></div>
+      <div class="indent-2"><span class="json-bracket">}</span></div>
+
+      <div class="indent-1"><span class="json-bracket">]</span>,</div>
+
+      <div class="indent-1">&nbsp;</div>
+      <div class="indent-1"><span class="json-comment">// ── Flags de Calidad ──</span></div>
+      <div class="indent-1"><span class="json-key">"quality_flags"</span>: <span class="json-bracket">[</span></div>
+      <div class="indent-2 warn-row"><span class="json-bracket">{</span></div>
+      <div class="indent-3"><span class="json-key">"field"</span>: <span class="json-string">"parties[1].rep_id_number"</span>,</div>
+      <div class="indent-3"><span class="json-key">"issue"</span>: <span class="json-string">"possible_ocr_error"</span>,</div>
+      <div class="indent-3"><span class="json-key">"confidence"</span>: <span class="json-number">0.72</span>,</div>
+      <div class="indent-3"><span class="json-key">"suggestion"</span>: <span class="json-string">"Verificar manualmente: último carácter puede ser 8 en vez de B"</span></div>
+      <div class="indent-2"><span class="json-bracket">}</span></div>
+      <div class="indent-1"><span class="json-bracket">]</span>,</div>
+
+      <div class="indent-1">&nbsp;</div>
+      <div class="indent-1"><span class="json-key">"mapping_status"</span>: <span class="json-string">"pending_validation"</span></div>
+
+      <div><span class="json-bracket">}</span></div>
+    </div>
+  </div>
+
+  <!-- Mapping Preview -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">🔄 Preview de Mapping → Bubble</span>
+      <span class="section-badge" style="background: rgba(109,60,255,0.1); color: var(--deals);">Deals Config</span>
+    </div>
+    <div class="mapping-grid">
+      <div class="map-col-header">structured_data (Binder)</div>
+      <div class="map-arrow">→</div>
+      <div class="map-col-header">Bubble Field</div>
+
+      <div class="map-field map-source">contract.contract_date</div>
+      <div class="map-mid">→</div>
+      <div class="map-field map-target">Bubble.contract_date</div>
+
+      <div class="map-field map-source">parties[0].entity_name</div>
+      <div class="map-mid">→</div>
+      <div class="map-field map-target">Bubble.counterparty</div>
+
+      <div class="map-field map-source">contract.amount</div>
+      <div class="map-mid">→</div>
+      <div class="map-field map-target">Bubble.amount</div>
+
+      <div class="map-field map-source">contract.currency</div>
+      <div class="map-mid">→</div>
+      <div class="map-field map-target">Bubble.currency</div>
+
+      <div class="map-field map-source">contract.expiration_date</div>
+      <div class="map-mid">→</div>
+      <div class="map-field map-target">Bubble.expiry_date</div>
+
+      <div class="map-field map-source">contract.subject</div>
+      <div class="map-mid">→</div>
+      <div class="map-field map-target">Bubble.description</div>
+
+      <div class="map-field map-source">parties[1].entity_name</div>
+      <div class="map-mid">→</div>
+      <div class="map-field map-target">Bubble.provider_name</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Binder</span> &nbsp;·&nbsp; Onboarding Pipeline &nbsp;·&nbsp; Anexo 3 &nbsp;·&nbsp; JSON Output Estructurado
+  </div>
+</div>
+</body>
+</html>

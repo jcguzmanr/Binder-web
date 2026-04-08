@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anexo 4 — Pantalla de Revisión de Documentos</title>
+<style>
+  :root {
+    --accent: #0098B1;
+    --fg: #1B1B1B;
+    --bg: #F5F5F5;
+    --white: #FFFFFF;
+    --border: #DFDFDF;
+    --gray-medium: #6B7280;
+    --gray-lightest: #F9FAFB;
+    --accent-light: #AEDEE6;
+    --positive: #22C55E;
+    --warning: #EAB308;
+    --danger: #EF4444;
+    --orange: #FF9000;
+    --deals: #6D3CFF;
+    --cases: #30339C;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0F172A; color: var(--fg); min-height: 100vh; }
+
+  /* App shell */
+  .app-shell { display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    background: #1E293B;
+    border-right: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+
+  .sidebar-logo {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #334155;
+  }
+
+  .sidebar-logo-icon {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 15px;
+  }
+
+  .sidebar-logo-text { color: #F1F5F9; font-weight: 600; font-size: 16px; }
+
+  .sidebar-section { padding: 16px 12px 8px; font-size: 10px; color: #64748B; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+  .sidebar-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 16px; margin: 2px 8px;
+    border-radius: 6px; font-size: 13px; color: #94A3B8; cursor: pointer;
+  }
+
+  .sidebar-item:hover { background: #334155; color: #E2E8F0; }
+  .sidebar-item.active { background: rgba(0,152,177,0.15); color: var(--accent); }
+
+  .sidebar-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  .sidebar-count {
+    margin-left: auto;
+    background: #334155;
+    color: #94A3B8;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+
+  .sidebar-count.alert { background: rgba(239,68,68,0.15); color: var(--danger); }
+
+  /* Main content */
+  .main-content { flex: 1; display: flex; flex-direction: column; background: var(--bg); }
+
+  /* Top bar */
+  .topbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .topbar-breadcrumb { font-size: 13px; color: var(--gray-medium); }
+  .topbar-breadcrumb span { color: var(--fg); font-weight: 600; }
+  .topbar-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; background: rgba(0,152,177,0.1); color: var(--accent); }
+
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+
+  .topbar-stats {
+    display: flex; gap: 20px; font-size: 12px;
+  }
+
+  .stat { display: flex; align-items: center; gap: 6px; }
+  .stat-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .stat-label { color: var(--gray-medium); }
+  .stat-value { font-weight: 700; }
+
+  /* Content area */
+  .content-area { flex: 1; padding: 24px; overflow-y: auto; }
+
+  /* Document table */
+  .doc-table {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .doc-table-header {
+    display: grid;
+    grid-template-columns: 44px 1fr 100px 120px 80px 100px 140px;
+    padding: 12px 20px;
+    background: var(--gray-lightest);
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-medium);
+    align-items: center;
+  }
+
+  .doc-row {
+    display: grid;
+    grid-template-columns: 44px 1fr 100px 120px 80px 100px 140px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--gray-lightest);
+    align-items: center;
+    font-size: 13px;
+    transition: background 0.15s;
+  }
+
+  .doc-row:hover { background: var(--gray-lightest); }
+  .doc-row:last-child { border-bottom: none; }
+
+  .doc-row.row-warn { background: rgba(234,179,8,0.04); }
+  .doc-row.row-error { background: rgba(239,68,68,0.04); }
+
+  .doc-check {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+  }
+
+  .doc-check.checked { background: var(--accent); border-color: var(--accent); color: white; }
+
+  .doc-name { font-weight: 500; }
+  .doc-name-sub { font-size: 11px; color: var(--gray-medium); margin-top: 2px; }
+
+  .doc-app {
+    font-size: 11px; font-weight: 600; padding: 3px 8px;
+    border-radius: 4px; display: inline-block;
+  }
+
+  .app-deals { background: rgba(109,60,255,0.08); color: var(--deals); }
+  .app-cases { background: rgba(48,51,156,0.08); color: var(--cases); }
+
+  .doc-conf { font-weight: 700; font-size: 13px; }
+  .conf-good { color: var(--positive); }
+  .conf-mid { color: var(--orange); }
+  .conf-low { color: var(--danger); }
+
+  .doc-status {
+    font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: 12px; display: inline-block; text-align: center;
+  }
+
+  .status-validated { background: rgba(34,197,94,0.1); color: var(--positive); }
+  .status-review { background: rgba(234,179,8,0.1); color: #B45309; }
+  .status-error { background: rgba(239,68,68,0.1); color: var(--danger); }
+  .status-pending { background: rgba(107,114,128,0.1); color: var(--gray-medium); }
+
+  /* Flags column */
+  .flags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .flag {
+    font-size: 9px; font-weight: 600; padding: 2px 6px;
+    border-radius: 3px; white-space: nowrap;
+  }
+
+  .flag-ocr { background: rgba(234,179,8,0.12); color: #B45309; }
+  .flag-missing { background: rgba(239,68,68,0.12); color: var(--danger); }
+  .flag-ok { background: rgba(34,197,94,0.1); color: var(--positive); }
+  .flag-dup { background: rgba(109,60,255,0.1); color: var(--deals); }
+
+  /* Detail panel */
+  .detail-panel {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-top: 20px;
+    overflow: hidden;
+  }
+
+  .detail-header {
+    padding: 16px 20px;
+    background: var(--gray-lightest);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .detail-title { font-size: 14px; font-weight: 600; }
+
+  .detail-body { padding: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  .detail-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .detail-card-title {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.5px; color: var(--gray-medium); margin-bottom: 12px;
+  }
+
+  .detail-item { margin-bottom: 8px; }
+  .detail-label { font-size: 11px; color: var(--gray-medium); }
+  .detail-value { font-size: 13px; font-weight: 500; }
+
+  .flag-detail {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 10px 12px; border-radius: 6px;
+    margin-bottom: 8px;
+  }
+
+  .flag-detail.warn-bg { background: rgba(234,179,8,0.06); border-left: 3px solid var(--warning); }
+  .flag-detail.error-bg { background: rgba(239,68,68,0.06); border-left: 3px solid var(--danger); }
+  .flag-detail.ok-bg { background: rgba(34,197,94,0.06); border-left: 3px solid var(--positive); }
+
+  .flag-detail-text { font-size: 12px; line-height: 1.5; }
+  .flag-detail-text strong { display: block; font-size: 12px; }
+
+  .watermark {
+    position: fixed;
+    bottom: 16px;
+    right: 24px;
+    font-size: 11px;
+    color: #94A3B8;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">B</div>
+      <div class="sidebar-logo-text">Binder</div>
+    </div>
+
+    <div class="sidebar-section">Onboarding</div>
+    <div class="sidebar-item active">
+      <div class="sidebar-dot" style="background: var(--accent);"></div>
+      Revisión Docs
+      <span class="sidebar-count alert">3</span>
+    </div>
+    <div class="sidebar-item">
+      <div class="sidebar-dot" style="background: var(--positive);"></div>
+      Validados
+      <span class="sidebar-count">12</span>
+    </div>
+    <div class="sidebar-item">
+      <div class="sidebar-dot" style="background: var(--gray-medium);"></div>
+      En Proceso
+      <span class="sidebar-count">5</span>
+    </div>
+
+    <div class="sidebar-section">Clientes</div>
+    <div class="sidebar-item">
+      <div class="sidebar-dot" style="background: var(--deals);"></div>
+      AcmeCorp
+    </div>
+    <div class="sidebar-item">
+      <div class="sidebar-dot" style="background: var(--cases);"></div>
+      LegalTech SA
+    </div>
+
+    <div class="sidebar-section">Config</div>
+    <div class="sidebar-item">
+      <div class="sidebar-dot" style="background: var(--gray-medium);"></div>
+      Mapping Rules
+    </div>
+    <div class="sidebar-item">
+      <div class="sidebar-dot" style="background: var(--gray-medium);"></div>
+      Prompt Versions
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main-content">
+    <div class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-breadcrumb">Onboarding → <span>Revisión de Documentos</span></span>
+        <span class="topbar-badge">Anexo 4</span>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-stats">
+          <div class="stat">
+            <div class="stat-dot" style="background: var(--positive);"></div>
+            <span class="stat-label">Validados</span>
+            <span class="stat-value">12</span>
+          </div>
+          <div class="stat">
+            <div class="stat-dot" style="background: var(--warning);"></div>
+            <span class="stat-label">Con flags</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat">
+            <div class="stat-dot" style="background: var(--danger);"></div>
+            <span class="stat-label">Errores</span>
+            <span class="stat-value">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-area">
+      <!-- Document Table -->
+      <div class="doc-table">
+        <div class="doc-table-header">
+          <div></div>
+          <div>Documento</div>
+          <div>Application</div>
+          <div>Confianza</div>
+          <div>Status</div>
+          <div>Mapping</div>
+          <div>Flags</div>
+        </div>
+
+        <div class="doc-row">
+          <div class="doc-check checked">✓</div>
+          <div>
+            <div class="doc-name">contrato_principal.pdf</div>
+            <div class="doc-name-sub">AcmeCorp / Deals / Contrato Proveedor</div>
+          </div>
+          <div><span class="doc-app app-deals">Deals</span></div>
+          <div><span class="doc-conf conf-good">94.2%</span></div>
+          <div><span class="doc-status status-validated">Validado</span></div>
+          <div><span class="doc-status status-validated">Listo</span></div>
+          <div class="flags">
+            <span class="flag flag-ocr">OCR ⚠</span>
+          </div>
+        </div>
+
+        <div class="doc-row">
+          <div class="doc-check checked">✓</div>
+          <div>
+            <div class="doc-name">adenda_01.pdf</div>
+            <div class="doc-name-sub">AcmeCorp / Deals / Contrato Proveedor</div>
+          </div>
+          <div><span class="doc-app app-deals">Deals</span></div>
+          <div><span class="doc-conf conf-good">97.8%</span></div>
+          <div><span class="doc-status status-validated">Validado</span></div>
+          <div><span class="doc-status status-validated">Listo</span></div>
+          <div class="flags">
+            <span class="flag flag-ok">OK ✓</span>
+          </div>
+        </div>
+
+        <div class="doc-row row-warn">
+          <div class="doc-check"></div>
+          <div>
+            <div class="doc-name">demanda.pdf</div>
+            <div class="doc-name-sub">AcmeCorp / Cases / Exp. 2024-1532</div>
+          </div>
+          <div><span class="doc-app app-cases">Cases</span></div>
+          <div><span class="doc-conf conf-mid">81.3%</span></div>
+          <div><span class="doc-status status-review">Revisión</span></div>
+          <div><span class="doc-status status-pending">Pendiente</span></div>
+          <div class="flags">
+            <span class="flag flag-ocr">OCR ⚠</span>
+            <span class="flag flag-missing">CAMPO</span>
+          </div>
+        </div>
+
+        <div class="doc-row">
+          <div class="doc-check checked">✓</div>
+          <div>
+            <div class="doc-name">contestacion.pdf</div>
+            <div class="doc-name-sub">AcmeCorp / Cases / Exp. 2024-1532</div>
+          </div>
+          <div><span class="doc-app app-cases">Cases</span></div>
+          <div><span class="doc-conf conf-good">92.1%</span></div>
+          <div><span class="doc-status status-validated">Validado</span></div>
+          <div><span class="doc-status status-validated">Listo</span></div>
+          <div class="flags">
+            <span class="flag flag-ok">OK ✓</span>
+          </div>
+        </div>
+
+        <div class="doc-row row-error">
+          <div class="doc-check"></div>
+          <div>
+            <div class="doc-name">resolucion_03.txt</div>
+            <div class="doc-name-sub">AcmeCorp / Cases / Exp. 2024-1532</div>
+          </div>
+          <div><span class="doc-app app-cases">Cases</span></div>
+          <div><span class="doc-conf conf-low">43.7%</span></div>
+          <div><span class="doc-status status-error">Error</span></div>
+          <div><span class="doc-status status-error">Bloqueado</span></div>
+          <div class="flags">
+            <span class="flag flag-missing">JSON ✗</span>
+            <span class="flag flag-missing">PROMPT</span>
+          </div>
+        </div>
+
+        <div class="doc-row">
+          <div class="doc-check checked">✓</div>
+          <div>
+            <div class="doc-name">nda_bilateral.pdf</div>
+            <div class="doc-name-sub">LegalTech SA / Deals / NDA</div>
+          </div>
+          <div><span class="doc-app app-deals">Deals</span></div>
+          <div><span class="doc-conf conf-good">98.5%</span></div>
+          <div><span class="doc-status status-validated">Validado</span></div>
+          <div><span class="doc-status status-validated">Listo</span></div>
+          <div class="flags">
+            <span class="flag flag-ok">OK ✓</span>
+          </div>
+        </div>
+
+        <div class="doc-row row-warn">
+          <div class="doc-check"></div>
+          <div>
+            <div class="doc-name">arrendamiento_v2.pdf</div>
+            <div class="doc-name-sub">AcmeCorp / Deals / Contrato Arrendamiento</div>
+          </div>
+          <div><span class="doc-app app-deals">Deals</span></div>
+          <div><span class="doc-conf conf-mid">76.4%</span></div>
+          <div><span class="doc-status status-review">Revisión</span></div>
+          <div><span class="doc-status status-pending">Pendiente</span></div>
+          <div class="flags">
+            <span class="flag flag-ocr">OCR ⚠</span>
+            <span class="flag flag-dup">DUP?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detail Panel -->
+      <div class="detail-panel">
+        <div class="detail-header">
+          <div class="detail-title">📋 Detalle: resolucion_03.txt — Flags de Calidad</div>
+          <span class="doc-status status-error">Error — Requiere Acción</span>
+        </div>
+        <div class="detail-body">
+          <div class="detail-card">
+            <div class="detail-card-title">Metadata</div>
+            <div class="detail-item"><div class="detail-label">Cliente</div><div class="detail-value">AcmeCorp</div></div>
+            <div class="detail-item"><div class="detail-label">Application</div><div class="detail-value" style="color:var(--cases);">Cases</div></div>
+            <div class="detail-item"><div class="detail-label">Workflow</div><div class="detail-value">Exp. 2024-1532</div></div>
+            <div class="detail-item"><div class="detail-label">Fecha Ingesta</div><div class="detail-value">2026-04-07</div></div>
+            <div class="detail-item"><div class="detail-label">Tamaño</div><div class="detail-value">2.1 KB</div></div>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-title">Flags Detectados</div>
+            <div class="flag-detail error-bg">
+              <div class="flag-detail-text">
+                <strong>🔴 JSON Mal Formado</strong>
+                El prompt de extracción retornó JSON inválido. Posible corte por token limit.
+              </div>
+            </div>
+            <div class="flag-detail error-bg">
+              <div class="flag-detail-text">
+                <strong>🔴 Prompt Fallido</strong>
+                CaseExtractPrompt no existe para esta Application. Se requiere módulo nuevo.
+              </div>
+            </div>
+            <div class="flag-detail warn-bg">
+              <div class="flag-detail-text">
+                <strong>🟡 Confianza < 50%</strong>
+                El texto extraído tiene alta proporción de caracteres no reconocidos.
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-title">Acciones Sugeridas</div>
+            <div class="flag-detail ok-bg">
+              <div class="flag-detail-text">
+                <strong>1. Crear CaseExtractPrompt</strong>
+                Desarrollar prompt específico para Application "Cases".
+              </div>
+            </div>
+            <div class="flag-detail ok-bg">
+              <div class="flag-detail-text">
+                <strong>2. Reprocesar archivo</strong>
+                Una vez disponible el prompt, reiniciar desde Fase 3.2.
+              </div>
+            </div>
+            <div class="flag-detail ok-bg">
+              <div class="flag-detail-text">
+                <strong>3. Revisar fuente</strong>
+                Verificar calidad del archivo TXT original en Drive.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="watermark">Binder · Onboarding Pipeline · Anexo 4</div>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anexo 1 — Estructura Estándar de Carpeta de Onboarding</title>
+<style>
+  :root {
+    --accent: #0098B1;
+    --fg: #1B1B1B;
+    --bg: #F5F5F5;
+    --white: #FFFFFF;
+    --border: #DFDFDF;
+    --gray-medium: #6B7280;
+    --gray-lightest: #F9FAFB;
+    --accent-light: #AEDEE6;
+    --blue-accent: #5FBDFF;
+    --cases: #30339C;
+    --deals: #6D3CFF;
+    --archive: #5FBDFF;
+    --positive: #22C55E;
+    --warning: #EAB308;
+    --danger: #EF4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 32px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--fg);
+  }
+
+  .subtitle {
+    color: var(--gray-medium);
+    font-size: 14px;
+    margin-bottom: 32px;
+    padding-left: 56px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-anexo {
+    background: rgba(0,152,177,0.1);
+    color: var(--accent);
+  }
+
+  .section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 20px;
+  }
+
+  /* Tree styles */
+  .tree {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .tree-node {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+  }
+
+  .tree-indent {
+    color: var(--border);
+    white-space: pre;
+    user-select: none;
+  }
+
+  .tree-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  .icon-drive { background: #4285F4; color: white; }
+  .icon-client { background: var(--accent); color: white; }
+  .icon-app-deals { background: var(--deals); color: white; }
+  .icon-app-cases { background: var(--cases); color: white; }
+  .icon-workflow { background: var(--accent-light); color: var(--fg); }
+  .icon-file { background: var(--gray-lightest); color: var(--gray-medium); }
+  .icon-s3 { background: #FF9900; color: white; }
+  .icon-bucket { background: #569A31; color: white; }
+
+  .tree-label {
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  .tree-label.muted {
+    color: var(--gray-medium);
+    font-weight: 400;
+  }
+
+  .tree-tag {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+
+  .tag-root { background: rgba(0,152,177,0.08); color: var(--accent); }
+  .tag-app { background: rgba(109,60,255,0.08); color: var(--deals); }
+  .tag-wf { background: rgba(174,222,230,0.3); color: #0077A0; }
+  .tag-pdf { background: rgba(239,68,68,0.08); color: var(--danger); }
+  .tag-txt { background: rgba(34,197,94,0.08); color: var(--positive); }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+  }
+
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: var(--gray-lightest);
+  }
+
+  .rule-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .rule-text {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .rule-text strong {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--gray-medium);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 24px 0;
+    color: var(--gray-medium);
+    font-size: 12px;
+  }
+
+  .footer span {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .s3-section {
+    margin-top: 0;
+  }
+
+  .arrow-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+    color: var(--accent);
+  }
+
+  .arrow-connector svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .arrow-label {
+    font-size: 11px;
+    color: var(--gray-medium);
+    margin-left: 8px;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="logo">B</div>
+    <h1>Estructura Estándar de Carpeta de Onboarding</h1>
+  </div>
+  <div class="subtitle">
+    <span class="badge badge-anexo">Anexo 1</span> &nbsp;Onboarding Pipeline — Fase 0: Estructura de Entrada
+  </div>
+
+  <!-- Google Drive Structure -->
+  <div class="section">
+    <div class="section-title">📂 Google Drive — Carpeta Controlada por Binder</div>
+    <div class="tree">
+      <div class="tree-node">
+        <span class="tree-indent"></span>
+        <span class="tree-icon icon-drive">G</span>
+        <span class="tree-label">Binder_Onboarding/</span>
+        <span class="tree-tag tag-root">raíz</span>
+      </div>
+
+      <div class="tree-node">
+        <span class="tree-indent">├── </span>
+        <span class="tree-icon icon-client">C</span>
+        <span class="tree-label">Cliente_AcmeCorp/</span>
+        <span class="tree-tag tag-root">cliente</span>
+      </div>
+
+      <div class="tree-node">
+        <span class="tree-indent">│   ├── </span>
+        <span class="tree-icon icon-app-deals">D</span>
+        <span class="tree-label">Deals/</span>
+        <span class="tree-tag tag-app">application</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">│   │   ├── </span>
+        <span class="tree-icon icon-workflow">W</span>
+        <span class="tree-label">Contrato_Proveedor_2024/</span>
+        <span class="tree-tag tag-wf">workflow</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">│   │   │   ├── </span>
+        <span class="tree-icon icon-file">F</span>
+        <span class="tree-label muted">contrato_principal.pdf</span>
+        <span class="tree-tag tag-pdf">PDF</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">│   │   │   └── </span>
+        <span class="tree-icon icon-file">F</span>
+        <span class="tree-label muted">adenda_01.pdf</span>
+        <span class="tree-tag tag-pdf">PDF</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">│   │   └── </span>
+        <span class="tree-icon icon-workflow">W</span>
+        <span class="tree-label">Contrato_Arrendamiento/</span>
+        <span class="tree-tag tag-wf">workflow</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">│   │       └── </span>
+        <span class="tree-icon icon-file">F</span>
+        <span class="tree-label muted">arrendamiento_v2.pdf</span>
+        <span class="tree-tag tag-pdf">PDF</span>
+      </div>
+
+      <div class="tree-node">
+        <span class="tree-indent">│   └── </span>
+        <span class="tree-icon icon-app-cases">J</span>
+        <span class="tree-label">Cases/</span>
+        <span class="tree-tag tag-app">application</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">│       └── </span>
+        <span class="tree-icon icon-workflow">W</span>
+        <span class="tree-label">Expediente_2024-1532/</span>
+        <span class="tree-tag tag-wf">workflow</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">│           ├── </span>
+        <span class="tree-icon icon-file">F</span>
+        <span class="tree-label muted">demanda.pdf</span>
+        <span class="tree-tag tag-pdf">PDF</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">│           ├── </span>
+        <span class="tree-icon icon-file">F</span>
+        <span class="tree-label muted">contestacion.pdf</span>
+        <span class="tree-tag tag-pdf">PDF</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">│           └── </span>
+        <span class="tree-icon icon-file">F</span>
+        <span class="tree-label muted">resolucion_03.txt</span>
+        <span class="tree-tag tag-txt">TXT</span>
+      </div>
+
+      <div class="tree-node">
+        <span class="tree-indent">└── </span>
+        <span class="tree-icon icon-client">C</span>
+        <span class="tree-label">Cliente_LegalTech_SA/</span>
+        <span class="tree-tag tag-root">cliente</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">    └── </span>
+        <span class="tree-icon icon-app-deals">D</span>
+        <span class="tree-label">Deals/</span>
+        <span class="tree-tag tag-app">application</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">        └── </span>
+        <span class="tree-icon icon-workflow">W</span>
+        <span class="tree-label">NDA_Confidencialidad/</span>
+        <span class="tree-tag tag-wf">workflow</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">            └── </span>
+        <span class="tree-icon icon-file">F</span>
+        <span class="tree-label muted">nda_bilateral.pdf</span>
+        <span class="tree-tag tag-pdf">PDF</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background: var(--accent);"></div> Cliente</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--deals);"></div> Application: Deals</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--cases);"></div> Application: Cases</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--accent-light);"></div> Workflow</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--border);"></div> Archivo</div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="arrow-connector">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    <span class="arrow-label">FASE 1 — Ingesta → S3 Bucket</span>
+  </div>
+
+  <!-- S3 Structure -->
+  <div class="section s3-section">
+    <div class="section-title">☁️ AWS S3 — Estructura de Persistencia</div>
+    <div class="tree">
+      <div class="tree-node">
+        <span class="tree-indent"></span>
+        <span class="tree-icon icon-s3">S3</span>
+        <span class="tree-label">binder-onboarding/</span>
+        <span class="tree-tag tag-root">bucket</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">├── </span>
+        <span class="tree-icon icon-bucket">R</span>
+        <span class="tree-label">raw/</span>
+        <span class="tree-tag" style="background:rgba(255,153,0,0.1);color:#FF9900;">original</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">│   └── </span>
+        <span class="tree-icon icon-file">F</span>
+        <span class="tree-label muted">acme/deals/contrato_proveedor/contrato_principal.pdf</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">├── </span>
+        <span class="tree-icon icon-bucket">P</span>
+        <span class="tree-label">processed/</span>
+        <span class="tree-tag" style="background:rgba(0,152,177,0.1);color:var(--accent);">normalizado</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">├── </span>
+        <span class="tree-icon icon-bucket">T</span>
+        <span class="tree-label">extracted_text/</span>
+        <span class="tree-tag" style="background:rgba(34,197,94,0.1);color:var(--positive);">OCR/texto</span>
+      </div>
+      <div class="tree-node">
+        <span class="tree-indent">└── </span>
+        <span class="tree-icon icon-bucket">J</span>
+        <span class="tree-label">structured_output/</span>
+        <span class="tree-tag" style="background:rgba(109,60,255,0.1);color:var(--deals);">JSON IA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rules -->
+  <div class="section">
+    <div class="section-title">📋 Reglas de Ingesta</div>
+    <div class="rules-grid">
+      <div class="rule">
+        <span class="rule-icon">✅</span>
+        <div class="rule-text">
+          <strong>Formatos permitidos</strong>
+          PDF y TXT únicamente. Validación en Fase 1 antes de copia a S3.
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rule-icon">🚫</span>
+        <div class="rule-text">
+          <strong>Formatos rechazados</strong>
+          XLS, DOC, imágenes sueltas. Se rechaza con notificación al operador.
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rule-icon">🏷️</span>
+        <div class="rule-text">
+          <strong>Metadata auto-generada</strong>
+          Cliente, Application, Workflow, nombre archivo, fecha de carga.
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rule-icon">🔒</span>
+        <div class="rule-text">
+          <strong>Propiedad de archivos</strong>
+          Drive controlado por Binder. Acceso IAM restringido en S3.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Binder</span> &nbsp;·&nbsp; Onboarding Pipeline &nbsp;·&nbsp; Anexo 1 &nbsp;·&nbsp; Estructura Estándar de Carpetas
+  </div>
+</div>
+</body>
+</html>

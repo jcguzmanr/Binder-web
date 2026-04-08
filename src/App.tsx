@@ -41,6 +41,11 @@ import { CasesPage } from './pages/casos-uso/CasesPage';
 import { TestAnimationPage } from './pages/TestAnimationPage';
 import { PrepReunionOkaPage } from './pages/docs/PrepReunionOkaPage';
 import { Hito2AnexosPage } from './pages/docs/Hito2AnexosPage';
+import { OnboardingAnexo1Page } from './pages/docs/onboarding/OnboardingAnexo1Page';
+import { OnboardingAnexo2Page } from './pages/docs/onboarding/OnboardingAnexo2Page';
+import { OnboardingAnexo3Page } from './pages/docs/onboarding/OnboardingAnexo3Page';
+import { OnboardingAnexo4Page } from './pages/docs/onboarding/OnboardingAnexo4Page';
+import { OnboardingAnexo5Page } from './pages/docs/onboarding/OnboardingAnexo5Page';
 import { EventPage } from './pages/eventos/EventPage';
 import './styles/globals.css';
 
@@ -90,6 +95,11 @@ function AppLayout() {
         <Route path="/test/antigravity" element={<TestAnimationPage />} />
         <Route path="/docs/prep-reunion-oka-ciberseguridad" element={<PrepReunionOkaPage />} />
         <Route path="/hito2/anexos" element={<Hito2AnexosPage />} />
+        <Route path="/hito2/anexos/onboarding/anexo-1" element={<OnboardingAnexo1Page />} />
+        <Route path="/hito2/anexos/onboarding/anexo-2" element={<OnboardingAnexo2Page />} />
+        <Route path="/hito2/anexos/onboarding/anexo-3" element={<OnboardingAnexo3Page />} />
+        <Route path="/hito2/anexos/onboarding/anexo-4" element={<OnboardingAnexo4Page />} />
+        <Route path="/hito2/anexos/onboarding/anexo-5" element={<OnboardingAnexo5Page />} />
         <Route path="/eventos/:slug" element={<EventPage />} />
         <Route
           path="/"

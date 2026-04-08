@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anexo 5 — Pipeline Completo de Onboarding</title>
+<style>
+  :root {
+    --accent: #0098B1;
+    --fg: #1B1B1B;
+    --bg: #F5F5F5;
+    --white: #FFFFFF;
+    --border: #DFDFDF;
+    --gray-medium: #6B7280;
+    --gray-lightest: #F9FAFB;
+    --accent-light: #AEDEE6;
+    --positive: #22C55E;
+    --warning: #EAB308;
+    --danger: #EF4444;
+    --orange: #FF9000;
+    --deals: #6D3CFF;
+    --cases: #30339C;
+    --blue-accent: #5FBDFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, sans-serif; background: var(--bg); color: var(--fg); }
+  .page { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+
+  .header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+  .logo { width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; }
+  .header h1 { font-size: 24px; font-weight: 700; }
+  .subtitle { color: var(--gray-medium); font-size: 14px; margin-bottom: 40px; padding-left: 56px; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,152,177,0.1); color: var(--accent); }
+
+  /* Pipeline flow */
+  .pipeline { position: relative; }
+
+  .phase-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 2px;
+    position: relative;
+  }
+
+  .phase-label {
+    width: 80px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 4px;
+  }
+
+  .phase-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: white;
+  }
+
+  .phase-name {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.5px; color: var(--gray-medium); margin-top: 6px;
+    text-align: center; line-height: 1.3;
+  }
+
+  .phase-content {
+    flex: 1;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 90px;
+  }
+
+  .phase-content.highlighted {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(0,152,177,0.1);
+  }
+
+  /* Connector arrows between phases */
+  .connector {
+    display: flex;
+    align-items: center;
+    padding: 4px 0 4px 80px;
+  }
+
+  .connector-line {
+    width: 2px;
+    height: 20px;
+    background: var(--accent);
+    margin-left: 17px;
+    position: relative;
+  }
+
+  .connector-line::after {
+    content: '▼';
+    position: absolute;
+    bottom: -8px;
+    left: -5px;
+    font-size: 10px;
+    color: var(--accent);
+  }
+
+  /* Step blocks inside phase */
+  .step {
+    background: var(--gray-lightest);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .step-title {
+    font-size: 12px; font-weight: 700; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .step-desc { font-size: 11px; color: var(--gray-medium); line-height: 1.5; }
+
+  .step-icon {
+    width: 24px; height: 24px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; flex-shrink: 0;
+  }
+
+  .step-arrow {
+    color: var(--accent);
+    font-size: 18px;
+    flex-shrink: 0;
+    padding: 0 4px;
+  }
+
+  /* Branching */
+  .branch-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .branch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .branch-label {
+    font-size: 10px; font-weight: 600;
+    padding: 2px 8px; border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .branch-deals { background: rgba(109,60,255,0.08); color: var(--deals); }
+  .branch-cases { background: rgba(48,51,156,0.08); color: var(--cases); }
+  .branch-generic { background: rgba(95,189,255,0.08); color: var(--blue-accent); }
+
+  /* Error flow */
+  .error-sidebar {
+    position: absolute;
+    right: -20px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--danger) 0, var(--danger) 8px,
+      transparent 8px, transparent 16px
+    );
+    border-radius: 2px;
+  }
+
+  /* Module tags */
+  .mod-tag {
+    font-size: 9px; font-weight: 600; padding: 2px 6px;
+    border-radius: 3px; white-space: nowrap;
+  }
+
+  .mod-existing { background: rgba(34,197,94,0.1); color: var(--positive); }
+  .mod-new { background: rgba(255,144,0,0.1); color: var(--orange); }
+  .mod-external { background: rgba(95,189,255,0.1); color: var(--blue-accent); }
+
+  /* Decision diamond */
+  .decision {
+    background: rgba(0,152,177,0.06);
+    border: 2px dashed var(--accent);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    flex: 0.8;
+  }
+
+  .decision-text {
+    font-size: 11px; font-weight: 600; color: var(--accent);
+  }
+
+  /* Summary section */
+  .summary {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 32px;
+  }
+
+  .summary-title {
+    font-size: 13px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.5px; color: var(--gray-medium); margin-bottom: 16px;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .module-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .module-card-name { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .module-card-desc { font-size: 11px; color: var(--gray-medium); line-height: 1.4; }
+  .module-card-phase { font-size: 10px; color: var(--accent); font-weight: 600; }
+
+  .footer { text-align: center; padding: 24px 0; color: var(--gray-medium); font-size: 12px; }
+  .footer span { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="logo">B</div>
+    <h1>Pipeline Completo de Onboarding</h1>
+  </div>
+  <div class="subtitle">
+    <span class="badge">Anexo 5</span> &nbsp;Recepción → Extracción → IA → Validación → Binder
+  </div>
+
+  <div class="pipeline">
+    <!-- FASE 0 -->
+    <div class="phase-row">
+      <div class="phase-label">
+        <div class="phase-num" style="background: #4285F4;">0</div>
+        <div class="phase-name">Estructura</div>
+      </div>
+      <div class="phase-content">
+        <div class="step">
+          <div class="step-title">
+            <span class="step-icon" style="background:#4285F4;color:white;">G</span>
+            Google Drive
+          </div>
+          <div class="step-desc">Carpeta controlada por Binder. Estructura: /Cliente/Application/Workflow/</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-title">
+            📋 Validación de Entrada
+          </div>
+          <div class="step-desc">Solo PDF/TXT. Ubicación correcta. Rechazar XLS/DOC con notificación.</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-title">
+            🏷️ Metadata Auto
+            <span class="mod-tag mod-new">Módulo 1</span>
+          </div>
+          <div class="step-desc">Cliente, Application, Workflow, nombre, fecha carga.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="connector-line"></div></div>
+
+    <!-- FASE 1 -->
+    <div class="phase-row">
+      <div class="phase-label">
+        <div class="phase-num" style="background: var(--accent);">1</div>
+        <div class="phase-name">Ingesta</div>
+      </div>
+      <div class="phase-content">
+        <div class="step">
+          <div class="step-title">
+            <span class="step-icon" style="background:var(--accent);color:white;">🔄</span>
+            Drive Listener
+            <span class="mod-tag mod-new">Módulo 1</span>
+          </div>
+          <div class="step-desc">Service Account detecta nuevos archivos. Webhook o polling.</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-title">
+            <span class="step-icon" style="background:#FF9900;color:white;">S3</span>
+            S3 Upload
+            <span class="mod-tag mod-new">Módulo 2</span>
+          </div>
+          <div class="step-desc">Copia a binder-onboarding/raw/{cliente}/{app}/{workflow}/</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="connector-line"></div></div>
+
+    <!-- FASE 2 -->
+    <div class="phase-row">
+      <div class="phase-label">
+        <div class="phase-num" style="background: var(--positive);">2</div>
+        <div class="phase-name">Persistencia</div>
+      </div>
+      <div class="phase-content">
+        <div class="step" style="flex: 0.7;">
+          <div class="step-title">📦 S3 Layers</div>
+          <div class="step-desc">raw/ → processed/ → extracted_text/ → structured_output/</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step" style="flex: 1.3;">
+          <div class="step-title">
+            🗄️ DB Intermedia
+            <span class="mod-tag mod-new">Nuevo</span>
+          </div>
+          <div class="step-desc">clients · applications · workflows · documents · extracted_text · structured_data · mapping_status</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="connector-line"></div></div>
+
+    <!-- FASE 3 -->
+    <div class="phase-row">
+      <div class="phase-label">
+        <div class="phase-num" style="background: var(--deals);">3</div>
+        <div class="phase-name">Proceso IA</div>
+      </div>
+      <div class="phase-content highlighted">
+        <div class="step">
+          <div class="step-title">
+            🔍 TextExtract
+            <span class="mod-tag mod-existing">Existente</span>
+          </div>
+          <div class="step-desc">OCR → texto plano. Almacena en extracted_text.</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="decision">
+          <div class="decision-text">¿Qué Application?</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="branch-container">
+          <div class="branch">
+            <span class="branch-label branch-deals">Deals</span>
+            <div class="step" style="flex:1;">
+              <div class="step-title">ContractClosurePrompt <span class="mod-tag mod-existing">Existente</span></div>
+              <div class="step-desc">→ JSON estructurado</div>
+            </div>
+          </div>
+          <div class="branch">
+            <span class="branch-label branch-cases">Cases</span>
+            <div class="step" style="flex:1;">
+              <div class="step-title">CaseExtractPrompt <span class="mod-tag mod-new">Nuevo</span></div>
+              <div class="step-desc">→ Expediente, actuaciones, hitos</div>
+            </div>
+          </div>
+          <div class="branch">
+            <span class="branch-label branch-generic">Otro</span>
+            <div class="step" style="flex:1;">
+              <div class="step-title">GenericPrompt <span class="mod-tag mod-new">Futuro</span></div>
+              <div class="step-desc">→ Extracción genérica</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="connector-line"></div></div>
+
+    <!-- FASE 4 -->
+    <div class="phase-row">
+      <div class="phase-label">
+        <div class="phase-num" style="background: var(--warning);">4</div>
+        <div class="phase-name">Validación</div>
+      </div>
+      <div class="phase-content">
+        <div class="step">
+          <div class="step-title">
+            🔎 Quality Check
+          </div>
+          <div class="step-desc">Confianza OCR, campos obligatorios, JSON válido, mapping completo.</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-title">
+            🚦 Status Assignment
+          </div>
+          <div class="step-desc">validated · pending_review · error. Flags en onboarding_errors.</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-title">
+            🗺️ Mapping Engine
+            <span class="mod-tag mod-new">Módulo 5</span>
+          </div>
+          <div class="step-desc">mapping_config por Application. structured_data → campos Bubble.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="connector-line"></div></div>
+
+    <!-- FASE 5 -->
+    <div class="phase-row">
+      <div class="phase-label">
+        <div class="phase-num" style="background: #0D9488;">5</div>
+        <div class="phase-name">Envío</div>
+      </div>
+      <div class="phase-content">
+        <div class="decision">
+          <div class="decision-text">mapping_status = validated?</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-title">
+            🔗 Bubble Connector
+            <span class="mod-tag mod-new">Módulo 6</span>
+          </div>
+          <div class="step-desc">POST → Bubble API (webhook controlado). Solo documentos validados.</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step" style="background: rgba(0,152,177,0.06); border-color: var(--accent);">
+          <div class="step-title" style="color: var(--accent);">
+            ✅ Binder Platform
+          </div>
+          <div class="step-desc">Documento procesado, estructurado y disponible en la aplicación destino.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error sidebar indicator -->
+    <div style="position: relative; margin-top: 16px; padding: 12px 20px 12px 92px;">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--danger);">
+        <span style="font-size: 14px;">⚡</span>
+        <strong>Error Monitor (Módulo 7)</strong>
+        <span style="color: var(--gray-medium);">— Captura errores en cada fase: archivo inválido, texto no extraído, prompt fallido, JSON mal formado, campo ausente, mapping incompleto.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Module Summary -->
+  <div class="summary">
+    <div class="summary-title">⚙️ Módulos Técnicos</div>
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="module-card-name"><span class="mod-tag mod-new">1</span> Drive Listener</div>
+        <div class="module-card-desc">Detecta nuevos archivos en carpeta cliente via Service Account.</div>
+        <div class="module-card-phase">Fases 0-1</div>
+      </div>
+      <div class="module-card">
+        <div class="module-card-name"><span class="mod-tag mod-new">2</span> S3 Uploader</div>
+        <div class="module-card-desc">Copia validada a bucket con estructura de capas.</div>
+        <div class="module-card-phase">Fase 1-2</div>
+      </div>
+      <div class="module-card">
+        <div class="module-card-name"><span class="mod-tag mod-existing">3</span> TextExtract</div>
+        <div class="module-card-desc">OCR existente. Convierte PDF/TXT a texto plano procesable.</div>
+        <div class="module-card-phase">Fase 3.1</div>
+      </div>
+      <div class="module-card">
+        <div class="module-card-name"><span class="mod-tag mod-existing">4</span> Contract Prompt</div>
+        <div class="module-card-desc">Prompt de cierre de contrato existente. JSON estructurado.</div>
+        <div class="module-card-phase">Fase 3.3</div>
+      </div>
+      <div class="module-card">
+        <div class="module-card-name"><span class="mod-tag mod-new">5</span> Mapping Engine</div>
+        <div class="module-card-desc">Config por Application. Transforma structured_data a campos Bubble.</div>
+        <div class="module-card-phase">Fase 4-5</div>
+      </div>
+      <div class="module-card">
+        <div class="module-card-name"><span class="mod-tag mod-new">6</span> Bubble Connector</div>
+        <div class="module-card-desc">Webhook POST controlado. Solo envía documentos validados.</div>
+        <div class="module-card-phase">Fase 5</div>
+      </div>
+      <div class="module-card">
+        <div class="module-card-name"><span class="mod-tag mod-new">7</span> Error Monitor</div>
+        <div class="module-card-desc">Registro transversal de errores. Tabla onboarding_errors.</div>
+        <div class="module-card-phase">Todas</div>
+      </div>
+      <div class="module-card" style="border-style: dashed; opacity: 0.7;">
+        <div class="module-card-name"><span class="mod-tag" style="background:rgba(107,114,128,0.1);color:var(--gray-medium);">—</span> Case Extractor</div>
+        <div class="module-card-desc">Pendiente. Requiere lógica de expedientes y actuaciones judiciales.</div>
+        <div class="module-card-phase" style="color: var(--orange);">Fase 3.3 · Futuro</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Binder</span> &nbsp;·&nbsp; Onboarding Pipeline &nbsp;·&nbsp; Anexo 5 &nbsp;·&nbsp; Pipeline Completo
+  </div>
+</div>
+</body>
+</html>

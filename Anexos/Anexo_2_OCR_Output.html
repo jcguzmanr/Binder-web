@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anexo 2 — Documento Escaneado: Texto Extraído por OCR</title>
+<style>
+  :root {
+    --accent: #0098B1;
+    --fg: #1B1B1B;
+    --bg: #F5F5F5;
+    --white: #FFFFFF;
+    --border: #DFDFDF;
+    --gray-medium: #6B7280;
+    --gray-lightest: #F9FAFB;
+    --accent-light: #AEDEE6;
+    --positive: #22C55E;
+    --warning: #EAB308;
+    --danger: #EF4444;
+    --deals: #6D3CFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, sans-serif; background: var(--bg); color: var(--fg); }
+  .page { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+
+  .header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+  .logo { width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; }
+  .header h1 { font-size: 24px; font-weight: 700; }
+  .subtitle { color: var(--gray-medium); font-size: 14px; margin-bottom: 32px; padding-left: 56px; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,152,177,0.1); color: var(--accent); }
+
+  .split-view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .panel {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    padding: 14px 20px;
+    background: var(--gray-lightest);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-medium);
+  }
+
+  .panel-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .panel-body { padding: 24px; }
+
+  /* Scanned document mockup */
+  .scan-mockup {
+    background: #FEFCE8;
+    border: 1px solid #FDE68A;
+    border-radius: 4px;
+    padding: 24px;
+    font-family: 'Times New Roman', serif;
+    font-size: 13px;
+    line-height: 1.9;
+    color: #44403C;
+    position: relative;
+    min-height: 500px;
+  }
+
+  .scan-mockup::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(0,0,0,0.02) 28px,
+      rgba(0,0,0,0.02) 29px
+    );
+    pointer-events: none;
+  }
+
+  .scan-header-text {
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: #292524;
+  }
+
+  .scan-line { margin-bottom: 4px; }
+  .scan-blur { filter: blur(0.5px); opacity: 0.7; }
+  .scan-bold { font-weight: bold; }
+  .scan-stamp {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 90px;
+    height: 90px;
+    border: 3px solid rgba(0,100,180,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0,100,180,0.3);
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    transform: rotate(-15deg);
+    line-height: 1.2;
+  }
+
+  .scan-signature {
+    margin-top: 30px;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 22px;
+    color: #1E3A5F;
+    opacity: 0.7;
+  }
+
+  /* OCR output */
+  .ocr-output {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--fg);
+    min-height: 500px;
+  }
+
+  .ocr-line {
+    padding: 2px 0;
+    display: flex;
+    gap: 12px;
+  }
+
+  .ocr-num {
+    color: var(--border);
+    min-width: 24px;
+    text-align: right;
+    user-select: none;
+    font-size: 11px;
+  }
+
+  .ocr-text { flex: 1; }
+
+  .ocr-highlight {
+    background: rgba(0,152,177,0.1);
+    border-left: 2px solid var(--accent);
+    padding-left: 8px;
+    margin-left: -10px;
+  }
+
+  .ocr-warn {
+    background: rgba(234,179,8,0.1);
+    border-left: 2px solid var(--warning);
+    padding-left: 8px;
+    margin-left: -10px;
+  }
+
+  .ocr-tag {
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 600;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+
+  .tag-extracted { background: rgba(34,197,94,0.12); color: var(--positive); }
+  .tag-low-conf { background: rgba(234,179,8,0.12); color: #B45309; }
+  .tag-entity { background: rgba(109,60,255,0.1); color: var(--deals); }
+
+  /* Metadata strip */
+  .meta-strip {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .meta-item {}
+  .meta-label { font-size: 11px; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .meta-value { font-size: 14px; font-weight: 600; }
+
+  /* Confidence bar */
+  .conf-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+
+  .conf-title { font-size: 13px; font-weight: 600; color: var(--gray-medium); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+
+  .conf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  .conf-card {
+    background: var(--gray-lightest);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .conf-card-label { font-size: 12px; color: var(--gray-medium); margin-bottom: 8px; }
+
+  .conf-bar-bg {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+
+  .conf-bar-fill { height: 100%; border-radius: 3px; }
+  .conf-bar-high { background: var(--positive); }
+  .conf-bar-mid { background: var(--warning); }
+  .conf-bar-low { background: var(--danger); }
+
+  .conf-value { font-size: 18px; font-weight: 700; }
+  .conf-high { color: var(--positive); }
+  .conf-mid { color: #B45309; }
+  .conf-low { color: var(--danger); }
+
+  .footer { text-align: center; padding: 24px 0; color: var(--gray-medium); font-size: 12px; }
+  .footer span { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="logo">B</div>
+    <h1>Documento Escaneado — Texto Extraído por OCR</h1>
+  </div>
+  <div class="subtitle">
+    <span class="badge">Anexo 2</span> &nbsp;Onboarding Pipeline — Fase 3.1: TextExtract Output
+  </div>
+
+  <!-- Metadata -->
+  <div class="meta-strip">
+    <div class="meta-item">
+      <div class="meta-label">Cliente</div>
+      <div class="meta-value">AcmeCorp</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Application</div>
+      <div class="meta-value" style="color: var(--deals);">Deals</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Workflow</div>
+      <div class="meta-value">Contrato Proveedor</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Archivo</div>
+      <div class="meta-value">contrato_principal.pdf</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Fecha Ingesta</div>
+      <div class="meta-value">2026-04-07</div>
+    </div>
+  </div>
+
+  <!-- Split View -->
+  <div class="split-view">
+    <!-- Scanned Doc -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">📄 Documento Original (Escaneo)</span>
+        <span class="panel-badge" style="background: rgba(234,179,8,0.12); color: #B45309;">Scan 300dpi</span>
+      </div>
+      <div class="panel-body">
+        <div class="scan-mockup">
+          <div class="scan-header-text">Contrato de Prestación de Servicios</div>
+
+          <div class="scan-line">Conste por el presente documento, el <span class="scan-bold">CONTRATO DE PRESTACIÓN</span></div>
+          <div class="scan-line"><span class="scan-bold">DE SERVICIOS</span> que celebran de una parte:</div>
+          <div class="scan-line">&nbsp;</div>
+          <div class="scan-line"><span class="scan-bold">PRIMERA PARTE (EL CONTRATANTE):</span></div>
+          <div class="scan-line">ACME CORPORATION S.A.C., con RUC N° 20512345678, debidamente</div>
+          <div class="scan-line">representada por su Gerente General, Sr. <span class="scan-bold">Roberto Méndez Torres</span>,</div>
+          <div class="scan-line">identificado con DNI N° 45678912, con domicilio fiscal en</div>
+          <div class="scan-line">Av. Javier Prado Este 4200, Surco, Lima.</div>
+          <div class="scan-line">&nbsp;</div>
+          <div class="scan-line"><span class="scan-bold">SEGUNDA PARTE (EL PROVEEDOR):</span></div>
+          <div class="scan-line">TECH SOLUTIONS PERÚ S.A., con RUC N° 20698745123, representada</div>
+          <div class="scan-line">por su Director, Sra. <span class="scan-bold">María Elena Vásquez</span>, identificada con</div>
+          <div class="scan-line scan-blur">DNI N° 32165498, con domicilio en Calle Las Begonias 475,</div>
+          <div class="scan-line">San Isidro, Lima.</div>
+          <div class="scan-line">&nbsp;</div>
+          <div class="scan-line"><span class="scan-bold">CLÁUSULA PRIMERA: OBJETO DEL CONTRATO</span></div>
+          <div class="scan-line">Por el presente contrato, EL PROVEEDOR se obliga a prestar</div>
+          <div class="scan-line">servicios de consultoría tecnológica y desarrollo de software</div>
+          <div class="scan-line">a favor de EL CONTRATANTE, por un monto total de</div>
+          <div class="scan-line"><span class="scan-bold">USD 185,000.00 (Ciento Ochenta y Cinco Mil Dólares)</span>,</div>
+          <div class="scan-line">conforme a las condiciones descritas en el Anexo A.</div>
+          <div class="scan-line">&nbsp;</div>
+          <div class="scan-line"><span class="scan-bold">CLÁUSULA SEGUNDA: VIGENCIA</span></div>
+          <div class="scan-line">El presente contrato tiene una vigencia de <span class="scan-bold">24 meses</span>,</div>
+          <div class="scan-line">computados a partir del 15 de marzo de 2026.</div>
+
+          <div class="scan-signature">Roberto Méndez T.</div>
+
+          <div class="scan-stamp">SELLO<br>NOTARIAL<br>LIMA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OCR Output -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">🔍 Texto Extraído (OCR Engine)</span>
+        <span class="panel-badge" style="background: rgba(34,197,94,0.12); color: var(--positive);">TextExtract v2.1</span>
+      </div>
+      <div class="panel-body">
+        <div class="ocr-output">
+          <div class="ocr-line"><span class="ocr-num">1</span><span class="ocr-text" style="font-weight:600; text-align:center;">CONTRATO DE PRESTACIÓN DE SERVICIOS</span></div>
+          <div class="ocr-line"><span class="ocr-num">2</span><span class="ocr-text">&nbsp;</span></div>
+          <div class="ocr-line"><span class="ocr-num">3</span><span class="ocr-text">Conste por el presente documento, el CONTRATO DE PRESTACIÓN</span></div>
+          <div class="ocr-line"><span class="ocr-num">4</span><span class="ocr-text">DE SERVICIOS que celebran de una parte:</span></div>
+          <div class="ocr-line"><span class="ocr-num">5</span><span class="ocr-text">&nbsp;</span></div>
+          <div class="ocr-line ocr-highlight"><span class="ocr-num">6</span><span class="ocr-text">PRIMERA PARTE (EL CONTRATANTE): <span class="ocr-tag tag-entity">PARTY</span></span></div>
+          <div class="ocr-line ocr-highlight"><span class="ocr-num">7</span><span class="ocr-text">ACME CORPORATION S.A.C., con RUC N° 20512345678 <span class="ocr-tag tag-extracted">98%</span></span></div>
+          <div class="ocr-line"><span class="ocr-num">8</span><span class="ocr-text">representada por su Gerente General, Sr. Roberto Méndez Torres,</span></div>
+          <div class="ocr-line"><span class="ocr-num">9</span><span class="ocr-text">identificado con DNI N° 45678912, con domicilio fiscal en</span></div>
+          <div class="ocr-line"><span class="ocr-num">10</span><span class="ocr-text">Av. Javier Prado Este 4200, Surco, Lima.</span></div>
+          <div class="ocr-line"><span class="ocr-num">11</span><span class="ocr-text">&nbsp;</span></div>
+          <div class="ocr-line ocr-highlight"><span class="ocr-num">12</span><span class="ocr-text">SEGUNDA PARTE (EL PROVEEDOR): <span class="ocr-tag tag-entity">PARTY</span></span></div>
+          <div class="ocr-line ocr-highlight"><span class="ocr-num">13</span><span class="ocr-text">TECH SOLUTIONS PERÚ S.A., con RUC N° 20698745123 <span class="ocr-tag tag-extracted">97%</span></span></div>
+          <div class="ocr-line"><span class="ocr-num">14</span><span class="ocr-text">representada por su Director, Sra. María Elena Vásquez,</span></div>
+          <div class="ocr-line ocr-warn"><span class="ocr-num">15</span><span class="ocr-text">identificada con DNI N° 3216549B <span class="ocr-tag tag-low-conf">72% ⚠</span></span></div>
+          <div class="ocr-line"><span class="ocr-num">16</span><span class="ocr-text">con domicilio en Calle Las Begonias 475, San Isidro, Lima.</span></div>
+          <div class="ocr-line"><span class="ocr-num">17</span><span class="ocr-text">&nbsp;</span></div>
+          <div class="ocr-line"><span class="ocr-num">18</span><span class="ocr-text">CLÁUSULA PRIMERA: OBJETO DEL CONTRATO</span></div>
+          <div class="ocr-line"><span class="ocr-num">19</span><span class="ocr-text">Por el presente contrato, EL PROVEEDOR se obliga a prestar</span></div>
+          <div class="ocr-line"><span class="ocr-num">20</span><span class="ocr-text">servicios de consultoría tecnológica y desarrollo de software</span></div>
+          <div class="ocr-line"><span class="ocr-num">21</span><span class="ocr-text">a favor de EL CONTRATANTE, por un monto total de</span></div>
+          <div class="ocr-line ocr-highlight"><span class="ocr-num">22</span><span class="ocr-text">USD 185,000.00 (Ciento Ochenta y Cinco Mil Dólares) <span class="ocr-tag tag-extracted">99%</span></span></div>
+          <div class="ocr-line"><span class="ocr-num">23</span><span class="ocr-text">conforme a las condiciones descritas en el Anexo A.</span></div>
+          <div class="ocr-line"><span class="ocr-num">24</span><span class="ocr-text">&nbsp;</span></div>
+          <div class="ocr-line"><span class="ocr-num">25</span><span class="ocr-text">CLÁUSULA SEGUNDA: VIGENCIA</span></div>
+          <div class="ocr-line ocr-highlight"><span class="ocr-num">26</span><span class="ocr-text">vigencia de 24 meses, computados a partir del 15/03/2026 <span class="ocr-tag tag-extracted">96%</span></span></div>
+          <div class="ocr-line"><span class="ocr-num">27</span><span class="ocr-text">&nbsp;</span></div>
+          <div class="ocr-line"><span class="ocr-num">28</span><span class="ocr-text">[firma ilegible]</span></div>
+          <div class="ocr-line ocr-warn"><span class="ocr-num">29</span><span class="ocr-text">[sello notarial — no procesable] <span class="ocr-tag tag-low-conf">N/A</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confidence -->
+  <div class="conf-section">
+    <div class="conf-title">📊 Métricas de Extracción</div>
+    <div class="conf-grid">
+      <div class="conf-card">
+        <div class="conf-card-label">Confianza General OCR</div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill conf-bar-high" style="width: 94%;"></div></div>
+        <div class="conf-value conf-high">94.2%</div>
+      </div>
+      <div class="conf-card">
+        <div class="conf-card-label">Entidades Detectadas</div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill conf-bar-high" style="width: 87%;"></div></div>
+        <div class="conf-value conf-high">7 / 8</div>
+      </div>
+      <div class="conf-card">
+        <div class="conf-card-label">Líneas con Baja Confianza</div>
+        <div class="conf-bar-bg"><div class="conf-bar-fill conf-bar-mid" style="width: 15%;"></div></div>
+        <div class="conf-value conf-mid">2 flags</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Binder</span> &nbsp;·&nbsp; Onboarding Pipeline &nbsp;·&nbsp; Anexo 2 &nbsp;·&nbsp; OCR Output
+  </div>
+</div>
+</body>
+</html>

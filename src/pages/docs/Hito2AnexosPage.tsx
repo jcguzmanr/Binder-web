@@ -1,5 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { InternalPage } from '../../components/layout/InternalPage';
+import { Link } from 'react-router-dom';
+import { AnexoBackLink } from '../../components/docs/AnexoBackLink';
 import './Hito2AnexosPage.css';
 
 type AnexoLink = {
@@ -15,15 +17,11 @@ type AnexoItem = {
   links: AnexoLink[];
 };
 
-const linkPlaceholder = (href: string): AnexoLink[] => [{ emoji: '🔗', label: 'Abrir', href }];
-
 type AnexoSection = {
   id: string;
   titulo: string;
   items: AnexoItem[];
 };
-
-const DEFAULT_CLICKUP_URL = 'https://app.clickup.com/';
 
 const COMPLY_CLIP_BASE = 'https://sharing.clickup.com/clip/p/t90132749493';
 
@@ -174,21 +172,77 @@ const SECCIONES: AnexoSection[] = [
     id: 'tally',
     titulo: '⏱️ Tally - Anexos',
     items: [
-      { anexo: 'Anexo 1', tipo: 'Diagrama', descripcion: 'Modelo de datos - estructura jerarquica', links: linkPlaceholder(DEFAULT_CLICKUP_URL) },
-      { anexo: 'Anexo 2', tipo: 'Video', descripcion: 'Configuracion de proyecto (Bolsa / Pacto)', links: linkPlaceholder(DEFAULT_CLICKUP_URL) },
-      { anexo: 'Anexo 3', tipo: 'Video', descripcion: 'Registro de horas con diferenciacion de tipos', links: linkPlaceholder(DEFAULT_CLICKUP_URL) },
-      { anexo: 'Anexo 4', tipo: 'Video', descripcion: 'Flujo de aprobacion y pantalla de arqueo', links: linkPlaceholder(DEFAULT_CLICKUP_URL) },
+      {
+        anexo: 'Anexo 1',
+        tipo: 'Video',
+        descripcion: 'Intro + usuarios y roles',
+        links: [
+          {
+            emoji: '🎥',
+            label: 'Binder - Tally - 1 Intro + Usuarios y Roles',
+            href: 'https://sharing.clickup.com/clip/p/t90132749493/f8a44b20-9222-4f7c-bc0e-fe84f6fb9f82/f8a44b20-9222-4f7c-bc0e-fe84f6fb9f82.webm',
+          },
+        ],
+      },
+      {
+        anexo: 'Anexo 2',
+        tipo: 'Video',
+        descripcion: 'Bonos y metas',
+        links: [
+          {
+            emoji: '🎥',
+            label: 'Binder - Tally - 2 Bonos y Metas',
+            href: 'https://app.clickup.com/90132749493/hubs/clips/319743e3-36e6-4cd4-8eb8-c54b21bee042.webm',
+          },
+        ],
+      },
+      {
+        anexo: 'Anexo 3',
+        tipo: 'Video',
+        descripcion: 'Clientes',
+        links: [
+          {
+            emoji: '🎥',
+            label: 'Binder - Tally - 3 Clientes',
+            href: 'https://app.clickup.com/90132749493/hubs/clips/72166d36-d20b-4500-9b71-811b2684419a.webm',
+          },
+        ],
+      },
+      {
+        anexo: 'Anexo 4',
+        tipo: 'Video',
+        descripcion: 'Proyectos',
+        links: [
+          {
+            emoji: '🎥',
+            label: 'Binder - Tally - 4 Proyectos',
+            href: 'https://app.clickup.com/90132749493/hubs/clips/ee9fe9ee-dfbd-472b-8221-84c9e7a011d4.webm',
+          },
+        ],
+      },
+      {
+        anexo: 'Anexo 5',
+        tipo: 'Video',
+        descripcion: 'Timetracking, gastos y actividad',
+        links: [
+          {
+            emoji: '🎥',
+            label: 'Binder - Tally - 5 Timetracking, Gastos y Actividad',
+            href: 'https://app.clickup.com/90132749493/hubs/clips/17ec9014-a03b-4b4e-a92e-7afd9146b7f9.webm',
+          },
+        ],
+      },
     ],
   },
   {
     id: 'onboarding',
     titulo: '📂 Onboarding - Anexos',
     items: [
-      { anexo: 'Anexo 1', tipo: 'Diagrama', descripcion: 'Estructura estandar de carpeta de onboarding', links: linkPlaceholder(DEFAULT_CLICKUP_URL) },
-      { anexo: 'Anexo 2', tipo: 'Screenshot / Output', descripcion: 'Documento escaneado - texto extraido por OCR', links: linkPlaceholder(DEFAULT_CLICKUP_URL) },
-      { anexo: 'Anexo 3', tipo: 'JSON', descripcion: 'Output estructurado generado por IA para un contrato', links: linkPlaceholder(DEFAULT_CLICKUP_URL) },
-      { anexo: 'Anexo 4', tipo: 'Screenshot', descripcion: 'Pantalla de revision de documentos con flags de calidad', links: linkPlaceholder(DEFAULT_CLICKUP_URL) },
-      { anexo: 'Anexo 5', tipo: 'Diagrama', descripcion: 'Pipeline completo: recepcion -> extraccion -> IA -> validacion -> Binder', links: linkPlaceholder(DEFAULT_CLICKUP_URL) },
+      { anexo: 'Anexo 1', tipo: 'Diagrama', descripcion: 'Estructura estandar de carpeta de onboarding', links: [{ emoji: '📄', label: 'Abrir', href: '/hito2/anexos/onboarding/anexo-1' }] },
+      { anexo: 'Anexo 2', tipo: 'Screenshot / Output', descripcion: 'Documento escaneado - texto extraido por OCR', links: [{ emoji: '📄', label: 'Abrir', href: '/hito2/anexos/onboarding/anexo-2' }] },
+      { anexo: 'Anexo 3', tipo: 'JSON', descripcion: 'Output estructurado generado por IA para un contrato', links: [{ emoji: '📄', label: 'Abrir', href: '/hito2/anexos/onboarding/anexo-3' }] },
+      { anexo: 'Anexo 4', tipo: 'Screenshot', descripcion: 'Pantalla de revision de documentos con flags de calidad', links: [{ emoji: '📄', label: 'Abrir', href: '/hito2/anexos/onboarding/anexo-4' }] },
+      { anexo: 'Anexo 5', tipo: 'Diagrama', descripcion: 'Pipeline completo: recepcion -> extraccion -> IA -> validacion -> Binder', links: [{ emoji: '📄', label: 'Abrir', href: '/hito2/anexos/onboarding/anexo-5' }] },
     ],
   },
 ];
@@ -202,6 +256,7 @@ export const Hito2AnexosPage = () => {
       </Helmet>
 
       <InternalPage title="Anexos - Hito 2">
+        <AnexoBackLink fallbackTo="/" label="Volver al inicio" />
         <div className="hito2-anexos-page">
           <p className="hito2-anexos-intro">Listado interno de anexos del informe. Acceso solo por enlace directo.</p>
           {SECCIONES.map((seccion) => (
@@ -226,12 +281,27 @@ export const Hito2AnexosPage = () => {
                         <td>
                           <div className="hito2-anexos-cell-links">
                             {item.links.map((link, i) => (
-                              <a key={`${link.href}-${i}`} href={link.href} target="_blank" rel="noopener noreferrer" className="hito2-anexos-link">
-                                <span className="hito2-anexos-link-emoji" aria-hidden="true">
-                                  {link.emoji}
-                                </span>{' '}
-                                {link.label}
-                              </a>
+                              link.href.startsWith('/') ? (
+                                <Link key={`${link.href}-${i}`} to={link.href} className="hito2-anexos-link">
+                                  <span className="hito2-anexos-link-emoji" aria-hidden="true">
+                                    {link.emoji}
+                                  </span>{' '}
+                                  {link.label}
+                                </Link>
+                              ) : (
+                                <a
+                                  key={`${link.href}-${i}`}
+                                  href={link.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="hito2-anexos-link"
+                                >
+                                  <span className="hito2-anexos-link-emoji" aria-hidden="true">
+                                    {link.emoji}
+                                  </span>{' '}
+                                  {link.label}
+                                </a>
+                              )
                             ))}
                           </div>
                         </td>

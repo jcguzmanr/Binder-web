@@ -98,7 +98,7 @@ export const Navigation = () => {
   ];
 
   const isDocPage = location.pathname === '/docs/prep-reunion-oka-ciberseguridad';
-  const isHito2AnexosPage = location.pathname === '/hito2/anexos';
+  const isHito2AnexosPage = location.pathname.startsWith('/hito2/anexos');
   const currentNavLinks = isDocPage ? docNavLinks : isHito2AnexosPage ? [] : navLinks;
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, sectionId?: string) => {
@@ -124,7 +124,9 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className={`navigation ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''} ${isDocPage ? 'navigation--doc' : ''}`}>
+    <nav
+      className={`navigation ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''} ${isDocPage ? 'navigation--doc' : ''}`}
+    >
       <div className="container-wide">
         <div className="nav-content">
           {/* Left side: Mobile Menu Toggle and Logo */}
